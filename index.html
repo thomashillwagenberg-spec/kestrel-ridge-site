@@ -3,17 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kestrel Ridge Health, Eye Institute. Clinical Workforce Operations</title>
+<title>Kestrel Ridge Health. Ophthalmic Workforce Operations</title>
 <meta name="description" content="Two clinics with the same patient count do not generate the same work. Forecast the technician minutes, staff under eight rules that never bend, and keep a person in authority.">
 <link rel="canonical" href="https://kestrelridgehealth.com/">
 <meta name="theme-color" content="#0B2545">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kestrelridgehealth.com/">
-<meta property="og:title" content="Kestrel Ridge Health, Eye Institute. Clinical Workforce Operations">
+<meta property="og:title" content="Kestrel Ridge Health. Ophthalmic Workforce Operations">
 <meta property="og:description" content="Two clinics with the same patient count do not generate the same work. Forecast the technician minutes, staff under eight rules that never bend, and keep a person in authority.">
 <meta property="og:image" content="https://kestrelridgehealth.com/assets/p1.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/mark.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/icon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://kestrelridgehealth.com/#org","name":"Kestrel Ridge Health","url":"https://kestrelridgehealth.com/","logo":"https://kestrelridgehealth.com/mark-light.png","email":"hello@kestrelridgehealth.com","description":"Technician staffing software for eye clinics that forecasts technician minutes per clinic session and assigns technicians under credentialing rules with human approval and an audit log.","parentOrganization":{"@type":"Organization","name":"Foundation AI Advisory, LLC","address":{"@type":"PostalAddress","addressLocality":"Cleveland","addressRegion":"OH","addressCountry":"US"}}},
+{"@type":"WebSite","@id":"https://kestrelridgehealth.com/#website","url":"https://kestrelridgehealth.com/","name":"Kestrel Ridge Health","publisher":{"@id":"https://kestrelridgehealth.com/#org"}}
+]}
+</script>
+<noscript><style>[data-sc-cue]{opacity:1!important}</style></noscript>
 <link rel="stylesheet" href="scrollcraft.css">
 <style>
   @font-face{font-family:"Public Sans";src:url("fonts/public-sans-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-display:swap}
@@ -34,6 +43,24 @@
        -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   ::selection{background:var(--kr-sky);color:var(--kr-navy)}
   :focus-visible{outline:2px solid var(--kr-sky);outline-offset:3px;border-radius:2px}
+
+
+  /* ---------------------------------------------- pre-mount CLS reserve
+     scrollcraft.css styles .sc-world / .sc-world__seg, classes the engine
+     only writes at mount. Until then the stage sits in flow and every
+     poster and clip contributes real height, then loses it. Mirror the
+     mounted geometry on the data attributes so nothing moves. Values match
+     scrollcraft.css exactly; z-index and opacity stay the engine's. */
+  [data-sc-world]{position:fixed;inset:0;overflow:clip;background:var(--sc-canvas)}
+  [data-sc-segment]{position:absolute;inset:0}
+  [data-sc-segment] > :is(video,img,canvas){position:absolute;inset:0;
+    width:100%;height:100%;aspect-ratio:16/9;object-fit:cover}
+  [data-sc-world-copy]{position:fixed;inset:0;pointer-events:none}
+  /* The spacer is the only thing in flow, and the engine sets its height in
+     pixels at mount: (sum of leg weights and lingers, plus one screen) times
+     the viewport. Here that is 1.7+0.06 + 2.24+0.08 + 2.24+0.06 + 1 = 7.38.
+     Reserve it up front so the trailing note does not jump the page height. */
+  [data-sc-spacer]{display:block;height:738vh}
 
   .mapwrap{position:fixed;inset:0;pointer-events:none;z-index:60}
   .mapwrap .map{pointer-events:auto}
@@ -77,8 +104,6 @@
          text-decoration:none;color:#fff}
   .brand__mark{width:3.2rem;height:auto;flex:none;display:block}
   .brand__name{font:700 .8125rem/1.1 var(--sc-font-text);letter-spacing:-.01em}
-  .brand__div{display:block;margin-top:.22rem;font:600 .5625rem/1 var(--sc-font-text);
-              letter-spacing:.16em;color:var(--kr-sky)}
 
 
   /* The engine positions these absolutely. Never override .sc-copy position:
@@ -165,6 +190,11 @@
            right:clamp(1rem,3vw,2.5rem);margin:0;
            font:400 .6875rem/1.5 var(--kr-mono);color:#C8D8EE;opacity:1;
            text-align:right;max-width:24rem}
+  .kr-fine--sm{display:none}
+  .kr-fine__p{margin:0}
+  .kr-fine__co{margin-top:.5rem}
+  .kr-fine__co a{color:var(--kr-sky);text-decoration:none;text-underline-offset:4px}
+  .kr-fine__co a:hover{text-decoration:underline}
 
   /* Keep the copy clear of the fixed map. Absolutely positioned children are
      laid out against the padding box, so this shifts every copy block. */
@@ -187,15 +217,31 @@
     .split{grid-template-columns:1fr;gap:1.2rem}
     .split__v{display:none}
     .split__n{font-size:clamp(3rem,17vw,4.4rem)}
-    .kr-fine{position:static;margin:2rem 0 0;max-width:none;text-align:left}
-    /* No utility nav on a phone, so the same four links live in the close. */
+    /* The fixed block sits after the spacer, which the scroll track never
+       reaches on a phone. Hide it and use the in-flow copy inside the close. */
+    .kr-fine{display:none}
+    .kr-fine--sm{display:block;position:static;margin:1.5rem 0 0;
+                 max-width:none;text-align:left}
+    .kr-fine--sm .kr-fine__co{margin-top:.5rem}
+    /* No utility nav on a phone, so the same six links live in the close. */
     .kr-util{display:none}
     .kr-second--sm{display:inline-block}
-    /* The close carries the offer, the data note and five links. Tighten it so
+    /* The close carries the offer, the data note and seven links. Tighten it so
        the headline never rides up under the fixed brand mark. */
     [data-sc-window="finale"] .kr-h2{font-size:clamp(1.35rem,5.6vw,1.8rem);margin-bottom:.6rem}
     [data-sc-window="finale"] .kr-lede{font-size:.95rem;line-height:1.5;margin-bottom:.7rem}
     [data-sc-window="finale"] .kr-note{font-size:.72rem;line-height:1.45}
+    /* Six secondary links wrap to more rows than four did. Tighten the row
+       gap by the height they added, so the headline keeps its clearance
+       under the fixed brand mark. */
+    [data-sc-window="finale"] .kr-actions{gap:.5rem 1rem;margin-top:1.1rem}
+    /* The close now also carries the company block, so it needs the full
+       column. Only the bottom offset moves; the engine keeps the position. */
+    [data-sc-window="finale"].sc-copy--lead{bottom:1.25rem}
+    [data-sc-window="finale"] .kr-h2{font-size:clamp(1.3rem,5.2vw,1.65rem)}
+    [data-sc-window="finale"] .kr-lede{font-size:.9rem;line-height:1.45}
+    [data-sc-window="finale"] .kr-fine--sm{font-size:.625rem;line-height:1.45;
+                                           margin-top:1.1rem}
   }
   @media (prefers-reduced-motion:reduce){
     .gate__deny,.shake{animation:none}
@@ -205,19 +251,21 @@
 </head>
 <body>
 
+<header>
 <a class="brand" href="#main">
   <img class="brand__mark" src="assets/mark.png" alt="" width="490" height="307" decoding="async">
-  <span class="brand__name">Kestrel Ridge Health
-    <span class="brand__div">EYE INSTITUTE</span>
-  </span>
+  <span class="brand__name">Kestrel Ridge Health</span>
 </a>
 
 <nav class="kr-util" aria-label="Site">
-  <a href="/evidence">Evidence</a>
-  <a href="/pilot">Pilot</a>
-  <a href="/governance">Governance</a>
-  <a href="/contact">Contact</a>
+  <a href="/product/">Product</a>
+  <a href="/how-it-works/">How it works</a>
+  <a href="/evidence/">Evidence</a>
+  <a href="/pilot/">Pilot</a>
+  <a href="/governance/">Governance</a>
+  <a href="/contact/">Contact</a>
 </nav>
+</header>
 
 <nav aria-label="The hall" class="mapwrap">
   <ol class="map" id="map">
@@ -227,20 +275,20 @@
   </ol>
 </nav>
 
-<div id="main" role="main" data-sc-mode="worldflight" data-sc-seam="0.14" data-sc-lerp="0.12">
+<main id="main" data-sc-mode="worldflight" data-sc-seam="0.14" data-sc-lerp="0.12">
 
   <div data-sc-world>
     <div data-sc-segment data-sc-w="1.7" data-sc-linger="0.06" data-sc-waypoint="The lane">
       <img class="sc-world__poster" src="assets/p1.jpg" alt="" decoding="async">
-      <video data-sc-src="assets/leg1.mp4" data-sc-src-mobile="assets/leg1-m.mp4" muted playsinline data-sc-lerp="0.12"></video>
+      <video width="1920" height="1080" data-sc-src="assets/leg1.mp4" data-sc-src-mobile="assets/leg1-m.mp4" muted playsinline data-sc-lerp="0.12"></video>
     </div>
     <div data-sc-segment data-sc-w="2.24" data-sc-linger="0.08" data-sc-waypoint="The work">
       <img class="sc-world__poster" src="assets/p2.jpg" alt="" decoding="async">
-      <video data-sc-src="assets/leg2.mp4" data-sc-src-mobile="assets/leg2-m.mp4" muted playsinline data-sc-lerp="0.12"></video>
+      <video width="1920" height="1080" data-sc-src="assets/leg2.mp4" data-sc-src-mobile="assets/leg2-m.mp4" muted playsinline data-sc-lerp="0.12"></video>
     </div>
     <div data-sc-segment data-sc-w="2.24" data-sc-linger="0.06" data-sc-waypoint="The corridor">
       <img class="sc-world__poster" src="assets/p3.jpg" alt="" decoding="async">
-      <video data-sc-src="assets/leg3.mp4" data-sc-src-mobile="assets/leg3-m.mp4" muted playsinline data-sc-lerp="0.12"></video>
+      <video width="1920" height="1080" data-sc-src="assets/leg3.mp4" data-sc-src-mobile="assets/leg3-m.mp4" muted playsinline data-sc-lerp="0.12"></video>
     </div>
   </div>
 
@@ -250,8 +298,8 @@
     <!-- 1 recognition -->
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="hero">
       <p class="kr-eyebrow">Technician staffing software for eye clinics</p>
-      <h1 class="kr-h1">Same patient count.<br>Not the same day.</h1>
-      <p class="kr-lede">Clinical Workforce Operations forecasts the technician minutes each clinic session will need and staffs it under rules that never bend, with a person approving every plan. Built for operations leaders at multi-site eye clinics and eye institutes. On its own synthetic data it forecast two ten-patient sessions at 345 and 181 minutes.</p>
+      <h1 class="kr-h1">Same patient count. <br>Not the same day.</h1>
+      <p class="kr-lede">Ophthalmic Workforce Operations forecasts the technician minutes each clinic session will need and staffs it under rules that never bend, with a person approving every plan. Built for operations leaders at independent multi-site ophthalmology groups. On its own synthetic data it forecast two ten-patient sessions at 345 and 181 minutes.</p>
     </div>
 
     <!-- 2 the blindness -->
@@ -304,22 +352,31 @@
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="finale">
       <h2 class="kr-h2">Every change is written down. Alter one entry and the chain stops matching.</h2>
       <p class="kr-lede">Every plan, override, refusal and approval goes to an append-only, hash-chained log with who acted and why.</p>
-      <p class="kr-lede">Start with phase zero. It retrains on your own history and checks the forecast against the ratio you use today. If it does not beat it, the engagement stops there, and that finding is yours to keep.</p>
-      <p class="kr-note">Phase zero runs on an export of past sessions: counts by appointment type, complexity flags and realized technician minutes. The contract carries no patient name, date of birth, diagnosis or note. Whether the combination is protected health information in a low-volume clinic is settled with your privacy office before any file moves. Pricing for the pilot is set per engagement.</p>
+      <p class="kr-lede">Start with Phase Zero. It retrains on your own history and checks the forecast against the ratio you use today. If it does not beat it, the engagement stops there, and that finding is yours to keep.</p>
+      <p class="kr-note">Phase Zero starts at $7,500, fixed fee. It runs on de-identified operational data: per-session counts by appointment type, complexity flags and realized technician minutes. No patient identifiers leave your clinic. Production use with protected health information comes later, under a business associate agreement and a security review.</p>
       <div class="kr-actions">
-        <a class="cta" href="mailto:hello@kestrelridgehealth.com?subject=Phase%20zero%20for%20our%20clinic">Ask about phase zero</a>
-        <a class="kr-second" href="/evidence">What has and has not been measured</a>
-        <a class="kr-second" href="/pilot">How the pilot is designed to stop</a>
-        <a class="kr-second kr-second--sm" href="/governance">Governance</a>
-        <a class="kr-second kr-second--sm" href="/contact">Contact</a>
+        <a class="cta" href="/contact/">Ask about Phase Zero</a>
+        <a class="kr-second" href="/evidence/">What has and has not been measured</a>
+        <a class="kr-second" href="/pilot/">How the pilot is designed to stop</a>
+        <a class="kr-second" href="/product/">What a scheduler does with it</a>
+        <a class="kr-second" href="/how-it-works/">The ten layers</a>
+        <a class="kr-second kr-second--sm" href="/governance/">Governance</a>
+        <a class="kr-second kr-second--sm" href="/contact/">Contact</a>
+      </div>
+      <div class="kr-fine kr-fine--sm">
+        <p class="kr-fine__p">Synthetic operational data throughout. Never validated on real clinic data. Not HIPAA certified.</p>
+        <p class="kr-fine__p kr-fine__co">Kestrel Ridge Health is a product of Foundation AI Advisory, LLC, Cleveland, Ohio. <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a></p>
       </div>
     </div>
   </div>
 
   <div data-sc-spacer aria-hidden="true"></div>
-</div>
+</main>
 
-<p class="kr-fine">Synthetic operational data throughout. Never validated on real clinic data. Not HIPAA certified.</p>
+<div class="kr-fine">
+  <p class="kr-fine__p">Synthetic operational data throughout. Never validated on real clinic data. Not HIPAA certified.</p>
+  <p class="kr-fine__p kr-fine__co">Kestrel Ridge Health is a product of Foundation AI Advisory, LLC, Cleveland, Ohio. <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a></p>
+</div>
 
 <script src="scrollcraft.js"></script>
 <script>

@@ -1,0 +1,32 @@
+1:"$Sreact.fragment"
+2:I[797,["/_next/static/chunks/0cr91h3mzcor-.js","/_next/static/chunks/10i88mi_-3-m7.js"],"ContactForm"]
+3:I[97367,["/_next/static/chunks/0cr91h3mzcor-.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+8:I[97367,["/_next/static/chunks/0cr91h3mzcor-.js"],"ViewportBoundary"]
+9:I[97367,["/_next/static/chunks/0cr91h3mzcor-.js"],"MetadataBoundary"]
+7:X
+17:X
+17:C
+0:{"buildId":"gVgp8-pnjgzYuALikq3pm","data":[{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"mx-auto max-w-6xl px-5 sm:px-8 ","children":[["$","header",null,{"className":"border-b border-rule-strong pb-8 pt-14 sm:pt-20","children":[["$","p",null,{"className":"label","children":"Contact"}],["$","h1",null,{"className":"mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-5xl","children":"Ask about Phase Zero."}],["$","p",null,{"className":"prose-measure mt-5 text-lg leading-relaxed text-ink-muted","children":"Phase Zero is a fixed fee starting at $7,500. It runs on de-identified operational data you already hold: per-session counts by appointment type, complexity flags and realized technician minutes, with no patient identifiers leaving your clinic. The first conversation is about what you can export, who owns the decision to stop, and whether a forecast beats the ratio you use today."}]]}],["$","section",null,{"className":"rule-top py-12 sm:py-16","children":[null,["$","h2",null,{"className":"mt-2 max-w-3xl font-serif text-2xl leading-tight sm:text-3xl","children":"Send a message"}],null,["$","div",null,{"className":"mt-8","children":["$","div",null,{"className":"grid gap-12 md:grid-cols-[1.2fr_1fr]","children":[["$","$L2",null,{}],["$","aside",null,{"className":"space-y-6","children":[["$","div",null,{"className":"border-l-2 border-primary bg-card px-5 py-4","children":[["$","p",null,{"className":"font-serif text-base font-semibold text-ink","children":"What we will ask for"}],["$","div",null,{"className":"prose-measure mt-2 text-[0.9375rem] leading-relaxed text-ink-muted","children":["$","p",null,{"children":"Historical sessions with appointment counts by type, a complexity flag, the site, the provider, the half-day, and realized technician minutes. No patient identifier, name, date of birth, diagnosis, medication or note, because the system has nowhere to put them."}]}]]}],["$","div",null,{"className":"border-l-2 border-primary bg-card px-5 py-4","children":[["$","p",null,{"className":"font-serif text-base font-semibold text-ink","children":"What we will tell you first"}],["$","div",null,{"className":"prose-measure mt-2 text-[0.9375rem] leading-relaxed text-ink-muted","children":["$","p",null,{"children":"That this system has only ever run on synthetic data, that no outcome has been measured anywhere, and that Phase Zero of a pilot is designed to end the engagement if a model trained on your history does not beat your current rule."}]}]]}],["$","div",null,{"className":"border-t border-rule pt-5","children":[["$","p",null,{"className":"label","children":"Privacy on this site"}],["$","p",null,{"className":"mt-2 text-[0.9375rem] leading-relaxed text-ink-muted","children":"No analytics, no tracking pixels, no third-party scripts and no embedded fonts from anyone else. There is no cookie banner because there are no cookies to consent to. This page is a static file."}]]}]]}]]}]}]]}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/10i88mi_-3-m7.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Ask about Phase Zero for your eye clinic, Kestrel Ridge Health"}],["$","meta","1",{"name":"description","content":"Ask about Phase Zero: a forecast check on your own past sessions against the fixed ratio you use today. It runs on an export, not a workflow change, and it can end in a no."}],["$","meta","2",{"name":"robots","content":"index, follow"}],["$","link","3",{"rel":"canonical","href":"https://kestrelridgehealth.com/contact/"}],["$","meta","4",{"property":"og:title","content":"Ask about Phase Zero for your eye clinic, Kestrel Ridge Health"}],"$La","$Lb","$Lc","$Ld","$Le","$Lf","$L10","$L11","$L12"]}]}]}],"$L13"]}],"isPartial":"$@14","staleTime":"$7","varyParams":null},{"rsc":"$L15","isPartial":"$@16","staleTime":"$7","varyParams":"$17"}],"isUpgradeableISRFallback":false,"a":"$@18","rootVaryParams":null,"needsRuntimeRequest":"$@19"}
+1a:I[27201,["/_next/static/chunks/0cr91h3mzcor-.js"],"IconMark"]
+1b:I[39756,["/_next/static/chunks/0cr91h3mzcor-.js"],"default"]
+1c:I[37457,["/_next/static/chunks/0cr91h3mzcor-.js"],"default"]
+5:null
+a:["$","meta","5",{"property":"og:description","content":"Ask about Phase Zero: a forecast check on your own past sessions against the fixed ratio you use today. It runs on an export, not a workflow change, and it can end in a no."}]
+b:["$","meta","6",{"property":"og:url","content":"https://kestrelridgehealth.com/contact/"}]
+c:["$","meta","7",{"name":"twitter:card","content":"summary"}]
+d:["$","meta","8",{"name":"twitter:title","content":"Ask about Phase Zero for your eye clinic, Kestrel Ridge Health"}]
+e:["$","meta","9",{"name":"twitter:description","content":"Ask about Phase Zero: a forecast check on your own past sessions against the fixed ratio you use today. It runs on an export, not a workflow change, and it can end in a no."}]
+f:["$","link","10",{"rel":"shortcut icon","href":"/favicon.ico"}]
+10:["$","link","11",{"rel":"icon","href":"/icon.png"}]
+11:["$","link","12",{"rel":"apple-touch-icon","href":"/icon.png"}]
+12:["$","$L1a","13",{}]
+13:["$","meta",null,{"name":"next-size-adjust","content":""}]
+15:["$","$1","c",{"children":[null,["$","$L1b",null,{"parallelRouterKey":"children","template":["$","$L1c",null,{}]}]]}]
+19:true
+7:300
+7:C
+18:0
+14:"$undefined"
+16:"$undefined"
+6:"$undefined"
