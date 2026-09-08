@@ -186,10 +186,13 @@
   .kr-actions .kr-second{margin:0}
   .kr-second--sm{display:none}
 
-  .kr-fine{position:fixed;z-index:60;bottom:clamp(.9rem,2vw,1.5rem);
-           right:clamp(1rem,3vw,2.5rem);margin:0;
-           font:400 .6875rem/1.5 var(--kr-mono);color:#C8D8EE;opacity:1;
-           text-align:right;max-width:24rem}
+  /* Lives inside the finale's own copy block now, as its closing lines, not
+     as a fixed overlay: a fixed .kr-fine used to sit on screen throughout
+     the whole piece and collide with the finale's own CTA and links. */
+  .kr-fine{margin-top:1.5rem;padding-top:1.25rem;
+           border-top:1px solid rgba(200,216,238,.18);
+           font:400 .6875rem/1.6 var(--kr-mono);color:#C8D8EE;opacity:1;
+           text-align:left;max-width:none}
   .kr-fine__p{margin:0}
   .kr-fine__co{margin-top:.5rem}
   .kr-fine__co a{color:var(--kr-sky);text-decoration:underline;
@@ -275,7 +278,7 @@
               text-underline-offset:4px;text-decoration-thickness:1px}
   .wl__note a:hover{color:#fff}
 
-  .kr-fine__legal{margin-top:.5rem;display:flex;gap:.9rem;justify-content:flex-end}
+  .kr-fine__legal{margin-top:.5rem;display:flex;gap:.9rem;justify-content:flex-start;flex-wrap:wrap}
   .kr-fine__legal a{color:var(--kr-sky);text-decoration:underline;
                     text-underline-offset:4px;text-decoration-thickness:1px}
   .kr-fine__legal a:hover{color:#fff}
@@ -358,9 +361,7 @@
     html:not(.kr-engine) .wl__btn{flex:1 1 100%}
 
     /* The close carries the status line, the legal links and the address. */
-    html:not(.kr-engine) .kr-fine{position:static;display:block;max-width:none;
-      text-align:left;padding:0 1.25rem 3rem;font-size:.75rem}
-    html:not(.kr-engine) .kr-fine__legal{justify-content:flex-start}
+    html:not(.kr-engine) [data-sc-window="finale"] .kr-fine{font-size:.75rem}
     html:not(.kr-engine) .kr-second--sm{display:inline-block}
   }
 
@@ -501,17 +502,16 @@
         <a class="kr-second kr-second--sm" href="/governance/">Governance</a>
         <a class="kr-second kr-second--sm" href="/contact/">Contact</a>
       </div>
+      <div class="kr-fine">
+        <p class="kr-fine__p">Figures shown come from the system's synthetic validation set. Not validated on real clinic data. Not HIPAA certified.</p>
+        <p class="kr-fine__p kr-fine__legal"><a href="/privacy/">Privacy</a> <a href="/terms/">Terms</a> <a href="/accessibility/">Accessibility</a></p>
+        <p class="kr-fine__p kr-fine__co">Kestrel Ridge Health is the operating name of a founder-operated business in Cleveland, Ohio, not a separately incorporated company. <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a></p>
+      </div>
     </div>
   </div>
 
   <div data-sc-spacer aria-hidden="true"></div>
 </main>
-
-<div class="kr-fine">
-  <p class="kr-fine__p">Figures shown come from the system's synthetic validation set. Not validated on real clinic data. Not HIPAA certified.</p>
-  <p class="kr-fine__p kr-fine__legal"><a href="/privacy/">Privacy</a> <a href="/terms/">Terms</a> <a href="/accessibility/">Accessibility</a></p>
-  <p class="kr-fine__p kr-fine__co">Kestrel Ridge Health is the operating name of a founder-operated business in Cleveland, Ohio, not a separately incorporated company. <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a></p>
-</div>
 
 <script>
 /* ---------------------------------------------------------------------
