@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kestrel Ridge Health, Eye Institute. Clinical Workforce Operations</title>
 <meta name="description" content="Two clinics with the same patient count do not generate the same work. Forecast the technician minutes, staff under eight rules that never bend, and keep a person in authority.">
+<link rel="canonical" href="https://kestrelridgehealth.com/">
+<meta name="theme-color" content="#0B2545">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kestrelridgehealth.com/">
+<meta property="og:title" content="Kestrel Ridge Health, Eye Institute. Clinical Workforce Operations">
+<meta property="og:description" content="Two clinics with the same patient count do not generate the same work. Forecast the technician minutes, staff under eight rules that never bend, and keep a person in authority.">
+<meta property="og:image" content="https://kestrelridgehealth.com/assets/p1.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/mark.png">
 <link rel="stylesheet" href="scrollcraft.css">
 <style>
@@ -138,6 +146,21 @@
   .kr-second{display:inline-block;margin:1.4rem 0 0 1.5rem;color:var(--kr-sky);
              font:500 .875rem/1 var(--sc-font-text);text-underline-offset:5px}
 
+  /* ------------------------------------------------------ utility nav */
+  .kr-util{position:fixed;z-index:60;top:clamp(1rem,2.4vw,1.9rem);
+           right:clamp(1rem,3vw,2.5rem);display:flex;align-items:center;
+           gap:1.25rem}
+  .kr-util a{font:400 .75rem/1 var(--kr-mono);letter-spacing:.04em;
+             color:#C8D8EE;text-decoration:none;text-underline-offset:5px}
+  .kr-util a:hover{color:#FFFFFF;text-decoration:underline}
+
+  /* The close links have to wrap cleanly on a narrow screen. */
+  .kr-actions{display:flex;flex-wrap:wrap;align-items:center;
+              gap:1rem 1.5rem;margin:1.8rem 0 0}
+  .kr-actions .cta{margin:0}
+  .kr-actions .kr-second{margin:0}
+  .kr-second--sm{display:none}
+
   .kr-fine{position:fixed;z-index:60;bottom:clamp(.9rem,2vw,1.5rem);
            right:clamp(1rem,3vw,2.5rem);margin:0;
            font:400 .6875rem/1.5 var(--kr-mono);color:#C8D8EE;opacity:1;
@@ -165,6 +188,14 @@
     .split__v{display:none}
     .split__n{font-size:clamp(3rem,17vw,4.4rem)}
     .kr-fine{position:static;margin:2rem 0 0;max-width:none;text-align:left}
+    /* No utility nav on a phone, so the same four links live in the close. */
+    .kr-util{display:none}
+    .kr-second--sm{display:inline-block}
+    /* The close carries the offer, the data note and five links. Tighten it so
+       the headline never rides up under the fixed brand mark. */
+    [data-sc-window="finale"] .kr-h2{font-size:clamp(1.35rem,5.6vw,1.8rem);margin-bottom:.6rem}
+    [data-sc-window="finale"] .kr-lede{font-size:.95rem;line-height:1.5;margin-bottom:.7rem}
+    [data-sc-window="finale"] .kr-note{font-size:.72rem;line-height:1.45}
   }
   @media (prefers-reduced-motion:reduce){
     .gate__deny,.shake{animation:none}
@@ -180,6 +211,13 @@
     <span class="brand__div">EYE INSTITUTE</span>
   </span>
 </a>
+
+<nav class="kr-util" aria-label="Site">
+  <a href="/evidence">Evidence</a>
+  <a href="/pilot">Pilot</a>
+  <a href="/governance">Governance</a>
+  <a href="/contact">Contact</a>
+</nav>
 
 <nav aria-label="The hall" class="mapwrap">
   <ol class="map" id="map">
@@ -211,9 +249,9 @@
 
     <!-- 1 recognition -->
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="hero">
-      <p class="kr-eyebrow">Ophthalmic technician staffing</p>
+      <p class="kr-eyebrow">Technician staffing software for eye clinics</p>
       <h1 class="kr-h1">Same patient count.<br>Not the same day.</h1>
-      <p class="kr-lede">On the synthetic date 2026-09-08 the system forecast two ten-patient sessions at 345 and 181 technician minutes. Forecast the minutes, then staff to them.</p>
+      <p class="kr-lede">Clinical Workforce Operations forecasts the technician minutes each clinic session will need and staffs it under rules that never bend, with a person approving every plan. Built for operations leaders at multi-site eye clinics and eye institutes. On its own synthetic data it forecast two ten-patient sessions at 345 and 181 minutes.</p>
     </div>
 
     <!-- 2 the blindness -->
@@ -247,7 +285,7 @@
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="0.55 0.76 0.18 0.18">
       <p class="kr-eyebrow">Eight rules. None of them bend.</p>
       <h2 class="kr-h2">Try to break one.</h2>
-      <p class="kr-lede">A technician has called off. Put someone else on the 8 a.m. glaucoma list at Avon Meadows. Pick one.</p>
+      <p class="kr-lede">The rules protect your credentialing, site eligibility and hour caps, and they hold even when someone is out. A technician has called off. Put someone on the 8 a.m. glaucoma list at Avon Meadows. Pick one.</p>
 
       <div class="gate" id="gate">
         <p class="gate__q">Who covers it?</p>
@@ -266,9 +304,15 @@
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="finale">
       <h2 class="kr-h2">Every change is written down. Alter one entry and the chain stops matching.</h2>
       <p class="kr-lede">Every plan, override, refusal and approval goes to an append-only, hash-chained log with who acted and why.</p>
-      <p class="kr-lede">Phase zero retrains on your own history and checks the forecast against the ratio you use today. If it does not beat it, the engagement stops there.</p>
-      <a class="cta" href="mailto:hello@kestrelridgehealth.com?subject=Clinical%20Workforce%20Operations">Test it against your own data</a>
-      <a class="kr-second" href="#main">What has and has not been measured</a>
+      <p class="kr-lede">Start with phase zero. It retrains on your own history and checks the forecast against the ratio you use today. If it does not beat it, the engagement stops there, and that finding is yours to keep.</p>
+      <p class="kr-note">Phase zero runs on an export of past sessions: counts by appointment type, complexity flags and realized technician minutes. The contract carries no patient name, date of birth, diagnosis or note. Whether the combination is protected health information in a low-volume clinic is settled with your privacy office before any file moves. Pricing for the pilot is set per engagement.</p>
+      <div class="kr-actions">
+        <a class="cta" href="mailto:hello@kestrelridgehealth.com?subject=Phase%20zero%20for%20our%20clinic">Ask about phase zero</a>
+        <a class="kr-second" href="/evidence">What has and has not been measured</a>
+        <a class="kr-second" href="/pilot">How the pilot is designed to stop</a>
+        <a class="kr-second kr-second--sm" href="/governance">Governance</a>
+        <a class="kr-second kr-second--sm" href="/contact">Contact</a>
+      </div>
     </div>
   </div>
 
