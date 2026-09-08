@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Ridge Health, Eye Institute. Clinical Workforce Operations</title>
+<meta name="description" content="Two clinics with the same patient count do not generate the same work. Forecast the technician minutes, staff under eight rules that never bend, and keep a person in authority.">
+<link rel="icon" href="assets/mark.png">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  @font-face{font-family:"Public Sans";src:url("fonts/public-sans-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-display:swap}
+  @font-face{font-family:"Source Serif 4";src:url("fonts/source-serif-4-latin-wght-normal.woff2") format("woff2");font-weight:200 900;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url("fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");font-weight:400;font-display:swap}
+
+  :root{
+    --sc-canvas:#04101F; --sc-surface:#0B2545;
+    --sc-ink:#FFFFFF;    --sc-ink-soft:#C8D8EE;
+    --sc-accent:#87BCF7; --sc-accent-ink:#04101F;
+    --sc-font-display:"Source Serif 4", Georgia, serif;
+    --sc-font-text:"Public Sans", system-ui, sans-serif;
+    --kr-blue:#1A5BDB; --kr-navy:#0B2545; --kr-sky:#87BCF7;
+    --kr-mono:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  html{background:var(--sc-canvas)}
+  body{margin:0;color:var(--sc-ink);font-family:var(--sc-font-text);
+       -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:var(--kr-sky);color:var(--kr-navy)}
+  :focus-visible{outline:2px solid var(--kr-sky);outline-offset:3px;border-radius:2px}
+
+  .mapwrap{position:fixed;inset:0;pointer-events:none;z-index:60}
+  .mapwrap .map{pointer-events:auto}
+
+  .sc-world__scrim.sc-scrim--left{
+    background:linear-gradient(90deg,
+      color-mix(in oklab, var(--sc-canvas) 97%, transparent) 0%,
+      color-mix(in oklab, var(--sc-canvas) 93%, transparent) 42%,
+      color-mix(in oklab, var(--sc-canvas) 62%, transparent) 62%,
+      color-mix(in oklab, var(--sc-canvas) 22%, transparent) 80%,
+      transparent 100%)}
+  @media (max-width:860px){
+    .sc-world__scrim.sc-scrim--left{
+      background:linear-gradient(to top,
+        color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
+        color-mix(in oklab, var(--sc-canvas) 88%, transparent) 34%,
+        color-mix(in oklab, var(--sc-canvas) 52%, transparent) 62%,
+        transparent 88%)}
+  }
+
+  /* ---------------------------------------------------------- the map */
+  .map{position:fixed;z-index:60;left:clamp(1rem,3vw,2.5rem);top:50%;
+       transform:translateY(-50%);display:flex;flex-direction:column;gap:0;
+       padding:0;margin:0;list-style:none}
+  .map__item{margin:0}
+  .map__btn{display:flex;align-items:center;gap:.75rem;background:none;border:0;
+            padding:.6rem 0;color:var(--sc-ink-soft);font:600 .625rem/1 var(--sc-font-text);
+            letter-spacing:.16em;text-transform:uppercase;cursor:pointer;
+            min-height:44px;transition:color .3s}
+  .map__btn:hover{color:#fff}
+  .map__rule{display:block;width:18px;height:2px;background:currentColor;
+             opacity:.45;transition:width .4s cubic-bezier(.2,.7,.2,1),opacity .4s}
+  .map__btn[aria-current="true"]{color:var(--kr-sky)}
+  .map__btn[aria-current="true"] .map__rule{width:44px;opacity:1}
+  .map__depth{position:absolute;left:0;top:-2.6rem;font:400 .625rem/1 var(--kr-mono);
+              color:var(--sc-ink-soft);opacity:.7;letter-spacing:.1em}
+
+  /* -------------------------------------------------------- the brand */
+  .brand{position:fixed;z-index:60;top:clamp(1rem,2.4vw,1.9rem);
+         left:clamp(1rem,3vw,2.5rem);display:flex;align-items:center;gap:.7rem;
+         text-decoration:none;color:#fff}
+  .brand__mark{width:3.2rem;height:auto;flex:none;display:block}
+  .brand__name{font:700 .8125rem/1.1 var(--sc-font-text);letter-spacing:-.01em}
+  .brand__div{display:block;margin-top:.22rem;font:600 .5625rem/1 var(--sc-font-text);
+              letter-spacing:.16em;color:var(--kr-sky)}
+
+
+  /* The engine positions these absolutely. Never override .sc-copy position:
+     doing so stacks every block in flow and drops the later ones below the fold. */
+  .sc-copy > *{position:relative;z-index:1}
+
+  /* --------------------------------------------------------- the copy */
+  .sc-copy{max-width:min(52rem,86vw)}
+  .kr-eyebrow{font:600 .6875rem/1 var(--sc-font-text);letter-spacing:.18em;
+              text-transform:uppercase;color:var(--kr-sky);margin:0 0 1.1rem}
+  .kr-h1{font-family:var(--sc-font-display);font-weight:600;
+         font-size:clamp(2.6rem,7.4vw,6.4rem);line-height:.98;letter-spacing:-.022em;
+         margin:0;text-wrap:balance}
+  .kr-h2{font-family:var(--sc-font-display);font-weight:600;
+         font-size:clamp(2rem,5vw,4.2rem);line-height:1.02;letter-spacing:-.02em;
+         margin:0;text-wrap:balance}
+  .kr-lede{font-size:clamp(1rem,1.5vw,1.25rem);line-height:1.62;color:var(--sc-ink-soft);
+           max-width:46ch;margin:1.4rem 0 0;text-wrap:pretty}
+  .kr-note{font:400 .8125rem/1.6 var(--kr-mono);color:#C8D8EE;opacity:1;
+           margin:1.6rem 0 0;max-width:44ch}
+
+  /* -------------------------------------------------- the split figure */
+  .split{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(1rem,3vw,2.6rem);
+         align-items:end;margin:2.2rem 0 0;max-width:44rem}
+  .split__col{min-width:0}
+  .split__label{font:600 .625rem/1.3 var(--sc-font-text);letter-spacing:.14em;
+                text-transform:uppercase;color:var(--sc-ink-soft);margin:0 0 .5rem}
+  .split__n{font-family:var(--sc-font-display);font-weight:600;line-height:.86;
+            font-size:clamp(3.4rem,9vw,7rem);letter-spacing:-.03em;display:block}
+  .split__n--lead{color:var(--kr-sky)}
+  .split__u{font:400 .8125rem/1 var(--kr-mono);color:var(--sc-ink-soft);
+            margin:.5rem 0 0;display:block}
+  .split__v{align-self:stretch;width:1px;background:rgba(200,216,238,.28)}
+
+  /* ------------------------------------------------------- the gate UI */
+  .gate{margin:2rem 0 0;max-width:40rem}
+  .gate__q{font:600 .8125rem/1.4 var(--sc-font-text);letter-spacing:.1em;text-transform:uppercase;margin:0 0 .85rem;color:var(--kr-sky)}
+  .gate__row{display:flex;flex-wrap:wrap;gap:.5rem}
+  .gate__opt{flex:1 1 auto;min-height:44px;padding:.6rem .9rem;cursor:pointer;
+             background:transparent;color:var(--sc-ink-soft);
+             border:1px solid rgba(135,188,247,.55);
+             font:600 1rem/1.2 var(--sc-font-text);transition:.25s}
+  .gate__opt:hover{border-color:var(--kr-sky);color:#fff}
+  .gate__opt[disabled]{cursor:not-allowed;opacity:.42}
+  .gate__out{margin:1.1rem 0 0}
+  .gate__deny{border-left:2px solid var(--kr-sky);padding:.7rem 0 .7rem .9rem;
+              animation:slam .42s cubic-bezier(.2,.9,.3,1)}
+  .gate__deny b{display:block;font:400 .75rem/1.4 var(--kr-mono);letter-spacing:.06em;
+                color:var(--kr-sky);margin:0 0 .35rem}
+  .gate__deny span{font-size:.875rem;line-height:1.55;color:var(--sc-ink-soft)}
+  .gate__ok{border-left:2px solid var(--kr-sky);padding:.7rem 0 .7rem .9rem;
+            font-size:.875rem;line-height:1.55;color:var(--sc-ink-soft)}
+  @keyframes slam{0%{opacity:0;transform:translateX(-10px)}
+                  55%{transform:translateX(3px)}100%{opacity:1;transform:none}}
+  .shake{animation:shake .38s cubic-bezier(.36,.07,.19,.97)}
+  @keyframes shake{10%,90%{transform:translateX(-2px)}30%,70%{transform:translateX(4px)}
+                   50%{transform:translateX(-5px)}}
+
+  /* ------------------------------------------------------------ close */
+  .cta{display:inline-flex;align-items:center;min-height:52px;margin:1.8rem 0 0;
+       padding:0 1.9rem;background:var(--kr-sky);color:var(--kr-navy);
+       font:700 .9375rem/1 var(--sc-font-text);text-decoration:none;
+       transition:background .25s,transform .25s}
+  .cta:hover{background:#fff;transform:translateY(-2px)}
+  .kr-second{display:inline-block;margin:1.4rem 0 0 1.5rem;color:var(--kr-sky);
+             font:500 .875rem/1 var(--sc-font-text);text-underline-offset:5px}
+
+  .kr-fine{position:fixed;z-index:60;bottom:clamp(.9rem,2vw,1.5rem);
+           right:clamp(1rem,3vw,2.5rem);margin:0;
+           font:400 .6875rem/1.5 var(--kr-mono);color:#C8D8EE;opacity:1;
+           text-align:right;max-width:24rem}
+
+  /* Keep the copy clear of the fixed map. Absolutely positioned children are
+     laid out against the padding box, so this shifts every copy block. */
+  /* The engine sets an explicit left on each copy block, so padding on the
+     layer does not move them. Push the lead blocks past the fixed map instead.
+     Trail blocks are right-anchored and never reach it. */
+  @media (min-width:1001px){
+    [data-sc-world-copy] .sc-copy--lead{left:clamp(11.5rem,15vw,15.5rem)}
+  }
+  /* Below the map's own breakpoint there is no map, so no inset is needed. */
+  @media (max-width:1000px){
+    .map{display:none}
+  }
+  @media (max-width:760px){
+    /* On a phone the copy runs full width, so a directional gradient leaves the
+       right-hand end of every line sitting on bare footage. Cover the column. */
+    .map{display:none}
+    .kr-h1{font-size:clamp(2.1rem,9vw,3rem)}
+    .kr-h2{font-size:clamp(1.7rem,7vw,2.3rem)}
+    .split{grid-template-columns:1fr;gap:1.2rem}
+    .split__v{display:none}
+    .split__n{font-size:clamp(3rem,17vw,4.4rem)}
+    .kr-fine{position:static;margin:2rem 0 0;max-width:none;text-align:left}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gate__deny,.shake{animation:none}
+    .cta{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<a class="brand" href="#main">
+  <img class="brand__mark" src="assets/mark.png" alt="" width="490" height="307" decoding="async">
+  <span class="brand__name">Kestrel Ridge Health
+    <span class="brand__div">EYE INSTITUTE</span>
+  </span>
+</a>
+
+<nav aria-label="The hall" class="mapwrap">
+  <ol class="map" id="map">
+    <li class="map__item"><button class="map__btn" data-leg="0" type="button"><span class="map__rule"></span>The lane</button></li>
+    <li class="map__item"><button class="map__btn" data-leg="1" type="button"><span class="map__rule"></span>The work</button></li>
+    <li class="map__item"><button class="map__btn" data-leg="2" type="button"><span class="map__rule"></span>The corridor</button></li>
+  </ol>
+</nav>
+
+<div id="main" role="main" data-sc-mode="worldflight" data-sc-seam="0.14" data-sc-lerp="0.12">
+
+  <div data-sc-world>
+    <div data-sc-segment data-sc-w="1.7" data-sc-linger="0.06" data-sc-waypoint="The lane">
+      <img class="sc-world__poster" src="assets/p1.jpg" alt="" decoding="async">
+      <video data-sc-src="assets/leg1.mp4" data-sc-src-mobile="assets/leg1-m.mp4" muted playsinline data-sc-lerp="0.12"></video>
+    </div>
+    <div data-sc-segment data-sc-w="2.24" data-sc-linger="0.08" data-sc-waypoint="The work">
+      <img class="sc-world__poster" src="assets/p2.jpg" alt="" decoding="async">
+      <video data-sc-src="assets/leg2.mp4" data-sc-src-mobile="assets/leg2-m.mp4" muted playsinline data-sc-lerp="0.12"></video>
+    </div>
+    <div data-sc-segment data-sc-w="2.24" data-sc-linger="0.06" data-sc-waypoint="The corridor">
+      <img class="sc-world__poster" src="assets/p3.jpg" alt="" decoding="async">
+      <video data-sc-src="assets/leg3.mp4" data-sc-src-mobile="assets/leg3-m.mp4" muted playsinline data-sc-lerp="0.12"></video>
+    </div>
+  </div>
+
+  <div data-sc-world-copy>
+    <div class="sc-world__scrim sc-scrim sc-scrim--left"></div>
+
+    <!-- 1 recognition -->
+    <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="hero">
+      <p class="kr-eyebrow">Ophthalmic technician staffing</p>
+      <h1 class="kr-h1">Same patient count.<br>Not the same day.</h1>
+      <p class="kr-lede">On the synthetic date 2026-09-08 the system forecast two ten-patient sessions at 345 and 181 technician minutes. Forecast the minutes, then staff to them.</p>
+    </div>
+
+    <!-- 2 the blindness -->
+    <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="0.16 0.28">
+      <h2 class="kr-h2">A fixed ratio counts heads.</h2>
+      <p class="kr-lede">It cannot see appointment mix, testing load, complexity or how a particular provider actually works. So every session becomes the same session.</p>
+      <p class="kr-lede">On synthetic holdout data the forecast's average error is 24.44 minutes against the fixed ratio's 208.61, about an eighth.</p>
+    </div>
+
+    <!-- 3 the divergence, the data does the work -->
+    <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="0.36 0.50">
+      <p class="kr-eyebrow">Two sessions, ten patients each</p>
+      <h2 class="kr-h2">Ten patients each.</h2>
+      <div class="split">
+        <div class="split__col">
+          <p class="split__label">Neuro-ophthalmology</p>
+          <span class="split__n split__n--lead">345</span>
+          <span class="split__u">minutes / 2 technicians</span>
+        </div>
+        <div class="split__v" aria-hidden="true"></div>
+        <div class="split__col">
+          <p class="split__label">Glaucoma</p>
+          <span class="split__n">181</span>
+          <span class="split__u">minutes / 1 technician</span>
+        </div>
+      </div>
+      <p class="kr-note">Forecasts from the system on its own synthetic data, synthetic date 2026-09-08. The fixed ratio asks for two technicians in both.</p>
+    </div>
+
+    <!-- 4 THE PEAK: the gate -->
+    <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="0.55 0.76 0.18 0.18">
+      <p class="kr-eyebrow">Eight rules. None of them bend.</p>
+      <h2 class="kr-h2">Try to break one.</h2>
+      <p class="kr-lede">A technician has called off. Put someone else on the 8 a.m. glaucoma list at Avon Meadows. Pick one.</p>
+
+      <div class="gate" id="gate">
+        <p class="gate__q">Who covers it?</p>
+        <div class="gate__row">
+          <button class="gate__opt" type="button" data-pick="site">T-041, approved for Lakeview only</button>
+          <button class="gate__opt" type="button" data-pick="comp">T-018, no OCT competency</button>
+          <button class="gate__opt" type="button" data-pick="ok">T-062, approved and free</button>
+        </div>
+        <div class="gate__out" id="gateOut" role="status" aria-live="polite"></div>
+      </div>
+      <p class="kr-note">A synthetic scenario. The rule names and the refusal are the system's own; SITE_ELIGIBILITY and COMPETENCY are two of eight hard constraints.</p>
+    </div>
+
+
+    <!-- close: arrival -->
+    <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="finale">
+      <h2 class="kr-h2">Every change is written down. Alter one entry and the chain stops matching.</h2>
+      <p class="kr-lede">Every plan, override, refusal and approval goes to an append-only, hash-chained log with who acted and why.</p>
+      <p class="kr-lede">Phase zero retrains on your own history and checks the forecast against the ratio you use today. If it does not beat it, the engagement stops there.</p>
+      <a class="cta" href="mailto:hello@kestrelridgehealth.com?subject=Clinical%20Workforce%20Operations">Test it against your own data</a>
+      <a class="kr-second" href="#main">What has and has not been measured</a>
+    </div>
+  </div>
+
+  <div data-sc-spacer aria-hidden="true"></div>
+</div>
+
+<p class="kr-fine">Synthetic operational data throughout. Never validated on real clinic data. Not HIPAA certified.</p>
+
+<script src="scrollcraft.js"></script>
+<script>
+  window.__sc = ScrollCraft.mount(document);
+
+  // The spacer is measured once at mount, and a zero-height innerHeight there
+  // leaves the page with no scroll track at all. One resize fixes it.
+  function relayout(){ dispatchEvent(new Event('resize')); }
+  addEventListener('load', relayout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+
+  // The map is the navigation, and it has to be able to jump.
+  const btns = [...document.querySelectorAll('.map__btn')];
+  addEventListener('sc:waypoint', (e) => {
+    btns.forEach((b) => b.setAttribute('aria-current', String(+b.dataset.leg === e.detail.index)));
+  });
+  const segs = [...document.querySelectorAll('[data-sc-segment]')];
+  btns.forEach((b) => b.addEventListener('click', () => {
+    const i = +b.dataset.leg;
+    const w = segs.map((s) => parseFloat(s.dataset.scW) || 1.3);
+    const before = w.slice(0, i).reduce((a, c) => a + c, 0);
+    scrollTo({ top: (before + 0.18) * innerHeight, behavior: 'smooth' });
+  }));
+
+  /* ------------------------------------------------------------------
+     THE SIGNATURE MOVE: the gate that will not open.
+     The page runs the real hard-constraint check rather than miming it.
+     Refusing names the constraint, exactly as the API does.
+  ------------------------------------------------------------------ */
+  const RULES = {
+    site: { name: 'SITE_ELIGIBILITY',
+            why: 'T-041 is approved for Lakeview. This session is at Avon Meadows, which is not in their approved sites. The override is refused and nothing is stored.' },
+    comp: { name: 'COMPETENCY',
+            why: 'This half-day carries four OCT imaging appointments, so at least one assigned technician must hold OCT. T-018 does not. The override is refused and nothing is stored.' }
+  };
+  const gate = document.getElementById('gate');
+  const out  = document.getElementById('gateOut');
+  document.querySelectorAll('.gate__opt').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const pick = btn.dataset.pick;
+      if (pick === 'ok') {
+        out.innerHTML = '<p class="gate__ok">Accepted. A new plan version is created, the previous one is kept, and the change is recorded with who made it and why. It still needs a second person to approve it.</p>';
+        return;
+      }
+      const r = RULES[pick];
+      out.innerHTML = '<div class="gate__deny"><b>REFUSED &middot; ' + r.name + '</b><span>' + r.why + '</span></div>';
+      gate.classList.remove('shake');
+      void gate.offsetWidth;
+      gate.classList.add('shake');
+    });
+  });
+</script>
+</body>
+</html>
