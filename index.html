@@ -22,7 +22,22 @@
 {"@type":"WebSite","@id":"https://kestrelridgehealth.com/#website","url":"https://kestrelridgehealth.com/","name":"Kestrel Ridge Health","publisher":{"@id":"https://kestrelridgehealth.com/#org"}}
 ]}
 </script>
-<noscript><style>[data-sc-cue]{opacity:1!important}</style></noscript>
+<noscript><style>
+  /* scrollcraft.css hides [data-sc-copy] and .sc-world__seg outright and fixes
+     the stage, because it expects a script to reveal them. With scripting off
+     the earlier version of this block named [data-sc-cue], which only two
+     elements carry, so the whole argument of the page stayed at zero opacity
+     on any screen wider than 760px. These are the same structural rules the
+     no-engine path uses, restated here at every width. */
+  [data-sc-copy],[data-sc-cue]{opacity:1!important;transform:none!important;
+    translate:none!important;pointer-events:auto!important}
+  [data-sc-world],[data-sc-spacer],.sc-world__scrim,.mapwrap{display:none!important}
+  [data-sc-world-copy]{position:static!important;inset:auto!important}
+  .sc-copy,.sc-copy--lead{position:static!important;inset:auto!important;
+    max-width:none!important}
+  .kr-poster{display:block!important;width:100%!important;height:auto!important}
+  .brand,.kr-util,.kr-fine{position:static!important}
+</style></noscript>
 <link rel="stylesheet" href="scrollcraft.css">
 <style>
   @font-face{font-family:"Public Sans";src:url("fonts/public-sans-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-display:swap}
@@ -329,6 +344,35 @@
   .kr-poster{display:none}
 
   /* ==================================================================
+     NO ENGINE, ANY WIDTH.
+     The phone block below carries these same structural rules, but it is
+     wrapped in max-width:760px, so a desktop that never mounted the engine
+     (scripting off, scrollcraft.js blocked, or the request failing) matched
+     none of them and rendered the copy at the opacity scrollcraft.css sets.
+     The engine class is what should gate this, not the viewport, so the
+     structure is restated here unconditionally. Phone-specific type sizing
+     stays where it is.
+     ================================================================== */
+  html:not(.kr-engine), html:not(.kr-engine) body{overflow-x:hidden}
+  html:not(.kr-engine) [data-sc-world],
+  html:not(.kr-engine) [data-sc-spacer],
+  html:not(.kr-engine) .sc-world__scrim,
+  html:not(.kr-engine) .mapwrap{display:none}
+  html:not(.kr-engine) [data-sc-world-copy]{position:static;inset:auto;
+    pointer-events:auto}
+  html:not(.kr-engine) [data-sc-cue],
+  html:not(.kr-engine) [data-sc-copy]{opacity:1;transform:none;translate:none;
+    pointer-events:auto}
+  html:not(.kr-engine) .sc-copy,
+  html:not(.kr-engine) .sc-copy--lead{position:static;inset:auto;max-width:none;
+    padding:2.5rem clamp(1.25rem,4vw,2.5rem)}
+  html:not(.kr-engine) .kr-poster{display:block;width:100%;height:auto}
+  html:not(.kr-engine) .brand{position:static;padding:1.5rem clamp(1.25rem,4vw,2.5rem) .75rem}
+  html:not(.kr-engine) .kr-util{position:static;display:flex;flex-wrap:wrap;
+    gap:.75rem 1.25rem;padding:0 clamp(1.25rem,4vw,2.5rem) 1rem}
+  html:not(.kr-engine) .kr-fine{position:static;padding:0 clamp(1.25rem,4vw,2.5rem) 3rem}
+
+  /* ==================================================================
      THE PHONE COMPOSITION.
      A separate layout, not a narrower worldflight. The engine script is
      never loaded below 761px (see the loader at the end of the body), so
@@ -601,10 +645,24 @@ function krMountWorld(){
 }
 
 if (matchMedia('(min-width: 761px)').matches) {
-  document.documentElement.classList.add('kr-engine');
+  /* kr-engine suppresses the readable fallback, so it is only honest to set it
+     while the engine is actually going to arrive. If the script fails to load,
+     or mounting throws, the class comes back off and the page returns to
+     ordinary document flow rather than sitting blank behind a hidden stage. */
+  const root = document.documentElement;
+  root.classList.add('kr-engine');
   const engine = document.createElement('script');
   engine.src = 'scrollcraft.js';
-  engine.onload = krMountWorld;
+  engine.onload = function () {
+    try {
+      krMountWorld();
+    } catch (err) {
+      root.classList.remove('kr-engine');
+    }
+  };
+  engine.onerror = function () {
+    root.classList.remove('kr-engine');
+  };
   document.body.appendChild(engine);
 }
 </script>
