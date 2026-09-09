@@ -1,0 +1,50 @@
+name: Notify IndexNow
+
+# Runs after every push to main so Bing (and any other IndexNow-consuming
+# search engine) is told about content changes without anyone remembering
+# to do it by hand. Reads the URL list straight from sitemap.xml, so a new
+# page only needs adding to the sitemap, never to this file.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          set -euo pipefail
+          KEY="e2a76b4686264f2f9418b07705154e24"
+          HOST="kestrelridgehealth.com"
+          KEY_LOCATION="https://${HOST}/${KEY}.txt"
+
+          URLS_JSON=$(python3 - <<'PY'
+          import xml.etree.ElementTree as ET, json
+          ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+          root = ET.parse("sitemap.xml").getroot()
+          urls = [el.text.strip() for el in root.findall("s:url/s:loc", ns)]
+          print(json.dumps(urls))
+          PY
+          )
+
+          PAYLOAD=$(python3 - "$HOST" "$KEY" "$KEY_LOCATION" "$URLS_JSON" <<'PY'
+          import json, sys
+          host, key, key_location, urls_json = sys.argv[1:5]
+          print(json.dumps({
+              "host": host,
+              "key": key,
+              "keyLocation": key_location,
+              "urlList": json.loads(urls_json),
+          }))
+          PY
+          )
+
+          echo "Submitting: $PAYLOAD"
+          curl -sS -o /dev/null -w "IndexNow response: %{http_code}\n" \
+            -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$PAYLOAD"
