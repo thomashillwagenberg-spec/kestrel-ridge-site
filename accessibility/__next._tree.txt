@@ -1,5 +1,5 @@
-:HL["/_next/static/chunks/0tqscnz5tunde.css","style"]
+:HL["/_next/static/chunks/424lnpa9_-m2f.css","style"]
 :HL["/_next/static/media/public_sans_latin_wght_normal-s.p.3l3rp4h9pmto-.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/source_serif_4_latin_wght_normal-s.p.3_g1pg7bqcyap.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/mark-light.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"accessibility","param":null,"prefetchHints":4160,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"p5TC3xoO3M7Fb9CY2aR3c"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"accessibility","param":null,"prefetchHints":4160,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"9I2C_kfw7SvGuBXQfZZio"}
