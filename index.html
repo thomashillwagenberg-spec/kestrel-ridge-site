@@ -254,6 +254,48 @@
     [data-sc-window="finale"] .kr-actions{margin-top:1.3rem}
   }
 
+  /* The rule above sized the close for width only, which was never the
+     binding constraint: the block is bottom-anchored inside a fixed layer,
+     so it is viewport HEIGHT that decides whether the headline clears the
+     brand mark. Measured on the deployed page the close stood 877px tall,
+     which overran a 900px laptop by 103px and a 720px window by 247px, and
+     the headline simply left the top of the screen. Stepped breakpoints did
+     not hold it, because a 982px window fell through the gaps between them.
+     These sizes are continuous in vh instead, so the close scales with the
+     window it is actually in and keeps its ceiling on a tall display. */
+  @media (min-width:761px){
+    /* The engine floats every lead block clamp(3rem,12vh,9rem) off the
+       bottom edge. On the close that is up to 144px of headroom spent below
+       the fold while the headline is being pushed off the top, so the close
+       alone sits nearer the edge. */
+    [data-sc-window="finale"].sc-copy--lead{bottom:clamp(1.25rem,4vh,3rem)}
+    [data-sc-window="finale"] .kr-h2{font-size:clamp(1.15rem,3.7vh,2.7rem);
+      line-height:1.08;margin-bottom:0}
+    [data-sc-window="finale"] .kr-lede{margin-top:clamp(.4rem,1.3vh,1rem);
+      font-size:clamp(.85rem,1.9vh,1.0625rem);line-height:1.5}
+    [data-sc-window="finale"] .kr-note{margin-top:clamp(.45rem,1.35vh,1.1rem);
+      font-size:clamp(.6rem,1.25vh,.75rem);line-height:1.45}
+    [data-sc-window="finale"] .wl{margin-top:clamp(.5rem,1.5vh,1.2rem)}
+    [data-sc-window="finale"] .wl__in,
+    [data-sc-window="finale"] .wl__btn{min-height:clamp(2.1rem,4.6vh,2.75rem)}
+    [data-sc-window="finale"] .kr-actions{margin-top:clamp(.5rem,1.6vh,1.3rem);
+      gap:clamp(.4rem,1vh,.75rem) 1.2rem}
+    [data-sc-window="finale"] .kr-fine{margin-top:clamp(.6rem,1.7vh,1.5rem);
+      padding-top:clamp(.5rem,1.4vh,1.25rem);
+      font-size:clamp(.58rem,1.15vh,.6875rem)}
+  }
+
+  /* The floor case. Continuous vh sizing holds every window down to about
+     768px; a 720px one is still 18px short of clearing the brand mark, so
+     the close gives up its last slack there. */
+  @media (min-width:761px) and (max-height:740px){
+    [data-sc-window="finale"] .kr-lede{margin-top:.35rem;line-height:1.4}
+    [data-sc-window="finale"] .kr-note{margin-top:.4rem;line-height:1.38}
+    [data-sc-window="finale"] .wl{margin-top:.45rem}
+    [data-sc-window="finale"] .kr-actions{margin-top:.45rem}
+    [data-sc-window="finale"] .kr-fine{margin-top:.5rem;padding-top:.45rem}
+  }
+
   /* ------------------------------------------------------ the waitlist */
   .wl{margin:1.8rem 0 0;max-width:34rem}
   .wl__label{display:block;font:600 .6875rem/1 var(--sc-font-text);
