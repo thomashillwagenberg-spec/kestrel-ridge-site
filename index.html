@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kestrel Ridge Health. Ophthalmic Workforce Operations</title>
-<meta name="description" content="Forecast the technician minutes each clinic session will need, staff it under eight rules the system does not relax, and keep a person in authority.">
+<meta name="description" content="Phase Zero starts at $7,500. Score a forecast on de-identified history against your ratio. Keep the finding. Synthetic only. Not HIPAA certified. No customers.">
 <link rel="canonical" href="https://kestrelridgehealth.com/">
 <meta name="theme-color" content="#0B2545">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kestrelridgehealth.com/">
 <meta property="og:title" content="Kestrel Ridge Health. Ophthalmic Workforce Operations">
-<meta property="og:description" content="Forecast the technician minutes each clinic session will need, staff it under eight rules the system does not relax, and keep a person in authority.">
+<meta property="og:description" content="Phase Zero starts at $7,500. Score a forecast on de-identified history against your ratio. Keep the finding. Synthetic only. Not HIPAA certified. No customers.">
 <meta property="og:image" content="https://kestrelridgehealth.com/assets/p1.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/mark.png">
@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" href="/icon.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"Organization","@id":"https://kestrelridgehealth.com/#org","name":"Kestrel Ridge Health","url":"https://kestrelridgehealth.com/","logo":"https://kestrelridgehealth.com/mark-light.png","email":"hello@kestrelridgehealth.com","address":{"@type":"PostalAddress","addressLocality":"Cleveland","addressRegion":"OH","addressCountry":"US"},"description":"Technician staffing software for eye clinics that forecasts technician minutes per clinic session and assigns technicians under credentialing rules with human approval and an audit log."},
+{"@type":"Organization","@id":"https://kestrelridgehealth.com/#org","name":"Kestrel Ridge Health","url":"https://kestrelridgehealth.com/","logo":"https://kestrelridgehealth.com/mark-light.png","email":"hello@kestrelridgehealth.com","address":{"@type":"PostalAddress","addressLocality":"Cleveland","addressRegion":"OH","addressCountry":"US"},"description":"Technician staffing software for eye clinics. Forecasts technician minutes per session and assigns under eight hard rules with human approval. Phase Zero starts at $7,500. Synthetic validation only; not HIPAA certified; no customers."},
 {"@type":"WebSite","@id":"https://kestrelridgehealth.com/#website","url":"https://kestrelridgehealth.com/","name":"Kestrel Ridge Health","publisher":{"@id":"https://kestrelridgehealth.com/#org"}}
 ]}
 </script>
@@ -139,6 +139,14 @@
            max-width:46ch;margin:1.4rem 0 0;text-wrap:pretty}
   .kr-note{font:400 .8125rem/1.6 var(--kr-mono);color:#C8D8EE;opacity:1;
            margin:1.6rem 0 0;max-width:44ch}
+  .kr-offer{max-width:52ch}
+  .kr-offer a,.kr-offer-links a{color:var(--kr-sky);text-decoration:underline;
+              text-underline-offset:4px;text-decoration-thickness:1px}
+  .kr-offer a:hover,.kr-offer-links a:hover{color:#fff}
+  .kr-offer-links{display:flex;flex-wrap:wrap;gap:.55rem 1.25rem;
+                  margin:1rem 0 0;max-width:54ch;
+                  font:500 .8125rem/1.4 var(--sc-font-text)}
+  .kr-offer-links a{min-height:44px;display:inline-flex;align-items:center}
 
   /* -------------------------------------------------- the split figure */
   .split{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(1rem,3vw,2.6rem);
@@ -193,6 +201,12 @@
   .kr-util a{font:400 .75rem/1 var(--kr-mono);letter-spacing:.04em;
              color:#C8D8EE;text-decoration:none;text-underline-offset:5px}
   .kr-util a:hover{color:#FFFFFF;text-decoration:underline}
+  .kr-util__cta{color:var(--kr-navy)!important;background:var(--kr-sky);
+                padding:.45rem .9rem;min-height:44px;
+                font:700 .75rem/1 var(--sc-font-text)!important;letter-spacing:.04em;
+                display:inline-flex;align-items:center;text-decoration:none!important}
+  .kr-util__cta:hover{background:#fff;color:var(--kr-navy)!important;
+                      text-decoration:none!important}
 
   /* The close links have to wrap cleanly on a narrow screen. */
   .kr-actions{display:flex;flex-wrap:wrap;align-items:center;
@@ -311,7 +325,7 @@
     [data-sc-window="finale"] .kr-fine{margin-top:.5rem;padding-top:.45rem}
   }
 
-  /* ------------------------------------------------------ the waitlist */
+  /* ------------------------------------------------------ inquire form */
   .wl{margin:1.8rem 0 0;max-width:34rem}
   .wl__label{display:block;font:600 .6875rem/1 var(--sc-font-text);
              letter-spacing:.16em;text-transform:uppercase;color:var(--kr-sky);
@@ -414,6 +428,7 @@
       border-bottom:1px solid rgba(200,216,238,.18)}
     html:not(.kr-engine) .kr-util a{display:inline-flex;align-items:center;
       min-height:44px;font-size:.8125rem}
+    html:not(.kr-engine) .kr-util__cta{font-size:.8125rem!important}
     html:not(.kr-engine) .kr-fine__legal{gap:1.25rem;flex-wrap:wrap}
     html:not(.kr-engine) .kr-fine__legal a,
     html:not(.kr-engine) .kr-fine__co a,
@@ -449,6 +464,28 @@
     /* The close carries the status line, the legal links and the address. */
     html:not(.kr-engine) [data-sc-window="finale"] .kr-fine{font-size:.75rem}
     html:not(.kr-engine) .kr-second--sm{display:inline-block}
+  }
+
+  /* Desktop worldflight: keep the hero offer to one note plus the fixed
+     Phase Zero control in the utility nav, so the headline still clears
+     the brand mark. Phone and no-engine get the full action row. */
+  html.kr-engine .kr-hero-actions{display:none}
+  html:not(.kr-engine) .kr-offer-links{display:none}
+  html.kr-engine [data-sc-window="hero"] .kr-h1{
+    font-size:clamp(2.15rem,5.8vw,5.2rem)}
+  html.kr-engine [data-sc-window="hero"] .kr-lede{
+    margin-top:1rem;font-size:clamp(.95rem,1.4vw,1.15rem);line-height:1.5}
+  html.kr-engine [data-sc-window="hero"] .kr-offer{
+    margin-top:1rem;font-size:.75rem;line-height:1.5;max-width:54ch}
+  html.kr-engine [data-sc-window="hero"] .kr-offer-links{
+    margin-top:.7rem;font-size:.75rem;gap:.35rem 1.1rem}
+  html.kr-engine [data-sc-window="hero"] .kr-offer-links a{min-height:0}
+  @media (min-width:761px) and (max-height:740px){
+    html.kr-engine [data-sc-window="hero"] .kr-h1{
+      font-size:clamp(1.75rem,4.6vw,3.2rem)}
+    html.kr-engine [data-sc-window="hero"] .kr-lede{margin-top:.55rem}
+    html.kr-engine [data-sc-window="hero"] .kr-offer{margin-top:.55rem}
+    html.kr-engine [data-sc-window="hero"] .kr-offer-links{margin-top:.4rem}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -487,7 +524,7 @@
   <a href="/evidence/">Evidence</a>
   <a href="/governance/">Governance</a>
   <a href="/pilot/">Pilot</a>
-  <a href="/contact/">Contact</a>
+  <a class="kr-util__cta" href="/contact/">Phase Zero</a>
 </nav>
 </header>
 
@@ -526,13 +563,24 @@
       <p class="kr-eyebrow">Technician staffing software for eye clinics</p>
       <h1 class="kr-h1">Same patient count. <br>Not the same day.</h1>
       <p class="kr-lede">Forecast the technician minutes each clinic session will need. Staff it under eight rules the system does not relax, with a person approving every plan.</p>
+      <p class="kr-note kr-offer">Phase Zero is a fixed-fee diagnostic starting at $7,500 on de-identified operational history. The clinic keeps the finding either way. Stop if the forecast does not beat the ratio you use today.</p>
+      <p class="kr-offer-links">
+        <a href="/contact/">Ask about Phase Zero</a>
+        <a href="/pilot/">How it is designed to stop</a>
+        <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
+      </p>
+      <div class="kr-actions kr-hero-actions">
+        <a class="cta" href="/contact/">Ask about Phase Zero</a>
+        <a class="kr-second" href="/pilot/">How Phase Zero is designed to stop</a>
+        <a class="kr-second" href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
+      </div>
     </div>
 
     <!-- 2 the blindness -->
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="0.16 0.28">
       <h2 class="kr-h2">A fixed ratio counts heads.</h2>
       <p class="kr-lede">It cannot see appointment mix, testing load, complexity or how a particular provider works. Every session becomes the same session.</p>
-      <p class="kr-lede">On the system's synthetic validation holdout the forecast's average error is 24.44 minutes against the fixed ratio's 208.61.</p>
+      <p class="kr-lede">On the system's synthetic validation holdout, not validated on real clinic data, the forecast's average error is 24.44 minutes against the fixed ratio's 208.61.</p>
     </div>
 
     <img class="kr-poster" src="assets/p2.jpg" alt="A technician adjusting diagnostic imaging equipment during a patient exam" width="1920" height="1080" decoding="async">
@@ -554,7 +602,7 @@
           <span class="split__u">minutes / 1 technician</span>
         </div>
       </div>
-      <p class="kr-note">Forecasts on the synthetic validation set for 2026-09-08. The fixed ratio asks for two technicians in both.</p>
+      <p class="kr-note">Synthetic forecasts for 2026-09-08, not validated on real clinic data. The fixed ratio asks for two technicians in both.</p>
     </div>
 
     <img class="kr-poster" src="assets/p3.jpg" alt="A hallway lined with exam rooms in a multi-site eye clinic" width="1920" height="1080" decoding="async">
@@ -586,26 +634,27 @@
       <p class="kr-note">Phase Zero starts at $7,500, fixed fee. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.</p>
 
       <form class="wl" id="wl" novalidate>
-        <label class="wl__label" for="wlEmail">Join the waitlist</label>
+        <label class="wl__label" for="wlEmail">Ask about Phase Zero</label>
         <div class="wl__row">
           <input class="wl__in" id="wlEmail" name="email" type="email" autocomplete="email" inputmode="email">
-          <button class="wl__btn" type="submit">Join the waitlist</button>
+          <button class="wl__btn" type="submit">Write to us</button>
         </div>
         <p class="wl__msg" id="wlOut" role="status" aria-live="polite"></p>
-        <p class="wl__note">We use your address only to tell you when Kestrel Ridge Health opens to new clinics. <a href="/privacy/">Privacy</a></p>
+        <p class="wl__note">Opens a message to <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>. Starting at $7,500, you keep the finding either way. <a href="/privacy/">Privacy</a></p>
       </form>
 
       <div class="kr-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
+        <a class="kr-second" href="/pilot/">How Phase Zero is designed to stop</a>
+        <a class="kr-second" href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
         <a class="kr-second" href="/product/">What a scheduler does with it</a>
         <a class="kr-second" href="/how-it-works/">The ten layers</a>
         <a class="kr-second" href="/evidence/">What the forecast was measured against</a>
-        <a class="kr-second kr-second--sm" href="/governance/">Governance</a>
-        <a class="kr-second" href="/pilot/">How the pilot is designed to stop</a>
+        <a class="kr-second kr-second--sm" href="/governance/">What the output may never be used for</a>
         <a class="kr-second kr-second--sm" href="/contact/">Contact</a>
       </div>
       <div class="kr-fine">
-        <p class="kr-fine__p">Figures shown come from the system's synthetic validation set. Not validated on real clinic data. Not HIPAA certified.</p>
+        <p class="kr-fine__p">Figures shown come from the system's synthetic validation set. Not validated on real clinic data. Not HIPAA certified. No customers.</p>
         <p class="kr-fine__p kr-fine__legal"><a href="/privacy/">Privacy</a> <a href="/terms/">Terms</a> <a href="/accessibility/">Accessibility</a></p>
         <p class="kr-fine__p kr-fine__co">Kestrel Ridge Health is the operating name of a founder-operated business in Cleveland, Ohio, not a separately incorporated company. <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a></p>
       </div>
@@ -698,8 +747,8 @@ if (matchMedia('(min-width: 761px)').matches) {
   });
 
   /* ------------------------------------------------------------------
-     The waitlist. There is no server behind this static file, so with no
-     endpoint configured the button composes the same message in the
+     Phase Zero inquire. There is no server behind this static file, so with
+     no endpoint configured the button composes the same message in the
      visitor's own mail client. Either way the control works.
   ------------------------------------------------------------------ */
   const FORM_ENDPOINT = '';
@@ -722,18 +771,18 @@ if (matchMedia('(min-width: 761px)').matches) {
         const res = await fetch(FORM_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ email: email, source: 'waitlist' })
+          body: JSON.stringify({ email: email, source: 'phase-zero' })
         });
         if (res.ok) {
-          wlOut.textContent = 'You are on the list. We will write when we open to new clinics.';
+          wlOut.textContent = 'Received. We will reply about Phase Zero.';
           return;
         }
       } catch (err) { /* fall through to the mail client */ }
     }
     window.location.href = 'mailto:' + WL_TO
-      + '?subject=' + encodeURIComponent('Waitlist')
+      + '?subject=' + encodeURIComponent('Phase Zero')
       + '&body=' + encodeURIComponent(email);
-    wlOut.textContent = 'Your mail client should have opened with your address. Press send there and you are on the list.';
+    wlOut.textContent = 'Your mail client should have opened with your address. Press send there and we will reply about Phase Zero.';
   });
 </script>
 </body>

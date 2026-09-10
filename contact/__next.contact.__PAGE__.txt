@@ -14,7 +14,7 @@ e:C
 17:I[27201,["/_next/static/chunks/11codyqvb7zsd.js"],"IconMark"]
 18:I[39756,["/_next/static/chunks/11codyqvb7zsd.js"],"default"]
 19:I[37457,["/_next/static/chunks/11codyqvb7zsd.js"],"default"]
-4:["$","$L2",null,{"className":"section-edge rule-top pb-10 pt-16 sm:pb-14 sm:pt-24","children":[null,["$","h2",null,{"className":"max-w-3xl font-serif text-2xl leading-[1.14] sm:text-[2rem]","children":"Not ready to talk yet"}],null,["$","div",null,{"className":"mt-6","children":[["$","p",null,{"className":"prose-measure text-base text-ink-muted","children":["Leave an address and we will write once, when ","Kestrel Ridge Health"," opens to new clinics."]}],["$","div",null,{"className":"mt-6","children":["$","$L11",null,{"id":"waitlist-contact"}]}]]}]]}]
+4:["$","$L2",null,{"className":"section-edge rule-top pb-10 pt-16 sm:pb-14 sm:pt-24","children":[null,["$","h2",null,{"className":"max-w-3xl font-serif text-2xl leading-[1.14] sm:text-[2rem]","children":"Send an address instead"}],null,["$","div",null,{"className":"mt-6","children":[["$","p",null,{"className":"prose-measure text-base text-ink-muted","children":"Leave an address and we will reply about Phase Zero. Starting at $7,500, the clinic keeps the finding either way."}],["$","div",null,{"className":"mt-6","children":["$","$L11",null,{"id":"waitlist-contact"}]}]]}]]}]
 5:["$","script","script-0",{"src":"/_next/static/chunks/12jttcpr0tj_7.js","async":true}]
 6:["$","script","script-1",{"src":"/_next/static/chunks/0uuu49dhov4vb.js","async":true}]
 7:["$","$L12",null,{"children":["$","$13",null,{"name":"Next.MetadataOutlet","children":"$@14"}]}]
