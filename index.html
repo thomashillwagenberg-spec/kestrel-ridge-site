@@ -140,9 +140,13 @@
   .kr-note{font:400 .8125rem/1.6 var(--kr-mono);color:#C8D8EE;opacity:1;
            margin:1.6rem 0 0;max-width:44ch}
   .kr-offer{max-width:52ch}
-  .kr-offer a{color:var(--kr-sky);text-decoration:underline;
+  .kr-offer a,.kr-offer-links a{color:var(--kr-sky);text-decoration:underline;
               text-underline-offset:4px;text-decoration-thickness:1px}
-  .kr-offer a:hover{color:#fff}
+  .kr-offer a:hover,.kr-offer-links a:hover{color:#fff}
+  .kr-offer-links{display:flex;flex-wrap:wrap;gap:.55rem 1.25rem;
+                  margin:1rem 0 0;max-width:54ch;
+                  font:500 .8125rem/1.4 var(--sc-font-text)}
+  .kr-offer-links a{min-height:44px;display:inline-flex;align-items:center}
 
   /* -------------------------------------------------- the split figure */
   .split{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(1rem,3vw,2.6rem);
@@ -466,17 +470,22 @@
      Phase Zero control in the utility nav, so the headline still clears
      the brand mark. Phone and no-engine get the full action row. */
   html.kr-engine .kr-hero-actions{display:none}
+  html:not(.kr-engine) .kr-offer-links{display:none}
   html.kr-engine [data-sc-window="hero"] .kr-h1{
     font-size:clamp(2.15rem,5.8vw,5.2rem)}
   html.kr-engine [data-sc-window="hero"] .kr-lede{
     margin-top:1rem;font-size:clamp(.95rem,1.4vw,1.15rem);line-height:1.5}
   html.kr-engine [data-sc-window="hero"] .kr-offer{
     margin-top:1rem;font-size:.75rem;line-height:1.5;max-width:54ch}
+  html.kr-engine [data-sc-window="hero"] .kr-offer-links{
+    margin-top:.7rem;font-size:.75rem;gap:.35rem 1.1rem}
+  html.kr-engine [data-sc-window="hero"] .kr-offer-links a{min-height:0}
   @media (min-width:761px) and (max-height:740px){
     html.kr-engine [data-sc-window="hero"] .kr-h1{
       font-size:clamp(1.75rem,4.6vw,3.2rem)}
     html.kr-engine [data-sc-window="hero"] .kr-lede{margin-top:.55rem}
     html.kr-engine [data-sc-window="hero"] .kr-offer{margin-top:.55rem}
+    html.kr-engine [data-sc-window="hero"] .kr-offer-links{margin-top:.4rem}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -554,7 +563,12 @@
       <p class="kr-eyebrow">Technician staffing software for eye clinics</p>
       <h1 class="kr-h1">Same patient count. <br>Not the same day.</h1>
       <p class="kr-lede">Forecast the technician minutes each clinic session will need. Staff it under eight rules the system does not relax, with a person approving every plan.</p>
-      <p class="kr-note kr-offer">Phase Zero is a fixed-fee diagnostic starting at $7,500 on de-identified operational history. The clinic keeps the finding either way. Stop if the forecast does not beat the ratio you use today. <a href="/contact/">Ask about Phase Zero</a>. <a href="/pilot/">How it is designed to stop</a>. <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a></p>
+      <p class="kr-note kr-offer">Phase Zero is a fixed-fee diagnostic starting at $7,500 on de-identified operational history. The clinic keeps the finding either way. Stop if the forecast does not beat the ratio you use today.</p>
+      <p class="kr-offer-links">
+        <a href="/contact/">Ask about Phase Zero</a>
+        <a href="/pilot/">How it is designed to stop</a>
+        <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
+      </p>
       <div class="kr-actions kr-hero-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
         <a class="kr-second" href="/pilot/">How Phase Zero is designed to stop</a>
