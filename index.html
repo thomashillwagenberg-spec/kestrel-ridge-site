@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kestrel Ridge Health. Ophthalmic Workforce Operations</title>
-<meta name="description" content="Phase Zero starts at $7,500. Score a forecast on de-identified history against your ratio. Keep the finding. Synthetic only. Not HIPAA certified. No customers.">
+<meta name="description" content="Phase Zero starts at $7,500 on de-identified operational history. Keep the finding either way. For practice admins, COOs and clinic ops at independent multi-site ophthalmology groups (5+ sites). Synthetic only. Not HIPAA certified. No customers.">
 <link rel="canonical" href="https://kestrelridgehealth.com/">
 <meta name="theme-color" content="#0B2545">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kestrelridgehealth.com/">
 <meta property="og:title" content="Kestrel Ridge Health. Ophthalmic Workforce Operations">
-<meta property="og:description" content="Phase Zero starts at $7,500. Score a forecast on de-identified history against your ratio. Keep the finding. Synthetic only. Not HIPAA certified. No customers.">
+<meta property="og:description" content="Phase Zero starts at $7,500 on de-identified operational history. Keep the finding either way. For practice admins, COOs and clinic ops at independent multi-site ophthalmology groups (5+ sites). Synthetic only. Not HIPAA certified. No customers.">
 <meta property="og:image" content="https://kestrelridgehealth.com/assets/p1.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/mark.png">
@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" href="/icon.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"Organization","@id":"https://kestrelridgehealth.com/#org","name":"Kestrel Ridge Health","url":"https://kestrelridgehealth.com/","logo":"https://kestrelridgehealth.com/mark-light.png","email":"hello@kestrelridgehealth.com","address":{"@type":"PostalAddress","addressLocality":"Cleveland","addressRegion":"OH","addressCountry":"US"},"description":"Technician staffing software for eye clinics. Forecasts technician minutes per session and assigns under eight hard rules with human approval. Phase Zero starts at $7,500. Synthetic validation only; not HIPAA certified; no customers."},
+{"@type":"Organization","@id":"https://kestrelridgehealth.com/#org","name":"Kestrel Ridge Health","url":"https://kestrelridgehealth.com/","logo":"https://kestrelridgehealth.com/mark-light.png","email":"hello@kestrelridgehealth.com","address":{"@type":"PostalAddress","addressLocality":"Cleveland","addressRegion":"OH","addressCountry":"US"},"description":"Technician staffing software for independent multi-site ophthalmology groups. Forecasts technician minutes per session and assigns under eight hard rules with human approval. Phase Zero starts at $7,500 on de-identified operational history. Synthetic validation only; not HIPAA certified; no customers."},
 {"@type":"WebSite","@id":"https://kestrelridgehealth.com/#website","url":"https://kestrelridgehealth.com/","name":"Kestrel Ridge Health","publisher":{"@id":"https://kestrelridgehealth.com/#org"}}
 ]}
 </script>
@@ -139,6 +139,8 @@
            max-width:46ch;margin:1.4rem 0 0;text-wrap:pretty}
   .kr-note{font:400 .8125rem/1.6 var(--kr-mono);color:#C8D8EE;opacity:1;
            margin:1.6rem 0 0;max-width:44ch}
+  .kr-buyer{font:500 .8125rem/1.45 var(--sc-font-text);color:var(--sc-ink-soft);
+            max-width:46ch;margin:.85rem 0 0}
   .kr-offer{max-width:52ch}
   .kr-offer a,.kr-offer-links a{color:var(--kr-sky);text-decoration:underline;
               text-underline-offset:4px;text-decoration-thickness:1px}
@@ -194,6 +196,15 @@
   .kr-second{display:inline-block;margin:1.4rem 0 0 1.5rem;color:var(--kr-sky);
              font:500 .875rem/1 var(--sc-font-text);text-underline-offset:5px}
 
+  /* ------------------------------------------------------ page jumps */
+  .kr-jump{display:none;align-items:center;flex-wrap:wrap;gap:.25rem 1.1rem;
+           padding:0 clamp(1.25rem,4vw,2.5rem) 1rem;
+           font:600 .6875rem/1 var(--sc-font-text);letter-spacing:.12em;
+           text-transform:uppercase}
+  .kr-jump a{color:var(--sc-ink-soft);text-decoration:none;min-height:44px;
+             display:inline-flex;align-items:center;text-underline-offset:4px}
+  .kr-jump a:hover{color:#fff;text-decoration:underline}
+
   /* ------------------------------------------------------ utility nav */
   .kr-util{position:fixed;z-index:60;top:clamp(1rem,2.4vw,1.9rem);
            right:clamp(1rem,3vw,2.5rem);display:flex;align-items:center;
@@ -202,9 +213,11 @@
              color:#C8D8EE;text-decoration:none;text-underline-offset:5px}
   .kr-util a:hover{color:#FFFFFF;text-decoration:underline}
   .kr-util__cta{color:var(--kr-navy)!important;background:var(--kr-sky);
-                padding:.45rem .9rem;min-height:44px;
-                font:700 .75rem/1 var(--sc-font-text)!important;letter-spacing:.04em;
-                display:inline-flex;align-items:center;text-decoration:none!important}
+                padding:.4rem .85rem;min-height:44px;
+                font:700 .75rem/1.15 var(--sc-font-text)!important;letter-spacing:.02em;
+                display:inline-flex;flex-direction:column;align-items:flex-start;
+                justify-content:center;gap:.15rem;text-decoration:none!important}
+  .kr-util__cta-fee{font:600 .625rem/1 var(--sc-font-text);letter-spacing:.04em}
   .kr-util__cta:hover{background:#fff;color:var(--kr-navy)!important;
                       text-decoration:none!important}
 
@@ -253,6 +266,8 @@
        reaches on a phone. Hide it and use the in-flow copy inside the close. */
     /* No utility nav on a phone, so the same six links live in the close. */
     .kr-util{display:none}
+    .kr-jump{display:flex;position:fixed;z-index:61;top:0;left:0;right:0;
+      padding:3.5rem 1.25rem .7rem;background:color-mix(in oklab, var(--sc-canvas) 92%, transparent)}
     .kr-second--sm{display:inline-block}
     /* The close carries the offer, the data note and seven links. Tighten it so
        the headline never rides up under the fixed brand mark. */
@@ -384,6 +399,11 @@
   html:not(.kr-engine) .brand{position:static;padding:1.5rem clamp(1.25rem,4vw,2.5rem) .75rem}
   html:not(.kr-engine) .kr-util{position:static;display:flex;flex-wrap:wrap;
     gap:.75rem 1.25rem;padding:0 clamp(1.25rem,4vw,2.5rem) 1rem}
+  html:not(.kr-engine) .kr-jump{display:flex;
+    border-bottom:1px solid rgba(200,216,238,.18)}
+  html:not(.kr-engine) #problem,
+  html:not(.kr-engine) #method,
+  html:not(.kr-engine) #phase-zero{scroll-margin-top:1rem}
   html:not(.kr-engine) .kr-fine{position:static;padding:0 clamp(1.25rem,4vw,2.5rem) 3rem}
 
   /* ==================================================================
@@ -424,11 +444,13 @@
     html:not(.kr-engine) .brand{position:static;padding:1.5rem 1.25rem .75rem;
       gap:.65rem}
     html:not(.kr-engine) .kr-util{position:static;display:flex;flex-wrap:wrap;
-      gap:.25rem 1rem;padding:.25rem 1.25rem 1rem;
-      border-bottom:1px solid rgba(200,216,238,.18)}
+      gap:.25rem 1rem;padding:.25rem 1.25rem .35rem}
     html:not(.kr-engine) .kr-util a{display:inline-flex;align-items:center;
       min-height:44px;font-size:.8125rem}
     html:not(.kr-engine) .kr-util__cta{font-size:.8125rem!important}
+    html:not(.kr-engine) .kr-jump{display:flex;padding:.15rem 1.25rem 1rem;
+      border-bottom:1px solid rgba(200,216,238,.18)}
+    html:not(.kr-engine) .kr-jump a{font-size:.75rem}
     html:not(.kr-engine) .kr-fine__legal{gap:1.25rem;flex-wrap:wrap}
     html:not(.kr-engine) .kr-fine__legal a,
     html:not(.kr-engine) .kr-fine__co a,
@@ -440,6 +462,7 @@
     html:not(.kr-engine) .kr-h2{font-size:clamp(1.6rem,6.6vw,2.1rem);line-height:1.08}
     html:not(.kr-engine) .kr-lede{font-size:1.0625rem;line-height:1.55;
       max-width:none;margin-top:1.1rem}
+    html:not(.kr-engine) .kr-buyer{font-size:.9375rem;max-width:none;margin-top:.85rem}
     html:not(.kr-engine) .kr-note{font-size:.8125rem;line-height:1.6;max-width:none;
       margin-top:1.4rem}
     html:not(.kr-engine) .kr-eyebrow{margin-bottom:.9rem}
@@ -475,6 +498,8 @@
     font-size:clamp(2.15rem,5.8vw,5.2rem)}
   html.kr-engine [data-sc-window="hero"] .kr-lede{
     margin-top:1rem;font-size:clamp(.95rem,1.4vw,1.15rem);line-height:1.5}
+  html.kr-engine [data-sc-window="hero"] .kr-buyer{
+    margin-top:.7rem;font-size:.8125rem}
   html.kr-engine [data-sc-window="hero"] .kr-offer{
     margin-top:1rem;font-size:.75rem;line-height:1.5;max-width:54ch}
   html.kr-engine [data-sc-window="hero"] .kr-offer-links{
@@ -484,6 +509,7 @@
     html.kr-engine [data-sc-window="hero"] .kr-h1{
       font-size:clamp(1.75rem,4.6vw,3.2rem)}
     html.kr-engine [data-sc-window="hero"] .kr-lede{margin-top:.55rem}
+    html.kr-engine [data-sc-window="hero"] .kr-buyer{margin-top:.4rem}
     html.kr-engine [data-sc-window="hero"] .kr-offer{margin-top:.55rem}
     html.kr-engine [data-sc-window="hero"] .kr-offer-links{margin-top:.4rem}
   }
@@ -524,15 +550,20 @@
   <a href="/evidence/">Evidence</a>
   <a href="/governance/">Governance</a>
   <a href="/pilot/">Pilot</a>
-  <a class="kr-util__cta" href="/contact/">Phase Zero</a>
+  <a class="kr-util__cta" href="/contact/">Ask about Phase Zero<span class="kr-util__cta-fee">from $7,500</span></a>
+</nav>
+<nav class="kr-jump" aria-label="On this page">
+  <a href="#problem">Problem</a>
+  <a href="#method">Method</a>
+  <a href="#phase-zero">Phase Zero</a>
 </nav>
 </header>
 
-<nav aria-label="The hall" class="mapwrap">
+<nav aria-label="On this page" class="mapwrap">
   <ol class="map" id="map">
-    <li class="map__item"><button class="map__btn" data-leg="0" type="button"><span class="map__rule"></span>The lane</button></li>
-    <li class="map__item"><button class="map__btn" data-leg="1" type="button"><span class="map__rule"></span>The work</button></li>
-    <li class="map__item"><button class="map__btn" data-leg="2" type="button"><span class="map__rule"></span>The corridor</button></li>
+    <li class="map__item"><button class="map__btn" data-jump="0.20" type="button"><span class="map__rule"></span>Problem</button></li>
+    <li class="map__item"><button class="map__btn" data-jump="0.42" type="button"><span class="map__rule"></span>Method</button></li>
+    <li class="map__item"><button class="map__btn" data-jump="0.88" type="button"><span class="map__rule"></span>Phase Zero</button></li>
   </ol>
 </nav>
 
@@ -560,24 +591,25 @@
 
     <!-- 1 recognition -->
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="hero">
-      <p class="kr-eyebrow">Technician staffing software for eye clinics</p>
+      <p class="kr-eyebrow">For practice admins, COOs and clinic ops</p>
       <h1 class="kr-h1">Same patient count. <br>Not the same day.</h1>
+      <p class="kr-buyer">Independent multi-site ophthalmology groups, 5+ sites.</p>
       <p class="kr-lede">Forecast the technician minutes each clinic session will need. Staff it under eight rules the system does not relax, with a person approving every plan.</p>
-      <p class="kr-note kr-offer">Phase Zero is a fixed-fee diagnostic starting at $7,500 on de-identified operational history. The clinic keeps the finding either way. Stop if the forecast does not beat the ratio you use today.</p>
+      <p class="kr-note kr-offer">Phase Zero is a fixed-fee diagnostic starting at $7,500 on de-identified operational history. You keep the finding either way. If the technician-minutes forecast does not improve on the ratio you use today for planning, under the scorecard agreed up front, the engagement ends and you keep the finding.</p>
       <p class="kr-offer-links">
-        <a href="/contact/">Ask about Phase Zero</a>
-        <a href="/pilot/">How it is designed to stop</a>
+        <a href="/contact/">Ask about Phase Zero, from $7,500</a>
+        <a href="/pilot/">How Phase Zero is designed</a>
         <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
       </p>
       <div class="kr-actions kr-hero-actions">
-        <a class="cta" href="/contact/">Ask about Phase Zero</a>
-        <a class="kr-second" href="/pilot/">How Phase Zero is designed to stop</a>
+        <a class="cta" href="/contact/">Ask about Phase Zero, from $7,500</a>
+        <a class="kr-second" href="/pilot/">How Phase Zero is designed</a>
         <a class="kr-second" href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
       </div>
     </div>
 
     <!-- 2 the blindness -->
-    <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="0.16 0.28">
+    <div class="sc-copy sc-copy--lead" id="problem" data-sc-copy data-sc-window="0.16 0.28">
       <h2 class="kr-h2">A fixed ratio counts heads.</h2>
       <p class="kr-lede">It cannot see appointment mix, testing load, complexity or how a particular provider works. Every session becomes the same session.</p>
       <p class="kr-lede">On the system's synthetic validation holdout, not validated on real clinic data, the forecast's average error is 24.44 minutes against the fixed ratio's 208.61.</p>
@@ -586,7 +618,7 @@
     <img class="kr-poster" src="assets/p2.jpg" alt="A technician adjusting diagnostic imaging equipment during a patient exam" width="1920" height="1080" decoding="async">
 
     <!-- 3 the divergence, the data does the work -->
-    <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="0.36 0.50">
+    <div class="sc-copy sc-copy--lead" id="method" data-sc-copy data-sc-window="0.36 0.50">
       <p class="kr-eyebrow">Two sessions, ten patients each</p>
       <h2 class="kr-h2">Ten patients each.</h2>
       <div class="split">
@@ -627,11 +659,11 @@
 
 
     <!-- close: arrival -->
-    <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="finale">
+    <div class="sc-copy sc-copy--lead" id="phase-zero" data-sc-copy data-sc-window="finale">
       <h2 class="kr-h2">Every change is written down. Alter one entry and the verification endpoint reports the break.</h2>
       <p class="kr-lede">Every plan, override, refusal and approval goes to an append-only, hash-chained log with who acted and why.</p>
-      <p class="kr-lede">Start with Phase Zero. It retrains on your own history and scores the forecast against the ratio you use today. If it does not win, the engagement stops and the finding is yours.</p>
-      <p class="kr-note">Phase Zero starts at $7,500, fixed fee. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.</p>
+      <p class="kr-lede">Start with Phase Zero. It retrains on your own de-identified history and scores the forecast against the ratio you use today. If it does not improve on that ratio for planning, the engagement ends and the finding is yours.</p>
+      <p class="kr-note">Phase Zero runs on operational counts you export: per-session appointment mix, complexity flags, and realized technician minutes. No patient identifiers are required for Phase Zero. Not HIPAA certified. Production use with PHI would come later only under a BAA, a security review, and a compliance roadmap.</p>
 
       <form class="wl" id="wl" novalidate>
         <label class="wl__label" for="wlEmail">Ask about Phase Zero</label>
@@ -644,8 +676,8 @@
       </form>
 
       <div class="kr-actions">
-        <a class="cta" href="/contact/">Ask about Phase Zero</a>
-        <a class="kr-second" href="/pilot/">How Phase Zero is designed to stop</a>
+        <a class="cta" href="/contact/">Ask about Phase Zero, from $7,500</a>
+        <a class="kr-second" href="/pilot/">How Phase Zero is designed</a>
         <a class="kr-second" href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
         <a class="kr-second" href="/product/">What a scheduler does with it</a>
         <a class="kr-second" href="/how-it-works/">The ten layers</a>
@@ -681,17 +713,26 @@ function krMountWorld(){
   addEventListener('load', relayout);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
 
-  // The map is the navigation, and it has to be able to jump.
+  // The map is the in-page navigation: problem, method, Phase Zero.
   const btns = [...document.querySelectorAll('.map__btn')];
-  addEventListener('sc:waypoint', (e) => {
-    btns.forEach((b) => b.setAttribute('aria-current', String(+b.dataset.leg === e.detail.index)));
-  });
-  const segs = [...document.querySelectorAll('[data-sc-segment]')];
+  const spacer = document.querySelector('[data-sc-spacer]');
+  function jumpProgress(p){
+    const track = spacer && spacer.offsetHeight ? spacer.offsetHeight : document.documentElement.scrollHeight;
+    scrollTo({ top: p * track, behavior: 'smooth' });
+  }
+  function markJump(p){
+    let cur = 0;
+    if (p >= 0.78) cur = 2;
+    else if (p >= 0.32) cur = 1;
+    btns.forEach((b, i) => b.setAttribute('aria-current', String(i === cur)));
+  }
+  addEventListener('scroll', () => {
+    const track = spacer && spacer.offsetHeight ? spacer.offsetHeight : 1;
+    markJump(scrollY / track);
+  }, {passive:true});
   btns.forEach((b) => b.addEventListener('click', () => {
-    const i = +b.dataset.leg;
-    const w = segs.map((sg) => parseFloat(sg.dataset.scW) || 1.3);
-    const before = w.slice(0, i).reduce((a, c) => a + c, 0);
-    scrollTo({ top: (before + 0.18) * innerHeight, behavior: 'smooth' });
+    const p = parseFloat(b.dataset.jump);
+    if (!Number.isNaN(p)) jumpProgress(p);
   }));
 }
 
