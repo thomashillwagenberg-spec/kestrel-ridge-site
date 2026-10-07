@@ -475,8 +475,9 @@
   /* Desktop worldflight: keep the hero offer to one note plus the fixed
      Phase Zero control in the utility nav, so the headline still clears
      the brand mark. Phone and no-engine get the full action row. */
-  html.kr-engine .kr-hero-actions{display:none}
-  html:not(.kr-engine) .kr-offer-links{display:none}
+  html.kr-engine [data-sc-window="hero"] .kr-hero-actions{margin-top:1.1rem;gap:.75rem 1.75rem}
+  html.kr-engine [data-sc-window="hero"] .kr-hero-actions .cta{min-height:48px;padding:0 1.6rem;font-size:.9375rem}
+  html.kr-engine [data-sc-window="hero"] .kr-hero-actions .kr-second{font-size:.875rem}
   html.kr-engine [data-sc-window="hero"] .kr-h1{
     font-size:clamp(2.15rem,5.8vw,5.2rem)}
   html.kr-engine [data-sc-window="hero"] .kr-lede{
@@ -580,13 +581,9 @@
     <!-- 1 recognition -->
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="hero">
       <p class="kr-eyebrow">Technician staffing software for eye clinics</p>
-      <h1 class="kr-h1">Same patient count. <br>Not the same day.</h1>
+      <h1 class="kr-h1">Same patient count. <br>Different technician workload.</h1>
       <p class="kr-lede">Forecast the technician minutes each clinic session will need. Staff it under eight rules the system does not relax, with a person approving every plan.</p>
       <p class="kr-note kr-offer">Phase Zero is a fixed-fee diagnostic from $7,500. If the forecast does not beat the ratio you use today, the engagement stops there.</p>
-      <p class="kr-offer-links">
-        <a href="/contact/">Ask about Phase Zero</a>
-        <a class="kr-offer-more" href="/pilot/">How it is designed to stop &rarr;</a>
-      </p>
       <div class="kr-actions kr-hero-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
         <a class="kr-second" href="/pilot/">How Phase Zero is designed to stop &rarr;</a>
