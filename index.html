@@ -488,6 +488,15 @@
     html.kr-engine [data-sc-window="hero"] .kr-offer-links{margin-top:.4rem}
   }
 
+  /* AppBully 2026-10-07: one clear hero action, lighter offer note. */
+  [data-sc-window="hero"] .kr-offer{font-family:var(--sc-font-text);font-size:.9375rem;line-height:1.55}
+  html.kr-engine [data-sc-window="hero"] .kr-offer{font-size:.875rem}
+  .kr-offer-links{align-items:center}
+  .kr-offer-links a[href="/contact/"]{background:var(--kr-sky);color:var(--kr-navy);
+    text-decoration:none;font-weight:700;padding:.7rem 1.15rem;min-height:0}
+  .kr-offer-links a[href="/contact/"]:hover{background:#fff;color:var(--kr-navy)}
+  [data-sc-window="hero"] a[href^="mailto:"]{display:none}
+
   @media (prefers-reduced-motion:reduce){
     .gate__deny,.shake{animation:none}
     .cta{transition:none}
@@ -563,7 +572,7 @@
       <p class="kr-eyebrow">Technician staffing software for eye clinics</p>
       <h1 class="kr-h1">Same patient count. <br>Not the same day.</h1>
       <p class="kr-lede">Forecast the technician minutes each clinic session will need. Staff it under eight rules the system does not relax, with a person approving every plan.</p>
-      <p class="kr-note kr-offer">Phase Zero is a fixed-fee diagnostic starting at $7,500 on de-identified operational history. The clinic keeps the finding either way. Stop if the forecast does not beat the ratio you use today.</p>
+      <p class="kr-note kr-offer">Phase Zero is a fixed-fee diagnostic from $7,500. If the forecast does not beat the ratio you use today, the engagement stops there.</p>
       <p class="kr-offer-links">
         <a href="/contact/">Ask about Phase Zero</a>
         <a href="/pilot/">How it is designed to stop</a>
@@ -628,7 +637,7 @@
 
     <!-- close: arrival -->
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="finale">
-      <h2 class="kr-h2">Every change is written down. Alter one entry and the verification endpoint reports the break.</h2>
+      <h2 class="kr-h2">Every change is written down. Alter one entry and the built-in verification check reports the break.</h2>
       <p class="kr-lede">Every plan, override, refusal and approval goes to an append-only, hash-chained log with who acted and why.</p>
       <p class="kr-lede">Start with Phase Zero. It retrains on your own history and scores the forecast against the ratio you use today. If it does not win, the engagement stops and the finding is yours.</p>
       <p class="kr-note">Phase Zero starts at $7,500, fixed fee. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.</p>
