@@ -495,7 +495,11 @@
   .kr-offer-links a[href="/contact/"]{background:var(--kr-sky);color:var(--kr-navy);
     text-decoration:none;font-weight:700;padding:.7rem 1.15rem;min-height:0}
   .kr-offer-links a[href="/contact/"]:hover{background:#fff;color:var(--kr-navy)}
-  [data-sc-window="hero"] a[href^="mailto:"]{display:none}
+  .kr-offer-links{gap:.6rem 2rem}
+  .kr-offer-links a.kr-offer-more{color:#C8D8EE;text-decoration:none;font-weight:500}
+  .kr-offer-links a.kr-offer-more:hover{color:#fff;text-decoration:underline}
+  .kr-hero-actions{gap:1rem 2rem}
+  .kr-hero-actions .kr-second{color:#C8D8EE;text-decoration:none}
 
   @media (prefers-reduced-motion:reduce){
     .gate__deny,.shake{animation:none}
@@ -575,13 +579,11 @@
       <p class="kr-note kr-offer">Phase Zero is a fixed-fee diagnostic from $7,500. If the forecast does not beat the ratio you use today, the engagement stops there.</p>
       <p class="kr-offer-links">
         <a href="/contact/">Ask about Phase Zero</a>
-        <a href="/pilot/">How it is designed to stop</a>
-        <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
+        <a class="kr-offer-more" href="/pilot/">How it is designed to stop &rarr;</a>
       </p>
       <div class="kr-actions kr-hero-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
-        <a class="kr-second" href="/pilot/">How Phase Zero is designed to stop</a>
-        <a class="kr-second" href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
+        <a class="kr-second" href="/pilot/">How Phase Zero is designed to stop &rarr;</a>
       </div>
     </div>
 
