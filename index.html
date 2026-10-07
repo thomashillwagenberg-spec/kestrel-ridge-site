@@ -215,6 +215,11 @@
   .kr-actions .cta{margin:0}
   .kr-actions .kr-second{margin:0}
   .kr-second--sm{display:none}
+  .kr-more{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-top:1.6rem;padding-top:1rem;
+    border-top:1px solid rgba(200,216,238,.2);font-size:.8125rem}
+  .kr-more a{color:#C8D8EE;text-decoration:none;min-height:24px}
+  .kr-more a:hover,.kr-more a:focus-visible{color:#fff;text-decoration:underline}
+  @media (max-width:760px){.kr-more{flex-direction:column;gap:0}.kr-more a{display:flex;align-items:center;min-height:44px;font-size:.9375rem}}
 
   /* Lives inside the finale's own copy block now, as its closing lines, not
      as a fixed overlay: a fixed .kr-fine used to sit on screen throughout
@@ -647,26 +652,16 @@
       <p class="kr-lede">Start with Phase Zero. It retrains on your own history and scores the forecast against the ratio you use today. If it does not win, the engagement stops and the finding is yours.</p>
       <p class="kr-note">Phase Zero starts at $7,500, fixed fee. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.</p>
 
-      <form class="wl" id="wl" novalidate>
-        <label class="wl__label" for="wlEmail">Ask about Phase Zero</label>
-        <div class="wl__row">
-          <input class="wl__in" id="wlEmail" name="email" type="email" autocomplete="email" inputmode="email">
-          <button class="wl__btn" type="submit">Write to us</button>
-        </div>
-        <p class="wl__msg" id="wlOut" role="status" aria-live="polite"></p>
-        <p class="wl__note">Opens a message to <a href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>. Starting at $7,500, you keep the finding either way. <a href="/privacy/">Privacy</a></p>
-      </form>
-
       <div class="kr-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
-        <a class="kr-second" href="/pilot/">How Phase Zero is designed to stop</a>
         <a class="kr-second" href="mailto:hello@kestrelridgehealth.com">hello@kestrelridgehealth.com</a>
-        <a class="kr-second" href="/product/">What a scheduler does with it</a>
-        <a class="kr-second" href="/how-it-works/">The ten layers</a>
-        <a class="kr-second" href="/evidence/">What the forecast was measured against</a>
-        <a class="kr-second kr-second--sm" href="/governance/">What the output may never be used for</a>
-        <a class="kr-second kr-second--sm" href="/contact/">Contact</a>
       </div>
+      <nav class="kr-more" aria-label="Keep reading">
+        <a href="/product/">What a scheduler does with it</a>
+        <a href="/how-it-works/">The ten layers</a>
+        <a href="/evidence/">What the forecast was measured against</a>
+        <a href="/governance/">What the output may never be used for</a>
+      </nav>
       <div class="kr-fine">
         <p class="kr-fine__p">Figures shown come from the system's synthetic validation set. Not validated on real clinic data. Not HIPAA certified. No customers.</p>
         <p class="kr-fine__p kr-fine__legal"><a href="/privacy/">Privacy</a> <a href="/terms/">Terms</a> <a href="/accessibility/">Accessibility</a></p>
@@ -770,7 +765,7 @@ if (matchMedia('(min-width: 761px)').matches) {
   const wl = document.getElementById('wl');
   const wlIn = document.getElementById('wlEmail');
   const wlOut = document.getElementById('wlOut');
-  wl.addEventListener('submit', async (e) => {
+  if (wl) wl.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = wlIn.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
