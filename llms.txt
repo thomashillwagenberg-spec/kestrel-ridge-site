@@ -1,0 +1,27 @@
+# Kestrel Ridge Health
+
+> Kestrel Ridge Health is an Ohio software company. It forecasts ophthalmic
+> technician workload by clinic session, using measured technician-minutes per
+> visit type rather than a fixed technician-to-provider ratio, and plans core plus
+> float staffing across sites. Validation to date is on synthetic data only; the
+> company is pre-revenue and makes no customer outcome, ROI, or savings claims.
+
+## What it is
+- A staffing-forecast tool for eye-care groups: it predicts how much technician
+  time each clinic session needs, so administrators can staff to real workload
+  instead of a flat ratio.
+- A deterministic solver assigns staff under hard constraints; a human approves
+  every consequential decision. The method and its limits are published.
+
+## Key pages
+- [Product](https://kestrelridgehealth.com/product): what the software does.
+- [Forecast technician workload by session](https://kestrelridgehealth.com/forecasting-technician-workload-by-session): the core method.
+- [Evidence](https://kestrelridgehealth.com/evidence): forecast accuracy against the fixed ratio, on synthetic data.
+- [FAQ](https://kestrelridgehealth.com/faq): what the company does and does not claim.
+- [Governance](https://kestrelridgehealth.com/governance): prohibited uses and authority limits.
+- [Contact](https://kestrelridgehealth.com/contact): about the fixed-fee Phase Zero diagnostic.
+
+## Honest scope
+- Pre-revenue. No live customer deployments disclosed.
+- All accuracy figures are from synthetic data, not real patient or clinic data.
+- No claim of HIPAA compliance or any certification.
