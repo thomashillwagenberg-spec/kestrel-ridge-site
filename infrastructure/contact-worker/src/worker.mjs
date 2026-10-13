@@ -19,7 +19,7 @@ function reply(status, payload, origin) {
     headers["Access-Control-Allow-Methods"] = "POST, OPTIONS";
     headers["Access-Control-Allow-Headers"] = "Content-Type";
   }
-  return new Response(JSON.stringify(payload), { status, headers });
+  return new Response(status === 204 ? null : JSON.stringify(payload), { status, headers });
 }
 
 function validEmail(value) {
