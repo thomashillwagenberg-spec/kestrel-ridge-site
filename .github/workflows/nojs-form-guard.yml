@@ -1,0 +1,22 @@
+name: KRH No-JavaScript Form Leak Guard
+
+on:
+  pull_request:
+    paths:
+      - 'contact/index.html'
+      - 'tests/nojs-contact.test.mjs'
+      - '.github/workflows/nojs-form-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify no-JavaScript form fallback
+        run: node --test tests/nojs-contact.test.mjs
