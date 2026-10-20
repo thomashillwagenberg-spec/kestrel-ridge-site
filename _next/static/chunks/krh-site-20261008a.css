@@ -198,6 +198,11 @@ main .section-edge{padding-top:clamp(5rem,9vw,8rem)!important}
 .krh-points:has(+a.krh-cta)>li:last-child:before{background:#fff!important;left:1.3rem!important;top:1.75rem!important}
 /* === /KRH-APPBULLY-13 === */
 
+/* === KRH-APPBULLY-14 (2026-10-20): increase vertical breathing room on evidence callout === */
+/* AppBully: 'slightly increasing vertical padding and margin further to enhance readability'. */
+.krh-callout{margin-top:2.75rem!important;padding:2rem 2.25rem!important}
+/* === /KRH-APPBULLY-14 === */
+
 /* === KRH-CAMPAIGN-1 (2026-10-08): one path to inquiry; waitlist retired === */
 #not-ready-to-talk-yet,#the-waitlist,a[href*="not-ready-to-talk-yet"],a[href*="the-waitlist"]{display:none!important}
 /* === KRH-CAMPAIGN-1 END === */
