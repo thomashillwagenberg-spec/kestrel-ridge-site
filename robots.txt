@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Block Next.js RSC payload files from being indexed
+Disallow: /*__next*
+Disallow: /*/index.txt
+
 Sitemap: https://kestrelridgehealth.com/sitemap.xml
