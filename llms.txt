@@ -7,21 +7,57 @@
 > company is pre-revenue and makes no customer outcome, ROI, or savings claims.
 
 ## What it is
-- A staffing-forecast tool for eye-care groups: it predicts how much technician
-  time each clinic session needs, so administrators can staff to real workload
-  instead of a flat ratio.
+- A staffing-forecast tool for ophthalmology groups and multi-location eye clinics:
+  it predicts how much technician time each clinic session needs, so administrators
+  can staff to real workload instead of a flat ratio.
 - A deterministic solver assigns staff under hard constraints; a human approves
   every consequential decision. The method and its limits are published.
+- Designed for ophthalmology administrators, operations directors, and practice
+  managers at multi-site eye-care groups. Not a scheduling app for individual
+  clinicians.
+
+## The clinical problem it addresses
+- Most eye clinics staff by a fixed technician-to-provider ratio (e.g., 2:1).
+  That ratio ignores visit-type mix: cataract follow-ups vs. comprehensive exams
+  vs. contact-lens fits require very different technician time.
+- When session mix shifts — adding surgical volume, opening a new site, onboarding
+  a new provider — a flat ratio over- or under-staffs. The result is unnecessary
+  overtime, call-offs, or patient throughput bottlenecks.
+- KRH models each visit type's measured technician-minutes and forecasts session
+  demand before the schedule finalizes, so staffing decisions are data-driven.
+
+## Phase Zero pilot offering
+- KRH's commercial offering is a fixed-fee Phase Zero diagnostic. For a defined
+  fee covering a defined scope, KRH works with one or two clinic sites to import
+  historical scheduling data, map visit types to technician-time estimates, run
+  the forecast model against past sessions, and report the gap between modeled
+  staffing and actual staffing.
+- Phase Zero does not require full production deployment. It is designed so an
+  operations director can evaluate the forecast method with real clinic data before
+  committing to a broader rollout.
+- Buyers: ophthalmology group administrators, operations directors, CFOs, and
+  medical directors at multi-location eye clinics.
 
 ## Key pages
-- [Product](https://kestrelridgehealth.com/product): what the software does.
-- [Forecast technician workload by session](https://kestrelridgehealth.com/forecasting-technician-workload-by-session): the core method.
+- [Product](https://kestrelridgehealth.com/product): what the software does and how it works.
+- [Pilot (Phase Zero)](https://kestrelridgehealth.com/pilot): the fixed-fee pilot program.
+- [How It Works](https://kestrelridgehealth.com/how-it-works): the forecasting workflow step by step.
+- [Forecast technician workload by session](https://kestrelridgehealth.com/forecasting-technician-workload-by-session): the core method explained.
 - [Evidence](https://kestrelridgehealth.com/evidence): forecast accuracy against the fixed ratio, on synthetic data.
-- [FAQ](https://kestrelridgehealth.com/faq): what the company does and does not claim.
+- [Staffing ratios in ophthalmology](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios): why fixed ratios underperform.
+- [Technician shortage and session variance](https://kestrelridgehealth.com/technician-shortage-session-variance): the operational problem in detail.
+- [Same-day ophthalmology staffing](https://kestrelridgehealth.com/same-day-ophthalmology-staffing): handling same-day add-ons without ratio blowout.
+- [Call-off coverage for eye clinics](https://kestrelridgehealth.com/call-off-coverage-eye-clinics): planned float coverage vs. reactive scrambling.
 - [Governance](https://kestrelridgehealth.com/governance): prohibited uses and authority limits.
-- [Contact](https://kestrelridgehealth.com/contact): about the fixed-fee Phase Zero diagnostic.
+- [FAQ](https://kestrelridgehealth.com/faq): what the company does and does not claim.
+- [About](https://kestrelridgehealth.com/about): company background and team.
+- [Resources](https://kestrelridgehealth.com/resources): reference material.
+- [Contact](https://kestrelridgehealth.com/contact): start a Phase Zero conversation.
 
 ## Honest scope
 - Pre-revenue. No live customer deployments disclosed.
 - All accuracy figures are from synthetic data, not real patient or clinic data.
-- No claim of HIPAA compliance or any certification.
+- No claim of HIPAA compliance or any regulatory certification.
+- The company does not guarantee staffing outcomes, cost savings, or improved patient throughput.
+- The forecast model is a planning tool; it does not replace clinical judgment or
+  human staffing decisions.
