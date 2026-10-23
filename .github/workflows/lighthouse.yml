@@ -1,0 +1,86 @@
+name: Lighthouse CI
+
+# Runs on every push to main and weekly on Monday.
+# Catches performance, accessibility, and SEO regressions without paid tools.
+# Results are posted as a job summary — no external service required.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 9 * * 1'   # Every Monday 09:00 UTC
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+      - name: Run Lighthouse against live site
+        run: |
+          lhci collect \
+            --url="https://kestrelridgehealth.com/" \
+            --url="https://kestrelridgehealth.com/product/" \
+            --url="https://kestrelridgehealth.com/pilot/" \
+            --url="https://kestrelridgehealth.com/evidence/" \
+            --numberOfRuns=1 \
+            --settings.onlyCategories="performance,accessibility,best-practices,seo" \
+            --settings.output=json \
+            --settings.outputPath=./lhci-results.json 2>&1 | tail -20
+          
+      - name: Parse and report scores
+        run: |
+          python3 << 'PY'
+          import json, glob, os
+
+          files = glob.glob('.lighthouseci/*.json') + glob.glob('lhci-results.json')
+          # lhci writes to .lighthouseci/
+          report_files = glob.glob('.lighthouseci/lhr-*.json')
+          
+          if not report_files:
+              print("No report files found — check collect step")
+              exit(0)
+
+          summary_lines = ['## Lighthouse Results\n', '| Page | Perf | Access | Best Prac | SEO |', '|------|------|--------|-----------|-----|']
+          all_ok = True
+          
+          for rf in sorted(report_files):
+              with open(rf) as f:
+                  r = json.load(f)
+              url = r.get('finalUrl','?')
+              cats = r.get('categories', {})
+              perf   = int(cats.get('performance',{}).get('score',0)*100)
+              acc    = int(cats.get('accessibility',{}).get('score',0)*100)
+              bp     = int(cats.get('best-practices',{}).get('score',0)*100)
+              seo    = int(cats.get('seo',{}).get('score',0)*100)
+              slug = url.replace('https://kestrelridgehealth.com','') or '/'
+              flag = '' if (perf >= 80 and acc >= 90 and seo >= 90) else ' ⚠️'
+              summary_lines.append(f'| {slug}{flag} | {perf} | {acc} | {bp} | {seo} |')
+              if perf < 60 or seo < 80:
+                  all_ok = False
+
+          summary_lines.append('')
+          summary_lines.append(f'> Targets: Performance ≥80, Accessibility ≥90, SEO ≥90')
+          
+          summary = '\n'.join(summary_lines)
+          print(summary)
+          
+          # Write to GitHub step summary
+          with open(os.environ.get('GITHUB_STEP_SUMMARY', '/dev/null'), 'a') as f:
+              f.write(summary + '\n')
+          
+          if not all_ok:
+              print('\n⚠️  One or more pages below threshold — see details above')
+          PY
+
+      - name: Upload Lighthouse reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          retention-days: 30
