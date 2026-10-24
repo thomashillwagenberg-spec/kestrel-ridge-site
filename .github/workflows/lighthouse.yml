@@ -28,26 +28,24 @@ jobs:
             --url="https://kestrelridgehealth.com/pilot/" \
             --url="https://kestrelridgehealth.com/evidence/" \
             --numberOfRuns=1 \
-            --settings.onlyCategories="performance,accessibility,best-practices,seo" \
-            --settings.output=json \
-            --settings.outputPath=./lhci-results.json 2>&1 | tail -20
-          
+            --settings.onlyCategories="performance,accessibility,best-practices,seo" 2>&1 | tail -30
+          echo "--- .lighthouseci contents ---"
+          ls -la .lighthouseci/ 2>/dev/null || echo "no .lighthouseci dir"
+
       - name: Parse and report scores
         run: |
           python3 << 'PY'
           import json, glob, os
 
-          files = glob.glob('.lighthouseci/*.json') + glob.glob('lhci-results.json')
-          # lhci writes to .lighthouseci/
           report_files = glob.glob('.lighthouseci/lhr-*.json')
-          
+
           if not report_files:
-              print("No report files found — check collect step")
-              exit(0)
+              print("No report files found in .lighthouseci/ — lhci collect may have failed")
+              exit(1)
 
           summary_lines = ['## Lighthouse Results\n', '| Page | Perf | Access | Best Prac | SEO |', '|------|------|--------|-----------|-----|']
           all_ok = True
-          
+
           for rf in sorted(report_files):
               with open(rf) as f:
                   r = json.load(f)
@@ -64,15 +62,15 @@ jobs:
                   all_ok = False
 
           summary_lines.append('')
-          summary_lines.append(f'> Targets: Performance ≥80, Accessibility ≥90, SEO ≥90')
-          
+          summary_lines.append('> Targets: Performance ≥80, Accessibility ≥90, SEO ≥90')
+
           summary = '\n'.join(summary_lines)
           print(summary)
-          
+
           # Write to GitHub step summary
           with open(os.environ.get('GITHUB_STEP_SUMMARY', '/dev/null'), 'a') as f:
               f.write(summary + '\n')
-          
+
           if not all_ok:
               print('\n⚠️  One or more pages below threshold — see details above')
           PY
@@ -83,4 +81,5 @@ jobs:
         with:
           name: lighthouse-reports
           path: .lighthouseci/
+          if-no-files-found: warn
           retention-days: 30
