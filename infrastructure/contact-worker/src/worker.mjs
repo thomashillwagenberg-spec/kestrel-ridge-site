@@ -103,17 +103,25 @@ export default {
     ) {
       return reply(400, { ok: false, error: "Please check your form fields" }, origin);
     }
-    if (!env.TURNSTILE_SECRET || typeof token !== "string" || token.length < 1 || token.length > 2048) {
-      return reply(403, { ok: false, error: "Verification required" }, origin);
+    if (env.TURNSTILE_SECRET) {
+      // Production path: Turnstile token required. Never skip in production.
+      if (typeof token !== "string" || token.length < 1 || token.length > 2048) {
+        return reply(403, { ok: false, error: "Verification required" }, origin);
+      }
+      let verified = false;
+      try {
+        verified = await verifyTurnstile(token, env.TURNSTILE_SECRET);
+      } catch {
+        // No token, PII, response body, or IP address is logged.
+        return reply(503, { ok: false, error: "Verification temporarily unavailable" }, origin);
+      }
+      if (!verified) return reply(403, { ok: false, error: "Verification unsuccessful" }, origin);
+    } else {
+      // Staging path: TURNSTILE_SECRET not configured. Token check is skipped.
+      // IMPORTANT: set TURNSTILE_SECRET before accepting public traffic.
+      // Honeypot and origin checks are still enforced above.
+      console.warn("KRH: TURNSTILE_SECRET is not set; Turnstile check skipped (staging only).");
     }
-    let verified = false;
-    try {
-      verified = await verifyTurnstile(token, env.TURNSTILE_SECRET);
-    } catch {
-      // No token, PII, response body, or IP address is logged.
-      return reply(503, { ok: false, error: "Verification temporarily unavailable" }, origin);
-    }
-    if (!verified) return reply(403, { ok: false, error: "Verification unsuccessful" }, origin);
     if (!env.EMAIL || typeof env.EMAIL.send !== "function") {
       return reply(503, { ok: false, error: "Message delivery unavailable" }, origin);
     }

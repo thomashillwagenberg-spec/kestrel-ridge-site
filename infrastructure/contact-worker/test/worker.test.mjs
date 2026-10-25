@@ -133,3 +133,32 @@ test("reports send failure instead of falsely acknowledging delivery", async () 
     console.error = originalConsole;
   }
 });
+
+// --- Staging path: no TURNSTILE_SECRET configured ---
+// These tests cover the pre-widget staging mode. They must never be used to
+// validate production readiness.
+
+test("staging: accepts submission without TURNSTILE_SECRET (no token required)", async () => {
+  const warnLog = [];
+  const originalWarn = console.warn;
+  console.warn = (...args) => { warnLog.push(args.join(" ")); };
+  let sent = 0;
+  const env = { EMAIL: { send: async () => { sent++; } } };  // no TURNSTILE_SECRET
+  try {
+    // Fields without a turnstileToken — same as the current live frontend sends.
+    const fields = { name: "Stage Person", organization: "Sample Practice", email: "stage@example.com", message: "Staging test inquiry without a widget." };
+    const response = await worker.fetch(createRequest("POST", fields), env);
+    assert.equal(response.status, 202, "staging submission should be accepted");
+    assert.equal(sent, 1);
+    assert.ok(warnLog.some(m => m.includes("TURNSTILE_SECRET")), "should log a warning about missing secret");
+  } finally {
+    console.warn = originalWarn;
+  }
+});
+
+test("staging: still rejects invalid email when TURNSTILE_SECRET is absent", async () => {
+  const env = { EMAIL: { send: async () => {} } };
+  const fields = { name: "Bad Email", organization: "Clinic", email: "not-valid", message: "Testing field validation in staging mode." };
+  const response = await worker.fetch(createRequest("POST", fields), env);
+  assert.equal(response.status, 400);
+});
