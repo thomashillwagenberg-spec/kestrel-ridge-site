@@ -1,9 +1,10 @@
 name: Notify IndexNow
 
-# Runs after every push to main so Bing (and any other IndexNow-consuming
-# search engine) is told about content changes without anyone remembering
-# to do it by hand. Reads the URL list straight from sitemap.xml, so a new
-# page only needs adding to the sitemap, never to this file.
+# Submits ONLY URLs whose content files changed in the triggering push.
+# Uses git diff to find changed HTML files and maps them to sitemap URLs.
+# If sitemap.xml itself changed, all sitemap URLs are submitted.
+# If no content files changed (e.g., workflow-only edits), nothing is submitted.
+# Log: shows URLs submitted, HTTP response, and timestamp in the Actions run.
 
 on:
   push:
@@ -14,22 +15,71 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # need HEAD and HEAD~1 for the diff
 
-      - name: Submit sitemap URLs to IndexNow
+      - name: Compute changed URLs and submit to IndexNow
         run: |
           set -euo pipefail
           KEY="e2a76b4686264f2f9418b07705154e24"
           HOST="kestrelridgehealth.com"
           KEY_LOCATION="https://${HOST}/${KEY}.txt"
+          TIMESTAMP=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
 
-          URLS_JSON=$(python3 - <<'PY'
-          import xml.etree.ElementTree as ET, json
+          # Get files changed in this push (HEAD vs HEAD~1)
+          # Falls back to all files on the first commit (no parent)
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            CHANGED=$(git diff --name-only HEAD~1 HEAD)
+          else
+            CHANGED=$(git ls-files)
+          fi
+
+          echo "--- Changed files in this push ---"
+          echo "$CHANGED"
+          echo "---"
+
+          URLS_JSON=$(python3 - "$HOST" <<'PY'
+          import sys, json, xml.etree.ElementTree as ET
+
+          host = sys.argv[1]
+          changed_files = set(sys.stdin.read().splitlines())
+
           ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
           root = ET.parse("sitemap.xml").getroot()
-          urls = [el.text.strip() for el in root.findall("s:url/s:loc", ns)]
-          print(json.dumps(urls))
-          PY
+          all_urls = [el.text.strip() for el in root.findall("s:url/s:loc", ns)]
+
+          # If sitemap.xml changed, submit everything
+          if "sitemap.xml" in changed_files:
+              sys.stderr.write("sitemap.xml changed -- submitting all URLs\n")
+              print(json.dumps(all_urls))
+              sys.exit(0)
+
+          def url_to_candidate_files(url):
+              """Return file paths that represent this URL."""
+              path = url.replace(f"https://{host}", "").strip("/")
+              if not path:
+                  return ["index.html"]
+              return [f"{path}/index.html", f"{path}.html"]
+
+          changed_urls = []
+          for url in all_urls:
+              candidates = url_to_candidate_files(url)
+              if any(c in changed_files for c in candidates):
+                  changed_urls.append(url)
+
+          print(json.dumps(changed_urls))
+          PY <<< "$CHANGED"
           )
+
+          echo "--- URLs to submit ---"
+          echo "$URLS_JSON" | python3 -c "import json,sys; urls=json.load(sys.stdin); print(f'{len(urls)} URL(s)'); [print(f'  {u}') for u in urls]"
+
+          # Exit cleanly if nothing to submit
+          URL_COUNT=$(echo "$URLS_JSON" | python3 -c "import json,sys; print(len(json.load(sys.stdin)))")
+          if [ "$URL_COUNT" -eq 0 ]; then
+            echo "No content changes detected -- skipping IndexNow submission ($TIMESTAMP)"
+            exit 0
+          fi
 
           PAYLOAD=$(python3 - "$HOST" "$KEY" "$KEY_LOCATION" "$URLS_JSON" <<'PY'
           import json, sys
@@ -43,8 +93,20 @@ jobs:
           PY
           )
 
-          echo "Submitting: $PAYLOAD"
-          curl -sS -o /dev/null -w "IndexNow response: %{http_code}\n" \
+          echo "Submitting $URL_COUNT URL(s) to IndexNow at $TIMESTAMP"
+          HTTP_STATUS=$(curl -sS -o /tmp/indexnow_response.json -w "%{http_code}" \
             -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$PAYLOAD"
+            --data "$PAYLOAD")
+
+          echo "IndexNow HTTP response: $HTTP_STATUS"
+          echo "Response body:"
+          cat /tmp/indexnow_response.json || true
+          echo ""
+
+          if [ "$HTTP_STATUS" -eq 200 ] || [ "$HTTP_STATUS" -eq 202 ]; then
+            echo "SUCCESS: IndexNow accepted $URL_COUNT URL(s) ($TIMESTAMP)"
+          else
+            echo "WARNING: IndexNow returned $HTTP_STATUS -- check response above"
+            exit 1
+          fi
