@@ -29,75 +29,81 @@ jobs:
           # Get files changed in this push (HEAD vs HEAD~1)
           # Falls back to all files on the first commit (no parent)
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
-            CHANGED=$(git diff --name-only HEAD~1 HEAD)
+            git diff --name-only HEAD~1 HEAD > /tmp/changed_files.txt
           else
-            CHANGED=$(git ls-files)
+            git ls-files > /tmp/changed_files.txt
           fi
 
           echo "--- Changed files in this push ---"
-          echo "$CHANGED"
+          cat /tmp/changed_files.txt
           echo "---"
 
-          URLS_JSON=$(python3 - "$HOST" <<'PY'
-          import sys, json, xml.etree.ElementTree as ET
+          python3 - "$HOST" /tmp/changed_files.txt > /tmp/urls.json << 'PY'
+import sys, json, xml.etree.ElementTree as ET
 
-          host = sys.argv[1]
-          changed_files = set(sys.stdin.read().splitlines())
+host = sys.argv[1]
+changed_files = set(open(sys.argv[2]).read().splitlines())
 
-          ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-          root = ET.parse("sitemap.xml").getroot()
-          all_urls = [el.text.strip() for el in root.findall("s:url/s:loc", ns)]
+ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+root = ET.parse("sitemap.xml").getroot()
+all_urls = [el.text.strip() for el in root.findall("s:url/s:loc", ns)]
 
-          # If sitemap.xml changed, submit everything
-          if "sitemap.xml" in changed_files:
-              sys.stderr.write("sitemap.xml changed -- submitting all URLs\n")
-              print(json.dumps(all_urls))
-              sys.exit(0)
+# If sitemap.xml changed, submit everything
+if "sitemap.xml" in changed_files:
+    sys.stderr.write("sitemap.xml changed -- submitting all URLs\n")
+    print(json.dumps(all_urls))
+    sys.exit(0)
 
-          def url_to_candidate_files(url):
-              """Return file paths that represent this URL."""
-              path = url.replace(f"https://{host}", "").strip("/")
-              if not path:
-                  return ["index.html"]
-              return [f"{path}/index.html", f"{path}.html"]
+def url_to_candidate_files(url):
+    """Return file paths that represent this URL."""
+    path = url.replace(f"https://{host}", "").strip("/")
+    if not path:
+        return ["index.html"]
+    return [f"{path}/index.html", f"{path}.html"]
 
-          changed_urls = []
-          for url in all_urls:
-              candidates = url_to_candidate_files(url)
-              if any(c in changed_files for c in candidates):
-                  changed_urls.append(url)
+changed_urls = []
+for url in all_urls:
+    candidates = url_to_candidate_files(url)
+    if any(c in changed_files for c in candidates):
+        changed_urls.append(url)
 
-          print(json.dumps(changed_urls))
-          PY <<< "$CHANGED"
-          )
+print(json.dumps(changed_urls))
+PY
+
+          URL_COUNT=$(python3 -c "import json; print(len(json.load(open('/tmp/urls.json'))))")
 
           echo "--- URLs to submit ---"
-          echo "$URLS_JSON" | python3 -c "import json,sys; urls=json.load(sys.stdin); print(f'{len(urls)} URL(s)'); [print(f'  {u}') for u in urls]"
+          python3 -c "
+import json
+urls = json.load(open('/tmp/urls.json'))
+print(f'{len(urls)} URL(s)')
+for u in urls:
+    print(f'  {u}')
+"
 
           # Exit cleanly if nothing to submit
-          URL_COUNT=$(echo "$URLS_JSON" | python3 -c "import json,sys; print(len(json.load(sys.stdin)))")
           if [ "$URL_COUNT" -eq 0 ]; then
             echo "No content changes detected -- skipping IndexNow submission ($TIMESTAMP)"
             exit 0
           fi
 
-          PAYLOAD=$(python3 - "$HOST" "$KEY" "$KEY_LOCATION" "$URLS_JSON" <<'PY'
-          import json, sys
-          host, key, key_location, urls_json = sys.argv[1:5]
-          print(json.dumps({
-              "host": host,
-              "key": key,
-              "keyLocation": key_location,
-              "urlList": json.loads(urls_json),
-          }))
-          PY
-          )
+          python3 - "$HOST" "$KEY" "$KEY_LOCATION" > /tmp/payload.json << 'PY'
+import json, sys
+host, key, key_location = sys.argv[1:4]
+urls = json.load(open('/tmp/urls.json'))
+print(json.dumps({
+    "host": host,
+    "key": key,
+    "keyLocation": key_location,
+    "urlList": urls,
+}))
+PY
 
           echo "Submitting $URL_COUNT URL(s) to IndexNow at $TIMESTAMP"
           HTTP_STATUS=$(curl -sS -o /tmp/indexnow_response.json -w "%{http_code}" \
             -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$PAYLOAD")
+            --data @/tmp/payload.json)
 
           echo "IndexNow HTTP response: $HTTP_STATUS"
           echo "Response body:"
