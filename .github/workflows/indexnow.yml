@@ -1,10 +1,10 @@
 name: Notify IndexNow
 
 # Submits ONLY URLs whose content files changed in the triggering push.
-# Uses git diff to find changed HTML files and maps them to sitemap URLs.
+# Logic lives in .github/scripts/indexnow_changed_urls.py.
 # If sitemap.xml itself changed, all sitemap URLs are submitted.
-# If no content files changed (e.g., workflow-only edits), nothing is submitted.
-# Log: shows URLs submitted, HTTP response, and timestamp in the Actions run.
+# If no content files changed, nothing is submitted.
+# Log: shows URLs submitted, HTTP response, and timestamp.
 
 on:
   push:
@@ -16,18 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2   # need HEAD and HEAD~1 for the diff
+          fetch-depth: 2
 
       - name: Compute changed URLs and submit to IndexNow
+        env:
+          INDEXNOW_KEY: e2a76b4686264f2f9418b07705154e24
         run: |
           set -euo pipefail
-          KEY="e2a76b4686264f2f9418b07705154e24"
           HOST="kestrelridgehealth.com"
-          KEY_LOCATION="https://${HOST}/${KEY}.txt"
+          KEY_LOCATION="https://${HOST}/${INDEXNOW_KEY}.txt"
           TIMESTAMP=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
 
-          # Get files changed in this push (HEAD vs HEAD~1)
-          # Falls back to all files on the first commit (no parent)
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
             git diff --name-only HEAD~1 HEAD > /tmp/changed_files.txt
           else
@@ -38,66 +37,22 @@ jobs:
           cat /tmp/changed_files.txt
           echo "---"
 
-          python3 - "$HOST" /tmp/changed_files.txt > /tmp/urls.json << 'PY'
-import sys, json, xml.etree.ElementTree as ET
-
-host = sys.argv[1]
-changed_files = set(open(sys.argv[2]).read().splitlines())
-
-ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-root = ET.parse("sitemap.xml").getroot()
-all_urls = [el.text.strip() for el in root.findall("s:url/s:loc", ns)]
-
-# If sitemap.xml changed, submit everything
-if "sitemap.xml" in changed_files:
-    sys.stderr.write("sitemap.xml changed -- submitting all URLs\n")
-    print(json.dumps(all_urls))
-    sys.exit(0)
-
-def url_to_candidate_files(url):
-    """Return file paths that represent this URL."""
-    path = url.replace(f"https://{host}", "").strip("/")
-    if not path:
-        return ["index.html"]
-    return [f"{path}/index.html", f"{path}.html"]
-
-changed_urls = []
-for url in all_urls:
-    candidates = url_to_candidate_files(url)
-    if any(c in changed_files for c in candidates):
-        changed_urls.append(url)
-
-print(json.dumps(changed_urls))
-PY
+          python3 .github/scripts/indexnow_changed_urls.py "$HOST" \
+            < /tmp/changed_files.txt > /tmp/urls.json
 
           URL_COUNT=$(python3 -c "import json; print(len(json.load(open('/tmp/urls.json'))))")
 
-          echo "--- URLs to submit ---"
-          python3 -c "
-import json
-urls = json.load(open('/tmp/urls.json'))
-print(f'{len(urls)} URL(s)')
-for u in urls:
-    print(f'  {u}')
-"
+          echo "--- URLs to submit: $URL_COUNT ---"
+          python3 -c "import json; [print('  ' + u) for u in json.load(open('/tmp/urls.json'))]"
 
-          # Exit cleanly if nothing to submit
           if [ "$URL_COUNT" -eq 0 ]; then
             echo "No content changes detected -- skipping IndexNow submission ($TIMESTAMP)"
             exit 0
           fi
 
-          python3 - "$HOST" "$KEY" "$KEY_LOCATION" > /tmp/payload.json << 'PY'
-import json, sys
-host, key, key_location = sys.argv[1:4]
-urls = json.load(open('/tmp/urls.json'))
-print(json.dumps({
-    "host": host,
-    "key": key,
-    "keyLocation": key_location,
-    "urlList": urls,
-}))
-PY
+          python3 .github/scripts/indexnow_build_payload.py \
+            "$HOST" "$INDEXNOW_KEY" "$KEY_LOCATION" \
+            < /tmp/urls.json > /tmp/payload.json
 
           echo "Submitting $URL_COUNT URL(s) to IndexNow at $TIMESTAMP"
           HTTP_STATUS=$(curl -sS -o /tmp/indexnow_response.json -w "%{http_code}" \
