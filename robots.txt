@@ -16,7 +16,7 @@ Disallow: /*/index.txt
 # OpenAI:      https://platform.openai.com/docs/bots
 # Google:      https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers
 # Anthropic:   https://support.claude.com/en/articles/8896518
-# Perplexity:  https://docs.perplexity.ai/guides/bots
+# Perplexity:  https://docs.perplexity.ai/docs/resources/perplexity-crawlers
 # Microsoft:   https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8950b435
 # ============================================================
 
@@ -26,6 +26,8 @@ User-agent: OAI-SearchBot
 Allow: /
 
 # ChatGPT-User: retrieves a URL when a user explicitly requests it in ChatGPT — allow
+# Note: OpenAI states user-initiated fetches "may not apply" robots.txt rules.
+# This directive is included for completeness but cannot be guaranteed to bind.
 User-agent: ChatGPT-User
 Allow: /
 
@@ -35,17 +37,21 @@ Disallow: /
 
 # --- Google ---
 # Googlebot: Google web search index — allow
+# Also controls AI Overviews and AI Mode (both use the Search index).
 User-agent: Googlebot
 Allow: /
 
-# Google-Extended: trains Gemini and Google AI products — decline
+# Google-Extended: product token controlling post-crawl use for Gemini model training
+# and Gemini Apps / Vertex AI grounding — decline.
+# Does NOT affect Google Search, AI Overviews, or AI Mode rankings.
 User-agent: Google-Extended
 Disallow: /
 
 # --- Microsoft / Bing ---
-# Bingbot: Bing Search and Copilot retrieval — allow
-# Note: Microsoft does not currently document a separate training-only crawler.
-User-agent: Bingbot
+# bingbot: Bing Search and Copilot grounding — allow.
+# Microsoft does not publish a separate training-only crawler.
+# Copilot cannot be decoupled from Bing: blocking bingbot removes both.
+User-agent: bingbot
 Allow: /
 
 # --- Anthropic ---
@@ -54,6 +60,7 @@ User-agent: Claude-SearchBot
 Allow: /
 
 # Claude-User: retrieves a URL when a user explicitly requests it in Claude — allow
+# Anthropic explicitly states Claude-User honors robots.txt.
 User-agent: Claude-User
 Allow: /
 
@@ -62,9 +69,15 @@ User-agent: ClaudeBot
 Disallow: /
 
 # --- Perplexity ---
-# PerplexityBot: retrieves pages to answer Perplexity search queries — allow
-# (Perplexity does not currently document a separate training-only crawler.)
+# PerplexityBot: retrieves pages to answer Perplexity search queries — allow.
+# Perplexity does not build foundation models; no training concern applies.
 User-agent: PerplexityBot
+Allow: /
+
+# Perplexity-User: user-initiated real-time page fetch in Perplexity — allow.
+# Note: Perplexity states this bot "generally ignores robots.txt" for user-initiated
+# fetches. This directive is included for completeness.
+User-agent: Perplexity-User
 Allow: /
 
 Sitemap: https://kestrelridgehealth.com/sitemap.xml
