@@ -5,4 +5,66 @@ Allow: /
 Disallow: /*__next*
 Disallow: /*/index.txt
 
+# ============================================================
+# AI CRAWLER POLICY
+# Updated: 2026-10-28
+#
+# Principle: allow web search and user-requested retrieval;
+# decline unsolicited use of site content for model training.
+#
+# Source verification for each agent name below:
+# OpenAI:      https://platform.openai.com/docs/bots
+# Google:      https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers
+# Anthropic:   https://support.claude.com/en/articles/8896518
+# Perplexity:  https://docs.perplexity.ai/guides/bots
+# Microsoft:   https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8950b435
+# ============================================================
+
+# --- OpenAI ---
+# OAI-SearchBot: retrieves pages to answer ChatGPT Search queries — allow
+User-agent: OAI-SearchBot
+Allow: /
+
+# ChatGPT-User: retrieves a URL when a user explicitly requests it in ChatGPT — allow
+User-agent: ChatGPT-User
+Allow: /
+
+# GPTBot: crawls pages to train OpenAI models — decline
+User-agent: GPTBot
+Disallow: /
+
+# --- Google ---
+# Googlebot: Google web search index — allow
+User-agent: Googlebot
+Allow: /
+
+# Google-Extended: trains Gemini and Google AI products — decline
+User-agent: Google-Extended
+Disallow: /
+
+# --- Microsoft / Bing ---
+# Bingbot: Bing Search and Copilot retrieval — allow
+# Note: Microsoft does not currently document a separate training-only crawler.
+User-agent: Bingbot
+Allow: /
+
+# --- Anthropic ---
+# Claude-SearchBot: retrieves pages to answer Claude web search queries — allow
+User-agent: Claude-SearchBot
+Allow: /
+
+# Claude-User: retrieves a URL when a user explicitly requests it in Claude — allow
+User-agent: Claude-User
+Allow: /
+
+# ClaudeBot: general Anthropic web crawler; used for training data collection — decline
+User-agent: ClaudeBot
+Disallow: /
+
+# --- Perplexity ---
+# PerplexityBot: retrieves pages to answer Perplexity search queries — allow
+# (Perplexity does not currently document a separate training-only crawler.)
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://kestrelridgehealth.com/sitemap.xml
