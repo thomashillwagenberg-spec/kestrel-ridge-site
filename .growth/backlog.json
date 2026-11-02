@@ -1,0 +1,33 @@
+{
+  "audience": "Independent physician-owned ophthalmology practices",
+  "cadence": "Daily, at most one substantial new resource per run. Latest explicit user selection on 2026-11-02. Skip publication without a useful researched topic.",
+  "topics": [
+    {
+      "topic": "Compare a staffing forecast with a provider-average spreadsheet",
+      "intent": "Evaluate vendors and local evidence",
+      "status": "candidate"
+    },
+    {
+      "topic": "Planning technician coverage across independent practice locations",
+      "intent": "Multi-site operations",
+      "status": "candidate"
+    },
+    {
+      "topic": "Review forecast misses without ranking employees",
+      "intent": "Governance and operational learning",
+      "status": "candidate"
+    },
+    {
+      "topic": "When a ratio is sufficient and when to test a workload model",
+      "intent": "Honest purchase qualification",
+      "status": "candidate"
+    }
+  ],
+  "measurement": {
+    "search_console": "Verified domain property accessible through signed-in Chrome; no API credential configured.",
+    "referral_analytics": "not_connected",
+    "qualified_inquiries": "not_connected",
+    "rankings": null,
+    "ai_citations": null
+  }
+}

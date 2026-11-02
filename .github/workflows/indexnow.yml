@@ -18,6 +18,14 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Wait for verified live content
+        run: |
+          for attempt in 1 2 3 4 5; do
+            if python3 .growth/check.py --live; then exit 0; fi
+            sleep 45
+          done
+          exit 1
+
       - name: Compute changed URLs and submit to IndexNow
         env:
           INDEXNOW_KEY: e2a76b4686264f2f9418b07705154e24

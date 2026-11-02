@@ -1,0 +1,44 @@
+name: KRH publishing checks
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '20 16 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: krh-publishing-checks
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate reviewed sources and publishing gates
+        run: |
+          python3 -m unittest discover -s .growth -p 'test_*.py'
+          python3 .growth/check.py
+      - name: Check committed generated output
+        run: |
+          python3 .growth/build.py
+          git diff --exit-code
+      - name: Verify deployed pages and assets
+        run: |
+          for attempt in 1 2 3 4 5; do
+            if python3 .growth/check.py --live --report /tmp/krh-publishing-report.json; then
+              exit 0
+            fi
+            sleep 45
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: krh-publishing-report
+          path: /tmp/krh-publishing-report.json
+          retention-days: 30

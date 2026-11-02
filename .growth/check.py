@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""Check indexable pages, reviewed content, local links and optional live deployment."""
+from html.parser import HTMLParser
+from pathlib import Path
+from urllib.parse import urlparse, unquote
+from urllib.request import Request, urlopen
+import argparse
+import hashlib
+import json
+import re
+import sys
+import xml.etree.ElementTree as ET
+from build import ROOT, BASE, NS, check_article
+
+class Page(HTMLParser):
+    def __init__(self):
+        super().__init__(); self.h1=0; self.canon=[]; self.links=[]; self.description=[]; self.robots=[]; self.images=[]; self.jsonld=[]; self.capture=False
+    def handle_starttag(self,t,a):
+        a=dict(a)
+        if t=='h1': self.h1+=1
+        if t=='link' and a.get('rel')=='canonical': self.canon.append(a.get('href'))
+        if t=='meta' and a.get('name')=='description': self.description.append(a.get('content'))
+        if t=='meta' and a.get('name')=='robots': self.robots.append(a.get('content',''))
+        if t in ('a','link','script','img'):
+            v=a.get('href',a.get('src',''))
+            if v.startswith('/'): self.links.append(v)
+        if t=='img': self.images.append(a)
+        if t=='script' and a.get('type')=='application/ld+json': self.capture=True
+    def handle_endtag(self,t):
+        if t=='script': self.capture=False
+    def handle_data(self,d):
+        if self.capture: self.jsonld.append(json.loads(d))
+
+def local_path(url):
+    p = unquote(urlparse(url).path).lstrip('/')
+    path=ROOT/p
+    return path/'index.html' if path.is_dir() or not p or p.endswith('/') else path
+
+def inspect(text,url):
+    p=Page();p.feed(text); errors=[]
+    if p.h1!=1: errors.append(f'{url}: expected one h1, got {p.h1}')
+    if p.canon!=[url]: errors.append(f'{url}: incorrect canonical {p.canon}')
+    if len(p.description)!=1 or not p.description[0]: errors.append(f'{url}: missing description')
+    if any('noindex' in r for r in p.robots): errors.append(f'{url}: noindex')
+    if re.search(r'\$\s*7[,.]?500|\bUSD\s*7[,.]?500|\b7500\s*dollars',text,re.I): errors.append(f'{url}: retired price')
+    for link in p.links:
+        if not local_path(link).exists(): errors.append(f'{url}: missing local target {link}')
+    return errors
+
+def main():
+    ap=argparse.ArgumentParser();ap.add_argument('--live',action='store_true');ap.add_argument('--report');args=ap.parse_args()
+    articles=[json.loads(p.read_text()) for p in (ROOT/'.growth/articles').glob('*.json')]
+    for a in articles: check_article(a)
+    urls=[e.text for e in ET.parse(ROOT/'sitemap.xml').findall(f'.//{{{NS}}}loc')]
+    errors=[]
+    if len(urls)!=len(set(urls)): errors.append('Duplicate sitemap URLs')
+    for url in urls:
+        p=local_path(url)
+        if not p.exists(): errors.append('Missing sitemap page: '+url);continue
+        errors.extend(inspect(p.read_text(),url))
+    checked=[]
+    if args.live:
+        paths={'resources/index.html','sitemap.xml','feed.xml','assets/growth.css','assets/growth.js','downloads/session-readiness-worksheet.csv'}
+        for a in articles: paths.update({a['slug']+'/index.html',a['image']['path'].lstrip('/')})
+        for path in sorted(paths):
+            url=BASE+'/'+path.removesuffix('index.html')
+            try:
+                req=Request(url,headers={'User-Agent':'KRH-Publishing-Verification/1.0','Cache-Control':'no-cache'})
+                with urlopen(req,timeout=25) as r:
+                    body=r.read();status=r.status
+                match=hashlib.sha256(body).digest()==hashlib.sha256((ROOT/path).read_bytes()).digest()
+                checked.append({'url':url,'http_status':status,'matches_source':match})
+                if not match: errors.append('Live content differs: '+url)
+            except Exception as e: errors.append(f'{url}: {e}')
+    report={'sitemap_pages':len(urls),'reviewed_articles':len(articles),'errors':errors,'live_checks':checked,'indexing_note':'HTTP success is not evidence of search engine indexing.'}
+    if args.report: Path(args.report).write_text(json.dumps(report,indent=2)+'\n')
+    print(json.dumps(report,indent=2));return bool(errors)
+
+if __name__=='__main__': sys.exit(main())
