@@ -1,0 +1,12 @@
+# KRH contact intake Worker — Resend API delivery
+name = "krh-contact-inquiries"
+main = "src/worker.mjs"
+compatibility_date = "2026-10-13"
+
+# Secrets (set via `wrangler secret put`):
+#   RESEND_API_KEY   — required for email delivery (get at resend.com, free tier)
+#   TURNSTILE_SECRET — optional; skip for staging, required before public launch
+#   DOMAIN_VERIFIED  — set to any non-empty value once kestrelridgehealth.com is
+#                      verified in Resend dashboard (enables branded from: address)
+
+# No send_email binding required — Resend API handles delivery without Email Routing.
