@@ -2,6 +2,7 @@ import copy
 import json
 import unittest
 from build import ROOT, check_article
+from check import deployment_bytes
 
 class PublishingGateTests(unittest.TestCase):
     def setUp(self):
@@ -23,5 +24,9 @@ class PublishingGateTests(unittest.TestCase):
         a=copy.deepcopy(self.article);a['body']=a['body'].replace('synthetic','generated')
         with self.assertRaisesRegex(AssertionError,'evidence limits'): check_article(a)
     def test_reviewed_article_passes(self): check_article(self.article)
+    def test_hosting_comments_are_normalized(self):
+        self.assertEqual(deployment_bytes(b'<p><!--email_off-->contact<!--/email_off--></p>','x.html'),b'<p>contact</p>')
+    def test_unexpected_scripts_are_not_ignored(self):
+        self.assertNotEqual(deployment_bytes(b'<p>text</p><script src="https://other.example/a.js"></script>','x.html'),b'<p>text</p>')
 
 if __name__=='__main__': unittest.main()

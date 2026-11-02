@@ -36,6 +36,14 @@ def local_path(url):
     path=ROOT/p
     return path/'index.html' if path.is_dir() or not p or p.endswith('/') else path
 
+def deployment_bytes(data, path):
+    if not path.endswith('.html'): return data
+    # Cloudflare consumes email-off comments and injects its configured RUM beacon.
+    # Ignore only this observed hosting transformation, not arbitrary script changes.
+    data=data.replace(b'<!--email_off-->',b'').replace(b'<!--/email_off-->',b'')
+    data=re.sub(rb'<script\b[^>]*src="https://static\.cloudflareinsights\.com/beacon\.min\.js/[^"<>]+"[^>]*data-cf-beacon=\'[^\']*\'[^>]*></script>',b'',data)
+    return re.sub(rb'>\s+<',b'><',data).strip()
+
 def inspect(text,url):
     p=Page();p.feed(text); errors=[]
     if p.h1!=1: errors.append(f'{url}: expected one h1, got {p.h1}')
@@ -68,7 +76,7 @@ def main():
                 req=Request(url,headers={'User-Agent':'KRH-Publishing-Verification/1.0','Cache-Control':'no-cache'})
                 with urlopen(req,timeout=25) as r:
                     body=r.read();status=r.status
-                match=hashlib.sha256(body).digest()==hashlib.sha256((ROOT/path).read_bytes()).digest()
+                match=hashlib.sha256(deployment_bytes(body,path)).digest()==hashlib.sha256(deployment_bytes((ROOT/path).read_bytes(),path)).digest()
                 checked.append({'url':url,'http_status':status,'matches_source':match})
                 if not match: errors.append('Live content differs: '+url)
             except Exception as e: errors.append(f'{url}: {e}')
