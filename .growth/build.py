@@ -52,7 +52,7 @@ def build():
             {'@type':'Organization','@id':BASE+'/#organization','name':'Kestrel Ridge Health','url':BASE+'/'},
             {'@type':'Article','@id':url+'#article','headline':a['title'],'description':a['description'],
              'datePublished':a['published'],'dateModified':a['modified'],'mainEntityOfPage':url,
-             'author':{'@id':BASE+'/#organization'},'publisher':{'@id':BASE+'/#organization'},
+             'author':({'@type':'Person','name':a['author'],'url':BASE+'/about/'} if a.get('author') else {'@id':BASE+'/#organization'}),'publisher':{'@id':BASE+'/#organization'},
              'image':BASE+im['path'],'citation':[s['url'] for s in a['sources']]},
             {'@type':'BreadcrumbList','itemListElement':[
                 {'@type':'ListItem','position':1,'name':'Resources','item':BASE+'/resources/'},
@@ -75,7 +75,7 @@ def build():
 <main id="main" class="growth"><article>
 <nav aria-label="Breadcrumb"><a href="/resources/">Resources</a> / Planning guide</nav>
 <p class="growth-label">{escape(a['category'])} / Independent ophthalmology practices</p>
-<h1>{escape(a['title'])}</h1><p class="growth-byline">By Kestrel Ridge Health · Published <time datetime="{a['published']}">{a['published']}</time> · Updated {a['modified']}</p>
+<h1>{escape(a['title'])}</h1><p class="growth-byline">By {escape(a.get('author','Kestrel Ridge Health'))} · Kestrel Ridge Health · Published <time datetime="{a['published']}">{a['published']}</time> · Updated {a['modified']}</p>
 <figure><img src="{im['path']}" alt="{escape(im['alt'])}" width="{im['width']}" height="{im['height']}" fetchpriority="high"><figcaption>{escape(im['caption'])}</figcaption></figure>
 <aside class="growth-answer" aria-label="Quick answer"><p class="growth-label">The starting point</p><p>{escape(a['answer'])}</p></aside>
 <div class="growth-copy">{a['body']}
