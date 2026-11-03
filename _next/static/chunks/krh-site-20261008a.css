@@ -206,3 +206,34 @@ main .section-edge{padding-top:clamp(5rem,9vw,8rem)!important}
 /* === KRH-CAMPAIGN-1 (2026-10-08): one path to inquiry; waitlist retired === */
 #not-ready-to-talk-yet,#the-waitlist,a[href*="not-ready-to-talk-yet"],a[href*="the-waitlist"]{display:none!important}
 /* === KRH-CAMPAIGN-1 END === */
+
+
+/* === KRH UX 2026-11 — Mobbin-pattern improvements === */
+
+/* 1. Resources category filter tabs */
+.kr-filter-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.kr-filter-tabs button{background:none;border:1px solid #ccd7d0;border-radius:4px;cursor:pointer;font-size:.875rem;padding:7px 16px;color:#526462;font-family:inherit;transition:all .15s}
+.kr-filter-tabs button:hover,.kr-filter-tabs button[aria-pressed="true"]{background:#2f554a;border-color:#2f554a;color:#fff}
+.kr-filter-empty{display:none;padding:32px 0;color:#526462;font-style:italic}
+
+/* 2. Homepage proof strip — synthetic validation callout below hero CTA */
+.kr-proof-strip{display:flex;flex-wrap:wrap;gap:20px 36px;margin-top:28px}
+.kr-proof-strip__item{display:flex;flex-direction:column;gap:3px}
+.kr-proof-strip__val{font-size:1.3rem;font-weight:700;color:#87bcf7;line-height:1.1}
+.kr-proof-strip__label{font-size:.72rem;color:rgba(255,255,255,.6);letter-spacing:.04em;text-transform:uppercase;line-height:1.4}
+@media(max-width:600px){.kr-proof-strip{gap:16px 24px}.kr-proof-strip__val{font-size:1.1rem}}
+
+/* 3. Sticky mobile CTA — pinned to bottom viewport on phones */
+.kr-mobile-sticky{display:none}
+@media(max-width:767px){
+  .kr-mobile-sticky{display:block;position:fixed;bottom:0;left:0;right:0;z-index:250;padding:10px 16px 14px;background:rgba(14,24,26,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.1)}
+  .kr-mobile-sticky a{display:flex;align-items:center;justify-content:center;min-height:50px;width:100%;background:#2f554a;color:#fff!important;text-decoration:none!important;font-size:.9375rem;font-weight:600;border-radius:4px}
+  .kr-mobile-sticky a:active,.kr-mobile-sticky a:focus{background:#254a40;outline:2px solid #87bcf7;outline-offset:2px}
+  body{padding-bottom:76px}
+}
+
+/* 4. Contact aside — additional trust card */
+.kr-contact-trust{font-size:.9375rem;line-height:1.6;color:#526462}
+.kr-contact-trust strong{color:inherit}
+.kr-contact-trust a{color:var(--color-primary,#2f554a);text-decoration:underline;text-underline-offset:3px}
+
