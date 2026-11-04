@@ -82,6 +82,19 @@ def build():
 <section class="growth-sources"><h2>Sources and scope</h2><ul>{sources}</ul></section>
 <aside class="growth-cta"><h2>Does your session history support a useful test?</h2><p>Start with a conversation about your sites, your current planning method and what you can measure.</p><a class="growth-button" href="/contact/">Discuss Phase Zero</a></aside>
 </div></article></main>{footer}<script src="/assets/growth.js" defer></script></body></html>'''
+        if a.get('presentation') == 'editorial':
+            sections = ''.join(f'<a href="#{escape(section[0])}">{escape(section[1])}</a>' for section in a['sections'])
+            opening = f'''<main id="main" class="growth story"><article>
+<nav class="story-breadcrumb" aria-label="Breadcrumb"><a href="/resources/">Resources</a><span>/</span>Practice operations</nav>
+<header class="story-hero"><div class="story-heading"><p class="growth-label">THE OPERATIONS NOTE / {dt.date.fromisoformat(a['published']).strftime('%d %b %Y').upper()}</p>
+<h1>{escape(a['title'])}</h1><p class="story-deck">{escape(a['deck'])}</p>
+<p class="growth-byline">{escape(a['author'])}<br>Kestrel Ridge Health · {max(1, (len(re.sub('<[^>]+>', ' ', a['body']).split()) + 199) // 200)} minute read</p></div>
+<figure><img src="{im['path']}" alt="{escape(im['alt'])}" width="{im['width']}" height="{im['height']}" fetchpriority="high"><figcaption>{escape(im['caption'])}</figcaption></figure></header>
+<aside class="story-takeaway"><p class="growth-label">THE PRACTICAL TAKEAWAY</p><p>{escape(a['answer'])}</p></aside>
+<div class="story-layout"><nav class="story-toc" aria-label="In this article"><p class="growth-label">IN THIS ARTICLE</p>{sections}<a class="story-toc-download" href="/downloads/screening-workflow-change-review.pdf">Get the worksheet ↓</a></nav>
+'''
+            page = page[:page.index('<main id="main"')] + opening + page[page.index('<div class="growth-copy">'):]
+            page = page.replace('</div></article></main>', '</div></div></article></main>')
         if write_changed(ROOT/a['slug']/'index.html', page):
             changed[url] = a['modified']
     # Extend the established resource page; retain all existing articles and navigation.
