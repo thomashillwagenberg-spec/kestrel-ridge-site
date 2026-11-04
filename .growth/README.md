@@ -4,7 +4,7 @@ This directory is the durable source for new resources on the existing public KR
 
 ## Approved scope
 
-The owner authorized autonomous research, writing, original editorial imagery, website publication and Google/Bing submission. Latest cadence selection on November 2, 2026: daily. Publish at most one useful substantial new resource per run. Refresh an existing page or skip when that better serves readers. No filler, keyword doorway pages, fabricated sources or invented demand.
+The owner authorized autonomous research, writing, original editorial imagery, website publication and Google/Bing submission. November 4 clarification: publish one new, distinct substantial article daily. Refreshes and downloads are additional maintenance. Check same-day developments first, verify source dates and explain practical value. When no suitable news merits coverage, publish a distinct evidence-based practical guide without implying it is breaking news. No filler, keyword doorway pages, fabricated sources or invented demand.
 
 Audience: independently owned US ophthalmology practices, especially owners, administrators and operations leaders. Phase Zero is a fixed fee scoped per clinic. Do not restore the retired $7,500 price. No fabricated customers, clinical validation, ROI, savings, endorsements, certifications or engagement. Clearly label synthetic findings. Follow the current live product/evidence/governance pages; flag conflicts rather than making up an answer.
 
