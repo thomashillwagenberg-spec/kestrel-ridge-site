@@ -113,12 +113,28 @@ def build():
         if mod is None: mod = ET.SubElement(el,f'{{{NS}}}lastmod')
         mod.text=date
     if changed: tree.write(ROOT/'sitemap.xml',encoding='utf-8',xml_declaration=True)
-    rss=ET.Element('rss',version='2.0');ch=ET.SubElement(rss,'channel')
-    for k,v in [('title','Kestrel Ridge Health resources'),('link',BASE+'/resources/'),('description','Practical ophthalmic technician staffing guides from KRH.')]: ET.SubElement(ch,k).text=v
-    for a in sorted(articles,key=lambda a:a['published'],reverse=True):
-        it=ET.SubElement(ch,'item')
-        for k,v in [('title',a['title']),('link',BASE+'/'+a['slug']+'/'),('guid',BASE+'/'+a['slug']+'/'),('description',a['description'])]: ET.SubElement(it,k).text=v
-    write_changed(ROOT/'feed.xml',ET.tostring(rss,encoding='unicode',xml_declaration=True))
+    # Keep the existing resource archive when adding or revising managed articles.
+    feed = ROOT/'feed.xml'
+    rss = ET.parse(feed).getroot()
+    channel = rss.find('channel')
+    items = {item.findtext('link'): item for item in channel.findall('item')}
+    for article in sorted(articles, key=lambda entry: entry['published']):
+        url = f"{BASE}/{article['slug']}/"
+        item = items.get(url)
+        if item is None:
+            item = ET.Element('item')
+            first_item = channel.find('item')
+            position = len(channel) if first_item is None else list(channel).index(first_item)
+            channel.insert(position, item)
+        published = dt.date.fromisoformat(article['published'])
+        for tag, value in [('title', article['title']), ('link', url), ('guid', url),
+                           ('pubDate', published.strftime('%a, %d %b %Y 00:00:00 +0000')),
+                           ('description', article['description'])]:
+            element = item.find(tag)
+            if element is None:
+                element = ET.SubElement(item, tag)
+            element.text = value
+    write_changed(feed, ET.tostring(rss, encoding='utf-8', xml_declaration=True).decode('utf-8') + '\n')
     print(json.dumps({'articles':len(articles),'changed_urls':list(changed)}))
 
 if __name__ == '__main__': build()
