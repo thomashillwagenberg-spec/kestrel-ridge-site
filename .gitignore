@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 .growth/reports/
+
+# Local Cloudflare account cache and development state
+.wrangler/
+**/.wrangler/

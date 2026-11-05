@@ -1,0 +1,8 @@
+{
+  "name": "krh-reader-feedback",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-05",
+  "workers_dev": true,
+  "triggers": { "crons": ["0 3 * * *"] },
+  "d1_databases": [{ "binding": "FEEDBACK_DB", "database_name": "krh-reader-feedback", "database_id": "25448cc4-0fbe-4181-ad5b-12b48ef4218e" }]
+}

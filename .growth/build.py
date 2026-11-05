@@ -44,6 +44,7 @@ def build():
         check_article(a)
     header = (ROOT/'.growth/templates/header.html').read_text().replace(' aria-current="page"', '')
     footer = (ROOT/'.growth/templates/footer.html').read_text()
+    feedback = (ROOT/'.growth/templates/feedback.html').read_text()
     changed = {}
     for a in articles:
         url = f"{BASE}/{a['slug']}/"
@@ -80,8 +81,9 @@ def build():
 <aside class="growth-answer" aria-label="Quick answer"><p class="growth-label">The starting point</p><p>{escape(a['answer'])}</p></aside>
 <div class="growth-copy">{a['body']}
 <section class="growth-sources"><h2>Sources and scope</h2><ul>{sources}</ul></section>
+{feedback}
 <aside class="growth-cta"><h2>Does your session history support a useful test?</h2><p>Start with a conversation about your sites, your current planning method and what you can measure.</p><a class="growth-button" href="/contact/">Discuss Phase Zero</a></aside>
-</div></article></main>{footer}<script src="/assets/growth.js" defer></script></body></html>'''
+</div></article></main>{footer}<script src="/assets/growth.js" defer></script><script src="/assets/article-feedback.js" defer></script></body></html>'''
         if a.get('presentation') == 'editorial':
             sections = ''.join(f'<a href="#{escape(section[0])}">{escape(section[1])}</a>' for section in a['sections'])
             resource = a.get('resource', {'url': '/downloads/screening-workflow-change-review.pdf', 'label': 'Get the worksheet ↓'})

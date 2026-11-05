@@ -1,0 +1,18 @@
+<section class="article-feedback" aria-labelledby="feedback-title">
+<p class="growth-label">HELP US IMPROVE</p>
+<h2 id="feedback-title">Was this article useful?</h2>
+<p>Your response helps us choose and improve future articles.</p>
+<form data-article-feedback data-endpoint="https://krh-reader-feedback.thomashillwagenberg.workers.dev/rating">
+<fieldset><legend class="feedback-legend">How useful was it?</legend>
+<div class="feedback-options">
+<label><input type="radio" name="rating" value="3" required> Useful</label>
+<label><input type="radio" name="rating" value="2"> Somewhat useful</label>
+<label><input type="radio" name="rating" value="1"> Not useful</label>
+</div>
+<label class="feedback-reason">What would improve it? <span>(optional)</span>
+<select name="improvement"><option value="">Choose an option</option><option value="examples">More practical examples</option><option value="evidence">More supporting evidence</option><option value="steps">Clearer next steps</option><option value="relevance">A more relevant topic</option></select></label>
+</fieldset>
+<button class="growth-button" type="submit">Send rating</button>
+<p class="feedback-status" role="status" aria-live="polite"></p>
+<p class="feedback-privacy">No name or email is requested. A random browser identifier helps limit repeat ratings. Responses are removed after 180 days by a daily cleanup. <a href="/privacy/">Privacy notice</a>.</p>
+</form></section>
