@@ -68,7 +68,7 @@ def main():
         errors.extend(inspect(p.read_text(),url))
     checked=[]
     if args.live:
-        paths={'resources/index.html','sitemap.xml','feed.xml','assets/growth.css','assets/growth.js','assets/article-feedback.js','privacy/index.html','downloads/session-readiness-worksheet.csv'}
+        paths={'resources/index.html','sitemap.xml','feed.xml','assets/growth.css','assets/growth.js','assets/article-feedback.js','assets/article-feedback.css','privacy/index.html','downloads/session-readiness-worksheet.csv'}
         for a in articles: paths.update({a['slug']+'/index.html',a['image']['path'].lstrip('/')})
         for path in sorted(paths):
             url=BASE+'/'+path.removesuffix('index.html')

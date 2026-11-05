@@ -64,7 +64,7 @@ def build():
 <title>{escape(a['title'])} | Kestrel Ridge Health</title>
 <meta name="description" content="{escape(a['description'])}"><meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="{url}"><link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/_next/static/chunks/krh-site-20261008a.css"><link rel="stylesheet" href="/assets/growth.css">
+<link rel="stylesheet" href="/_next/static/chunks/krh-site-20261008a.css"><link rel="stylesheet" href="/assets/growth.css"><link rel="stylesheet" href="/assets/article-feedback.css">
 <link rel="alternate" type="application/rss+xml" title="KRH resources" href="/feed.xml">
 <meta property="og:type" content="article"><meta property="og:title" content="{escape(a['title'])}">
 <meta property="og:description" content="{escape(a['description'])}"><meta property="og:url" content="{url}">
