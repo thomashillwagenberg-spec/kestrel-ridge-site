@@ -1,0 +1,81 @@
+{
+  "slug": "ophthalmology-staffing-forecast-error-review",
+  "title": "How to review an ophthalmology staffing forecast that misses",
+  "description": "Check forecast error, session data and coverage decisions with a practical review process for independent ophthalmology practices.",
+  "published": "2026-11-06",
+  "modified": "2026-11-06",
+  "reviewed": "2026-11-06",
+  "category": "Forecast evaluation",
+  "author": "Thomas Wagenberg",
+  "presentation": "editorial",
+  "deck": "A practical way to investigate a workload miss, compare the same sessions and decide whether to continue using a forecast.",
+  "sections": [
+    [
+      "snapshot",
+      "Original prediction"
+    ],
+    [
+      "measurement",
+      "Measurement definitions"
+    ],
+    [
+      "compare",
+      "Compare errors"
+    ],
+    [
+      "diagnose",
+      "Review the cause"
+    ],
+    [
+      "decision",
+      "Decide what happens next"
+    ]
+  ],
+  "resource": {
+    "url": "/pilot/",
+    "label": "Read the evaluation gates"
+  },
+  "answer": "I'd preserve the original prediction, check how technician minutes were measured and compare errors with the existing planning method on the same sessions. Then document whether the issue concerns data, demand or coverage, and record a named decision to continue, pause or stop.",
+  "body": "<p>When an ophthalmology staffing forecast misses, I'd first check what was predicted and what was measured. A busy session can expose a problem. It doesn't tell me whether the problem came from the forecast, the data or the coverage plan.</p>\n<p>I think the review needs to answer a practical question: can the scheduler keep using this forecast, or should the practice fall back to its approved planning method? I'd write down that decision before changing the model.</p>\n<p>This is a practical guide for independent practices evaluating a staffing forecast. It isn't a report of a new clinical finding. The review below is my suggested operating process, informed by <a href=\"https://airc.nist.gov/airmf-resources/airmf/5-sec-core/\">NIST's voluntary AI Risk Management Framework</a> and KRH's published evaluation boundaries.</p>\n<h2 id=\"snapshot\">Keep the forecast that existed before the session</h2>\n<p>I'd keep the original forecast, its creation time and the appointment information available then. I'd also keep the planning method being used for comparison. Changing either after the session would make the result harder to interpret.</p>\n<p>A retrospective prediction that includes information learned during the day answers a different question. For example, the final cancellation count wasn't necessarily known when the schedule was approved. KRH's <a href=\"/governance/\">governance policy</a> excludes realized no-shows and cancellations from forecast inputs for this reason.</p>\n<p>I'd give each comparison a session identifier, site, date and morning or afternoon label. Use the practice's approved operational records. This review doesn't require a public patient list or an export of patient identifiers.</p>\n<h2 id=\"measurement\">Check the definition of technician minutes</h2>\n<p>Before calling the model wrong, I'd confirm that the observed number measures the same work as the prediction. Paid shift minutes, hands-on work minutes and patient elapsed time describe different things. I'd ask whoever maintains the export to explain what starts and stops the measurement.</p>\n<p>I'd check whether the session includes training, interruptions or work completed after its scheduled end. Those details need consistent treatment. I wouldn't quietly remove a difficult session because it makes the forecast look worse.</p>\n<p>If the observation is missing or its definition changed, I'd mark the comparison as unresolved. A blank observation can't establish a zero-minute error. Keep a count of unresolved sessions beside any accuracy result.</p>\n<h2 id=\"compare\">Compare errors without letting the average hide them</h2>\n<p>For a session with comparable observations, I'd calculate signed error as observed technician minutes minus forecast minutes. A positive value means the forecast was below the observed workload. A negative value means it was above it.</p>\n<p>I'd also calculate absolute error, which ignores direction. Mean absolute error is the sum of those absolute session errors divided by the number of comparable sessions. Mean signed error can look small when errors in opposite directions cancel, so I'd show both measures.</p>\n<p>I'd compare the forecast and the practice's existing planning method on the same sessions, using the same definitions. Record which sessions were excluded and why. If a model only wins after removing the sessions the scheduler struggles with, I'd want that limitation visible.</p>\n<p>A session's position outside a prediction interval is another useful observation. I'd review interval coverage across comparable sessions rather than treating one miss as proof that the model failed. A wide interval also needs to be useful for the scheduling decision. Accuracy and practical usefulness both need a review.</p>\n<h2 id=\"diagnose\">Separate the miss from the decision it informed</h2>\n<p>I'd ask the scheduler and the person responsible for the data to work through the same short review. The table is a suggested diagnostic aid. It doesn't establish the cause by itself.</p>\n<div class=\"growth-table\"><table><caption>Questions to ask after a forecast miss</caption><thead><tr><th>What you find</th><th>What I'd check next</th><th>What to record</th></tr></thead><tbody>\n<tr><td>The original forecast can't be reproduced</td><td>Was the input snapshot or model version changed?</td><td>The missing version or record, and who will recover it.</td></tr>\n<tr><td>The observed minutes use a different definition</td><td>Did the export, timing rule or session boundary change?</td><td>The definition change and which sessions it affects.</td></tr>\n<tr><td>Comparable sessions repeatedly exceed the forecast</td><td>Has the appointment mix or operating process changed?</td><td>The pattern, comparison window and evidence still needed.</td></tr>\n<tr><td>Demand was estimated reasonably, but coverage wasn't feasible</td><td>Were availability, competencies, supervision and travel checked?</td><td>The coverage constraint and the approved response.</td></tr>\n<tr><td>A person changed the plan during the day</td><td>What changed, when, and why?</td><td>The original plan, override reason and resulting plan.</td></tr>\n</tbody></table></div>\n<p>I'd avoid treating overtime as a direct measurement of forecast error. Overtime is an operating outcome with its own definition and possible causes. It belongs beside the error review, with enough context to explain the day's decisions.</p>\n<h2 id=\"decision\">Finish with a named decision and a review date</h2>\n<p>I'd end the review with one of three recorded decisions. Continue under the current evaluation rules, pause use while the measurement is repaired, or stop and return to the approved fallback. Name the decision owner and the next review date.</p>\n<p>The practice should agree on its thresholds before evaluating results. KRH's <a href=\"/pilot/\">proposed pilot design</a> includes a stopping rule when forecast error exceeds the fixed-ratio baseline over a rolling two-week window. That is KRH's published evaluation rule. It isn't a universal threshold for every clinic or model.</p>\n<p>I wouldn't turn this review into a ranking of technicians. KRH prohibits using its outputs for individual performance scoring, compensation or employment decisions. A workload miss needs an explanation about the model, records and operating conditions.</p>\n<p><a href=\"/evidence/\">KRH's published evidence uses synthetic data</a>. It doesn't establish accuracy, savings or staffing outcomes in your practice. <a href=\"/ophthalmology-staffing-forecast-readiness/\">Consistent session data</a> and a fair local comparison are still needed. Phase Zero is a fixed-fee diagnostic scoped per clinic.</p>\n<p>I want the review to leave the scheduler with a clear answer about the next session. Keep the original prediction, document what can actually be compared, and record who decided whether to continue.</p>\n",
+  "editorial_note": "Practical guide, not breaking news. Same-day research found Australian optometry workforce consultation coverage and a CMS outpatient rule publication, but no verified same-day primary development sufficiently direct to this US technician forecast-review question. NIST 2023 framework and March 9, 2026 monitoring report are older background, not November 6 news. Original diagnostic framework and definitions, no numerical clinic results or patient data. Search Console observed queries include ophthalmology staffing forecast and phase zero staffing pilot ophthalmology. No claim of keyword search volume or ranking likelihood.",
+  "sources": [
+    {
+      "title": "NIST: AI Risk Management Framework Core",
+      "url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/",
+      "checked": "2026-11-06",
+      "supports": "The 2023 voluntary framework supports ongoing monitoring and evaluation in deployment-like conditions. It does not prescribe this article\u2019s clinic checklist."
+    },
+    {
+      "title": "NIST: Challenges to the Monitoring of Deployed AI Systems",
+      "url": "https://www.nist.gov/news-events/news/2026/03/new-report-challenges-monitoring-deployed-ai-systems",
+      "checked": "2026-11-06",
+      "supports": "Published March 9, 2026. Discusses distinct functionality, operational and human-factors monitoring questions. Background research, not same-day news."
+    },
+    {
+      "title": "KRH: Governance and prohibited uses",
+      "url": "https://kestrelridgehealth.com/governance/",
+      "checked": "2026-11-06",
+      "supports": "Realized cancellations and no-shows are excluded from forecast inputs. Individual performance scoring and employment uses are prohibited."
+    },
+    {
+      "title": "KRH: Pilot evaluation and stopping rules",
+      "url": "https://kestrelridgehealth.com/pilot/",
+      "checked": "2026-11-06",
+      "supports": "Proposed local evaluation compares baselines and specifies a rolling two-week forecast-error stopping rule. Phase Zero is fixed fee, scoped per clinic. No completed clinic pilot is claimed."
+    },
+    {
+      "title": "KRH: Current evidence limits",
+      "url": "https://kestrelridgehealth.com/evidence/",
+      "checked": "2026-11-06",
+      "supports": "Published evaluation uses synthetic data and does not establish local accuracy or real-practice outcomes."
+    }
+  ],
+  "image": {
+    "path": "/assets/forecast-error-review-20261106.jpg",
+    "width": 1536,
+    "height": 1024,
+    "alt": "Fictional clinic workroom with a blank clipboard, closed folder and calculator beside an exam-room doorway.",
+    "caption": "AI-generated editorial illustration of a fictional clinic. No patient or customer is depicted.",
+    "provenance": "Original image generated with the built-in image tool on November 6, 2026."
+  }
+}
