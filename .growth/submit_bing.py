@@ -15,7 +15,7 @@ def main():
         assert url.startswith(BASE+'/') and urlparse(url).hostname=='kestrelridgehealth.com'
         with urlopen(Request(url,headers={'User-Agent':'KRH-IndexNow-Submit/1.0'}),timeout=25) as r:
             assert r.status==200, f'URL not live: {url}'
-    with urlopen(BASE+'/'+key+'.txt',timeout=25) as r: assert r.read().decode().strip()==key
+    with urlopen(Request(BASE+'/'+key+'.txt',headers={'User-Agent':'KRH-IndexNow-Submit/1.0'}),timeout=25) as r: assert r.read().decode().strip()==key
     payload={'host':'kestrelridgehealth.com','key':key,'keyLocation':BASE+'/'+key+'.txt','urlList':urls}
     req=Request('https://api.indexnow.org/indexnow',data=json.dumps(payload).encode(),headers={'Content-Type':'application/json; charset=utf-8'},method='POST')
     with urlopen(req,timeout=30) as r:
