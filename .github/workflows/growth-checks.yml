@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: '22'
       - name: Verify reader feedback service
-        run: node --test tests/reader-feedback/*.test.mjs
+        run: node --test tests/reader-feedback/*.test.mjs tests/analytics/*.test.mjs
       - name: Validate reviewed sources and publishing gates
         run: |
           python3 -m unittest discover -s .growth -p 'test_*.py'
