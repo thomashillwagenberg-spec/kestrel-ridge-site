@@ -70,7 +70,11 @@ def main():
     if args.live:
         paths={'resources/index.html','sitemap.xml','feed.xml','assets/growth.css','assets/growth.js','assets/site-analytics.js','assets/site-analytics.css','assets/article-feedback.js','assets/article-feedback.css','privacy/index.html','downloads/session-readiness-worksheet.csv'}
         for a in articles: paths.update({a['slug']+'/index.html',a['image']['path'].lstrip('/')})
-        for path in sorted(paths):
+        # Wait for current HTML before requesting newly named assets.
+        # A pre-deployment asset request can cache a 404 at the delivery edge.
+        for path in sorted(paths, key=lambda path: (not path.endswith('.html'), path)):
+            if errors and not path.endswith('.html'):
+                continue
             url=BASE+'/'+path.removesuffix('index.html')
             try:
                 req=Request(url,headers={'User-Agent':'KRH-Publishing-Verification/1.0','Cache-Control':'no-cache'})
