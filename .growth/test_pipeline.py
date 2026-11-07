@@ -7,6 +7,19 @@ from check import deployment_bytes
 class PublishingGateTests(unittest.TestCase):
     def setUp(self):
         self.article=json.loads(next((ROOT/'.growth/articles').glob('*.json')).read_text())
+    def test_old_deployment_does_not_probe_new_assets(self):
+        from unittest.mock import patch
+        from urllib.error import HTTPError
+        import io
+        import check
+        requested=[]
+        def unavailable(request, **kwargs):
+            requested.append(request.full_url)
+            raise HTTPError(request.full_url,404,'Not deployed',None,None)
+        with patch('sys.argv',['check.py','--live']), patch('check.urlopen',side_effect=unavailable), patch('sys.stdout',new=io.StringIO()):
+            self.assertTrue(check.main())
+        self.assertTrue(requested)
+        self.assertFalse(any('/assets/' in url for url in requested))
     def test_retired_price_is_blocked(self):
         for price in ('$7,500','$7500','USD 7500','7500 dollars'):
             a=copy.deepcopy(self.article);a['body']+=' Phase Zero costs '+price
