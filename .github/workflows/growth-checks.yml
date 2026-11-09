@@ -2,6 +2,7 @@ name: KRH publishing checks
 on:
   push:
     branches: [main]
+  pull_request:
   schedule:
     - cron: '20 16 * * *'
   workflow_dispatch:
@@ -31,8 +32,17 @@ jobs:
       - name: Check committed generated output
         run: |
           python3 .growth/build.py
+          python3 scripts/gen_markdown.py --check
           git diff --exit-code
+      - name: Post-build browser check (all sitemap URLs, local build)
+        run: |
+          npm install --no-save --no-package-lock playwright@1
+          npx playwright install --with-deps chromium-headless-shell
+          python3 -m http.server 8830 -d . >/tmp/http.log 2>&1 &
+          sleep 2
+          node scripts/postbuild-check.mjs --base http://127.0.0.1:8830 --json /tmp/krh-postbuild.json
       - name: Verify deployed pages and assets
+        if: github.event_name != 'pull_request'
         run: |
           for attempt in 1 2 3 4 5; do
             if python3 .growth/check.py --live --report /tmp/krh-publishing-report.json; then
@@ -45,5 +55,7 @@ jobs:
         if: always()
         with:
           name: krh-publishing-report
-          path: /tmp/krh-publishing-report.json
+          path: |
+            /tmp/krh-publishing-report.json
+            /tmp/krh-postbuild.json
           retention-days: 30

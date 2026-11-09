@@ -39,20 +39,20 @@
   medical directors at multi-location eye clinics.
 
 ## Key pages
-- [Product](https://kestrelridgehealth.com/product): what the software does and how it works.
-- [Pilot (Phase Zero)](https://kestrelridgehealth.com/pilot): the fixed-fee pilot program.
-- [How It Works](https://kestrelridgehealth.com/how-it-works): the forecasting workflow step by step.
-- [Forecast technician workload by session](https://kestrelridgehealth.com/forecasting-technician-workload-by-session): the core method explained.
-- [Evidence](https://kestrelridgehealth.com/evidence): forecast accuracy against the fixed ratio, on synthetic data.
-- [Staffing ratios in ophthalmology](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios): why fixed ratios underperform.
-- [Technician shortage and session variance](https://kestrelridgehealth.com/technician-shortage-session-variance): the operational problem in detail.
-- [Same-day ophthalmology staffing](https://kestrelridgehealth.com/same-day-ophthalmology-staffing): handling same-day add-ons without ratio blowout.
-- [Call-off coverage for eye clinics](https://kestrelridgehealth.com/call-off-coverage-eye-clinics): planned float coverage vs. reactive scrambling.
-- [Governance](https://kestrelridgehealth.com/governance): prohibited uses and authority limits.
-- [FAQ](https://kestrelridgehealth.com/faq): what the company does and does not claim.
-- [About](https://kestrelridgehealth.com/about): company background and team.
-- [Resources](https://kestrelridgehealth.com/resources): reference material.
-- [Contact](https://kestrelridgehealth.com/contact): start a Phase Zero conversation.
+- [Product](https://kestrelridgehealth.com/product/): what the software does and how it works.
+- [Pilot (Phase Zero)](https://kestrelridgehealth.com/pilot/): the fixed-fee pilot program.
+- [How It Works](https://kestrelridgehealth.com/how-it-works/): the forecasting workflow step by step.
+- [Forecast technician workload by session](https://kestrelridgehealth.com/forecasting-technician-workload-by-session/): the core method explained.
+- [Evidence](https://kestrelridgehealth.com/evidence/): forecast accuracy against the fixed ratio, on synthetic data.
+- [Staffing ratios in ophthalmology](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/): why fixed ratios underperform.
+- [Technician shortage and session variance](https://kestrelridgehealth.com/technician-shortage-session-variance/): the operational problem in detail.
+- [Same-day ophthalmology staffing](https://kestrelridgehealth.com/same-day-ophthalmology-staffing/): handling same-day add-ons without ratio blowout.
+- [Call-off coverage for eye clinics](https://kestrelridgehealth.com/call-off-coverage-eye-clinics/): planned float coverage vs. reactive scrambling.
+- [Governance](https://kestrelridgehealth.com/governance/): prohibited uses and authority limits.
+- [FAQ](https://kestrelridgehealth.com/faq/): what the company does and does not claim.
+- [About](https://kestrelridgehealth.com/about/): company background and team.
+- [Resources](https://kestrelridgehealth.com/resources/): reference material.
+- [Contact](https://kestrelridgehealth.com/contact/): start a Phase Zero conversation.
 
 ## Honest scope
 - Pre-revenue. No live customer deployments disclosed.
@@ -61,3 +61,31 @@
 - The company does not guarantee staffing outcomes, cost savings, or improved patient throughput.
 - The forecast model is a planning tool; it does not replace clinical judgment or
   human staffing decisions.
+
+<!-- AUTOGEN:pages BEGIN (scripts/gen_markdown.py; do not edit by hand) -->
+## All pages (24, with Markdown copies)
+- [Ophthalmic Staffing Software](https://kestrelridgehealth.com/) ([markdown](https://kestrelridgehealth.com/index.md)): Phase Zero is a fixed-fee diagnostic that scores a session-level staffing forecast against your ratio. Data handling agreed with your privacy office before anything moves. Ask for a quote.
+- [Accessibility Statement](https://kestrelridgehealth.com/accessibility/) ([markdown](https://kestrelridgehealth.com/accessibility/index.md)): What we target, what we checked and when, the limitations we know about, and how to tell us about a barrier on this site.
+- [Ask About Phase Zero](https://kestrelridgehealth.com/contact/) ([markdown](https://kestrelridgehealth.com/contact/index.md)): Ask about Phase Zero, a fixed-fee diagnostic that scores a staffing forecast against your ratio. An export, not a new workflow. Data handling agreed with your privacy office before anything moves.
+- [Staffing Forecast Accuracy](https://kestrelridgehealth.com/evidence/) ([markdown](https://kestrelridgehealth.com/evidence/index.md)): Mean absolute error against the fixed technician-to-provider ratio and the historical mean, where the forecast is weakest, and the claims we will not make.
+- [Ophthalmic Staffing FAQ](https://kestrelridgehealth.com/faq/) ([markdown](https://kestrelridgehealth.com/faq/index.md)): What Kestrel Ridge Health does, how the forecast and the eight hard rules work, what Phase Zero costs and requires, the data posture, and current limitations.
+- [Forecasting Technician Workload by Session | Kestrel Ridge](https://kestrelridgehealth.com/forecasting-technician-workload-by-session/) ([markdown](https://kestrelridgehealth.com/forecasting-technician-workload-by-session/index.md)): How session-level workload forecasting differs from ratio staffing, what data it needs, what the ophthalmology literature supports, and where it still fails.
+- [Governance & Guardrails](https://kestrelridgehealth.com/governance/) ([markdown](https://kestrelridgehealth.com/governance/index.md)): Prohibited uses, the inputs kept out of the optimizer, the fairness report, and where human authority sits. The guardrails are the product, not add-ons.
+- [How Technician Forecasting Works](https://kestrelridgehealth.com/how-it-works/) ([markdown](https://kestrelridgehealth.com/how-it-works/index.md)): The ten layers from data intake through model validation, where machine learning stops, and where clinical rules take over. Ophthalmic staffing, explained.
+- [Ophthalmic Technician Staffing Ratios](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/) ([markdown](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/index.md)): The real vintage and meaning of the ophthalmic staffing benchmarks, which budget decisions they can settle, and which session-level questions they cannot.
+- [Pilot Design & Stopping Rules](https://kestrelridgehealth.com/pilot/) ([markdown](https://kestrelridgehealth.com/pilot/index.md)): Phase Zero runs on an operational export with a pre-registered measure, six stopping rules, and an expansion decision agreed upfront. Scoped to your clinic.
+- [Privacy Notice](https://kestrelridgehealth.com/privacy/) ([markdown](https://kestrelridgehealth.com/privacy/index.md)): How this website handles reader ratings, traffic measurement and contact inquiries.
+- [Technician Staffing Software for Eye Clinics | Kestrel Ridge](https://kestrelridgehealth.com/product/) ([markdown](https://kestrelridgehealth.com/product/index.md)): What a scheduler does with it: build a staffing plan, get refused an override that breaks a rule, stress-test a call-off, hand the lineage to an auditor.
+- [The Tech Shortage You Cannot Hire Your Way Out Of | KRH](https://kestrelridgehealth.com/technician-shortage-session-variance/) ([markdown](https://kestrelridgehealth.com/technician-shortage-session-variance/index.md)): Every published fix for the ophthalmic technician shortage is supply-side. The demand-side lever is session variance and allocation across sites. Here is how.
+- [Website Terms of Use](https://kestrelridgehealth.com/terms/) ([markdown](https://kestrelridgehealth.com/terms/index.md)): The terms that apply to using this website. The site is informational. It is not an offer, and nothing on it forms a contract.
+- [About Kestrel Ridge Health | Ophthalmic Staffing Software](https://kestrelridgehealth.com/about/) ([markdown](https://kestrelridgehealth.com/about/index.md)): Kestrel Ridge Health builds technician staffing software for multi-site ophthalmology clinics. Based in Cleveland, Ohio. Phase Zero is available now.
+- [Ophthalmic Staffing Resources](https://kestrelridgehealth.com/resources/) ([markdown](https://kestrelridgehealth.com/resources/index.md)): Research and guides on ophthalmic technician staffing, workload forecasting, and session variance for independent ophthalmology groups.
+- [Same-Day Ophthalmology Staffing](https://kestrelridgehealth.com/same-day-ophthalmology-staffing/) ([markdown](https://kestrelridgehealth.com/same-day-ophthalmology-staffing/index.md)): When a technician calls out same-day, most eye clinics have no systematic response. Here is how forecasting-based staffing changes that equation.
+- [Call-Off Coverage for Eye Clinics](https://kestrelridgehealth.com/call-off-coverage-eye-clinics/) ([markdown](https://kestrelridgehealth.com/call-off-coverage-eye-clinics/index.md)): When an ophthalmic technician calls out, eye clinics face a narrow decision window. Options, tradeoffs, and how forecasting changes the math.
+- [Before you buy a staffing forecast, check your session data](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-readiness/) ([markdown](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-readiness/index.md)): A practical readiness checklist and blank worksheet for independent ophthalmology practices evaluating technician workload forecasting.
+- [When screening schedules change, recheck technician coverage](https://kestrelridgehealth.com/screening-schedule-changes-technician-coverage/) ([markdown](https://kestrelridgehealth.com/screening-schedule-changes-technician-coverage/index.md)): A practical review for independent eye clinics changing a care pathway, prompted by the AAO’s November 4 journal update on screening timing.
+- [Adding an ophthalmologist? Check technician coverage first](https://kestrelridgehealth.com/adding-ophthalmologist-technician-coverage/) ([markdown](https://kestrelridgehealth.com/adding-ophthalmologist-technician-coverage/index.md)): Compare launch options, shared testing resources and cross-site coverage before opening a new physician’s appointment template.
+- [How to review an ophthalmology staffing forecast that misses](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-error-review/) ([markdown](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-error-review/index.md)): Check forecast error, session data and coverage decisions with a practical review process for independent ophthalmology practices.
+- [Ophthalmic technician training: plan the coverage first](https://kestrelridgehealth.com/ophthalmic-technician-training-coverage/) ([markdown](https://kestrelridgehealth.com/ophthalmic-technician-training-coverage/index.md)): A practical checklist for protecting learner and trainer time, checking supervision and keeping eye clinic sessions covered during technician training.
+- [Ten Patients Is Not a Staffing Plan](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/) ([markdown](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/index.md)): Kestrel Ridge Health LLC announces Phase Zero, a fixed-fee diagnostic that tests technician workload forecasting against a practice's own history.
+<!-- AUTOGEN:pages END -->

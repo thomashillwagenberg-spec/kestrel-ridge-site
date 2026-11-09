@@ -13,6 +13,13 @@
 
 set -euo pipefail
 
+# RETIRED 2026-11-09: this patched compiled build output (_next/ chunks) after the
+# build, which is how the exported pages drifted from their Next.js data and crashed
+# (React #412/#418). The form endpoint now lives in source config
+# (~/Developer/kestrel-ridge-source, brand config formEndpoint). Change it there and rebuild.
+echo "set-form-endpoint.sh is retired: set formEndpoint in the Next.js source and rebuild." >&2
+exit 1
+
 WORKER_ORIGIN="${1:-}"
 if [[ -z "$WORKER_ORIGIN" ]]; then
   echo "Error: supply the Worker origin as the first argument." >&2
