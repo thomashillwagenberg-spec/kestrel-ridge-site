@@ -1,7 +1,13 @@
 User-agent: *
 Allow: /
-
 # Block Next.js RSC payload files from being indexed
+Disallow: /*__next*
+Disallow: /*/index.txt
+
+# SuperSchema site scanner (current and legacy tokens): explicitly allowed
+User-agent: SuperSchemaBot
+User-agent: AEO-Schema-Generator
+Allow: /
 Disallow: /*__next*
 Disallow: /*/index.txt
 

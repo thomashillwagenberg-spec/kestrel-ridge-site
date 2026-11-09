@@ -4,3 +4,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com https://krh-contact-inquiries.thomas-ec7.workers.dev; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'
+
+/*.md
+  X-Robots-Tag: noindex
+  Content-Type: text/markdown; charset=utf-8
