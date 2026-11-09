@@ -118,6 +118,8 @@ The methodology is published, the comparisons show their work, and nothing moves
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
 
+Check your technician coverage risk in about 3 minutes, using your own sessions and staffing. [Start the risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/)
+
 ### Questions worth asking before a call
 
 Does this involve patient health information?

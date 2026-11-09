@@ -63,3 +63,9 @@ The best time to build a call-off coverage protocol is not the morning of a call
 That review is difficult to do without session-level data. The Kestrel Ridge Health Phase Zero diagnostic produces exactly that data: a session-by-session workload forecast that identifies which sessions are structurally fragile and why.
 
 [Contact us](https://kestrelridgehealth.com/contact/) to start a conversation about Phase Zero and what it would show for your group.
+
+## Technician coverage risk check
+
+Check your technician coverage risk in about 3 minutes. Answer a few questions about your own sessions and staffing, then decide whether a longer conversation is worth having.
+
+[Start the risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/)

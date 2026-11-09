@@ -67,3 +67,9 @@ That audit, done honestly, usually surfaces two or three sessions that represent
 If you want to work through that audit with an outside perspective, the Phase Zero diagnostic at Kestrel Ridge Health is one way to do it. It runs on your existing schedule data and produces a session-level workload report without requiring new systems or staff training.
 
 [Contact us](https://kestrelridgehealth.com/contact/) to start a conversation about Phase Zero.
+
+## Technician coverage risk check
+
+Check your technician coverage risk in about 3 minutes. Answer a few questions about your own sessions and staffing, then decide whether a longer conversation is worth having.
+
+[Start the risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/)

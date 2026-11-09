@@ -69,6 +69,12 @@ HELP US IMPROVE
 
 Your response helps us choose and improve future articles.
 
+## Technician coverage risk check
+
+Check your technician coverage risk in about 3 minutes. Answer a few questions about your own sessions and staffing, then decide whether a longer conversation is worth having.
+
+[Start the risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/)
+
 ## Does your session history support a useful test?
 
 Start with a conversation about your sites, your current planning method and what you can measure.
