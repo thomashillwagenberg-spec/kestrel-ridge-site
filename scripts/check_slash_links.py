@@ -8,7 +8,7 @@ root = Path(__file__).resolve().parent.parent
 pages = [l.replace("https://kestrelridgehealth.com/", "").strip("/") for l in
          re.findall(r"<loc>([^<]+)</loc>", (root / "sitemap.xml").read_text())]
 pages = [p for p in pages if p] + ["methodology"]
-rx = re.compile(r"""["'(]/(%s)["')]""" % "|".join(map(re.escape, sorted(pages, key=len, reverse=True))))
+rx = re.compile(r"""["'(]/(%s)\\?["')]""" % "|".join(map(re.escape, sorted(pages, key=len, reverse=True))))
 files = subprocess.run(["git", "ls-files", "-co", "--exclude-standard"], cwd=root, capture_output=True, text=True).stdout.split()
 bad = {}
 for f in files:
