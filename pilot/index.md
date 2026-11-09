@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/pilot/
 description: "Phase Zero runs on an operational export with a pre-registered measure, six stopping rules, and an expansion decision agreed upfront. Scoped to your clinic."
 ---
 
-$/$
-
-Skip to content
-
 The path to a decision
 
 ## Earn the next phase.
@@ -19,6 +15,24 @@ Agree on the gates before collecting results. Stop when the evidence says to sto
 3. 02Compare ### Controlled pilot 8–12 weeks, planning estimate Use paired sites and human-reviewed staffing. Measure a preselected primary outcome. Decision gate Expand only if the agreed criteria hold.
 
 Proposed evaluation design. No clinic pilot or real-world outcome is claimed.
+
+Step 1
+
+#### Privacy-scoped data handoff
+
+You export an approved slice of your own historical session data — no PHI, no new software, agreed with your privacy office before anything moves.
+
+Step 2
+
+#### Forecast vs. baseline comparison
+
+We train a model on that export and score its error against the staffing rule you already use — on your own data, not a demo dataset.
+
+Step 3
+
+#### Stop-or-continue decision
+
+If the model doesn’t clear the agreed threshold, the engagement ends — that finding is yours either way. If it does, we scope a fixed fee for what’s next.
 
 Phases
 
@@ -92,6 +106,28 @@ These are one-directional. There is no early stop for success, because staffing 
 
 Source  docs/pilot-evaluation-design.md, Stopping rules
 
+**The stop rule is the risk reversal.** We agree the pass/fail threshold before we see your data. If Phase Zero doesn’t clear it, the engagement stops there — you keep the finding, we don’t ask you to continue funding a model that isn’t working.
+
+### Know where you’ll be short — before it’s a crisis
+
+✓
+
+**The outcome:** a clear read on technician coverage gaps weeks out, scored against your own history, not a sales pitch.
+
+✓
+
+**Why you can trust the read:** the scoring method is written down and public — see the methodology link — and this is explicitly synthetic-stage, no real-clinic validation claimed yet.
+
+✓
+
+**How fast the first step is:** one scoped data export, no platform-wide commitment, no calendar to clear.
+
+✓
+
+**What it costs you to find out:** approved historical data you already have, no PHI, nothing new to learn — yet.
+
+[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[Read the methodology](https://kestrelridgehealth.com/methodology/)
+
 Agreed before the pilot begins, not argued afterwards
 
 Expansion
@@ -136,7 +172,3 @@ Source  docs/pilot-evaluation-design.md, Sample size reasoning
 The first conversation is about what history you can export and who owns the decision to stop.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
-
-$
-
-/$

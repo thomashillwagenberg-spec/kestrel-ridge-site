@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/
 description: "The real vintage and meaning of the ophthalmic staffing benchmarks, which budget decisions they can settle, and which session-level questions they cannot."
 ---
 
-$/$
-
-Skip to content
-
 ## The three numbers everyone quotes, and where they came from
 
 1. ### 4 to 8 FTE staff per FTE provider This range appears in  [CRSToday’s “What Is the Right Ratio?”](https://crstoday.com/articles/2016-oct/what-is-the-right-ratio)  (October 2016), attributed to American Academy of Ophthalmology benchmarking data and reported as the 25th to 75th percentile band. Two things about this number are routinely lost in retelling. First, it counts all staff, clinical and administrative, not technicians alone. If you are trying to size a technician team specifically, this range does not answer your question. Second, a 25th-to-75th-percentile band is a description of what practices do, not a statement of what works. Half of all practices sit outside it, and the article gives no evidence that the ones inside it perform better.
@@ -86,9 +82,3 @@ That third step is the one that changes the conversation, because it is measured
 - [How the forecast and the eight hard rules work](https://kestrelridgehealth.com/how-it-works/) The method behind the session-level forecast and the constraints the assignment step will not relax.
 - [Forecast accuracy against the fixed ratio](https://kestrelridgehealth.com/evidence/) Mean absolute error on the synthetic validation set, where the forecast is weakest, and the claims not made.
 - [Frequently asked questions](https://kestrelridgehealth.com/faq/) What Phase Zero costs and requires, the data posture, and the limitations stated plainly.
-
-**Kestrel Ridge Health Research Team** · Kestrel Ridge Health LLC, Cleveland, OH
-
-$
-
-/$

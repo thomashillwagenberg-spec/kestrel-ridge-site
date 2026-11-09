@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/contact/
 description: "Ask about Phase Zero, a fixed-fee diagnostic that scores a staffing forecast against your ratio. An export, not a new workflow. Data handling agreed with your privacy office before anything moves."
 ---
 
-$/$
-
-Skip to content
-
 Compose an enquiry →[Review the evidence first →](https://kestrelridgehealth.com/evidence/)[Who operates Kestrel Ridge Health →](https://kestrelridgehealth.com/faq/)
 
 Phase Zero
@@ -49,9 +45,3 @@ Leave an address
 ## Not ready to talk yet
 
 Leave an address and we will write once, when  Kestrel Ridge Health  opens to new clinics.
-
-Ask about Phase Zero
-
-$
-
-/$

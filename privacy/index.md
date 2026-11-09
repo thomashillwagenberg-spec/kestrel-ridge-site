@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/privacy/
 description: "How this website handles reader ratings, traffic measurement and contact inquiries."
 ---
 
-$/$
-
-Skip to content
-
 ## Who we are
 
 Kestrel Ridge Health LLC is an Ohio limited liability company based in Cleveland.  It operates this website and is responsible for the handling described here.  Cleveland, Ohio  is where the business is based; there is no office open to visitors. Our mailing address is P.O.  Box 18, Novelty, OH 44072. You can reach us at  email_off[hello@kestrelridgehealth.com](mailto:hello@kestrelridgehealth.com)/email_off.
@@ -87,7 +83,3 @@ This site sells software to eye care organizations. It is not directed to childr
 If what the site does changes, this notice changes first or at the same time, and the effective date below changes with it.
 
 Effective 6 November 2026.
-
-$
-
-/$

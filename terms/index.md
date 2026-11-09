@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/terms/
 description: "The terms that apply to using this website. The site is informational. It is not an offer, and nothing on it forms a contract."
 ---
 
-$/$
-
-Skip to content
-
 ## What this site is
 
 This site describes  Ophthalmic Workforce Operations , the technician staffing software from  Kestrel Ridge Health . It exists to explain what the software does, what has been measured, and on what data. It is information, not advice about your clinic, your staffing, your compliance obligations or your legal position. Do not act on it as though it were.
@@ -49,7 +45,3 @@ To the extent the law allows,  Kestrel Ridge Health  is not liable for any indir
 Questions about these terms go to  email_off[hello@kestrelridgehealth.com](mailto:hello@kestrelridgehealth.com)/email_off. How we handle what you send is described in the  [privacy notice](https://kestrelridgehealth.com/privacy/).
 
 Effective 8 September 2026.
-
-$
-
-/$

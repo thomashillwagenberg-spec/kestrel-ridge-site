@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/forecasting-technician-workload-by-session/
 description: "How session-level workload forecasting differs from ratio staffing, what data it needs, what the ophthalmology literature supports, and where it still fails."
 ---
 
-$/$
-
-Skip to content
-
 ## The unit of analysis is the whole argument
 
 Ratio staffing asks: how many technicians should this practice employ?
@@ -136,9 +132,3 @@ A practice that has done those three things is in a position to evaluate any ven
 - [How the forecast and the eight hard rules work](https://kestrelridgehealth.com/how-it-works/) The forecasting method, the assignment step, and the constraints the solver will not relax.
 - [Forecast accuracy against the fixed ratio](https://kestrelridgehealth.com/evidence/) The full synthetic validation result, where the forecast is weakest, and the claims not made.
 - [What Phase Zero measures on your own data](https://kestrelridgehealth.com/pilot/) The scope, the fixed fee, and the condition under which the engagement stops.
-
-**Kestrel Ridge Health Research Team** · Kestrel Ridge Health LLC, Cleveland, OH
-
-$
-
-/$

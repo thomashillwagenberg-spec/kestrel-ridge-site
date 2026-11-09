@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/product/
 description: "What a scheduler does with it: build a staffing plan, get refused an override that breaks a rule, stress-test a call-off, hand the lineage to an auditor."
 ---
 
-$/$
-
-Skip to content
-
 Session-level planning
 
 ## See the work  
@@ -175,9 +171,3 @@ Four things it is routinely mistaken for, and what it does instead.
 There is a documented export format and a scoring service that tests the model on sessions you export. Rows are parsed in memory and dropped. Nothing is written, and nothing is kept.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[What the forecast was measured against](https://kestrelridgehealth.com/evidence/)
-
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
-
-$
-
-/$

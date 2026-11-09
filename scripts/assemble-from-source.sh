@@ -79,7 +79,13 @@ print("kept _next files for plain pages:", len(saved))
 PY
 
 cd "$ROOT"
-python3 scripts/gen_markdown.py --root .
+# gen_markdown.py needs bs4; pick the first python3 that has it
+PY_MD=""
+for c in python3 /usr/bin/python3 /opt/homebrew/bin/python3; do
+  if command -v "$c" >/dev/null 2>&1 && "$c" -c 'import bs4' 2>/dev/null; then PY_MD="$c"; break; fi
+done
+[ -n "$PY_MD" ] || { echo "no python3 with bs4 found (pip install beautifulsoup4)" >&2; exit 1; }
+"$PY_MD" scripts/gen_markdown.py --root .
 # verification only (no --fix): the clean build must not need RSC length repair
 python3 scripts/check_rsc_payload.py
 # slash-link check reads `git ls-files`, so stage the new output first

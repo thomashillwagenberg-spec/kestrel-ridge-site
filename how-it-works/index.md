@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/how-it-works/
 description: "The ten layers from data intake through model validation, where machine learning stops, and where clinical rules take over. Ophthalmic staffing, explained."
 ---
 
-$/$
-
-Skip to content
-
 The product in 60 seconds
 
 ## Forecast the work.  
@@ -253,9 +249,3 @@ Source  docs/model-card.md, How the per-forecast explanation is computed
 The governance page covers who may override, who may approve, and what the system refuses to be used for.
 
 [Governance and guardrails](https://kestrelridgehealth.com/governance/)[What was measured, and on what data](https://kestrelridgehealth.com/evidence/)
-
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
-
-$
-
-/$

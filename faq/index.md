@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/faq/
 description: "What Kestrel Ridge Health does, how the forecast and the eight hard rules work, what Phase Zero costs and requires, the data posture, and current limitations."
 ---
 
-$/$
-
-Skip to content
-
 ## What Kestrel Ridge Health does
 
 ### What does Kestrel Ridge Health do?
@@ -109,9 +105,3 @@ Three questions worth asking, of this company and of any other in the category:
 1. ### Was the reported error measured on held-out sessions, or on the data the model was fit to? A model scored on its own training data will always look better than it is.
 2. ### What is the error distribution, not just the mean? A mean absolute error made up of consistent small misses is a different operational reality from one made up of mostly perfect forecasts and occasional very large ones.
 3. ### What is your own baseline? Compute what your current staffing rule would have predicted for the last twelve months of sessions and how far off it was. That number makes every vendor claim an arithmetic comparison rather than a story, and it costs nothing to produce.
-
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
-
-$
-
-/$

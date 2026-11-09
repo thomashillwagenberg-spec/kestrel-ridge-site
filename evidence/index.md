@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/evidence/
 description: "Mean absolute error against the fixed technician-to-provider ratio and the historical mean, where the forecast is weakest, and the claims we will not make."
 ---
 
-$/$
-
-Skip to content
-
 Research brief / synthetic data only
 
 ## A working pipeline.  
@@ -164,9 +160,3 @@ Verified  Measured 2026-09-07 by running the backend suite with a five second so
 The useful conversation is about what these figures become when they are recomputed on your own sessions.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[How the pilot is designed to stop](https://kestrelridgehealth.com/pilot/)
-
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
-
-$
-
-/$

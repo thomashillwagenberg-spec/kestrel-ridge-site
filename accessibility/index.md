@@ -4,10 +4,6 @@ url: https://kestrelridgehealth.com/accessibility/
 description: "What we target, what we checked and when, the limitations we know about, and how to tell us about a barrier on this site."
 ---
 
-$/$
-
-Skip to content
-
 ## The target
 
 We aim to meet  [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)  at level AA across this site. That is the standard we work to. It is not an audit result and no third party has certified this site against it.
@@ -39,7 +35,3 @@ We have not run a screen reader test with a user of assistive technology, and we
 Write to  email_off[hello@kestrelridgehealth.com](mailto:hello@kestrelridgehealth.com)/email_off  and say which page and what happened. If you cannot use the contact form, that address reaches the same person, and everything on this site is also available as plain text on request.
 
 Effective 8 September 2026.
-
-$
-
-/$
