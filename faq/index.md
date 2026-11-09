@@ -4,6 +4,10 @@ url: https://kestrelridgehealth.com/faq/
 description: "What Kestrel Ridge Health does, how the forecast and the eight hard rules work, what Phase Zero costs and requires, the data posture, and current limitations."
 ---
 
+$/$
+
+Skip to content
+
 ## What Kestrel Ridge Health does
 
 ### What does Kestrel Ridge Health do?
@@ -24,7 +28,7 @@ Staffing a clinic session from a headcount ratio treats every session with the s
 
 The system takes, per session, the appointment mix, the testing load, and complexity flags. It learns the relationship between those inputs and realized technician minutes from a clinic's own historical sessions, then applies that relationship to upcoming sessions.
 
-1. ### To illustrate what this produces in practice, two ten-patient sessions in the system's validation data forecast at 345 and 181 technician minutes respectively. That figure is measured on the system's synthetic validation set and has not been validated on real clinic data. It shows what a mix-aware forecast does with two sessions a ratio would treat identically; it is not evidence about any real clinic.
+1. ### To illustrate what this produces in practice, two ten-patient sessions in the system's validation data forecast at 354 (PRV027, 2 technicians) and 198 (PRV011, 1 technician) minutes respectively, dated 2026-09-08. That figure is measured on the system's synthetic validation set and has not been validated on real clinic data. It shows what a mix-aware forecast does with two sessions a ratio would treat identically; it is not evidence about any real clinic.
 
 ### How accurate is the forecast?
 
@@ -80,7 +84,7 @@ It is also worth noting that no vendor is "HIPAA certified" in any formal sense,
 
 ## Current limitations
 
-What are the system's current limitations?
+### What are the system's current limitations?
 
 Stated plainly, and these are the material ones:
 
@@ -105,6 +109,8 @@ Three questions worth asking, of this company and of any other in the category:
 1. ### Was the reported error measured on held-out sessions, or on the data the model was fit to? A model scored on its own training data will always look better than it is.
 2. ### What is the error distribution, not just the mean? A mean absolute error made up of consistent small misses is a different operational reality from one made up of mostly perfect forecasts and occasional very large ones.
 3. ### What is your own baseline? Compute what your current staffing rule would have predicted for the last twelve months of sessions and how far off it was. That number makes every vendor claim an arithmetic comparison rather than a story, and it costs nothing to produce.
+
+[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
 
 $
 

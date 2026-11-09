@@ -4,15 +4,17 @@ url: https://kestrelridgehealth.com/privacy/
 description: "How this website handles reader ratings, traffic measurement and contact inquiries."
 ---
 
+$/$
+
+Skip to content
+
 ## Who we are
 
 Kestrel Ridge Health LLC is an Ohio limited liability company based in Cleveland.  It operates this website and is responsible for the handling described here.  Cleveland, Ohio  is where the business is based; there is no office open to visitors. Our mailing address is P.O.  Box 18, Novelty, OH 44072. You can reach us at  email_off[hello@kestrelridgehealth.com](mailto:hello@kestrelridgehealth.com)/email_off.
 
 ## What this site collects
 
-Cloudflare adds its Web Analytics script to this website to measure page views and page performance. The script is served from static.cloudflareinsights.com. We do not add advertising pixels, session recording or a chat widget. Fonts are served from this domain.
-
-For information about Cloudflare Web Analytics and its data handling, see Cloudflare documentation and the privacy policy linked below.
+This site does not run Cloudflare Web Analytics. We do not add advertising pixels, session recording or a chat widget. Fonts are served from this domain.
 
 ## Optional Google Analytics
 
@@ -20,7 +22,7 @@ Google Analytics is optional. Its script loads only after you choose Allow analy
 
 Google receives technical information when your browser connects to its service and uses Analytics cookies to distinguish visits. Our tag disables Google signals and advertising personalization and sets Analytics cookie expiry to 180 days without extending it on each visit. We remember your allow or decline choice in browser local storage for 180 days. If browser storage is unavailable, your choice applies to the current page.
 
-You can change your choice using Analytics settings at the bottom of any page. Declining disables further measurement by this integration and removes the Analytics cookies accessible to this site. It does not remove information already received by Google. We review aggregate reports to improve useful content and navigation. Google processes Analytics information under its [privacy policy](https://policies.google.com/privacy). Our existing Cloudflare traffic measurement and voluntary reader ratings are separate and described in this notice.
+You can change your choice using Analytics settings at the bottom of any page. Declining disables further measurement by this integration and removes the Analytics cookies accessible to this site. It does not remove information already received by Google. We review aggregate reports to improve useful content and navigation. Google processes Analytics information under its [privacy policy](https://policies.google.com/privacy). Our voluntary reader ratings are described separately in this notice.
 
 ## Optional article ratings
 
@@ -56,10 +58,10 @@ If you send us business information in the course of an inquiry, we treat it as 
 
 ## Third parties involved in running this site
 
-These providers operate the website and communications infrastructure. Cloudflare also supplies traffic measurement and reader-rating storage. Resend processes contact and waitlist submissions for email delivery; see [Resend’s privacy policy](https://resend.com/legal/privacy-policy).
+These providers operate the website and communications infrastructure. Cloudflare also supplies reader-rating storage. Resend processes contact and waitlist submissions for email delivery; see [Resend’s privacy policy](https://resend.com/legal/privacy-policy).
 
 - **GitHub Pages**  hosts the files. GitHub receives standard server request information, which includes your IP address, when your browser asks for a page.  [GitHub privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
-- **Cloudflare**  provides DNS, website delivery, Web Analytics, contact form processing, and the Worker and D1 storage used for optional article ratings.  [Cloudflare privacy policy](https://www.cloudflare.com/privacypolicy/).
+- **Cloudflare**  provides DNS, website delivery, contact form processing, and the Worker and D1 storage used for optional article ratings.  [Cloudflare privacy policy](https://www.cloudflare.com/privacypolicy/).
 - **Microsoft** holds the mailbox. Kestrel Ridge Health uses Microsoft 365 (Outlook) to receive and store email sent to our address. A message you send to us is stored there in the ordinary way email is stored.  [Microsoft privacy statement](https://privacy.microsoft.com/en-us/privacystatement).
 
 Where information is handled. Kestrel Ridge Health is based in the United States, and so are GitHub, Cloudflare and Microsoft. Each of them may process the technical information described above, and any message you send us, in the United States or in other countries where they run their services, under the privacy terms linked above.

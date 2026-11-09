@@ -4,6 +4,10 @@ url: https://kestrelridgehealth.com/pilot/
 description: "Phase Zero runs on an operational export with a pre-registered measure, six stopping rules, and an expansion decision agreed upfront. Scoped to your clinic."
 ---
 
+$/$
+
+Skip to content
+
 The path to a decision
 
 ## Earn the next phase.

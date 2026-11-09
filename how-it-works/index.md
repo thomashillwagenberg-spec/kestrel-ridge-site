@@ -4,6 +4,10 @@ url: https://kestrelridgehealth.com/how-it-works/
 description: "The ten layers from data intake through model validation, where machine learning stops, and where clinical rules take over. Ophthalmic staffing, explained."
 ---
 
+$/$
+
+Skip to content
+
 The product in 60 seconds
 
 ## Forecast the work.  
@@ -17,6 +21,44 @@ Ophthalmic technician staffing software turns the patient schedule into a worklo
 4. 04 Human authority ### Let a person decide Review, override with a reason, approve and publish. Each change leaves a record.
 
 Current development stage: synthetic data only. A feasible plan is not a proven optimal plan.
+
+The four stages
+
+## Data in. Forecast. Validate. Publish.
+
+Each stage hands off to the next. The forecast, the rule validator and the human reviewer are kept visually and functionally separate.
+
+1
+
+Data in
+
+Sessions, roster, competencies
+
+Appointment counts and complexity flags, plus the technician roster, availability, competencies and eligible sites. No chart, diagnosis or note.
+
+2
+
+Forecast
+
+Predicted technician minutes
+
+A learned model estimates workload per session with a range. It outputs a number, never an assignment.
+
+3
+
+Eight-rule validation
+
+Solver assigns, validator re-checks
+
+A constraint solver proposes assignments; every one is re-checked against the eight hard rules. Anything that fails is refused and named, not bent.
+
+4
+
+Human publish
+
+A person approves before it is final
+
+By default a second person approves and publishes. Until then, there is no plan of record.
 
 ## Where learning stops
 
@@ -104,6 +146,88 @@ The solver runs under a time limit. On a full clinic day it returns a feasible p
 
 Source  backend/app/schemas.py, SOFT_OBJECTIVES
 
+In more detail
+
+## The eight hard rules and the ten-layer model
+
+Open any row for the full text. Nothing here is hidden from search or screen readers — these are standard HTML disclosure elements.
+
+Eight hard rules, never relaxed
+
+CompetencyHard rule
+
+Every required competency for the session is held by at least the minimum number of assigned technicians.
+
+AvailabilityHard rule
+
+The technician has an available shift covering the session window on that date.
+
+Site eligibilityHard rule
+
+The session site is in the technician's approved eligible sites.
+
+No double bookingHard rule
+
+A technician is assigned to at most one session per half-day.
+
+Travel feasibleHard rule
+
+If morning and afternoon sessions are at different sites, the travel time fits the gap and the technician is travel eligible.
+
+Weekly hoursHard rule
+
+Assigned hours plus already-assigned hours in the week do not exceed the technician's weekly cap.
+
+Minimum staffingHard rule
+
+Every session has at least one technician.
+
+Trainee supervisionHard rule
+
+A trainee is never the only technician in a session.
+
+Ten layers, data through validation
+
+01 · DataLayer
+
+Sites, providers, technicians, availability, sessions, appointments and historical assignments. No patient identifier, name, date of birth, diagnosis, medication or note. **The limit:** Today every row comes from the system's own generator. Phase Zero replaces it with your history.
+
+02 · Workload predictionLayer
+
+A gradient boosted regressor predicts technician minutes for one provider half-day from the appointment mix, complexity, subspecialty, site and half-day. **The limit:** The only learned component that produces a number a human acts on. It never names a person.
+
+03 · Prediction uncertaintyLayer
+
+Separate quantile models at p10 and p90, widened by a calibrated offset. **The limit:** A prediction interval for one session, not a confidence interval or a guarantee. One session in five is expected to land outside its band.
+
+04 · Hard constraintsLayer
+
+Eight rules written as readable text and checked by the solver. This is where machine learning stops. **The limit:** Never relaxed to improve a score. An unfillable session is reported with a shortfall, not filled by bending a rule.
+
+05 · Staffing assignmentLayer
+
+A constraint solver assigns technicians to sessions under the eight rules, with soft objectives for travel, home site, continuity and workload balance. **The limit:** Holds no learned parameters. Returns a feasible plan within a time limit, not a proven optimal one.
+
+06 · ExplanationLayer
+
+Per-session feature contributions for the forecast, and a plain-language reason on every assignment. **The limit:** A single-ordering attribution, not a Shapley value. The assignment rationale is post-hoc, not the solver's internal reasoning.
+
+07 · Human reviewLayer
+
+Every recommendation is overridable. An override names a technician and a reason, and is re-validated against all eight hard rules. **The limit:** An override that breaks a rule is refused with the failing checks named, and nothing is written.
+
+08 · Plan versioningLayer
+
+Overrides, replans and new plans create new versions with a parent. Nothing stored is rewritten. **The limit:** Rejection is terminal. A date has no plan of record until a human approves and publishes the new one.
+
+09 · Outcome and override feedbackLayer
+
+Intraday events, scenario state changes, replan differences, and plan-to-plan comparison against a fixed-ratio baseline. **The limit:** The baseline comparison is a simulation re-run over history, not a measured outcome.
+
+10 · Validation and governanceLayer
+
+Holdout evaluation against baselines, a fairness report, a model card, and an append-only hash-chained audit log. **The limit:** The holdout comes from the same generated data. The fairness report describes the historical process on synthetic data.
+
 Verification
 
 ## A validator that does not trust the solver
@@ -129,6 +253,8 @@ Source  docs/model-card.md, How the per-forecast explanation is computed
 The governance page covers who may override, who may approve, and what the system refuses to be used for.
 
 [Governance and guardrails](https://kestrelridgehealth.com/governance/)[What was measured, and on what data](https://kestrelridgehealth.com/evidence/)
+
+[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
 
 $
 

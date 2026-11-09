@@ -23,7 +23,7 @@ Plan technician staffing session by session. Forecast the minutes each session w
 
 **Phase Zero** is a fixed-fee diagnostic, scoped to your clinic. If the forecast does not beat the ratio you use today, the engagement stops there.
 
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
+[Ask about Phase Zero](https://kestrelridgehealth.com/contact/) [See how it's measured](https://kestrelridgehealth.com/evidence/)
 
 23.76 min Avg forecast error (synthetic)
 
@@ -61,6 +61,12 @@ minutes / 1 technician
 
 Synthetic forecasts for 2026-09-08, not validated on real clinic data. The fixed ratio asks for two technicians in both.
 
+Illustration, not a live forecast
+
+### What a session forecast looks like
+
+Every forecast carries a range, not a single number pretending to be exact. This diagram uses placeholder values to show the shape of the output; it is not a session from the dataset above.
+
 ![A hallway lined with exam rooms in a multi-site eye clinic](assets/p3.jpg)
 
 4 THE PEAK: the gate
@@ -74,6 +80,69 @@ The rules protect skills such as OCT, site approvals and weekly hour limits, and
 Who covers it?
 
 The rule names and the refusal wording are the system's own. This panel reproduces them and is not connected to a running system. Site eligibility and competency are two of eight hard constraints.
+
+Illustrative synthetic example — not connected to a running system
+
+### Every plan carries who approved it
+
+1. **Forecast scored**System · session PRV027 · 2026-09-08
+2. **Plan drafted**Scheduler · assigns two technicians
+3. **Override requested**Technician on call · reason logged automatically
+4. **Approved**Clinical lead · human sign-off, not automatic
+
+The system can recommend a plan and refuse an override that breaks a hard rule, the way the panel above does. It does not approve plans on its own: a named person does, and that step is what the log above reproduces.
+
+Synthetic validation
+
+### How the forecast was scored
+
+Synthetic **23.76 min** This forecast · avg. error, holdout set · 2026-09-08
+
+Synthetic **24.01 min** Plain regression · same sessions
+
+Synthetic **33.42 min** Provider-average spreadsheet · same sessions
+
+Synthetic **208.61 min** Fixed ratio floor · same sessions
+
+Figures come from the system's synthetic validation holdout, not validated on real clinic data. Session counts, denominators and the full methodology are published at [/evidence/ →](https://kestrelridgehealth.com/evidence/)
+
+Phase Zero
+
+### Three steps, and you can stop after any one
+
+1. **Scope the data with your privacy office** We agree what the export looks like, and whether it counts as protected health information in your hands, before anything moves.
+2. **Compare the forecast to your approved baselines** Your own session history, scored against the ratio or spreadsheet you already use — not against ours.
+3. **Stop, or talk about the next step** If the forecast does not beat your baseline, the engagement ends there and the finding is yours either way.
+
+The methodology is published, the comparisons show their work, and nothing moves until your privacy office signs off. The only ask right now is a conversation: no PHI changes hands, no platform to adopt, and no commitment past this step.
+
+[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
+
+### Questions worth asking before a call
+
+Does this involve patient health information?
+
+Not by default. Phase Zero runs on operational counts: session mix, complexity flags and realized technician minutes. Whether any of that counts as PHI in your hands, and how it is exported, is agreed with your privacy office before anything moves.
+
+What outcomes has this shown in a real clinic?
+
+None yet. The accuracy figures on this site come from a synthetic validation holdout, not from a live clinic. Phase Zero is the step that tests the forecast against your own history, and there are no customers yet.
+
+What does Phase Zero cost?
+
+It is a fixed-fee diagnostic, quoted after scoping your clinic and your data with your privacy office. There is no published rate card, because scope depends on site count and on how ready your data export is.
+
+Does it work across multiple sites?
+
+Site eligibility is one of the system's eight hard constraints, so multi-site clinics are the normal case. Scope and fee still depend on how many sites and how much history you bring to the scoping conversation.
+
+Can the system assign a technician without a person approving it?
+
+No. It can recommend a plan and refuse an override that breaks a hard rule, but a named person still approves the plan, and that approval is written to an append-only log.
+
+What happens if the forecast doesn't beat what we do today?
+
+The engagement stops there. The comparison is scored against the baseline you already use, and the finding is yours either way.
 
 close: arrival
 

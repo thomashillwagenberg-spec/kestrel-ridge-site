@@ -4,6 +4,10 @@ url: https://kestrelridgehealth.com/product/
 description: "What a scheduler does with it: build a staffing plan, get refused an override that breaks a rule, stress-test a call-off, hand the lineage to an auditor."
 ---
 
+$/$
+
+Skip to content
+
 Session-level planning
 
 ## See the work  
@@ -41,6 +45,34 @@ This demonstration reproduces two rule checks. It is not connected to the solver
 Choose a technician
 
 The reason appears here. Every choice keeps a person responsible for the decision.
+
+How it works, in three layers
+
+## Forecast. Validate. Approve.
+
+Every plan passes through three layers in order. None of them can skip ahead of the one before it.
+
+Layer 1 · Forecast
+
+Predicts workload, not people
+
+A model estimates technician minutes per session, with a range. It emits a number, never an assignment, and never ranks a technician.
+
+↓
+
+Layer 2 · Rule validator
+
+Checks every assignment against eight hard rules
+
+Competency, availability, site eligibility and five more. A proposed change that breaks one is refused, logged and named by rule — nothing is saved.
+
+↓
+
+Layer 3 · Human approval
+
+A person publishes the plan, not the system
+
+By default a second person approves before anything becomes final. A solo approval needs an acknowledgment and a reason, and it is recorded.
 
 The loop
 
@@ -87,6 +119,34 @@ Re-check all eight hard rules against the proposed change. If it breaks one, ref
 
 Source  backend/app/solver/validator.py; backend/tests/test_solver.py, test_override_breaking_site_eligibility_is_rejected
 
+See the refusal happen
+
+## Try an assignment that breaks a rule
+
+Illustrative synthetic example — not a live solver. No real clinic, session or technician data is used.
+
+Assign Dana R. to the 7:30 AM Westside session
+
+**Session:**
+
+Westside Clinic · 7:30 AM · Dr. Alvarez half-day
+
+**Proposed technician:**
+
+Dana R.
+
+**Reason given:**
+
+"covering a call-off"
+
+✖ Refused
+
+**Site eligibility.** Dana R. is not on the approved eligible-sites list for Westside Clinic. The hard rule is checked before any change is saved.
+
+Nothing is written. The plan is unchanged, and the refusal with the rule it broke is logged for audit.
+
+Source: backend/app/solver/validator.py · same check as the live override path.
+
 Where the record goes
 
 ## An auditor can reconstruct the day without asking anyone
@@ -115,6 +175,8 @@ Four things it is routinely mistaken for, and what it does instead.
 There is a documented export format and a scoring service that tests the model on sessions you export. Rows are parsed in memory and dropped. Nothing is written, and nothing is kept.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[What the forecast was measured against](https://kestrelridgehealth.com/evidence/)
+
+[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
 
 $
 

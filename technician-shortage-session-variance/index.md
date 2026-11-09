@@ -4,6 +4,10 @@ url: https://kestrelridgehealth.com/technician-shortage-session-variance/
 description: "Every published fix for the ophthalmic technician shortage is supply-side. The demand-side lever is session variance and allocation across sites. Here is how."
 ---
 
+$/$
+
+Skip to content
+
 ## The supply side is real, and it is not going to move quickly
 
 The scale of the constraint is well documented and worth stating precisely, because the numbers get inflated in retelling.
@@ -113,6 +117,8 @@ You probably cannot hire your way out of the technician shortage this year, and 
 - [What the product does](https://kestrelridgehealth.com/product/) The forecast, the assignment step, and the eight rules it will not relax, in operational terms.
 - [How the forecast and the eight hard rules work](https://kestrelridgehealth.com/how-it-works/) The method, the constraints, and where human approval sits in the sequence.
 - [Forecast accuracy against the fixed ratio](https://kestrelridgehealth.com/evidence/) The synthetic validation result in full, and the claims the company will not make.
+
+**Kestrel Ridge Health Research Team** · Kestrel Ridge Health LLC, Cleveland, OH
 
 $
 

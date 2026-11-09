@@ -4,6 +4,10 @@ url: https://kestrelridgehealth.com/accessibility/
 description: "What we target, what we checked and when, the limitations we know about, and how to tell us about a barrier on this site."
 ---
 
+$/$
+
+Skip to content
+
 ## The target
 
 We aim to meet  [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)  at level AA across this site. That is the standard we work to. It is not an audit result and no third party has certified this site against it.
