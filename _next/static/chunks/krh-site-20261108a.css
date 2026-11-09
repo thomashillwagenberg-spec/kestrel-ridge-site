@@ -325,7 +325,9 @@ details[open]>summary .kr-faq-chevron::after{opacity:0}
 @media (max-width:480px){
   .kr-faq-item>summary.kr-faq-summary{padding:.75rem 0;min-height:44px;}
   .kr-faq-item .kr-faq-q{font-size:1.0625rem;line-height:1.4;}
-  .kr-faq-answer p,.kr-faq-answer li{font-size:.9375rem;line-height:1.6;
+  .kr-faq-answer p,.kr-faq-answer li{font-size:.9375rem;line-height:1.6;}
+}
+
 /* === KRH MOBILE 4T — product & how-it-works mobile-only additions (2026-11-08) === */
 .kr-m-only{display:none}
 @media(max-width:767px){
