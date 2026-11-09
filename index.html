@@ -419,6 +419,7 @@
      at max-width:760px (see the matching display:block rule below).
      ================================================================== */
   .kr-m-only{display:none}
+  .kr-m-hero-link{display:none}
   .kr-h3{font-family:var(--sc-font-display);font-weight:600;
     font-size:clamp(1.3rem,5.6vw,1.7rem);line-height:1.15;margin:.4rem 0 .9rem}
 
@@ -590,6 +591,7 @@
     html:not(.kr-engine) .kr-hero-actions{flex-direction:column;align-items:flex-start;gap:.6rem}
     html:not(.kr-engine) .kr-hero-actions .kr-second{margin-left:0}
     html:not(.kr-engine) [data-sc-window="hero"] .kr-proof-strip{display:none}
+    html:not(.kr-engine) .kr-m-hero-link{display:inline-block;margin:.6rem 0 0}
 
     html:not(.kr-engine) .wl{max-width:none}
     html:not(.kr-engine) .wl__btn{flex:1 1 100%}
@@ -743,7 +745,7 @@
       <p class="kr-note kr-offer"><strong class="kr-pz">Phase Zero</strong> is a fixed-fee diagnostic, scoped to your clinic. If the forecast does not beat the ratio you use today, the engagement stops there.</p>
       <div class="kr-actions kr-hero-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
-        <a class="kr-second kr-m-only" style="display:inline-block;border:0;margin:0;padding:0" href="/evidence/">See how it's measured</a>
+        <a class="kr-second kr-m-hero-link" href="/evidence/">See how it's measured</a>
       </div>
       <div class="kr-proof-strip" aria-label="Synthetic validation results">
         <div class="kr-proof-strip__item">
