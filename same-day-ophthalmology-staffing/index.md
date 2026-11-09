@@ -18,7 +18,7 @@ Three structural features make same-day staffing harder in ophthalmology than in
 
 ### Credentialing requirements
 
-Ophthalmic medical technicians and ophthalmic technicians hold credentials that take 12 to 24 months to earn under direct clinical supervision. There is no informal substitute. A medical assistant from the general pool cannot perform a visual field test or operate a slit lamp. This means that when a credentialed technician is unavailable, the replacement must also be credentialed. The supply of same-day credentialed coverage is structurally small.
+Ophthalmic medical technicians and ophthalmic technicians hold credentials that require supervised clinical experience. There is no informal substitute. A medical assistant from the general pool cannot perform a visual field test or operate a slit lamp. This means that when a credentialed technician is unavailable, the replacement must also be credentialed. The supply of same-day credentialed coverage is structurally small.
 
 ### Patient preparation lead time
 

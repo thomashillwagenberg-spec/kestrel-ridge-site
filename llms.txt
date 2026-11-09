@@ -27,8 +27,7 @@
   demand before the schedule finalizes, so staffing decisions are data-driven.
 
 ## Phase Zero pilot offering
-- KRH's commercial offering is a fixed-fee Phase Zero diagnostic. For a defined
-  fee covering a defined scope, KRH works with one or two clinic sites to import
+- KRH's offering is a Phase Zero diagnostic with a defined scope. KRH works with one or two clinic sites to import
   historical scheduling data, map visit types to technician-time estimates, run
   the forecast model against past sessions, and report the gap between modeled
   staffing and actual staffing.
@@ -40,7 +39,7 @@
 
 ## Key pages
 - [Product](https://kestrelridgehealth.com/product/): what the software does and how it works.
-- [Pilot (Phase Zero)](https://kestrelridgehealth.com/pilot/): the fixed-fee pilot program.
+- [Pilot (Phase Zero)](https://kestrelridgehealth.com/pilot/): the proposed evaluation design for Phase Zero.
 - [How It Works](https://kestrelridgehealth.com/how-it-works/): the forecasting workflow step by step.
 - [Forecast technician workload by session](https://kestrelridgehealth.com/forecasting-technician-workload-by-session/): the core method explained.
 - [Evidence](https://kestrelridgehealth.com/evidence/): forecast accuracy against the fixed ratio, on synthetic data.
@@ -64,7 +63,7 @@
 
 <!-- AUTOGEN:pages BEGIN (scripts/gen_markdown.py; do not edit by hand) -->
 ## All pages (24, with Markdown copies)
-- [Ophthalmic Staffing Software](https://kestrelridgehealth.com/) ([markdown](https://kestrelridgehealth.com/index.md)): Phase Zero is a fixed-fee diagnostic that scores a session-level staffing forecast against your ratio. Data handling agreed with your privacy office before anything moves. Ask for a quote.
+- [Ophthalmic Staffing Software](https://kestrelridgehealth.com/) ([markdown](https://kestrelridgehealth.com/index.md)): Phase Zero is a diagnostic that scores a session-level staffing forecast against your current ratio, using your own history. Synthetic validation data only.
 - [Accessibility Statement](https://kestrelridgehealth.com/accessibility/) ([markdown](https://kestrelridgehealth.com/accessibility/index.md)): What we target, what we checked and when, the limitations we know about, and how to tell us about a barrier on this site.
 - [Ask About Phase Zero](https://kestrelridgehealth.com/contact/) ([markdown](https://kestrelridgehealth.com/contact/index.md)): Ask about Phase Zero, a fixed-fee diagnostic that scores a staffing forecast against your ratio. An export, not a new workflow. Data handling agreed with your privacy office before anything moves.
 - [Staffing Forecast Accuracy](https://kestrelridgehealth.com/evidence/) ([markdown](https://kestrelridgehealth.com/evidence/index.md)): Mean absolute error against the fixed technician-to-provider ratio and the historical mean, where the forecast is weakest, and the claims we will not make.
@@ -87,5 +86,5 @@
 - [Adding an ophthalmologist? Check technician coverage first](https://kestrelridgehealth.com/adding-ophthalmologist-technician-coverage/) ([markdown](https://kestrelridgehealth.com/adding-ophthalmologist-technician-coverage/index.md)): Compare launch options, shared testing resources and cross-site coverage before opening a new physician’s appointment template.
 - [How to review an ophthalmology staffing forecast that misses](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-error-review/) ([markdown](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-error-review/index.md)): Check forecast error, session data and coverage decisions with a practical review process for independent ophthalmology practices.
 - [Ophthalmic technician training: plan the coverage first](https://kestrelridgehealth.com/ophthalmic-technician-training-coverage/) ([markdown](https://kestrelridgehealth.com/ophthalmic-technician-training-coverage/index.md)): A practical checklist for protecting learner and trainer time, checking supervision and keeping eye clinic sessions covered during technician training.
-- [Ten Patients Is Not a Staffing Plan](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/) ([markdown](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/index.md)): Kestrel Ridge Health LLC announces Phase Zero, a fixed-fee diagnostic that tests technician workload forecasting against a practice's own history.
+- [Ten Patients Is Not a Staffing Plan](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/) ([markdown](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/index.md)): Kestrel Ridge Health LLC announces Phase Zero, a diagnostic that tests a staffing forecast on a practice's own history.
 <!-- AUTOGEN:pages END -->

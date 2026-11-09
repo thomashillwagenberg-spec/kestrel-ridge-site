@@ -1,7 +1,7 @@
 ---
 title: "Ophthalmic Staffing Software | Kestrel Ridge Health"
 url: https://kestrelridgehealth.com/
-description: "Phase Zero is a fixed-fee diagnostic that scores a session-level staffing forecast against your ratio. Data handling agreed with your privacy office before anything moves. Ask for a quote."
+description: "Phase Zero is a diagnostic that scores a session-level staffing forecast against your current ratio, using your own history. Synthetic validation data only."
 ---
 
 ![An ophthalmology exam room with a slit lamp and phoropter](assets/p1.jpg)
@@ -21,7 +21,7 @@ Different technician workload.
 
 Plan technician staffing session by session. Forecast the minutes each session will need, then staff it under eight rules the system does not relax, with a person approving every plan.
 
-**Phase Zero** is a fixed-fee diagnostic, scoped to your clinic. If the forecast does not beat the ratio you use today, the engagement stops there.
+**Phase Zero** is a diagnostic scoped to your clinic. If the forecast does not beat the ratio you use today, the engagement stops there.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/) [See how it's measured](https://kestrelridgehealth.com/evidence/)
 
@@ -29,7 +29,7 @@ Plan technician staffing session by session. Forecast the minutes each session w
 
 Privacy office Agrees data handling first
 
-Fixed fee Scoped diagnostic, no subscription
+Scoped per clinic Agreed in writing first
 
 2 the blindness
 
@@ -128,13 +128,13 @@ What outcomes has this shown in a real clinic?
 
 None yet. The accuracy figures on this site come from a synthetic validation holdout, not from a live clinic. Phase Zero is the step that tests the forecast against your own history, and there are no customers yet.
 
-What does Phase Zero cost?
+How is Phase Zero scoped?
 
-It is a fixed-fee diagnostic, quoted after scoping your clinic and your data with your privacy office. There is no published rate card, because scope depends on site count and on how ready your data export is.
+Scope depends on site count, data history and the evaluation you need. We agree it in writing before any work starts.
 
 Does it work across multiple sites?
 
-Site eligibility is one of the system's eight hard constraints, so multi-site clinics are the normal case. Scope and fee still depend on how many sites and how much history you bring to the scoping conversation.
+Site eligibility is one of the system's eight hard constraints, so multi-site clinics are the normal case. Scope still depends on how many sites and how much history you bring to the scoping conversation.
 
 Can the system assign a technician without a person approving it?
 
@@ -152,7 +152,7 @@ Every plan, override, refusal and approval goes to an append-only, hash-chained 
 
 Start with Phase Zero. It retrains on your own history and scores the forecast against the ratio you use today. If it does not win, the engagement stops and the finding is yours.
 
-Phase Zero is a fixed fee, scoped to your clinic. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.
+Phase Zero is scoped to your clinic. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/) email_off[hello@kestrelridgehealth.com](mailto:hello@kestrelridgehealth.com)/email_off
 

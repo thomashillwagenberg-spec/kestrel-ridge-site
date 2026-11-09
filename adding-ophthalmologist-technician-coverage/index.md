@@ -52,7 +52,7 @@ A new physician may have little local session history. I'd keep that uncertainty
 
 For practices considering a forecast, our [session data readiness guide](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-readiness/) covers consistent definitions and a fair comparison with the current spreadsheet. A forecast can help frame expected demand. A person still needs to decide whether the proposed plan is workable.
 
-KRH's published evaluation uses synthetic data. It doesn't establish how a new physician will work in your clinic or what expansion will save. [Phase Zero](https://kestrelridgehealth.com/pilot/) is a fixed-fee diagnostic scoped per clinic that tests the forecast on approved local history.
+KRH's published evaluation uses synthetic data. It doesn't establish how a new physician will work in your clinic or what expansion will save. [Phase Zero](https://kestrelridgehealth.com/pilot/) is a diagnostic scoped per clinic that tests the forecast on approved local history.
 
 I want the staffing discussion to happen while the appointment template can still be changed. The useful result is a launch plan with clear coverage, named dependencies and a way to learn from the first sessions.
 
@@ -61,7 +61,7 @@ I want the staffing discussion to happen while the appointment template can stil
 - [ESCRS: Structuring a Multi-Physician Practice in a Changing World](https://escrs.org/channels/eurotimes-articles/structuring-a-multi-physician-practice-in-a-changing-world) Published November 5, 2026; reports an earlier discussion of practice expansion, satellite offices and shared infrastructure. This motivates the original launch-review framework. Checked 2026-11-05.
 - [KRH: forecasting and assignment](https://kestrelridgehealth.com/how-it-works/) Workload forecasts are separate from assignment constraints, including competency, availability, travel and supervision; human approval remains required. Checked 2026-11-05.
 - [KRH: evidence limits](https://kestrelridgehealth.com/evidence/) Current published evaluation uses synthetic data and does not establish real-practice savings or outcomes. Checked 2026-11-05.
-- [KRH: Phase Zero scope](https://kestrelridgehealth.com/pilot/) Fixed-fee diagnostic scoped per clinic, using local history and agreed evaluation gates. Checked 2026-11-05.
+- [KRH: Phase Zero scope](https://kestrelridgehealth.com/pilot/) Diagnostic scoped per clinic, using local history and agreed evaluation gates. Checked 2026-11-05.
 
 HELP US IMPROVE
 

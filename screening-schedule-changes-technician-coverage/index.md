@@ -63,7 +63,7 @@ At KRH, the proposed workflow separates the estimate of session demand from the 
 
 If your practice is changing a pathway, I'd first check whether its history still describes the future sessions. Mark the change date and review the affected visit categories. Historical averages from the earlier workflow may need a fresh local test.
 
-KRH's published results use synthetic data. We haven't established staffing savings or performance at your clinic. [Phase Zero](https://kestrelridgehealth.com/pilot/) is a fixed-fee diagnostic scoped per clinic, with local evaluation and agreed gates for continuing.
+KRH's published results use synthetic data. We haven't established staffing savings or performance at your clinic. [Phase Zero](https://kestrelridgehealth.com/pilot/) is a diagnostic scoped per clinic, with local evaluation and agreed gates for continuing.
 
 I want the staffing decision to follow the work people can actually observe. A change in visit count gives us a reason to look. The session review gives us something to decide from.
 
@@ -73,7 +73,7 @@ I want the staffing decision to follow the work people can actually observe. A c
 - [FIRST-ROP original study abstract, University of Miami repository](https://scholarship.miami.edu/esploro/outputs/journalArticle/Validation-of-the-FIRST-ROP-Algorithm-at/991033053136902976) Retrospective comparison of screening strategies in a specific medium-risk infant cohort. The study was published earlier in 2026 and does not measure independent-practice technician staffing. Checked 2026-11-04.
 - [KRH forecasting and assignment process](https://kestrelridgehealth.com/how-it-works/) Company workflow separates workload prediction, constrained assignment and human approval. Checked 2026-11-04.
 - [KRH evidence and limitations](https://kestrelridgehealth.com/evidence/) Current company results are synthetic and do not establish real-clinic staffing outcomes. Checked 2026-11-04.
-- [KRH Phase Zero scope](https://kestrelridgehealth.com/pilot/) Fixed-fee diagnostic scoped per clinic with local evaluation gates. Checked 2026-11-04.
+- [KRH Phase Zero scope](https://kestrelridgehealth.com/pilot/) Diagnostic scoped per clinic with local evaluation gates. Checked 2026-11-04.
 
 HELP US IMPROVE
 

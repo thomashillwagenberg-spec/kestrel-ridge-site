@@ -62,7 +62,7 @@ The practice should agree on its thresholds before evaluating results. KRH's [pr
 
 I wouldn't turn this review into a ranking of technicians. KRH prohibits using its outputs for individual performance scoring, compensation or employment decisions. A workload miss needs an explanation about the model, records and operating conditions.
 
-[KRH's published evidence uses synthetic data](https://kestrelridgehealth.com/evidence/). It doesn't establish accuracy, savings or staffing outcomes in your practice. [Consistent session data](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-readiness/) and a fair local comparison are still needed. Phase Zero is a fixed-fee diagnostic scoped per clinic.
+[KRH's published evidence uses synthetic data](https://kestrelridgehealth.com/evidence/). It doesn't establish accuracy, savings or staffing outcomes in your practice. [Consistent session data](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-readiness/) and a fair local comparison are still needed. Phase Zero is a diagnostic scoped per clinic.
 
 I want the review to leave the scheduler with a clear answer about the next session. Keep the original prediction, document what can actually be compared, and record who decided whether to continue.
 
@@ -71,7 +71,7 @@ I want the review to leave the scheduler with a clear answer about the next sess
 - [NIST: AI Risk Management Framework Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) The 2023 voluntary framework supports ongoing monitoring and evaluation in deployment-like conditions. It does not prescribe this article’s clinic checklist. Checked 2026-11-06.
 - [NIST: Challenges to the Monitoring of Deployed AI Systems](https://www.nist.gov/news-events/news/2026/03/new-report-challenges-monitoring-deployed-ai-systems) Published March 9, 2026. Discusses distinct functionality, operational and human-factors monitoring questions. Background research, not same-day news. Checked 2026-11-06.
 - [KRH: Governance and prohibited uses](https://kestrelridgehealth.com/governance/) Realized cancellations and no-shows are excluded from forecast inputs. Individual performance scoring and employment uses are prohibited. Checked 2026-11-06.
-- [KRH: Pilot evaluation and stopping rules](https://kestrelridgehealth.com/pilot/) Proposed local evaluation compares baselines and specifies a rolling two-week forecast-error stopping rule. Phase Zero is fixed fee, scoped per clinic. No completed clinic pilot is claimed. Checked 2026-11-06.
+- [KRH: Pilot evaluation and stopping rules](https://kestrelridgehealth.com/pilot/) Proposed local evaluation compares baselines and specifies a rolling two-week forecast-error stopping rule. Phase Zero is scoped per clinic. No completed clinic pilot is claimed. Checked 2026-11-06.
 - [KRH: Current evidence limits](https://kestrelridgehealth.com/evidence/) Published evaluation uses synthetic data and does not establish local accuracy or real-practice outcomes. Checked 2026-11-06.
 
 HELP US IMPROVE
