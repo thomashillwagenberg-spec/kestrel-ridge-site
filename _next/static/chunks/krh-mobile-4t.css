@@ -1,0 +1,144 @@
+/* krh-mobile-4t.css — additive mobile + funnel styling for /pilot/ and /contact/.
+   Loaded alongside the compiled stylesheet; never edits it. Mobile-first
+   rules target 320–480px; wider breakpoints are untouched defaults. */
+
+/* ---------- Phase Zero commitment vs proposed-later-phases separation ---------- */
+.kr-phase-grid li {
+  position: relative;
+}
+.kr-phase-grid li:first-child {
+  border: 2px solid var(--color-primary, #1f3d3a);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background: rgba(31, 61, 58, 0.04);
+}
+.kr-phase-grid li:first-child::before {
+  content: "This is the commitment";
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-primary, #1f3d3a);
+  margin-bottom: 0.5rem;
+}
+.kr-phase-grid li:not(:first-child) {
+  opacity: 0.88;
+}
+.kr-phase-grid li:not(:first-child)::before {
+  content: "Proposed, not committed";
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted, #6b7280);
+  margin-bottom: 0.5rem;
+  border: 1px dashed currentColor;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+}
+
+/* ---------- Phase Zero 3-step scope strip (JS-inserted content) ---------- */
+.kr-p0-steps {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  margin: 1.5rem 0;
+}
+@media (min-width: 640px) {
+  .kr-p0-steps { grid-template-columns: repeat(3, 1fr); }
+}
+.kr-p0-step {
+  border: 1px solid var(--color-rule, #e3e3e0);
+  border-radius: 0.5rem;
+  padding: 1rem 1.125rem;
+  background: var(--color-card, #fff);
+}
+.kr-p0-step .kr-p0-step-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-primary, #1f3d3a);
+  letter-spacing: 0.04em;
+}
+.kr-p0-step h4 { margin: 0.375rem 0 0.25rem; font-size: 1rem; font-weight: 600; }
+.kr-p0-step p { margin: 0; font-size: 0.875rem; line-height: 1.5; color: var(--color-ink-muted, #6b7280); }
+.kr-p0-step + .kr-p0-arrow { display: none; }
+@media (min-width: 640px) {
+  .kr-p0-steps { position: relative; }
+}
+
+.kr-stop-rule-callout {
+  border-left: 3px solid var(--color-primary, #1f3d3a);
+  padding: 0.875rem 1.125rem;
+  background: rgba(31, 61, 58, 0.05);
+  border-radius: 0 0.375rem 0.375rem 0;
+  margin: 1.25rem 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+.kr-stop-rule-callout strong { color: var(--color-primary, #1f3d3a); }
+
+/* ---------- Hormozi value-equation CTA band ---------- */
+.kr-value-cta {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--color-secondary, #f4f4f1);
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .kr-value-cta { grid-template-columns: 1fr 1fr; align-items: start; padding: 2rem; }
+}
+.kr-value-cta h3 { font-size: 1.125rem; font-weight: 700; margin: 0 0 0.5rem; }
+.kr-value-row { display: flex; gap: 0.625rem; align-items: flex-start; margin-bottom: 0.625rem; }
+.kr-value-row .kr-value-icon {
+  flex: none; width: 1.5rem; height: 1.5rem; border-radius: 999px;
+  background: var(--color-primary, #1f3d3a); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;
+}
+.kr-value-row p { margin: 0; font-size: 0.875rem; line-height: 1.5; }
+.kr-value-cta-actions { display: flex; flex-direction: column; gap: 0.625rem; }
+@media (min-width: 480px) {
+  .kr-value-cta-actions { flex-direction: row; }
+}
+
+/* ---------- Mobile-first breakpoints 320–480px ---------- */
+@media (max-width: 480px) {
+  .kr-phase-grid { gap: 1rem; }
+  .kr-p0-step { padding: 0.875rem; }
+  .kr-value-cta { padding: 1.125rem; border-radius: 0.5rem; }
+  .kr-value-cta h3 { font-size: 1rem; }
+  .btn-primary { width: 100%; justify-content: center; }
+}
+@media (max-width: 360px) {
+  .kr-p0-steps { gap: 0.5rem; }
+  .kr-value-cta-actions { gap: 0.5rem; }
+}
+
+/* ---------- Form states (styling only — real submit/validate/success/
+   mailto-fallback/waitlist logic is the site's existing hydrated React
+   form in _next/static/chunks/12jttcpr0tj_9.js; these rules style its
+   real markup/attributes, they do not add a second form handler) ---------- */
+.field { transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease; }
+.field:focus-visible {
+  outline: none;
+  border-color: var(--color-primary, #1f3d3a);
+  box-shadow: 0 0 0 3px rgba(31, 61, 58, 0.18);
+}
+.field:-webkit-autofill,
+.field:autofill {
+  background-color: rgba(250, 240, 200, 0.35) !important;
+  box-shadow: 0 0 0 1000px rgba(250, 240, 200, 0.35) inset !important;
+}
+.field[aria-invalid="true"] {
+  border-color: #b3261e;
+  background-color: rgba(179, 38, 30, 0.03);
+}
+/* disabled = the real component's submitting state (button text already
+   switches to "Sending" / "Join the waitlist" via its own React state) */
+button.btn-primary:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
