@@ -81,7 +81,7 @@ Who covers it?
 
 The rule names and the refusal wording are the system's own. This panel reproduces them and is not connected to a running system. Site eligibility and competency are two of eight hard constraints.
 
-Illustrative synthetic example — not connected to a running system
+Illustrative synthetic example, not connected to a running system
 
 ### Every plan carries who approved it
 
@@ -111,7 +111,7 @@ Phase Zero
 ### Three steps, and you can stop after any one
 
 1. **Scope the data with your privacy office** We agree what the export looks like, and whether it counts as protected health information in your hands, before anything moves.
-2. **Compare the forecast to your approved baselines** Your own session history, scored against the ratio or spreadsheet you already use — not against ours.
+2. **Compare the forecast to your approved baselines** Your own session history, scored against the ratio or spreadsheet you already use, not against ours.
 3. **Stop, or talk about the next step** If the forecast does not beat your baseline, the engagement ends there and the finding is yours either way.
 
 The methodology is published, the comparisons show their work, and nothing moves until your privacy office signs off. The only ask right now is a conversation: no PHI changes hands, no platform to adopt, and no commitment past this step.

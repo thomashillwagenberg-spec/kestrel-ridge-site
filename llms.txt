@@ -20,8 +20,8 @@
 - Most eye clinics staff by a fixed technician-to-provider ratio (e.g., 2:1).
   That ratio ignores visit-type mix: cataract follow-ups vs. comprehensive exams
   vs. contact-lens fits require very different technician time.
-- When session mix shifts — adding surgical volume, opening a new site, onboarding
-  a new provider — a flat ratio over- or under-staffs. The result is unnecessary
+- When session mix shifts (adding surgical volume, opening a new site, onboarding
+  a new provider), a flat ratio over- or under-staffs. The result is unnecessary
   overtime, call-offs, or patient throughput bottlenecks.
 - KRH models each visit type's measured technician-minutes and forecasts session
   demand before the schedule finalizes, so staffing decisions are data-driven.
