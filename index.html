@@ -411,6 +411,72 @@
   .kr-poster{display:none}
 
   /* ==================================================================
+     MOBILE-ONLY STORYBOARD ADDITIONS (home-hero).
+     These blocks exist nowhere in the desktop worldflight and carry no
+     [data-sc-copy]/[data-sc-window] attributes, so the engine never sees
+     them and desktop rendering is untouched at any width above 760px.
+     Hidden by default; shown only under the no-engine phone composition
+     at max-width:760px (see the matching display:block rule below).
+     ================================================================== */
+  .kr-m-only{display:none}
+  .kr-h3{font-family:var(--sc-font-display);font-weight:600;
+    font-size:clamp(1.3rem,5.6vw,1.7rem);line-height:1.15;margin:.4rem 0 .9rem}
+
+  /* 3: compact workload forecast illustration */
+  .kr-fc__bar{position:relative;height:10px;border-radius:5px;
+    background:rgba(200,216,238,.16);margin:1.1rem 0 .6rem}
+  .kr-fc__range{position:absolute;top:0;bottom:0;border-radius:5px;
+    background:rgba(135,188,247,.4)}
+  .kr-fc__point{position:absolute;top:-4px;width:2px;height:18px;
+    background:var(--kr-sky)}
+  .kr-fc__scale{display:flex;justify-content:space-between;
+    font:600 .6875rem/1 var(--kr-mono);letter-spacing:.08em;
+    text-transform:uppercase;color:var(--sc-ink-soft)}
+
+  /* 5: human-approval timeline */
+  .kr-tl{list-style:none;margin:1.1rem 0 0;padding:0;
+    border-left:2px solid rgba(135,188,247,.35)}
+  .kr-tl li{position:relative;padding:0 0 1.1rem 1.15rem}
+  .kr-tl li::before{content:"";position:absolute;left:-5px;top:.3rem;
+    width:8px;height:8px;border-radius:50%;background:var(--kr-sky)}
+  .kr-tl li:last-child{padding-bottom:0}
+  .kr-tl b{display:block;font:600 .9375rem/1.3 var(--sc-font-text);margin:0 0 .2rem}
+  .kr-tl span{display:block;font:400 .8125rem/1.4 var(--kr-mono);color:var(--sc-ink-soft)}
+
+  /* 6: evidence cards */
+  .kr-ev__grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1.1rem 0 1rem}
+  .kr-ev__card{border:1px solid rgba(200,216,238,.22);padding:.9rem .85rem;min-width:0}
+  .kr-ev__badge{display:inline-block;font:700 .625rem/1 var(--kr-mono);
+    letter-spacing:.08em;text-transform:uppercase;color:var(--kr-navy);
+    background:var(--kr-sky);padding:.2rem .4rem;border-radius:3px;margin:0 0 .5rem}
+  .kr-ev__card b{display:block;font:600 1.25rem/1.1 var(--sc-font-text);margin:0 0 .35rem}
+  .kr-ev__card span{display:block;font:400 .75rem/1.4 var(--kr-mono);color:var(--sc-ink-soft)}
+
+  /* 7: Phase Zero stepper */
+  .kr-stepper__list{list-style:none;margin:1.1rem 0 1.2rem;padding:0;
+    display:flex;flex-direction:column;gap:1.1rem}
+  .kr-stepper__list li{display:flex;gap:.9rem;align-items:flex-start}
+  .kr-stepper__n{flex:0 0 auto;width:1.9rem;height:1.9rem;border-radius:50%;
+    border:1px solid var(--kr-sky);color:var(--kr-sky);
+    display:flex;align-items:center;justify-content:center;
+    font:700 .9375rem/1 var(--sc-font-text)}
+  .kr-stepper__list b{display:block;font:600 1rem/1.3 var(--sc-font-text);margin:0 0 .3rem}
+  .kr-stepper__list p{margin:0;font-size:.9375rem;line-height:1.5;color:var(--sc-ink-soft)}
+  .kr-stepper__pitch{margin-top:.2rem}
+
+  /* 8: objections accordion, plain <details>/<summary>: crawlable, no JS */
+  .kr-faq__item{border-top:1px solid rgba(200,216,238,.22);padding:1rem 0}
+  .kr-faq__item:last-child{border-bottom:1px solid rgba(200,216,238,.22)}
+  .kr-faq__item summary{cursor:pointer;font:600 1rem/1.4 var(--sc-font-text);
+    min-height:44px;display:flex;align-items:center;list-style:none}
+  .kr-faq__item summary::-webkit-details-marker{display:none}
+  .kr-faq__item summary::after{content:"+";margin-left:auto;font-weight:400;
+    color:var(--kr-sky);font-size:1.25rem}
+  .kr-faq__item[open] summary::after{content:"\2212"}
+  .kr-faq__item p{margin:.7rem 0 0;font-size:.9375rem;line-height:1.55;
+    color:var(--sc-ink-soft)}
+
+  /* ==================================================================
      NO ENGINE, ANY WIDTH.
      The phone block below carries these same structural rules, but it is
      wrapped in max-width:760px, so a desktop that never mounted the engine
@@ -516,12 +582,49 @@
     html:not(.kr-engine) .gate__row{flex-direction:column}
     html:not(.kr-engine) .gate__opt{flex:1 1 auto;text-align:left}
     html:not(.kr-engine) .split{grid-template-columns:1fr;gap:1.4rem}
+
+    /* Storyboard additions only ever appear here, phone + no-engine. */
+    html:not(.kr-engine) .kr-m-only{display:block;text-align:left;
+      padding:1.4rem 1.25rem;margin:2.75rem 0 0;border-top:1px solid rgba(200,216,238,.22)}
+    html:not(.kr-engine) .kr-ev__grid{grid-template-columns:1fr}
+    html:not(.kr-engine) .kr-hero-actions{flex-direction:column;align-items:flex-start;gap:.6rem}
+    html:not(.kr-engine) .kr-hero-actions .kr-second{margin-left:0}
+    html:not(.kr-engine) [data-sc-window="hero"] .kr-proof-strip{display:none}
+
     html:not(.kr-engine) .wl{max-width:none}
     html:not(.kr-engine) .wl__btn{flex:1 1 100%}
 
     /* The close carries the status line, the legal links and the address. */
     html:not(.kr-engine) [data-sc-window="finale"] .kr-fine{font-size:.75rem}
     html:not(.kr-engine) .kr-second--sm{display:inline-block}
+  }
+
+  /* --------------------------------------------------------------
+     Fine-grained phone breakpoints. The clamp() ramps above already
+     interpolate continuously from 320–480px; these are the explicit
+     checkpoints requested for QA (320/360/375/390/414/430/480) where
+     a couple of components need a concrete rather than fluid change. */
+  @media (max-width:320px){
+    html:not(.kr-engine) .kr-ev__badge{font-size:.5625rem}
+    html:not(.kr-engine) .kr-stepper__n{width:1.7rem;height:1.7rem;font-size:.8125rem}
+  }
+  @media (min-width:321px) and (max-width:360px){
+    html:not(.kr-engine) .kr-tl{border-left-width:2px}
+  }
+  @media (min-width:361px) and (max-width:375px){
+    html:not(.kr-engine) .kr-ev__card b{font-size:1.1875rem}
+  }
+  @media (min-width:376px) and (max-width:390px){
+    html:not(.kr-engine) .kr-faq__item summary{font-size:.9375rem}
+  }
+  @media (min-width:391px) and (max-width:414px){
+    html:not(.kr-engine) .kr-fc__bar{height:11px}
+  }
+  @media (min-width:415px) and (max-width:430px){
+    html:not(.kr-engine) .kr-stepper__list{gap:1.25rem}
+  }
+  @media (min-width:431px) and (max-width:480px){
+    html:not(.kr-engine) .kr-m-only{padding:1.4rem 1.5rem}
   }
 
   /* Desktop worldflight: keep the hero offer to one note plus the fixed
@@ -640,6 +743,7 @@
       <p class="kr-note kr-offer"><strong class="kr-pz">Phase Zero</strong> is a fixed-fee diagnostic, scoped to your clinic. If the forecast does not beat the ratio you use today, the engagement stops there.</p>
       <div class="kr-actions kr-hero-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
+        <a class="kr-second kr-m-only" style="display:inline-block;border:0;margin:0;padding:0" href="/evidence/">See how it's measured</a>
       </div>
       <div class="kr-proof-strip" aria-label="Synthetic validation results">
         <div class="kr-proof-strip__item">
@@ -686,6 +790,17 @@
       <p class="kr-note">Synthetic forecasts for 2026-09-08, not validated on real clinic data. The fixed ratio asks for two technicians in both.</p>
     </div>
 
+    <div class="kr-m-only" data-mob-step="3-forecast-illustration">
+      <p class="kr-eyebrow">Illustration, not a live forecast</p>
+      <h3 class="kr-h3">What a session forecast looks like</h3>
+      <div class="kr-fc__bar" aria-hidden="true">
+        <span class="kr-fc__range" style="left:28%;width:38%"></span>
+        <span class="kr-fc__point" style="left:51%"></span>
+      </div>
+      <div class="kr-fc__scale" aria-hidden="true"><span>Low</span><span>Likely</span><span>High</span></div>
+      <p class="kr-note">Every forecast carries a range, not a single number pretending to be exact. This diagram uses placeholder values to show the shape of the output; it is not a session from the dataset above.</p>
+    </div>
+
     <img class="kr-poster" src="assets/p3.jpg" alt="A hallway lined with exam rooms in a multi-site eye clinic" width="1920" height="1080" decoding="async">
 
     <!-- 4 THE PEAK: the gate -->
@@ -704,6 +819,100 @@
         <div class="gate__out" id="gateOut" role="status" aria-live="polite"></div>
       </div>
       <p class="kr-note">The rule names and the refusal wording are the system's own. This panel reproduces them and is not connected to a running system. Site eligibility and competency are two of eight hard constraints.</p>
+    </div>
+
+    <div class="kr-m-only" data-mob-step="5-approval-timeline">
+      <p class="kr-eyebrow">Illustrative synthetic example — not connected to a running system</p>
+      <h3 class="kr-h3">Every plan carries who approved it</h3>
+      <ol class="kr-tl">
+        <li><b>Forecast scored</b><span>System &middot; session PRV027 &middot; 2026-09-08</span></li>
+        <li><b>Plan drafted</b><span>Scheduler &middot; assigns two technicians</span></li>
+        <li><b>Override requested</b><span>Technician on call &middot; reason logged automatically</span></li>
+        <li><b>Approved</b><span>Clinical lead &middot; human sign-off, not automatic</span></li>
+      </ol>
+      <p class="kr-note">The system can recommend a plan and refuse an override that breaks a hard rule, the way the panel above does. It does not approve plans on its own: a named person does, and that step is what the log above reproduces.</p>
+    </div>
+
+    <div class="kr-m-only" data-mob-step="6-evidence">
+      <p class="kr-eyebrow">Synthetic validation</p>
+      <h3 class="kr-h3">How the forecast was scored</h3>
+      <div class="kr-ev__grid">
+        <div class="kr-ev__card">
+          <span class="kr-ev__badge">Synthetic</span>
+          <b>23.76 min</b>
+          <span>This forecast &middot; avg. error, holdout set &middot; 2026-09-08</span>
+        </div>
+        <div class="kr-ev__card">
+          <span class="kr-ev__badge">Synthetic</span>
+          <b>24.01 min</b>
+          <span>Plain regression &middot; same sessions</span>
+        </div>
+        <div class="kr-ev__card">
+          <span class="kr-ev__badge">Synthetic</span>
+          <b>33.42 min</b>
+          <span>Provider-average spreadsheet &middot; same sessions</span>
+        </div>
+        <div class="kr-ev__card">
+          <span class="kr-ev__badge">Synthetic</span>
+          <b>208.61 min</b>
+          <span>Fixed ratio floor &middot; same sessions</span>
+        </div>
+      </div>
+      <p class="kr-note">Figures come from the system's synthetic validation holdout, not validated on real clinic data. Session counts, denominators and the full methodology are published at <a href="/evidence/">/evidence/ &rarr;</a></p>
+    </div>
+
+    <div class="kr-m-only" data-mob-step="7-phase-zero-stepper">
+      <p class="kr-eyebrow">Phase Zero</p>
+      <h3 class="kr-h3">Three steps, and you can stop after any one</h3>
+      <ol class="kr-stepper__list">
+        <li>
+          <span class="kr-stepper__n" aria-hidden="true">1</span>
+          <div><b>Scope the data with your privacy office</b>
+            <p>We agree what the export looks like, and whether it counts as protected health information in your hands, before anything moves.</p></div>
+        </li>
+        <li>
+          <span class="kr-stepper__n" aria-hidden="true">2</span>
+          <div><b>Compare the forecast to your approved baselines</b>
+            <p>Your own session history, scored against the ratio or spreadsheet you already use &mdash; not against ours.</p></div>
+        </li>
+        <li>
+          <span class="kr-stepper__n" aria-hidden="true">3</span>
+          <div><b>Stop, or talk about the next step</b>
+            <p>If the forecast does not beat your baseline, the engagement ends there and the finding is yours either way.</p></div>
+        </li>
+      </ol>
+      <p class="kr-lede kr-stepper__pitch">The methodology is published, the comparisons show their work, and nothing moves until your privacy office signs off. The only ask right now is a conversation: no PHI changes hands, no platform to adopt, and no commitment past this step.</p>
+      <div class="kr-actions">
+        <a class="cta" href="/contact/">Ask about Phase Zero</a>
+      </div>
+    </div>
+
+    <div class="kr-m-only" data-mob-step="8-faq">
+      <h3 class="kr-h3">Questions worth asking before a call</h3>
+      <details class="kr-faq__item">
+        <summary>Does this involve patient health information?</summary>
+        <p>Not by default. Phase Zero runs on operational counts: session mix, complexity flags and realized technician minutes. Whether any of that counts as PHI in your hands, and how it is exported, is agreed with your privacy office before anything moves.</p>
+      </details>
+      <details class="kr-faq__item">
+        <summary>What outcomes has this shown in a real clinic?</summary>
+        <p>None yet. The accuracy figures on this site come from a synthetic validation holdout, not from a live clinic. Phase Zero is the step that tests the forecast against your own history, and there are no customers yet.</p>
+      </details>
+      <details class="kr-faq__item">
+        <summary>What does Phase Zero cost?</summary>
+        <p>It is a fixed-fee diagnostic, quoted after scoping your clinic and your data with your privacy office. There is no published rate card, because scope depends on site count and on how ready your data export is.</p>
+      </details>
+      <details class="kr-faq__item">
+        <summary>Does it work across multiple sites?</summary>
+        <p>Site eligibility is one of the system's eight hard constraints, so multi-site clinics are the normal case. Scope and fee still depend on how many sites and how much history you bring to the scoping conversation.</p>
+      </details>
+      <details class="kr-faq__item">
+        <summary>Can the system assign a technician without a person approving it?</summary>
+        <p>No. It can recommend a plan and refuse an override that breaks a hard rule, but a named person still approves the plan, and that approval is written to an append-only log.</p>
+      </details>
+      <details class="kr-faq__item">
+        <summary>What happens if the forecast doesn't beat what we do today?</summary>
+        <p>The engagement stops there. The comparison is scored against the baseline you already use, and the finding is yours either way.</p>
+      </details>
     </div>
 
 
