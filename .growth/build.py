@@ -37,7 +37,7 @@ def check_article(a):
     assert (ROOT / im['path'].lstrip('/')).is_file(), 'Missing article image'
     assert im['alt'] and im['caption'] and im['provenance'], 'Missing image provenance'
 
-NOSCRIPT_NAV = '<noscript><style>@media (max-width:767.98px){#mobile-nav[hidden]{display:block!important}button[aria-controls="mobile-nav"]{display:none!important}}</style></noscript>'
+NOSCRIPT_NAV = '<noscript><style>@layer base{@media (max-width:767.98px){#mobile-nav[hidden]{display:block!important}}}@media (max-width:767.98px){button[aria-controls="mobile-nav"]{display:none!important}}</style></noscript>'
 
 
 def build():
