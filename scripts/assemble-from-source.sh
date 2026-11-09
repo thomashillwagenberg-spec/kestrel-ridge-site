@@ -9,7 +9,7 @@
 #    __next.* RSC segment files; keeps non-Next files (index.md etc.)
 # 3. replaces 404.html and the whole _next/ directory, except files under
 #    _next/ that plain-HTML pages (built by .growth/build.py) still reference
-# 4. copies out/krh/ (stable, non-_next mobile assets)
+# 4. copies out/krh/ (stable, non-_next mobile assets) and merges out/downloads/
 # 5. regenerates .md copies and runs the RSC + slash-link checks (verify only)
 # Never hand-edit the output this produces; change the source and re-run.
 set -euo pipefail
@@ -70,6 +70,13 @@ for r in next_routes:
             shutil.copytree(f, dst, dirs_exist_ok=True)
         else:
             shutil.copy2(f, dst)
+
+# public/downloads from source (merge: plain-page downloads stay in place)
+if (out / "downloads").is_dir():
+    (root / "downloads").mkdir(exist_ok=True)
+    for f in (out / "downloads").iterdir():
+        if f.is_file():
+            shutil.copy2(f, root / "downloads" / f.name)
 
 shutil.copy2(out / "404.html", root / "404.html")
 shutil.rmtree(root / "krh", ignore_errors=True)

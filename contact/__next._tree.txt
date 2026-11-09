@@ -2,4 +2,4 @@
 :HL["/krh/krh-site-20261008a.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":{"n":"slug","t":"d","k":"contact","s":["technician-coverage-risk-check"]},"h":65600,"c":"$Q2"}]]
-0:{"b":"p0CAg2XO6TYDYowSBeDwy","t":{"t":{"s":"","h":131088,"c":"$Q1"}}}
+0:{"b":"UXx6db3YwWkxVBYMHH9wb","t":{"t":{"s":"","h":131088,"c":"$Q1"}}}
