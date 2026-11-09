@@ -113,3 +113,11 @@ You probably cannot hire your way out of the technician shortage this year, and 
 - [What the product does](https://kestrelridgehealth.com/product/) The forecast, the assignment step, and the eight rules it will not relax, in operational terms.
 - [How the forecast and the eight hard rules work](https://kestrelridgehealth.com/how-it-works/) The method, the constraints, and where human approval sits in the sequence.
 - [Forecast accuracy against the fixed ratio](https://kestrelridgehealth.com/evidence/) The synthetic validation result in full, and the claims the company will not make.
+
+Technician Coverage Risk Check
+
+## Check your technician coverage risk in about two minutes
+
+Nine questions about one typical session. You see a Low, Elevated or High band for six areas of technician coverage, the reason behind each, and steps you can take this week. Answers stay in your browser. No email needed.
+
+[Start the Risk Check](https://kestrelridgehealth.com/technician-coverage-risk-check/)[Or use the blank worksheet](https://kestrelridgehealth.com/downloads/technician-coverage-risk-check-worksheet.html)

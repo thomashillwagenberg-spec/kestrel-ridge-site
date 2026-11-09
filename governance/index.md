@@ -68,7 +68,7 @@ They are outcomes, not inputs. Nobody knows them when a forecast is made the day
 
 **Historical no-show and cancellation rates**
 
-The legitimate pre-session version was built and measured over seven seeds. It moved holdout error by 0.026 minutes against a 0.182 minute seed spread, which is noise, so it was reverted and is not in the shipped model.
+The legitimate pre-session version was built and measured on synthetic data over seven seeds. It moved holdout error by 0.026 minutes against a 0.182 minute seed spread, which is noise, so it was reverted and is not in the shipped model.
 
 **Technician assignments**
 
@@ -154,4 +154,4 @@ Phase Zero ingests per-session counts: appointment counts by type, a complexity 
 - Availability edits and intraday events are not confined by site scope, so a scoped account can still act at another site.
 - No drift monitoring and no recalibration schedule. A real deployment needs both.
 
-Source  docs/security-architecture.md; docs/hipaa-control-mapping.md
+Source  docs/security-architecture.md; docs/hipaa-control-mapping.md (HIPAA control mapping, readiness work, not certification)

@@ -1,7 +1,7 @@
 ---
 title: "Ask About Phase Zero | Kestrel Ridge Health"
 url: https://kestrelridgehealth.com/contact/
-description: "Ask about Phase Zero, a fixed-fee diagnostic that scores a staffing forecast against your ratio. An export, not a new workflow. Data handling agreed with your privacy office before anything moves."
+description: "Ask about Phase Zero, a diagnostic that scores a staffing forecast against your ratio. An export, not a new workflow. Data handling agreed with your privacy office before anything moves."
 ---
 
 Compose an enquiry →[Review the evidence first →](https://kestrelridgehealth.com/evidence/)[Who operates Kestrel Ridge Health →](https://kestrelridgehealth.com/faq/)
@@ -32,7 +32,7 @@ What to expect
 
 Phase Zero in brief
 
-A fixed-fee engagement. We train a forecast model on your historical sessions and compare its error against your current rule. For this step, data handling is agreed with your privacy office before anything moves. If the model does not beat your rule, that finding is yours and the engagement ends.
+A scoped engagement. We train a forecast model on your historical sessions and compare its error against your current rule. For this step, data handling is agreed with your privacy office before anything moves. If the model does not beat your rule, that finding is yours and the engagement ends.
 
 [Review the evidence →](https://kestrelridgehealth.com/evidence/)
 

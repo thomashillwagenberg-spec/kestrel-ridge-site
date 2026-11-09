@@ -142,7 +142,7 @@ Engineering
 
 ## What is actually tested
 
-The automated test suite runs  512  passing tests with   2  skipped, covering the solver, the eight hard constraints, override validation, plan lineage, the audit chain and the API contract. This is evidence about the software.
+As of 2026-09-07, the automated test suite ran  512  passing tests with   2  skipped, covering the solver, the eight hard constraints, override validation, plan lineage, the audit chain and the API contract. This is evidence about the software.
 
 **passing tests**
 

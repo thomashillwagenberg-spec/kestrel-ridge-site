@@ -14,7 +14,7 @@ These are not competing answers to one question. They are answers to two differe
 
 Consider the concrete case. Two sessions, ten patients each, same provider, same room count. Session A is postoperative cataract follow-up: short histories, refractions, pressures, brief exams. Session B is new and complex glaucoma: full histories, visual fields, OCT, pachymetry, gonioscopy prep, longer dilations, more counselling. A ratio sees two identical ten-patient sessions and staffs them identically. Anyone who has run a clinic knows they are not identical.
 
-1. ### 345 and 181 technician minutes Kestrel Ridge Health’s own model, measured on the system’s synthetic validation set and not validated on real clinic data, produces exactly this kind of split: two ten-patient sessions forecast at 345 and 181 technician minutes respectively. That figure is an illustration of what a forecast does with mix, not evidence about any real clinic.
+1. ### 354 and 198 technician minutes Kestrel Ridge Health’s own model, measured on the system’s synthetic validation set and not validated on real clinic data, produces exactly this kind of split: two ten-patient sessions forecast at 354 and 198 technician minutes respectively. That figure is an illustration of what a forecast does with mix, not evidence about any real clinic.
 
 ## What the ophthalmology literature actually establishes
 
@@ -70,7 +70,7 @@ It is forecast error against what you do today. If your current practice is to s
 
 What a synthetic result can and cannot support
 
-For illustration of what such a comparison looks like: Kestrel Ridge Health reports a mean absolute error of 23.76 minutes, against 24.01 for a linear regression with one coefficient per provider and 33.42 for a spreadsheet rule of patients times that provider’s average, all measured on the system’s synthetic validation set and none validated on real clinic data. A fixed technician-to-provider ratio scores 208.61 on the same sessions, a naive floor rather than the comparison that matters. Synthetic validation establishes that the method runs and that the model is about level with a plain regression on data generated to resemble clinic operations. It does not establish that either number will hold on a real schedule, and it should not be read as if it does. The same comparison run against a clinic’s own history is a different and much stronger claim, and it is the claim any practice should require before spending money.
+For illustration of what such a comparison looks like: Kestrel Ridge Health reports a mean absolute error of 23.76 minutes, against 24.01 for a linear regression with one coefficient per provider and 33.42 for a spreadsheet rule of patients times that provider’s average, all measured on the system’s synthetic validation set and none validated on real clinic data. A fixed technician-to-provider ratio scores 208.61 on the same sessions, a naive floor rather than the comparison that matters. Synthetic validation shows that the method runs and that the model is about level with a plain regression on data generated to resemble clinic operations. It does not show that either number will hold on a real schedule, and it should not be read as if it does. The same comparison run against a clinic’s own history is a different and much stronger claim, and it is the claim any practice should require before spending money.
 
 Two further questions to ask of any forecast number:
 
@@ -131,4 +131,12 @@ A practice that has done those three things is in a position to evaluate any ven
 
 - [How the forecast and the eight hard rules work](https://kestrelridgehealth.com/how-it-works/) The forecasting method, the assignment step, and the constraints the solver will not relax.
 - [Forecast accuracy against the fixed ratio](https://kestrelridgehealth.com/evidence/) The full synthetic validation result, where the forecast is weakest, and the claims not made.
-- [What Phase Zero measures on your own data](https://kestrelridgehealth.com/pilot/) The scope, the fixed fee, and the condition under which the engagement stops.
+- [What Phase Zero measures on your own data](https://kestrelridgehealth.com/pilot/) The scope and the condition under which the engagement stops.
+
+Technician Coverage Risk Check
+
+## Check your technician coverage risk in about two minutes
+
+Nine questions about one typical session. You see a Low, Elevated or High band for six areas of technician coverage, the reason behind each, and steps you can take this week. Answers stay in your browser. No email needed.
+
+[Start the Risk Check](https://kestrelridgehealth.com/technician-coverage-risk-check/)[Or use the blank worksheet](https://kestrelridgehealth.com/downloads/technician-coverage-risk-check-worksheet.html)

@@ -1,0 +1,5 @@
+:HL["/_next/static/chunks/3w-j_w8uo2xjz.css","style"]
+:HL["/krh/krh-site-20261108a.css","style"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"technician-coverage-risk-check","h":64,"c":"$Q2"}]]
+0:{"b":"p0CAg2XO6TYDYowSBeDwy","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

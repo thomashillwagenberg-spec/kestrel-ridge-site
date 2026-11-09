@@ -1,0 +1,9 @@
+/* Risk Check value-first CTA block (Next routes). */
+.kr-rc-cta{padding:2.5rem 1.25rem}
+.kr-rc-cta-box{max-width:72rem;margin:0 auto;border:1px solid var(--border,#dce4f2);border-left:4px solid var(--primary,#1a5bdb);border-radius:var(--radius,3px);background:var(--card,#fff);padding:1.5rem 1.5rem 1.75rem}
+.kr-rc-cta-eyebrow{margin:0 0 .5rem;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-foreground,#4a5f7e)}
+.kr-rc-cta h2{margin:0 0 .5rem;font-family:var(--font-serif,"Source Serif 4",ui-serif,Georgia,serif);font-size:1.5rem;line-height:1.25;color:var(--foreground,#0b2545)}
+.kr-rc-cta p.kr-rc-cta-body{margin:0 0 1.25rem;max-width:42rem;line-height:1.6;color:var(--muted-foreground,#4a5f7e)}
+.kr-rc-cta-actions{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;align-items:center}
+.kr-rc-cta-actions a.kr-rc-cta-secondary{color:var(--primary,#1a5bdb);text-decoration:underline;text-underline-offset:4px;font-size:.9375rem}
+@media (min-width:640px){.kr-rc-cta{padding:3rem 2rem}.kr-rc-cta-box{padding:2rem 2.25rem}}

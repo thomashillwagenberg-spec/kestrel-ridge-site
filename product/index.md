@@ -89,7 +89,7 @@ The moments worth seeing
 Each of these is built and covered by automated tests.
 
 1. 01Session Detail ### The system refuses an override and names the rule you broke Pick a technician the picker has marked blocked, give a reason, and submit. More detail The override is refused, nothing is stored, and the failing hard constraints come back by name, with the detail for each. Try a technician who is not blocked and the override is accepted, creating a new plan version whose parent is the one it replaced. An automated test confirms the refusal names the site eligibility rule.
-2. 02Session Detail ### Every assignment can be second-guessed Open the counterfactual for any assigned technician and the system names the next feasible alternative, then re-validates the swapped plan and reports the real metric differences rather than estimating them. More detail Runs on the same plan comparison and counterfactual checks.
+2. 02Session Detail ### Every assignment can be second-guessed Open the counterfactual for any assigned technician and the system names the next feasible alternative, then re-validates the swapped plan and reports the simulated metric differences on synthetic data rather than estimating them. More detail Runs on the same plan comparison and counterfactual checks.
 3. 03Scenario Lab ### Stress the roster before the day does Thirteen scenarios, two of them infeasible by design, applied as real state changes through the same machinery a live event uses. More detail Apply a technician call-off and read which checks on the current plan now fail, before deciding whether to reoptimize. Reset returns the date to its snapshot, and the reset is itself in the audit log. Thirteen scenarios verified in the scenario catalog.
 4. 04Optimization ### See which rule the solver ran out of room on Pass, warning or fail for each of the eight hard constraints, with a plain-language explanation and the sessions each one affects, plus the solver's own account of where it stopped and the diagnostics for every session left unresolved. More detail One check per rule, re-derived by the independent validator.
 5. 05Plan History ### Nothing is overwritten, and any two versions can be compared A version timeline built from plan lineage, with status, override reasons and what changed. More detail Compare any two versions, or compare a version against the fixed-ratio baseline staffed under the same eight rules and scored with the same metrics. Every override and replan keeps a link to the plan it replaced.
@@ -171,3 +171,11 @@ Four things it is routinely mistaken for, and what it does instead.
 There is a documented export format and a scoring service that tests the model on sessions you export. Rows are parsed in memory and dropped. Nothing is written, and nothing is kept.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[What the forecast was measured against](https://kestrelridgehealth.com/evidence/)
+
+Technician Coverage Risk Check
+
+## Check your technician coverage risk in about two minutes
+
+Nine questions about one typical session. You see a Low, Elevated or High band for six areas of technician coverage, the reason behind each, and steps you can take this week. Answers stay in your browser. No email needed.
+
+[Start the Risk Check](https://kestrelridgehealth.com/technician-coverage-risk-check/)[Or use the blank worksheet](https://kestrelridgehealth.com/downloads/technician-coverage-risk-check-worksheet.html)

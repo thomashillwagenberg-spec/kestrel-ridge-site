@@ -1,7 +1,7 @@
 ---
 title: "Ophthalmic Staffing FAQ | Kestrel Ridge Health"
 url: https://kestrelridgehealth.com/faq/
-description: "What Kestrel Ridge Health does, how the forecast and the eight hard rules work, what Phase Zero costs and requires, the data posture, and current limitations."
+description: "What Kestrel Ridge Health does, how the forecast and the eight hard rules work, what Phase Zero covers and requires, the data posture, and current limitations."
 ---
 
 ## What Kestrel Ridge Health does
@@ -28,9 +28,9 @@ The system takes, per session, the appointment mix, the testing load, and comple
 
 ### How accurate is the forecast?
 
-1. ### On the system's synthetic validation set, and not validated on real clinic data, the forecast has a mean absolute error of 23.76 minutes. On the same sessions a linear regression with one coefficient per provider scores 24.01 minutes and a spreadsheet rule of patients times that provider's average scores 33.42 minutes, so on synthetic data the model is about level with a plain regression and better than the spreadsheet rule. A fixed technician-to-provider ratio scores 208.61 minutes, which is the naive floor rather than the comparison that matters. Those comparisons are the honest way to read a forecasting number, because they measure the model against what a practice could do instead rather than against zero. They are also synthetic results. Synthetic validation establishes that the method runs and beats the baseline on data generated to resemble clinic operations. It does not establish that either figure will hold on a real schedule. Producing the same comparison on a clinic's own history is the purpose of Phase Zero.
+1. ### On the system's synthetic validation set, and not validated on real clinic data, the forecast has a mean absolute error of 23.76 minutes. On the same sessions a linear regression with one coefficient per provider scores 24.01 minutes and a spreadsheet rule of patients times that provider's average scores 33.42 minutes, so on synthetic data the model is about level with a plain regression and better than the spreadsheet rule. A fixed technician-to-provider ratio scores 208.61 minutes, which is the naive floor rather than the comparison that matters. Those comparisons are the honest way to read a forecasting number, because they measure the model against what a practice could do instead rather than against zero. They are also synthetic results. Synthetic validation shows the method runs and beats the baseline on synthetic data. It does not show performance on a real clinic. Producing the same comparison on a clinic's own history is the purpose of Phase Zero.
 
-## What Phase Zero costs and requires
+## What Phase Zero covers and requires
 
 ### What is Phase Zero?
 
@@ -38,9 +38,9 @@ Phase Zero is the first engagement. The clinic exports its historical operationa
 
 If the forecast does not beat the status quo, the engagement ends and the findings transfer to the clinic. The clinic keeps the analysis either way.
 
-### How is Phase Zero priced?
+### How is Phase Zero scoped?
 
-A fixed fee, scoped to your clinic once we see your data. Ask us for a quote. It is a fixed fee rather than an hourly or per-seat arrangement because the deliverable is a single defined comparison with a defined end.
+Scope is agreed in writing once we have seen what data your clinic can export.
 
 ### What does a clinic need to provide?
 
@@ -68,9 +68,9 @@ The distinction between a constraint and a warning matters operationally. A syst
 
 ### What is the data posture? Does patient data leave the clinic?
 
-Patient identifiers remain in the clinic's systems. Clients export operational counts, appointment types, test counts, complexity flags, and durations, and the system does not receive raw patient data. A forecast of technician minutes does not need a patient name, date of birth, or identified diagnosis to work.
+Patient identifiers remain in the clinic's systems. A clinic exports operational counts, appointment types, test counts, complexity flags, and durations, and the system does not receive raw patient data. A forecast of technician minutes does not need a patient name, date of birth, or identified diagnosis to work.
 
-Export preparation, including classification of what is and is not protected health information, is agreed with the client's privacy office before any data moves. Any later use of production PHI would be governed by a business associate agreement and a security review, and that has not occurred.
+Export preparation, including classification of what is and is not protected health information, is agreed with the clinic's privacy office before any data moves. Any later use of production PHI would be governed by a business associate agreement and a security review, and that has not occurred.
 
 ### Is the system HIPAA compliant or certified?
 

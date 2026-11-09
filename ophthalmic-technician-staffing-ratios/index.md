@@ -81,4 +81,12 @@ That third step is the one that changes the conversation, because it is measured
 
 - [How the forecast and the eight hard rules work](https://kestrelridgehealth.com/how-it-works/) The method behind the session-level forecast and the constraints the assignment step will not relax.
 - [Forecast accuracy against the fixed ratio](https://kestrelridgehealth.com/evidence/) Mean absolute error on the synthetic validation set, where the forecast is weakest, and the claims not made.
-- [Frequently asked questions](https://kestrelridgehealth.com/faq/) What Phase Zero costs and requires, the data posture, and the limitations stated plainly.
+- [Frequently asked questions](https://kestrelridgehealth.com/faq/) What Phase Zero covers and requires, the data posture, and the limitations stated plainly.
+
+Technician Coverage Risk Check
+
+## Check your technician coverage risk in about two minutes
+
+Nine questions about one typical session. You see a Low, Elevated or High band for six areas of technician coverage, the reason behind each, and steps you can take this week. Answers stay in your browser. No email needed.
+
+[Start the Risk Check](https://kestrelridgehealth.com/technician-coverage-risk-check/)[Or use the blank worksheet](https://kestrelridgehealth.com/downloads/technician-coverage-risk-check-worksheet.html)

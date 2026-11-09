@@ -249,3 +249,11 @@ Source  docs/model-card.md, How the per-forecast explanation is computed
 The governance page covers who may override, who may approve, and what the system refuses to be used for.
 
 [Governance and guardrails](https://kestrelridgehealth.com/governance/)[What was measured, and on what data](https://kestrelridgehealth.com/evidence/)
+
+Technician Coverage Risk Check
+
+## Check your technician coverage risk in about two minutes
+
+Nine questions about one typical session. You see a Low, Elevated or High band for six areas of technician coverage, the reason behind each, and steps you can take this week. Answers stay in your browser. No email needed.
+
+[Start the Risk Check](https://kestrelridgehealth.com/technician-coverage-risk-check/)[Or use the blank worksheet](https://kestrelridgehealth.com/downloads/technician-coverage-risk-check-worksheet.html)
