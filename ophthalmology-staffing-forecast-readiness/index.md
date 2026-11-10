@@ -8,7 +8,7 @@ Planning guide / Independent ophthalmology practices
 
 # Before you buy a staffing forecast, check your session data
 
-By Thomas Wagenberg · Kestrel Ridge Health · Published 2026-11-02 · Updated 2026-11-04
+By Thomas Wagenberg · Kestrel Ridge Health · Published 2026-11-02 · Updated 2026-11-04 · 6 minute read
 
 ![Illustration of a blank planning worksheet and closed laptop beside an ophthalmology exam room.](https://kestrelridgehealth.com/assets/session-readiness-editorial.jpg)
 

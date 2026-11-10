@@ -79,7 +79,7 @@ def build():
 <main id="main" class="growth"><article>
 <nav aria-label="Breadcrumb"><a href="/resources/">Resources</a> / Planning guide</nav>
 <p class="growth-label">{escape(a['category'])} / Independent ophthalmology practices</p>
-<h1>{escape(a['title'])}</h1><p class="growth-byline">By {escape(a.get('author','Kestrel Ridge Health'))} · Kestrel Ridge Health · Published <time datetime="{a['published']}">{a['published']}</time> · Updated {a['modified']}</p>
+<h1>{escape(a['title'])}</h1><p class="growth-byline">By {escape(a.get('author','Kestrel Ridge Health'))} · Kestrel Ridge Health · Published <time datetime="{a['published']}">{a['published']}</time> · Updated <time datetime="{a['modified']}">{a['modified']}</time> · {max(1, (len(re.sub('<[^>]+>', ' ', a['body']).split()) + 199) // 200)} minute read</p>
 <figure><img src="{im['path']}" alt="{escape(im['alt'])}" width="{im['width']}" height="{im['height']}" fetchpriority="high"><figcaption>{escape(im['caption'])}</figcaption></figure>
 <aside class="growth-answer" aria-label="Quick answer"><p class="growth-label">The starting point</p><p>{escape(a['answer'])}</p></aside>
 <div class="growth-copy">{a['body']}
@@ -95,7 +95,7 @@ def build():
 <nav class="story-breadcrumb" aria-label="Breadcrumb"><a href="/resources/">Resources</a><span>/</span>Practice operations</nav>
 <header class="story-hero"><div class="story-heading"><p class="growth-label">THE OPERATIONS NOTE / {dt.date.fromisoformat(a['published']).strftime('%d %b %Y').upper()}</p>
 <h1>{escape(a['title'])}</h1><p class="story-deck">{escape(a['deck'])}</p>
-<p class="growth-byline">{escape(a['author'])}<br>Kestrel Ridge Health · {max(1, (len(re.sub('<[^>]+>', ' ', a['body']).split()) + 199) // 200)} minute read</p></div>
+<p class="growth-byline">By {escape(a['author'])}<br>Kestrel Ridge Health · Published <time datetime="{a['published']}">{dt.date.fromisoformat(a['published']).strftime('%B %-d, %Y')}</time> · {max(1, (len(re.sub('<[^>]+>', ' ', a['body']).split()) + 199) // 200)} minute read</p></div>
 <figure><img src="{im['path']}" alt="{escape(im['alt'])}" width="{im['width']}" height="{im['height']}" fetchpriority="high"><figcaption>{escape(im['caption'])}</figcaption></figure></header>
 <aside class="story-takeaway"><p class="growth-label">THE PRACTICAL TAKEAWAY</p><p>{escape(a['answer'])}</p></aside>
 <div class="story-layout"><nav class="story-toc" aria-label="In this article"><p class="growth-label">IN THIS ARTICLE</p>{sections}<a class="story-toc-download" href="{escape(resource['url'])}">{escape(resource['label'])}</a></nav>
