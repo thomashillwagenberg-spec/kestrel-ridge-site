@@ -6,7 +6,7 @@ description: "When an ophthalmic technician calls out, eye clinics face a narrow
 
 ## The call-off problem in ophthalmology
 
-A call-off in ophthalmology is not a generic staffing problem. It is a credentialing problem with a short fuse. Ophthalmic technicians hold certifications that reflect 12 to 24 months of supervised clinical training. A general clinical substitute cannot step in. When a credentialed technician calls out, the replacement must also be credentialed, and the pool of available credentialed staff on any given morning is small.
+A call-off in ophthalmology is not a generic staffing problem. It is a credentialing problem with a short fuse. Ophthalmic technicians hold certifications that require supervised clinical experience. A general clinical substitute cannot step in. When a credentialed technician calls out, the replacement must also be credentialed, and the pool of available credentialed staff on any given morning is small.
 
 The time pressure compounds the credentialing constraint. Ophthalmic sessions require sequential pre-testing before any patient sees the provider. That pre-testing takes 15 to 30 minutes per patient depending on the session type. If a technician calls out an hour before the session starts, there is not time to find a locum, brief them on practice protocols, and maintain a normal patient flow. The session is already compromised before the first patient arrives.
 
@@ -63,3 +63,9 @@ The best time to build a call-off coverage protocol is not the morning of a call
 That review is difficult to do without session-level data. The Kestrel Ridge Health Phase Zero diagnostic produces exactly that data: a session-by-session workload forecast that identifies which sessions are structurally fragile and why.
 
 [Contact us](https://kestrelridgehealth.com/contact/) to start a conversation about Phase Zero and what it would show for your group.
+
+## Technician coverage risk check
+
+Check your technician coverage risk in about 3 minutes. Answer a few questions about your own sessions and staffing, then decide whether a longer conversation is worth having.
+
+[Start the risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/)

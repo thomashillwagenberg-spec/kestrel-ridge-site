@@ -64,7 +64,7 @@ For practices considering a local evaluation, I'd ask how training blocks and su
 
 KRH's [governance policy](https://kestrelridgehealth.com/governance/) prohibits using its outputs to score individual performance or make employment decisions. I'd keep learning progress in the practice's approved training process. Workload minutes shouldn't become a shortcut for judging a person.
 
-KRH's current evaluation uses [synthetic data](https://kestrelridgehealth.com/evidence/). It doesn't establish training benefits, savings or staffing results in your clinic. [Phase Zero](https://kestrelridgehealth.com/pilot/) is a fixed-fee diagnostic scoped per clinic, with local evaluation before proceeding.
+KRH's current evaluation uses [synthetic data](https://kestrelridgehealth.com/evidence/). It doesn't establish training benefits, savings or staffing results in your clinic. [Phase Zero](https://kestrelridgehealth.com/pilot/) is a diagnostic scoped per clinic, with local evaluation before proceeding.
 
 I want a training commitment to come with a workable coverage arrangement. Name the task, reserve the teaching time and agree what happens if the plan changes. Then the learner, trainer and scheduler are working from the same decision.
 
@@ -74,13 +74,19 @@ I want a training commitment to come with a workable coverage arrangement. Name 
 - [KRH: Assignment rules and limitations](https://kestrelridgehealth.com/how-it-works/) Published rules cover competency, availability and trainee supervision; a trainee cannot be the only assigned technician. The rule does not itself establish protected coaching time. Checked 2026-11-07.
 - [KRH: Governance boundaries](https://kestrelridgehealth.com/governance/) Workload outputs must not become individual performance scores or employment decisions. Checked 2026-11-07.
 - [KRH: Current evaluation evidence](https://kestrelridgehealth.com/evidence/) Published evaluation uses synthetic data and does not establish real-clinic outcomes. Checked 2026-11-07.
-- [KRH: Phase Zero and evaluation gates](https://kestrelridgehealth.com/pilot/) Phase Zero is fixed fee and scoped per clinic; local evaluation precedes later phases. No published price amount. Checked 2026-11-07.
+- [KRH: Phase Zero and evaluation gates](https://kestrelridgehealth.com/pilot/) Phase Zero is scoped per clinic; local evaluation precedes later phases. Checked 2026-11-07.
 
 HELP US IMPROVE
 
 ## Was this article useful?
 
 Your response helps us choose and improve future articles.
+
+## Technician coverage risk check
+
+Check your technician coverage risk in about 3 minutes. Answer a few questions about your own sessions and staffing, then decide whether a longer conversation is worth having.
+
+[Start the risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/)
 
 ## Does your session history support a useful test?
 

@@ -20,7 +20,7 @@ The staffing problem at that scale is not solved by hiring more. It is solved by
 
 Phase Zero is available now. It is a diagnostic engagement that runs on a clinic's existing schedule data. It produces a workload forecast by session type, identifies the sessions with the highest variance, and scores the forecast against the ratio you use today. Phase Zero does not require new software, integration work, or staff training to run.
 
-Groups that complete Phase Zero receive a written report and a structured recommendation for whether and how to proceed to a staffed schedule product. There is no automatic progression to a paid product. The diagnostic stands on its own.
+Groups that complete Phase Zero receive a written report and a structured recommendation for whether and how to proceed to a staffed schedule product. There is no automatic progression to a further engagement. The diagnostic stands on its own.
 
 ## Founders
 

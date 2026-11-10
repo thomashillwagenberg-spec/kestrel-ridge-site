@@ -108,7 +108,7 @@
   ]
 }
 </script>
-</head>
+<noscript><style>@layer base{@media (max-width:767.98px){#mobile-nav[hidden]{display:block!important}}}@media (max-width:767.98px){button[aria-controls="mobile-nav"]{display:none!important}}</style></noscript></head>
 <body class="flex min-h-full flex-col bg-background text-foreground">
   <a href="#main" class="sr-only rounded-sm bg-primary px-4 py-3 text-primary-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:inline-flex focus:min-h-11 focus:items-center">Skip to content</a>
 
@@ -125,6 +125,7 @@
         <a class="relative flex items-center whitespace-nowrap px-4 text-[0.9375rem] tracking-[-0.006em] no-underline transition-colors text-ink-muted hover:text-ink" href="/governance/">Governance</a>
         <a class="relative flex items-center whitespace-nowrap px-4 text-[0.9375rem] tracking-[-0.006em] no-underline transition-colors text-ink-muted hover:text-ink" href="/resources/">Resources</a>
         <a class="relative flex items-center whitespace-nowrap px-4 text-[0.9375rem] tracking-[-0.006em] no-underline transition-colors text-ink-muted hover:text-ink" href="/pilot/">Pilot</a>
+        <a class="relative flex items-center whitespace-nowrap px-4 text-[0.9375rem] tracking-[-0.006em] no-underline transition-colors text-ink-muted hover:text-ink" href="/technician-coverage-risk-check/">Risk Check</a>
         <a class="relative flex items-center whitespace-nowrap px-4 text-[0.9375rem] tracking-[-0.006em] no-underline transition-colors text-ink-muted hover:text-ink" href="/contact/">Contact</a>
       </nav>
       <button type="button" aria-expanded="false" aria-controls="mobile-nav" class="my-2 inline-flex min-h-11 items-center rounded-sm border border-input px-4 text-sm text-ink md:hidden">Menu</button>
@@ -137,6 +138,7 @@
         <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/governance/">Governance</a></li>
         <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/resources/">Resources</a></li>
         <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/pilot/">Pilot</a></li>
+        <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/technician-coverage-risk-check/">Risk Check</a></li>
         <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/contact/">Contact</a></li>
       </ul>
     </nav>
@@ -177,7 +179,7 @@
         <p>Three structural features make same-day staffing harder in ophthalmology than in most other outpatient specialties.</p>
 
         <h3>Credentialing requirements</h3>
-        <p>Ophthalmic medical technicians and ophthalmic technicians hold credentials that take 12 to 24 months to earn under direct clinical supervision. There is no informal substitute. A medical assistant from the general pool cannot perform a visual field test or operate a slit lamp. This means that when a credentialed technician is unavailable, the replacement must also be credentialed. The supply of same-day credentialed coverage is structurally small.</p>
+        <p>Ophthalmic medical technicians and ophthalmic technicians hold credentials that require supervised clinical experience. There is no informal substitute. A medical assistant from the general pool cannot perform a visual field test or operate a slit lamp. This means that when a credentialed technician is unavailable, the replacement must also be credentialed. The supply of same-day credentialed coverage is structurally small.</p>
 
         <h3>Patient preparation lead time</h3>
         <p>Ophthalmic appointments require pre-testing that runs in sequence before the provider sees the patient. If the session starts short-staffed, pre-testing backs up. That backup propagates through the session. A one-technician shortfall in a high-volume retina session can delay every patient by 15 to 30 minutes and, in the worst case, force rescheduling of patients who have already had their pupils dilated.</p>
@@ -210,6 +212,12 @@
         <p>That audit, done honestly, usually surfaces two or three sessions that represent most of the same-day risk. Building coverage protocols around those specific sessions is more tractable than trying to build a general solution.</p>
         <p>If you want to work through that audit with an outside perspective, the Phase Zero diagnostic at Kestrel Ridge Health is one way to do it. It runs on your existing schedule data and produces a session-level workload report without requiring new systems or staff training.</p>
         <p><a href="/contact/" class="text-primary underline underline-offset-4">Contact us</a> to start a conversation about Phase Zero.</p>
+
+        <aside class="mt-10 rounded-sm border border-rule bg-secondary/60 p-6" aria-labelledby="risk-check-title">
+          <h2 id="risk-check-title">Technician coverage risk check</h2>
+          <p>Check your technician coverage risk in about 3 minutes. Answer a few questions about your own sessions and staffing, then decide whether a longer conversation is worth having.</p>
+          <p class="mt-4"><a href="/technician-coverage-risk-check/" class="inline-flex min-h-11 items-center rounded-sm bg-primary px-5 text-sm font-semibold text-primary-foreground no-underline">Start the risk check</a></p>
+        </aside>
 
       </div>
     </div>
@@ -269,5 +277,5 @@
       </div>
     </div>
   </footer>
-<script src="/assets/site-analytics.js" defer></script></body>
+<script src="/assets/growth.js" defer></script><script src="/assets/site-analytics.js" defer></script></body>
 </html>

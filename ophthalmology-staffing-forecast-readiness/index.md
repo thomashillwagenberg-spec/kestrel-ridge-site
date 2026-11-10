@@ -78,7 +78,7 @@ If your current rule gives a headcount, keep it as a separate staffing compariso
 
 I want the decision rules agreed before the results come back. If the history can't support a useful comparison, we may need better measurement first. If the spreadsheet works just as well, I'd want to know that too.
 
-That's how I think about [Phase Zero at KRH](https://kestrelridgehealth.com/pilot/). It starts with local evaluation and agreed gates for continuing. The fixed fee and scope are worked out for the clinic.
+That's how I think about [Phase Zero at KRH](https://kestrelridgehealth.com/pilot/). It starts with local evaluation and agreed gates for continuing. The scope is worked out for the clinic.
 
 ## Keep the staffing decision with a person
 
@@ -98,7 +98,7 @@ I want a practice to know whether the forecast helps before it changes how peopl
 
 ## Sources and scope
 
-- [KRH: Phase Zero scope and evaluation gates](https://kestrelridgehealth.com/pilot/) Clinic-specific fixed fee, local evaluation, continuation gates and export review. Checked 2026-11-04.
+- [KRH: Phase Zero scope and evaluation gates](https://kestrelridgehealth.com/pilot/) Clinic-specific scope, local evaluation, continuation gates and export review. Checked 2026-11-04.
 - [KRH: forecasting and assignment process](https://kestrelridgehealth.com/how-it-works/) Workload forecasting is separate from constrained assignment and human approval. Checked 2026-11-04.
 - [Hyndman and Athanasopoulos: evaluating point forecast accuracy](https://otexts.com/fpp3/accuracy.html) Testing on observations excluded from training and interpreting mean absolute error in the units measured. Checked 2026-11-04.
 - [KRH: forecast comparisons and evidence limits](https://kestrelridgehealth.com/evidence/) The published synthetic evaluation includes a provider-average spreadsheet comparison. Checked 2026-11-04.
@@ -108,6 +108,12 @@ HELP US IMPROVE
 ## Was this article useful?
 
 Your response helps us choose and improve future articles.
+
+## Technician coverage risk check
+
+Check your technician coverage risk in about 3 minutes. Answer a few questions about your own sessions and staffing, then decide whether a longer conversation is worth having.
+
+[Start the risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/)
 
 ## Does your session history support a useful test?
 

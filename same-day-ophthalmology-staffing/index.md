@@ -18,7 +18,7 @@ Three structural features make same-day staffing harder in ophthalmology than in
 
 ### Credentialing requirements
 
-Ophthalmic medical technicians and ophthalmic technicians hold credentials that take 12 to 24 months to earn under direct clinical supervision. There is no informal substitute. A medical assistant from the general pool cannot perform a visual field test or operate a slit lamp. This means that when a credentialed technician is unavailable, the replacement must also be credentialed. The supply of same-day credentialed coverage is structurally small.
+Ophthalmic medical technicians and ophthalmic technicians hold credentials that require supervised clinical experience. There is no informal substitute. A medical assistant from the general pool cannot perform a visual field test or operate a slit lamp. This means that when a credentialed technician is unavailable, the replacement must also be credentialed. The supply of same-day credentialed coverage is structurally small.
 
 ### Patient preparation lead time
 
@@ -67,3 +67,9 @@ That audit, done honestly, usually surfaces two or three sessions that represent
 If you want to work through that audit with an outside perspective, the Phase Zero diagnostic at Kestrel Ridge Health is one way to do it. It runs on your existing schedule data and produces a session-level workload report without requiring new systems or staff training.
 
 [Contact us](https://kestrelridgehealth.com/contact/) to start a conversation about Phase Zero.
+
+## Technician coverage risk check
+
+Check your technician coverage risk in about 3 minutes. Answer a few questions about your own sessions and staffing, then decide whether a longer conversation is worth having.
+
+[Start the risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/)

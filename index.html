@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ophthalmic Staffing Software | Kestrel Ridge Health</title>
-<meta name="description" content="Phase Zero is a fixed-fee diagnostic that scores a session-level staffing forecast against your ratio. Data handling agreed with your privacy office before anything moves. Ask for a quote.">
+<meta name="description" content="Phase Zero is a diagnostic that scores a session-level staffing forecast against your current ratio, using your own history. Synthetic validation data only.">
 <link rel="canonical" href="https://kestrelridgehealth.com/"><link rel="alternate" type="text/markdown" href="https://kestrelridgehealth.com/index.md"/>
 <meta name="theme-color" content="#0B2545">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kestrelridgehealth.com/">
 <meta property="og:title" content="Ophthalmic Staffing Software | Kestrel Ridge Health">
-<meta property="og:description" content="Phase Zero is a fixed-fee diagnostic that scores a session-level staffing forecast against your ratio. Keep the finding. Data handling agreed with your privacy office before anything moves. Ask for a quote.">
+<meta property="og:description" content="Phase Zero is a diagnostic that scores a session-level staffing forecast against your current ratio, using your own history. Synthetic validation data only.">
 <meta property="og:image" content="https://kestrelridgehealth.com/assets/p1.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/mark.png">
@@ -39,7 +39,7 @@
         "addressRegion": "OH",
         "addressCountry": "US"
       },
-      "description": "Technician demand forecasting software for multisite ophthalmology practices. Forecasts session-level technician workload from schedule data and generates human-approved staffing recommendations. Phase Zero is a fixed-fee operational diagnostic. Synthetic-data validation; seeking first pilot partners."
+      "description": "Technician demand forecasting software for multisite ophthalmology practices. Forecasts session-level technician workload from schedule data and generates human-approved staffing recommendations. Phase Zero is an operational diagnostic scoped per clinic. Synthetic-data validation; seeking first pilot partners."
     },
     {
       "@type": "WebSite",
@@ -55,7 +55,7 @@
       "@id": "https://kestrelridgehealth.com/kestrelridgehealth.com/#webpage",
       "url": "https://kestrelridgehealth.com/",
       "name": "Ophthalmic Staffing Software | Kestrel Ridge Health",
-      "description": "Phase Zero is a fixed-fee diagnostic that scores a session-level staffing forecast against your ratio. Data handling agreed with your privacy office before anything moves.",
+      "description": "Phase Zero is a diagnostic that scores a session-level staffing forecast against your current ratio, using your own history. Synthetic validation data only.",
       "inLanguage": "en-US",
       "isPartOf": {
         "@id": "https://kestrelridgehealth.com/#website"
@@ -670,6 +670,29 @@
     .gate__deny,.shake{animation:none}
     .cta{transition:none}
   }
+
+  /* ------------------------------------------- phone header (plain pages)
+     Same markup and labels as the inner-page header (.kr-site-header):
+     a Menu toggle controlling #mobile-nav. Desktop keeps the fixed .kr-util
+     row, so nothing here applies above 760px. */
+  .kr-home-header .kr-menu,.kr-home-header #mobile-nav{display:none}
+  @media (max-width:760px){
+    html:not(.kr-engine) .kr-home-header{display:flex;flex-wrap:wrap;align-items:center;
+      justify-content:space-between;background:#04101f;border-bottom:1px solid #24415d}
+    html:not(.kr-engine) .kr-home-header .kr-util{display:none!important}
+    .kr-home-header .kr-menu{display:inline-flex;align-items:center;min-height:44px;
+      margin:.5rem 1.25rem .5rem 0;padding:0 1rem;border:1px solid #526a84;border-radius:2px;
+      background:none;color:#fff;font:400 .875rem/1 var(--sc-font-text);cursor:pointer}
+    .kr-home-header #mobile-nav:not([hidden]){display:block;flex-basis:100%;border-top:1px solid #24415d}
+    .kr-home-header #mobile-nav ul{list-style:none;margin:0;padding:.5rem 1.25rem}
+    .kr-home-header #mobile-nav li{border-bottom:1px solid #24415d}
+    .kr-home-header #mobile-nav li:last-child{border-bottom:0}
+    .kr-home-header #mobile-nav a{display:flex;align-items:center;min-height:44px;padding:.25rem 0;
+      color:#d3e2f4;text-decoration:none;font:400 .9375rem/1.3 var(--sc-font-text)}
+    .kr-home-header #mobile-nav a:hover{color:#fff}
+  }
+  .kr-riskcheck{margin-top:1rem}
+  .kr-riskcheck a{color:var(--kr-sky);text-underline-offset:4px}
 </style>
 <!-- Microsoft Clarity. Set CLARITY_PROJECT_ID below once signup at
      clarity.microsoft.com is complete; empty, it does nothing. When it goes
@@ -685,10 +708,11 @@
   })(window, document, "clarity", "script", id);
 })("");
 </script>
+<noscript><style>@media (max-width:760px){.kr-home-header #mobile-nav[hidden]{display:block!important;flex-basis:100%}.kr-home-header .kr-menu{display:none!important}}</style></noscript>
 </head>
 <body>
 
-<header>
+<header class="kr-home-header">
 <a class="brand" href="#main">
   <!-- alt is empty on purpose: .brand__name repeats the company name in text
        inside this same link, so a description here is announced twice. -->
@@ -696,14 +720,28 @@
   <span class="brand__name">Kestrel Ridge Health</span>
 </a>
 
-<nav class="kr-util" aria-label="Site">
+<nav class="kr-util" aria-label="Primary">
   <a href="/product/">Product</a>
   <a href="/how-it-works/">How it works</a>
   <a href="/evidence/">Evidence</a>
   <a href="/governance/">Governance</a>
-  <a href="/pilot/">Pilot</a>
   <a href="/resources/">Resources</a>
+  <a href="/pilot/">Pilot</a>
+  <a href="/technician-coverage-risk-check/">Risk Check</a>
   <a href="/contact/">Contact</a>
+</nav>
+<button type="button" aria-expanded="false" aria-controls="mobile-nav" class="kr-menu my-2 inline-flex min-h-11 items-center rounded-sm border border-input px-4 text-sm text-ink md:hidden">Menu</button>
+<nav id="mobile-nav" aria-label="Primary" hidden="" class="border-t border-rule md:hidden">
+  <ul class="mx-auto max-w-6xl px-5 py-2 sm:px-8">
+    <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/product/">Product</a></li>
+    <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/how-it-works/">How it works</a></li>
+    <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/evidence/">Evidence</a></li>
+    <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/governance/">Governance</a></li>
+    <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/resources/">Resources</a></li>
+    <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/pilot/">Pilot</a></li>
+    <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/technician-coverage-risk-check/">Risk Check</a></li>
+    <li class="border-b border-rule last:border-0"><a class="block py-3 text-[0.9375rem] no-underline text-ink-muted" href="/contact/">Contact</a></li>
+  </ul>
 </nav>
 </header>
 
@@ -742,7 +780,7 @@
       <p class="kr-eyebrow">Technician staffing software for eye clinics</p>
       <h1 class="kr-h1">Same patient count. <br>Different technician workload.</h1>
       <p class="kr-lede">Plan technician staffing session by session. Forecast the minutes each session will need, then staff it under eight rules the system does not relax, with a person approving every plan.</p>
-      <p class="kr-note kr-offer"><strong class="kr-pz">Phase Zero</strong> is a fixed-fee diagnostic, scoped to your clinic. If the forecast does not beat the ratio you use today, the engagement stops there.</p>
+      <p class="kr-note kr-offer"><strong class="kr-pz">Phase Zero</strong> is a diagnostic scoped to your clinic. If the forecast does not beat the ratio you use today, the engagement stops there.</p>
       <div class="kr-actions kr-hero-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
         <a class="kr-second kr-m-hero-link" href="/evidence/">See how it's measured</a>
@@ -757,8 +795,8 @@
           <span class="kr-proof-strip__label">Agrees data handling first</span>
         </div>
         <div class="kr-proof-strip__item">
-          <span class="kr-proof-strip__val">Fixed fee</span>
-          <span class="kr-proof-strip__label">Scoped diagnostic, no subscription</span>
+          <span class="kr-proof-strip__val">Scoped per clinic</span>
+          <span class="kr-proof-strip__label">Agreed in writing first</span>
         </div>
       </div>
     </div>
@@ -824,7 +862,7 @@
     </div>
 
     <div class="kr-m-only" data-mob-step="5-approval-timeline">
-      <p class="kr-eyebrow">Illustrative synthetic example — not connected to a running system</p>
+      <p class="kr-eyebrow">Illustrative synthetic example, not connected to a running system</p>
       <h3 class="kr-h3">Every plan carries who approved it</h3>
       <ol class="kr-tl">
         <li><b>Forecast scored</b><span>System &middot; session PRV027 &middot; 2026-09-08</span></li>
@@ -875,7 +913,7 @@
         <li>
           <span class="kr-stepper__n" aria-hidden="true">2</span>
           <div><b>Compare the forecast to your approved baselines</b>
-            <p>Your own session history, scored against the ratio or spreadsheet you already use &mdash; not against ours.</p></div>
+            <p>Your own session history, scored against the ratio or spreadsheet you already use, not against ours.</p></div>
         </li>
         <li>
           <span class="kr-stepper__n" aria-hidden="true">3</span>
@@ -887,6 +925,7 @@
       <div class="kr-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
       </div>
+      <p class="kr-note kr-riskcheck">Check your technician coverage risk in about 3 minutes, using your own sessions and staffing. <a href="/technician-coverage-risk-check/">Start the risk check</a></p>
     </div>
 
     <div class="kr-m-only" data-mob-step="8-faq">
@@ -900,12 +939,12 @@
         <p>None yet. The accuracy figures on this site come from a synthetic validation holdout, not from a live clinic. Phase Zero is the step that tests the forecast against your own history, and there are no customers yet.</p>
       </details>
       <details class="kr-faq__item">
-        <summary>What does Phase Zero cost?</summary>
-        <p>It is a fixed-fee diagnostic, quoted after scoping your clinic and your data with your privacy office. There is no published rate card, because scope depends on site count and on how ready your data export is.</p>
+        <summary>How is Phase Zero scoped?</summary>
+        <p>Scope depends on site count, data history and the evaluation you need. We agree it in writing before any work starts.</p>
       </details>
       <details class="kr-faq__item">
         <summary>Does it work across multiple sites?</summary>
-        <p>Site eligibility is one of the system's eight hard constraints, so multi-site clinics are the normal case. Scope and fee still depend on how many sites and how much history you bring to the scoping conversation.</p>
+        <p>Site eligibility is one of the system's eight hard constraints, so multi-site clinics are the normal case. Scope still depends on how many sites and how much history you bring to the scoping conversation.</p>
       </details>
       <details class="kr-faq__item">
         <summary>Can the system assign a technician without a person approving it?</summary>
@@ -923,7 +962,7 @@
       <h2 class="kr-h2">Every change is written down. Alter one entry and the built-in verification check reports the break.</h2>
       <p class="kr-lede">Every plan, override, refusal and approval goes to an append-only, hash-chained log with who acted and why.</p>
       <p class="kr-lede">Start with Phase Zero. It retrains on your own history and scores the forecast against the ratio you use today. If it does not win, the engagement stops and the finding is yours.</p>
-      <p class="kr-note">Phase Zero is a fixed fee, scoped to your clinic. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.</p>
+      <p class="kr-note">Phase Zero is scoped to your clinic. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.</p>
 
       <div class="kr-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
@@ -1071,5 +1110,5 @@ if (matchMedia('(min-width: 761px)').matches) {
 <div class="kr-mobile-sticky">
   <a href="/contact/">Ask about Phase Zero</a>
 </div>
-<script src="/assets/site-analytics.js" defer></script></body>
+<script src="/assets/growth.js" defer></script><script src="/assets/site-analytics.js" defer></script></body>
 </html>

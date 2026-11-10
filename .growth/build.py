@@ -37,6 +37,9 @@ def check_article(a):
     assert (ROOT / im['path'].lstrip('/')).is_file(), 'Missing article image'
     assert im['alt'] and im['caption'] and im['provenance'], 'Missing image provenance'
 
+NOSCRIPT_NAV = '<noscript><style>@layer base{@media (max-width:767.98px){#mobile-nav[hidden]{display:block!important}}}@media (max-width:767.98px){button[aria-controls="mobile-nav"]{display:none!important}}</style></noscript>'
+
+
 def build():
     articles = [json.loads(p.read_text()) for p in sorted((ROOT/'.growth/articles').glob('*.json'))]
     assert len({a['slug'] for a in articles}) == len(articles), 'Duplicate article slug'
@@ -70,7 +73,7 @@ def build():
 <meta property="og:description" content="{escape(a['description'])}"><meta property="og:url" content="{url}">
 <meta property="og:image" content="{BASE+im['path']}"><meta property="og:image:alt" content="{escape(im['alt'])}">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{json.dumps(schema).replace('<', chr(92)+'u003c')}</script></head>
+<script type="application/ld+json">{json.dumps(schema).replace('<', chr(92)+'u003c')}</script>{NOSCRIPT_NAV}</head>
 <body class="flex min-h-full flex-col bg-background text-foreground"><a class="growth-skip" href="#main">Skip to content</a>
 {header}
 <main id="main" class="growth"><article>
@@ -82,6 +85,7 @@ def build():
 <div class="growth-copy">{a['body']}
 <section class="growth-sources"><h2>Sources and scope</h2><ul>{sources}</ul></section>
 {feedback}
+<aside class="growth-cta growth-riskcheck" aria-labelledby="risk-check-title"><h2 id="risk-check-title">Technician coverage risk check</h2><p>Check your technician coverage risk in about 3 minutes. Answer a few questions about your own sessions and staffing, then decide whether a longer conversation is worth having.</p><a class="growth-button" href="/technician-coverage-risk-check/">Start the risk check</a></aside>
 <aside class="growth-cta"><h2>Does your session history support a useful test?</h2><p>Start with a conversation about your sites, your current planning method and what you can measure.</p><a class="growth-button" href="/contact/">Discuss Phase Zero</a></aside>
 </div></article></main>{footer}<script src="/assets/growth.js" defer></script><script src="/assets/article-feedback.js" defer></script></body></html>'''
         if a.get('presentation') == 'editorial':
