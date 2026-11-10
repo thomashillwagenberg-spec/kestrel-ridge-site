@@ -31,6 +31,7 @@ jobs:
           python3 .growth/check.py
       - name: Check committed generated output
         run: |
+          pip install -q beautifulsoup4
           python3 .growth/build.py
           python3 scripts/gen_markdown.py --check
           python3 scripts/check_slash_links.py
