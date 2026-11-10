@@ -34,9 +34,9 @@ The system takes, per session, the appointment mix, the testing load, and comple
 
 ### What is Phase Zero?
 
-Phase Zero is the first engagement. The clinic exports its historical operational data, per-session appointment mix, complexity flags, and realized technician minutes. The system is retrained on that data, and the resulting forecast is scored against the clinic's current staffing ratio on the clinic's own sessions.
+Phase Zero is the first engagement. The clinic exports its historical operational data, per-session appointment mix, complexity flags, and realized technician minutes. We fit the forecast to that data as part of the diagnostic (this is done with the clinic and is not yet an automated product feature), and score it against the clinic's current staffing method and a historical average on the clinic's own later sessions.
 
-If the forecast does not beat the status quo, the engagement ends and the findings transfer to the clinic. The clinic keeps the analysis either way.
+If the forecast does not beat both the current method and a historical average, with its range near 80 percent coverage, the engagement ends and the findings transfer to the clinic. The clinic keeps the analysis either way.
 
 ### How is Phase Zero scoped?
 
@@ -94,7 +94,7 @@ A forecast also cannot create staff. It reallocates existing capacity and sizes 
 
 ### What happens after Phase Zero?
 
-That depends on what Phase Zero finds. If the forecast does not beat the clinic's current staffing ratio, the engagement ends and the findings transfer to the clinic. If it does, the next step is a scoped discussion about running the system against live sessions, which would require the business associate agreement and security review described above before any production PHI is involved.
+That depends on what Phase Zero finds. If the forecast does not beat both the clinic's current staffing method and a historical average, with its range near 80 percent coverage, the engagement ends and the findings transfer to the clinic. If it does, the next step is a scoped discussion about running the system against live sessions, which would require the business associate agreement and security review described above before any production PHI is involved.
 
 No further phase is defined publicly beyond that, because no engagement has run and defining one in advance of evidence would be guessing. [Contact](https://kestrelridgehealth.com/contact/) is the route for a specific conversation, and the [pilot page](https://kestrelridgehealth.com/pilot/) describes the Phase Zero scope in more detail.
 

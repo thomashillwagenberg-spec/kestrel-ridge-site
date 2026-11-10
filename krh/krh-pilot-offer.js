@@ -21,16 +21,14 @@
       '<div class="kr-p0-step"><span class="kr-p0-step-num">Step 1</span>' +
       '<h4>Privacy-scoped data handoff</h4>' +
       '<p>You export an approved slice of your own historical session data \u2014 ' +
-      'no PHI, no new software, agreed with your privacy office before anything moves.</p></div>' +
+      'no patient identifiers requested, no new software, agreed with your privacy office before anything moves.</p></div>' +
       '<div class="kr-p0-step"><span class="kr-p0-step-num">Step 2</span>' +
       '<h4>Forecast vs. baseline comparison</h4>' +
-      '<p>We train a model on that export and score its error against the staffing ' +
-      'rule you already use \u2014 on your own data, not a demo dataset.</p></div>' +
+      '<p>Together with you, we fit a forecast to that export and score its error against your current method and a historical average, on your own data, not a demo dataset.</p></div>' +
       '<div class="kr-p0-step"><span class="kr-p0-step-num">Step 3</span>' +
       '<h4>Stop-or-continue decision</h4>' +
-      '<p>If the model doesn\u2019t clear the agreed threshold, the engagement ends \u2014 ' +
-      'that finding is yours either way. If it does, we scope a fixed fee for ' +
-      'what\u2019s next.</p></div>';
+      '<p>If the forecast does not beat both comparisons by the margin agreed in writing beforehand, with its range near 80 percent coverage, the engagement ends. ' +
+      'That finding is yours either way. If it does, we agree in writing what happens next.</p></div>';
     overview.parentNode.insertBefore(steps, overview.nextSibling);
   }
 
@@ -58,7 +56,7 @@
       'commitment, no calendar to clear.</p></div>' +
       '<div class="kr-value-row"><span class="kr-value-icon">\u2713</span>' +
       '<p><strong>What it costs you to find out:</strong> approved historical data you already ' +
-      'have, no PHI, nothing new to learn \u2014 yet.</p></div>' +
+      'have, with no patient identifiers requested and nothing new to learn \u2014 yet.</p></div>' +
       '</div>' +
       '<div class="kr-value-cta-actions">' +
       '<a class="btn-primary inline-flex min-h-11 items-center justify-center px-6 py-3 text-[0.9375rem] font-semibold" href="/contact/">Ask about Phase Zero</a>' +
@@ -67,9 +65,7 @@
     anchor.parentNode.insertBefore(cta, anchor.nextSibling);
 
     var callout = el('p', 'kr-stop-rule-callout',
-      '<strong>The stop rule is the risk reversal.</strong> We agree the pass/fail threshold ' +
-      'before we see your data. If Phase Zero doesn\u2019t clear it, the engagement stops there \u2014 ' +
-      'you keep the finding, we don\u2019t ask you to continue funding a model that isn\u2019t working.');
+      '<strong>The stop rule.</strong> The forecast must beat both your current method and a historical average, with its range close to 80 percent coverage, by a margin we agree in writing before we see your data. If it does not, the engagement stops there and you keep the findings.');
     anchor.insertBefore(callout, anchor.firstElementChild ? anchor.firstElementChild.nextSibling : null);
   }
 

@@ -1,7 +1,7 @@
 ---
 title: "Ask About Phase Zero | Kestrel Ridge Health"
 url: https://kestrelridgehealth.com/contact/
-description: "Ask about Phase Zero, a diagnostic that scores a staffing forecast against your ratio. An export, not a new workflow. Data handling agreed with your privacy office before anything moves."
+description: "Ask about Phase Zero, a diagnostic that scores a staffing forecast against your current method and a historical average. An export, not a new workflow. Data handling agreed with your privacy office before anything moves."
 ---
 
 Compose an enquiry →[Review the evidence first →](https://kestrelridgehealth.com/evidence/)[Who operates Kestrel Ridge Health →](https://kestrelridgehealth.com/faq/)
@@ -16,7 +16,7 @@ Historical sessions with appointment counts by type, a complexity flag, the site
 
 What you get back
 
-A model retrained on your history, its error against the fixed ratio and the historical mean, interval coverage, the subspecialties it handles worst, and a recommendation to continue or to stop. If it does not beat your current rule, that is the finding, and it is yours to keep.
+A forecast fitted to your history, its error against the fixed ratio and the historical mean, interval coverage, the subspecialties it handles worst, and a recommendation to continue or to stop. If it does not beat your current rule, that is the finding, and it is yours to keep.
 
 Production use with protected health information is a later step, under a business associate agreement and a security review.
 

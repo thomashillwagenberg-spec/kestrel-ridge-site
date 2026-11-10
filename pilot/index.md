@@ -10,7 +10,7 @@ The path to a decision
 
 Agree on the gates before collecting results. Stop when the evidence says to stop.
 
-1. 00Readiness ### Phase Zero Scoped per clinic Retrain on an approved operational export. Compare error with both baselines. Decision gate Continue only if local validation supports it.
+1. 00Readiness ### Phase Zero Scoped per clinic Fit the forecast to an approved operational export. Compare error with both baselines. Decision gate Continue only if local validation supports it.
 2. 01Observe ### Shadow mode 4 weeks Show recommendations while the existing staffing process stays in force. Decision gate Review prospective accuracy and scheduler trust.
 3. 02Compare ### Controlled pilot 8–12 weeks, planning estimate Use paired sites and human-reviewed staffing. Measure a preselected primary outcome. Decision gate Expand only if the agreed criteria hold.
 
@@ -20,19 +20,19 @@ Step 1
 
 #### Privacy-scoped data handoff
 
-You export an approved slice of your own historical session data, with no PHI and no new software, agreed with your privacy office before anything moves.
+You export an approved slice of your own historical session data, with no patient identifiers requested and no new software, agreed with your privacy office before anything moves.
 
 Step 2
 
 #### Forecast vs. baseline comparison
 
-We train a model on that export and score its error against the staffing rule you already use, on your own data, not a demo dataset.
+Together with you, we fit a forecast to that export and score its error against your current method and a historical average, on your own data, not a demo dataset.
 
 Step 3
 
 #### Stop-or-continue decision
 
-If the model doesn’t clear the agreed threshold, the engagement ends. That finding is yours either way. If it does, we agree in writing what happens next.
+If the forecast does not beat both comparisons by the margin agreed in writing beforehand, with its range near 80 percent coverage, the engagement ends. That finding is yours either way. If it does, we agree in writing what happens next.
 
 Phases
 
@@ -40,7 +40,7 @@ Phases
 
 Nothing about your staffing changes until Phase Two, and Phase Two only happens if Phase Zero and Phase One pass.
 
-1. 00 ### Phase Zero, readiness Before anything runs, the scope is agreed in writing. Retrain and validate on your own history. A model trained on generated data says nothing about your clinic until it has been retrained on your data. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems. How the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves. Exit gate The model must beat both the fixed-ratio rule and the historical mean on error, with interval coverage near 80 percent. If it does not, the pilot stops. That the fixed ratio is adequate for you is a legitimate finding.
+1. 00 ### Phase Zero, readiness Before anything runs, the scope is agreed in writing. Fit and validate on your own history. A model trained on generated data says nothing about your clinic until it has been fitted to your data, which we would do with you as part of the diagnostic; it is not yet an automated feature. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems. How the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves. Exit gate The model must beat both the fixed-ratio rule and the historical mean on error, with interval coverage near 80 percent. If it does not, the pilot stops. That the fixed ratio is adequate for you is a legitimate finding.
 2. 01 ### Phase One, shadow mode 4 weeks Schedulers see forecasts and recommended plans. The fixed-ratio process stays the plan of record, so behavior does not change and no patient is exposed. Exit gate Forecast accuracy measured prospectively, and scheduler trust. Not outcomes, because nothing has changed yet.
 3. 02 ### Phase Two, site-paired comparison 8 to 12 weeks Pair sites on volume, subspecialty mix and staffing profile. One site in each pair staffs from the forecast with scheduler override, the other keeps the fixed ratio. Exit gate Pairing is at site level because technicians are shared within a site-day, so finer randomization contaminates the control.
 
@@ -48,7 +48,7 @@ Source  docs/pilot-evaluation-design.md, Design
 
 The gate that most vendors do not offer
 
-Phase Zero can end the engagement. If a model retrained on your own history does not beat both your fixed ratio and a simple historical mean, there is no case for continuing. If the forecast does not help, you learn that within the evaluation window. Your fixed ratio being adequate is a real possible outcome. The finding is yours to keep either way.
+Phase Zero can end the engagement. If a forecast fitted to your own history does not beat both your fixed ratio and a simple historical mean, there is no case for continuing. If the forecast does not help, you learn that within the evaluation window. Your fixed ratio being adequate is a real possible outcome. The finding is yours to keep either way.
 
 Phase Zero
 
@@ -58,7 +58,7 @@ Scoped before anything is signed.
 
 Scoped per clinic
 
-Phase Zero is  scoped to your clinic . We size it to how many sites and how much history you bring. If the forecast does not beat the ratio you use today, the engagement stops there and the finding is yours to keep.
+Phase Zero is  scoped to your clinic . We size it to how many sites and how much history you bring. If the forecast does not beat both the ratio you use today and a historical average, with its range near 80 percent coverage, the engagement stops there and the finding is yours to keep.
 
 Operational counts only
 
@@ -106,7 +106,7 @@ These are one-directional. There is no early stop for success, because staffing 
 
 Source  docs/pilot-evaluation-design.md, Stopping rules
 
-**The stop rule is the risk reversal.** We agree the pass/fail threshold before we see your data. If Phase Zero doesn’t clear it, the engagement stops there. You keep the finding, and we do not ask you to continue with a model that has not beaten your current method.
+**The stop rule.** The forecast must beat both your current method and a historical average, with its range close to 80 percent coverage, by a margin we agree in writing before we see your data. If it does not, the engagement stops there and you keep the findings.
 
 ### See expected technician workload for each scheduled session before the day starts
 
@@ -124,7 +124,7 @@ Source  docs/pilot-evaluation-design.md, Stopping rules
 
 ✓
 
-**What Phase Zero needs from you:** approved historical data you already have, no PHI, nothing new to learn.
+**What Phase Zero needs from you:** approved historical data you already have, no patient identifiers requested, nothing new to learn.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[Read the methodology](https://kestrelridgehealth.com/methodology/)
 

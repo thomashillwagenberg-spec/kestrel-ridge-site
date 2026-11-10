@@ -19,7 +19,7 @@ Status
 
 ## Validation status
 
-Every figure on this page was measured on the system’s synthetic validation set, which the system generated for itself. The system has not been validated on data from a real clinic and it is not HIPAA certified. Phase Zero closes that gap: the model is retrained on your own history and scored against the ratio you use today, and the engagement stops if it does not win.
+Every figure on this page was measured on the system’s synthetic validation set, which the system generated for itself. The system has not been validated on data from a real clinic and it is not HIPAA certified. Phase Zero closes that gap: the forecast is fitted to your own history as part of the diagnostic and scored against both the ratio you use today and a historical average, and the engagement stops if it does not win.
 
 Accuracy
 
