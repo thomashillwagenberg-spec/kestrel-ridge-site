@@ -117,7 +117,7 @@ You do not need to buy anything to find out whether this applies to your practic
 2. ### Pull twelve months of sessions and plot realized technician hours against patient count. If the relationship is tight, a ratio is serving you fine. If the scatter is wide, the width is the size of the problem, in hours, on your own operation.
 3. ### Compute what a fixed ratio would have predicted for each of those sessions and how far off it was. That is your baseline. Every future claim gets measured against it.
 
-A practice that has done those three things is in a position to evaluate any vendor sceptically, including this one. Kestrel Ridge Health’s  [Phase Zero](https://kestrelridgehealth.com/pilot/)  engagement is structured around exactly that comparison, run on the clinic’s own historical data rather than on synthetic data, and ends with findings transferring to the clinic if the forecast does not beat the clinic’s current staffing ratio.
+A practice that has done those three things is in a position to evaluate any vendor sceptically, including this one. Kestrel Ridge Health’s  [Phase Zero](https://kestrelridgehealth.com/pilot/)  engagement is structured around exactly that comparison, run on the clinic’s own historical data rather than on synthetic data, and ends with findings transferring to the clinic if the forecast does not beat both the clinic’s current staffing method and a historical average.
 
 ## Sources
 

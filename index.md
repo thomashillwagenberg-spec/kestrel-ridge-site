@@ -21,7 +21,7 @@ Different technician workload.
 
 Plan technician staffing session by session. Forecast the minutes each session will need, then staff it under eight rules the system does not relax, with a person approving every plan.
 
-**Phase Zero** is a diagnostic scoped to your clinic. If the forecast does not beat the ratio you use today, the engagement stops there.
+**Phase Zero** is a diagnostic scoped to your clinic. If the forecast does not beat both the ratio you use today and a historical average, the engagement stops there.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/) [See how it's measured](https://kestrelridgehealth.com/evidence/)
 
@@ -114,7 +114,7 @@ Phase Zero
 2. **Compare the forecast to your approved baselines** Your own session history, scored against the ratio or spreadsheet you already use, not against ours.
 3. **Stop, or talk about the next step** If the forecast does not beat your baseline, the engagement ends there and the finding is yours either way.
 
-The methodology is published, the comparisons show their work, and nothing moves until your privacy office signs off. The only ask right now is a conversation: no PHI changes hands, no platform to adopt, and no commitment past this step.
+The methodology is published, the comparisons show their work, and nothing moves until your privacy office signs off. The only ask right now is a conversation: no patient identifiers are requested, there is no platform to adopt, and the next step is a conversation about scope.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
 
@@ -152,7 +152,7 @@ close: arrival
 
 Every plan, override, refusal and approval goes to an append-only, hash-chained log with who acted and why.
 
-Start with Phase Zero. It retrains on your own history and scores the forecast against the ratio you use today. If it does not win, the engagement stops and the finding is yours.
+Start with Phase Zero. We fit the forecast to your own history and score it against the ratio you use today and a historical average. If it does not win, the engagement stops and the finding is yours.
 
 Phase Zero is scoped to your clinic. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.
 

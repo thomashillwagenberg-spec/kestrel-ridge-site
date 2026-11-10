@@ -75,7 +75,7 @@ The ten layers
 Each layer carries what it does, and the limit that goes with it.
 
 1. 01 Data ### Data Sites, providers, technicians, availability, sessions, appointments and historical assignments in SQLite for local development, PostgreSQL in production. The contract carries no patient identifier, name, date of birth, diagnosis, medication or note. Demand is counts by appointment type plus complexity flags. The limit Today every row comes from the system's own generator. Phase Zero replaces it with your history.
-2. 02 Learned ### Workload prediction A gradient boosted regressor predicts technician minutes for one provider half-day from the appointment mix, complexity, subspecialty, site, half-day and the provider's historical pace. The limit This is the only learned component that produces a number a human acts on. It never names a person.
+2. 02 Learned ### Workload prediction A spline-expanded ridge regression predicts technician minutes for one provider half-day from the appointment mix, complexity, subspecialty, site, half-day and the provider's historical pace. The limit This is the only learned component that produces a number a human acts on. It never names a person.
 3. 03 Learned ### Prediction uncertainty Separate quantile models at p10 and p90, widened by a split-conformal offset of 5.4 minutes each side calibrated on the last 45 days of the training window. The limit This is a prediction interval for one session, not a confidence interval, and not a guarantee. One session in five is expected to land outside its band.
 4. 04 Rule ### Hard constraints Eight rules written as readable text and checked by the solver. This is where machine learning stops. The limit They are never relaxed to improve a score. A session that cannot be filled inside them is reported unfilled with a shortfall, rather than filled by bending a rule.
 5. 05 Rule ### Staffing assignment A CP-SAT constraint solver assigns technicians to sessions under those eight rules, with soft objectives for travel, home site, continuity and workload balance. A greedy fallback obeys the same eight rules. The limit The solver holds no learned parameters. Within a five second limit it returns a feasible plan rather than a proven optimal one, so two runs can return different plans of equal cost.
@@ -190,7 +190,7 @@ Sites, providers, technicians, availability, sessions, appointments and historic
 
 02 · Workload predictionLayer
 
-A gradient boosted regressor predicts technician minutes for one provider half-day from the appointment mix, complexity, subspecialty, site and half-day. **The limit:** The only learned component that produces a number a human acts on. It never names a person.
+A spline-expanded ridge regression predicts technician minutes for one provider half-day from the appointment mix, complexity, subspecialty, site and half-day. **The limit:** The only learned component that produces a number a human acts on. It never names a person.
 
 03 · Prediction uncertaintyLayer
 
