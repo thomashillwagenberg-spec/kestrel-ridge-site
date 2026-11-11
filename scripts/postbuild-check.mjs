@@ -51,7 +51,13 @@ for (const url of urls) {
   page.on('pageerror', e => errs.push('pageerror: ' + String(e.message || e).slice(0, 300)));
   let status = 0;
   try {
-    const resp = await page.goto(target, { waitUntil: 'networkidle', timeout: 45000 });
+    // 'networkidle' is not viable here: /contact/'s Turnstile widget schedules an
+    // automatic retry loop (reset + poll) whenever its challenge fails to resolve
+    // (e.g. a sitekey/domain mismatch on a non-production --base, or any real
+    // widget failure), which keeps a connection open indefinitely and was timing
+    // out this check at 45s. 'load' + the explicit settle wait below is enough to
+    // let hydration run without depending on third-party polling going quiet.
+    const resp = await page.goto(target, { waitUntil: 'load', timeout: 45000 });
     status = resp ? resp.status() : 0;
     await page.waitForTimeout(1500); // let hydration finish / crash
   } catch (e) { errs.push('navigation: ' + e.message.slice(0, 200)); }
