@@ -1,0 +1,7 @@
+version: 2
+updates:
+  # No package.json in this repository, so there is no npm ecosystem to track.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
