@@ -150,6 +150,19 @@ export default {
     const origin = request.headers.get("origin") || "";
     if (path !== "/submit") return reply(404, { ok: false }, origin);
 
+    // CORS preflight MUST be handled before any body parsing. Real browsers
+    // require a 2xx status on the OPTIONS preflight before they will send the
+    // actual POST; this used to fall through to readInput() first, which
+    // returned null for a preflight's empty body and produced a 400 - failing
+    // the preflight and silently blocking every real contact/waitlist
+    // submission (reproduced live: fetch() from the production /contact/
+    // page threw "TypeError: Failed to fetch" before reaching this fix).
+    if (request.method === "OPTIONS") {
+      return ALLOWED_ORIGINS.has(origin)
+        ? reply(204, null, origin)
+        : reply(403, { ok: false }, origin);
+    }
+
     // Detect waitlist submission (frontend sends {email, source:"waitlist"}).
     let preFields;
     try {
@@ -183,11 +196,6 @@ export default {
       }
     }
     // End waitlist path -----
-    if (request.method === "OPTIONS") {
-      return ALLOWED_ORIGINS.has(origin)
-        ? reply(204, null, origin)
-        : reply(403, { ok: false }, origin);
-    }
     if (request.method !== "POST") {
       return reply(405, { ok: false, error: "POST required" }, origin);
     }
