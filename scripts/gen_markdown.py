@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 SITE = "https://kestrelridgehealth.com"
 BEGIN = "<!-- AUTOGEN:pages BEGIN (scripts/gen_markdown.py; do not edit by hand) -->"
 END = "<!-- AUTOGEN:pages END -->"
-DROP = ["script", "style", "noscript", "svg", "nav", "header", "footer", "form", "button",
+DROP = ["script", "style", "noscript", "svg", "nav", "header:not(.story-hero)", "footer", "form", "button",
         "template", "iframe", "dialog", "aside[aria-hidden=true]"]
 
 
