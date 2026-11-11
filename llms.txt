@@ -63,7 +63,7 @@
   human staffing decisions.
 
 <!-- AUTOGEN:pages BEGIN (scripts/gen_markdown.py; do not edit by hand) -->
-## All pages (25, with Markdown copies)
+## All pages (26, with Markdown copies)
 - [Ophthalmic Staffing Software](https://kestrelridgehealth.com/) ([markdown](https://kestrelridgehealth.com/index.md)): Phase Zero is a diagnostic that scores a session-level staffing forecast against your current ratio, using your own history. Synthetic validation data only.
 - [Accessibility Statement](https://kestrelridgehealth.com/accessibility/) ([markdown](https://kestrelridgehealth.com/accessibility/index.md)): What we target, what we checked and when, the limitations we know about, and how to tell us about a barrier on this site.
 - [Ask About Phase Zero](https://kestrelridgehealth.com/contact/) ([markdown](https://kestrelridgehealth.com/contact/index.md)): Ask about Phase Zero, a diagnostic that scores a staffing forecast against your current method and a historical average. An export, not a new workflow. Data handling agreed with your privacy office before anything moves.
@@ -89,4 +89,5 @@
 - [How to review an ophthalmology staffing forecast that misses](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-error-review/) ([markdown](https://kestrelridgehealth.com/ophthalmology-staffing-forecast-error-review/index.md)): Check forecast error, session data and coverage decisions with a practical review process for independent ophthalmology practices.
 - [Ophthalmic technician training: plan the coverage first](https://kestrelridgehealth.com/ophthalmic-technician-training-coverage/) ([markdown](https://kestrelridgehealth.com/ophthalmic-technician-training-coverage/index.md)): A practical checklist for protecting learner and trainer time, checking supervision and keeping eye clinic sessions covered during technician training.
 - [Ten Patients Is Not a Staffing Plan](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/) ([markdown](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/index.md)): Kestrel Ridge Health LLC announces Phase Zero, a diagnostic that tests a staffing forecast on a practice's own history.
+- [Before refilling an ophthalmology cancellation, check technician coverage](https://kestrelridgehealth.com/ophthalmology-waitlist-technician-coverage/) ([markdown](https://kestrelridgehealth.com/ophthalmology-waitlist-technician-coverage/index.md)): An ophthalmology waitlist checklist for checking technician time, imaging and room coverage before booking a replacement visit.
 <!-- AUTOGEN:pages END -->

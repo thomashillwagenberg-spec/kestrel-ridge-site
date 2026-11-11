@@ -52,6 +52,12 @@ KRH-GROWTH-START
 
 Practical checks and tools for independently owned eye clinics.
 
+![A scheduling desk overlooking an empty eye exam room with an exam chair and slit lamp.](https://kestrelridgehealth.com/assets/waitlist-coverage-20261109.jpg)
+
+### Before refilling an ophthalmology cancellation, check technician coverage
+
+An ophthalmology waitlist checklist for checking technician time, imaging and room coverage before booking a replacement visit.
+
 ![Fictional eye clinic teaching station with two empty stools, generic examination equipment and closed study materials.](https://kestrelridgehealth.com/assets/technician-training-20261107.jpg)
 
 ### Ophthalmic technician training: plan the coverage first
