@@ -45,6 +45,7 @@ function prodEnv(overrides = {}) {
     TURNSTILE_SECRET: "synthetic-unit-test-secret",
     SENDER_FROM: "KRH Contact <notifications@kestrelridgehealth.com>",
     RATE_LIMITER: fakeRateLimiter(),
+    WAITLIST_RATE_LIMITER: fakeRateLimiter(),
     ...overrides,
   };
 }
@@ -120,6 +121,38 @@ test("production: refuses ALL traffic with 503 if RATE_LIMITER binding is missin
   const env = prodEnv({ RATE_LIMITER: undefined });
   const response = await worker.fetch(createRequest(), env);
   assert.equal(response.status, 503);
+});
+
+test("production: refuses ALL traffic with 503 if WAITLIST_RATE_LIMITER binding is missing", async () => {
+  const env = prodEnv({ WAITLIST_RATE_LIMITER: undefined });
+  const response = await worker.fetch(createRequest(), env);
+  assert.equal(response.status, 503);
+});
+
+test("waitlist: uses the dedicated WAITLIST_RATE_LIMITER binding, not RATE_LIMITER", async () => {
+  const restore = simulateResendSend(true);
+  try {
+    let waitlistCalled = false;
+    let contactLimiterCalled = false;
+    const env = prodEnv({
+      WAITLIST_RATE_LIMITER: { limit: async () => { waitlistCalled = true; return { success: true }; } },
+      RATE_LIMITER: { limit: async () => { contactLimiterCalled = true; return { success: true }; } },
+    });
+    const fields = { source: "waitlist", email: "waitlist@example.com" };
+    const response = await worker.fetch(createRequest("POST", fields), env);
+    assert.equal(response.status, 202);
+    assert.equal(waitlistCalled, true);
+    assert.equal(contactLimiterCalled, false);
+  } finally {
+    restore();
+  }
+});
+
+test("waitlist: 429 once its own (separate, stricter) rate limit is hit", async () => {
+  const env = prodEnv({ WAITLIST_RATE_LIMITER: fakeRateLimiter(false) });
+  const fields = { source: "waitlist", email: "waitlist@example.com" };
+  const response = await worker.fetch(createRequest("POST", fields), env);
+  assert.equal(response.status, 429);
 });
 
 test("staging: relaxed config gate allows missing secrets (explicit ENVIRONMENT=staging required)", async () => {
@@ -272,11 +305,16 @@ test("waitlist: rejects an invalid email", async () => {
   assert.equal(response.status, 400);
 });
 
-test("waitlist: rate limited independently of the contact path", async () => {
-  const env = prodEnv({ RATE_LIMITER: fakeRateLimiter(false) });
-  const fields = { source: "waitlist", email: "a@b.com" };
-  const response = await worker.fetch(createRequest("POST", fields), env);
-  assert.equal(response.status, 429);
+test("waitlist: not blocked by the separate contact-path rate limiter", async () => {
+  const restore = simulateResendSend(true);
+  try {
+    const env = prodEnv({ RATE_LIMITER: fakeRateLimiter(false) }); // contact path exhausted
+    const fields = { source: "waitlist", email: "a@b.com" };
+    const response = await worker.fetch(createRequest("POST", fields), env);
+    assert.equal(response.status, 202); // waitlist's own limiter (WAITLIST_RATE_LIMITER) is untouched
+  } finally {
+    restore();
+  }
 });
 
 test("waitlist: accepts and sends a valid, non-bot submission", async () => {

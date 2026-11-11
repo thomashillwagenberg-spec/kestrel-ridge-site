@@ -48,6 +48,7 @@ function validateConfig(env) {
       problems.push("SENDER_FROM missing or not on an allowed/verified domain");
     }
     if (!env.RATE_LIMITER) problems.push("RATE_LIMITER binding not configured");
+    if (!env.WAITLIST_RATE_LIMITER) problems.push("WAITLIST_RATE_LIMITER binding not configured");
   }
   return problems;
 }
@@ -98,16 +99,31 @@ async function readInput(request) {
 // per-key write-rate limit (~1 write/sec sustained) that bursty abuse
 // traffic against a single IP key could itself exceed.
 //
-// The Rate Limiting binding is backed by the same counting infrastructure
-// Cloudflare uses for its edge WAF Rate Limiting Rules: a sliding-window
-// counter enforced close to the edge, with atomic increments per key.
-// Documented characteristics (from Cloudflare's own docs, not guessed):
+// IMPORTANT — accuracy, per Cloudflare's own docs (not "atomic", corrected
+// 2026-11-11 after this was previously misdescribed here): the Rate
+// Limiting binding is explicitly documented as APPROXIMATE and EVENTUALLY
+// CONSISTENT, not atomic. Each Cloudflare location checks a local,
+// independently-maintained count; updates propagate to other locations
+// and other isolates in the background, not synchronously. A burst of
+// requests hitting the same key across locations (or even within one
+// location, before counts sync) CAN exceed the configured limit — this
+// is Cloudflare's documented, intended behavior, not a bug:
+// https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/#accuracy
+// There is also at least one reported case (cloudflare/workers-sdk#16097,
+// Oct 2026) of the binding not enforcing at all for a sustained run on a
+// single edge location with a constant key. Do not treat this binding as
+// a precise or guaranteed-enforced limit anywhere in this codebase or in
+// any status report. What it DOES still give us over Workers KV:
 //   - `period` must be 10 or 60 seconds (we approximate our 10-request/
 //     10-minute requirement as 10 req/60s, the closest supported window -
 //     see note in wrangler.toml).
-//   - It is approximate/best-effort under extreme global burst, same as
-//     any edge-distributed limiter, but does not have KV's stale-read or
-//     per-key-write-rate failure modes.
+//   - No KV-specific stale read-then-write race on OUR get/put code path
+//     (we don't write our own counter at all), and no KV per-key
+//     write-rate ceiling for us to exceed under abuse traffic.
+//   - It is a genuine, Cloudflare-operated backstop against sustained
+//     single-source abuse, even though it will not hold a hard line
+//     against a determined, distributed attacker. Treat it as a speed
+//     bump, not a guarantee, when assessing production risk.
 //   - `limit()` can itself throw (network/infra fault). We treat that as
 //     a transient limiter failure, not a security decision: we fail OPEN
 //     for that one request (log a warning) rather than reject a
@@ -117,13 +133,14 @@ async function readInput(request) {
 //     and blocks ALL traffic with a 503 — it is never silently treated as
 //     "rate limiting enforced" when it is not configured at all.
 async function checkRateLimit(env, ip, scope) {
-  if (!env.RATE_LIMITER) {
+  const binding = scope === "waitlist" ? env.WAITLIST_RATE_LIMITER : env.RATE_LIMITER;
+  if (!binding) {
     // Only reachable in staging (validateConfig blocks this in production).
-    console.warn(`KRH: RATE_LIMITER not bound (${scope}); rate limiting not enforced (staging only).`);
+    console.warn(`KRH: rate limiter binding not bound (${scope}); rate limiting not enforced (staging only).`);
     return true;
   }
   try {
-    const { success } = await env.RATE_LIMITER.limit({ key: `${scope}:${ip}` });
+    const { success } = await binding.limit({ key: `${scope}:${ip}` });
     return success;
   } catch (err) {
     console.warn(`KRH: rate limiter call failed for ${scope}, failing open for this request:`, typeof err?.message === "string" ? err.message : "unspecified");
@@ -265,6 +282,25 @@ export default {
     }
 
     // Waitlist path --------------------------------------------------------
+    // TEMPORARY, DOCUMENTED RESTRICTION (2026-11-11), not a claim of
+    // equivalent protection: this path has NO Turnstile challenge. The
+    // waitlist signup form's markup and client-side JS are compiled into
+    // this site's Next.js build chunks under _next/static/chunks/, which
+    // are NOT present as editable source in this repo (only the built
+    // output is committed here) — there is no safe, reviewable way to add
+    // a real Turnstile widget to that form from this repo without
+    // hand-patching minified production JS, which this session will not
+    // do. Until the actual frontend source is available and a proper
+    // widget can be added and verified in a real browser, the compensating
+    // controls are: (1) the existing honeypot field (silently accepts and
+    // discards bot submissions that fill the hidden "website" field), (2)
+    // a SEPARATE, stricter rate limit on this path (WAITLIST_RATE_LIMITER,
+    // 3 req/60s vs. the contact form's 10 req/60s — see wrangler.toml),
+    // and (3) this path only ever sends a signup confirmation email, it
+    // never relays arbitrary attacker-controlled free-text content to
+    // twagenberg@kestrelridgehealth.com the way the contact form does, so
+    // the abuse impact of a bypass here is spam signups, not inbox abuse
+    // or phishing-via-relay. This is a real gap, not "equivalent security."
     if (preFields.source === "waitlist") {
       if (!ALLOWED_ORIGINS.has(origin)) {
         return reply(403, { ok: false, error: "Request origin not allowed" }, origin);

@@ -32,20 +32,46 @@ ENVIRONMENT = "production"
 # Cloudflare's edge), its get-then-put pattern is not atomic (concurrent
 # requests at different edge locations can both read a stale count), and
 # it has a per-key write-rate ceiling that bursty abuse against one IP
-# could itself exceed. The Rate Limiting binding is backed by the same
-# infrastructure as Cloudflare's edge WAF Rate Limiting Rules: atomic
-# increments, no KV propagation delay. `period` only supports 10 or 60
-# seconds (not the 600s/10-request window originally specified elsewhere
-# in this project) — approximated here as 10 requests / 60 seconds per
-# scope+IP key, the closest supported configuration; worker.mjs prefixes
-# the key with "contact:" or "waitlist:" so the two paths don't share a
-# budget. In production, if this binding is absent, validateConfig() in
-# worker.mjs refuses ALL traffic with a 503 rather than ever silently
-# treating "no binding" as "rate limiting enforced."
+# could itself exceed.
+#
+# CORRECTED 2026-11-11: the Rate Limiting binding is NOT atomic either.
+# Cloudflare's own docs describe it as APPROXIMATE and EVENTUALLY
+# CONSISTENT — each location checks a local count and syncs to other
+# locations/isolates in the background, so a burst across locations (or
+# even within one, before sync) can exceed the configured limit by
+# design: https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/#accuracy
+# (there is also at least one reported case, cloudflare/workers-sdk#16097,
+# of it not enforcing at all for a sustained single-location run). It
+# remains strictly better than our rejected KV approach for OUR use case
+# (no stale read-then-write race, no per-key write-rate ceiling to trip),
+# and it is a real Cloudflare-operated backstop against sustained
+# single-source abuse — just not a hard guarantee against a determined
+# distributed attacker. Treat it as a speed bump, never as "rate limiting
+# is atomically enforced," anywhere this is described.
+#
+# `period` only supports 10 or 60 seconds (not the 600s/10-request window
+# originally specified elsewhere in this project) — approximated here as
+# 10 requests / 60 seconds per scope+IP key, the closest supported
+# configuration; worker.mjs prefixes the key with "contact:" or
+# "waitlist:" so the two paths don't share a budget. In production, if
+# this binding is absent, validateConfig() in worker.mjs refuses ALL
+# traffic with a 503 rather than ever silently treating "no binding" as
+# "rate limiting enforced."
 [[ratelimits]]
 name = "RATE_LIMITER"
 namespace_id = "1001"
 simple = { limit = 10, period = 60 }
+
+# Stricter, separate limiter for the waitlist signup path (see the
+# "TEMPORARY, DOCUMENTED RESTRICTION" comment in worker.mjs above the
+# waitlist handler): this path has no Turnstile challenge, so it gets a
+# tighter budget (3/60s vs. the contact form's 10/60s) as one of the
+# compensating controls until a real widget can be added to the actual
+# frontend source (not present in this repo).
+[[ratelimits]]
+name = "WAITLIST_RATE_LIMITER"
+namespace_id = "1003"
+simple = { limit = 3, period = 60 }
 
 # Staging environment — `wrangler deploy --env staging` / `wrangler dev --env staging`.
 # ENVIRONMENT="staging" relaxes the fail-closed config gate so local/dev
@@ -64,5 +90,9 @@ ENVIRONMENT = "staging"
 name = "RATE_LIMITER"
 namespace_id = "1002"
 simple = { limit = 10, period = 60 }
+[[env.staging.ratelimits]]
+name = "WAITLIST_RATE_LIMITER"
+namespace_id = "1004"
+simple = { limit = 3, period = 60 }
 
 # No send_email binding required — Resend API handles delivery without Email Routing.
