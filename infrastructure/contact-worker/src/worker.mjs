@@ -45,6 +45,24 @@ async function readInput(request) {
   return null;
 }
 
+// Fixed-window rate limit, keyed by client IP. Requires a KV namespace bound
+// as RATE_LIMIT_KV (not yet created/bound - see wrangler.toml comment). If the
+// binding is absent, this fails open (logs once) rather than taking the whole
+// Worker down, so merging this code is safe before the binding is approved
+// and added; it only becomes an enforced control once RATE_LIMIT_KV exists.
+async function checkRateLimit(env, ip, scope, limit, windowSeconds) {
+  if (!env.RATE_LIMIT_KV) {
+    console.warn("KRH: RATE_LIMIT_KV not bound; rate limiting is not enforced.");
+    return true;
+  }
+  const bucket = Math.floor(Date.now() / (windowSeconds * 1000));
+  const key = `rl:${scope}:${ip}:${bucket}`;
+  const current = Number((await env.RATE_LIMIT_KV.get(key)) || "0");
+  if (current >= limit) return false;
+  await env.RATE_LIMIT_KV.put(key, String(current + 1), { expirationTtl: windowSeconds + 60 });
+  return true;
+}
+
 async function verifyTurnstile(token, secret) {
   const data = new FormData();
   data.set("secret", secret);
@@ -179,9 +197,23 @@ export default {
       if (!ALLOWED_ORIGINS.has(origin)) {
         return reply(403, { ok: false, error: "Request origin not allowed" }, origin);
       }
+      // Honeypot: the waitlist form ships the same hidden "website" field as
+      // the contact form, but this path never checked it - any origin-valid
+      // POST with a parseable email was sent immediately, with no honeypot
+      // and no Turnstile at all (the waitlist widget doesn't render one).
+      // Bots that fill the hidden field are silently discarded, matching the
+      // contact-form behavior, until a real Turnstile widget is added to the
+      // waitlist form itself.
+      if (preFields.website) {
+        return reply(202, { ok: true, status: "accepted_for_delivery" }, origin);
+      }
       const wEmail = typeof preFields.email === "string" ? preFields.email.trim() : "";
       if (!validEmail(wEmail)) {
         return reply(400, { ok: false, error: "Add an email address we can write to." }, origin);
+      }
+      const wIp = request.headers.get("cf-connecting-ip") || "unknown";
+      if (!(await checkRateLimit(env, wIp, "waitlist", 5, 600))) {
+        return reply(429, { ok: false, error: "Too many requests. Please try again later." }, origin);
       }
       if (!env.RESEND_API_KEY) {
         console.error("KRH: RESEND_API_KEY not set for waitlist.");
@@ -225,6 +257,11 @@ export default {
       message.length < 10 || message.length > 3000
     ) {
       return reply(400, { ok: false, error: "Please check your form fields" }, origin);
+    }
+
+    const contactIp = request.headers.get("cf-connecting-ip") || "unknown";
+    if (!(await checkRateLimit(env, contactIp, "contact", 5, 600))) {
+      return reply(429, { ok: false, error: "Too many requests. Please try again later." }, origin);
     }
 
     if (env.TURNSTILE_SECRET) {
