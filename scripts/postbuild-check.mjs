@@ -34,6 +34,13 @@ const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].trim())
 if (urls.length === 0) { console.error('No URLs in sitemap.xml'); process.exit(2); }
 
 const IGNORE = [/cloudflareinsights\.com/i, /beacon\.min\.js/i, /googletagmanager/i];
+// When testing a local/staging build (--base set, i.e. not the real production
+// origin), Cloudflare Turnstile's challenge iframe legitimately 400s because the
+// widget's sitekey is registered only to the production domain. That is Cloudflare's
+// own domain-validation response, not an application defect, and the contact form
+// already degrades gracefully (see data-krh-ts-status / error-callback in the form
+// component). Only ignore it off production so a real production regression still fails.
+if (BASE) IGNORE.push(/challenges\.cloudflare\.com/i);
 const browser = await chromium.launch(process.env.PW_EXE ? { executablePath: process.env.PW_EXE } : {});
 const results = [];
 for (const url of urls) {
