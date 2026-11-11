@@ -39,7 +39,20 @@ jobs:
       - name: Post-build browser check (all sitemap URLs, local build)
         run: |
           npm install --no-save --no-package-lock playwright@1
-          npx playwright install --with-deps chromium-headless-shell
+          # Transient upstream apt mirror DNS failures (e.g. security.ubuntu.com)
+          # have caused this step to fail for reasons unrelated to app code.
+          # Retry with backoff before treating it as a real failure.
+          for attempt in 1 2 3; do
+            if npx playwright install --with-deps chromium-headless-shell; then
+              break
+            fi
+            echo "playwright install --with-deps failed (attempt $attempt/3), retrying after backoff..."
+            if [ "$attempt" = "3" ]; then
+              echo "playwright install failed after 3 attempts" >&2
+              exit 1
+            fi
+            sleep $((attempt * 20))
+          done
           python3 -m http.server 8830 -d . >/tmp/http.log 2>&1 &
           sleep 2
           node scripts/postbuild-check.mjs --base http://127.0.0.1:8830 --json /tmp/krh-postbuild.json
