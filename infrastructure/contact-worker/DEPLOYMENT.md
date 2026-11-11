@@ -1,3 +1,11 @@
+> **SUPERSEDED (2026-11-11 independent release review).** Do not follow this runbook for PR #18. It is wrong in these ways:
+> - Email: PR #18 sends through the Resend API, not Cloudflare Email Routing / `send_email` (see `src/worker.mjs` Resend calls).
+> - Hosting: the static site is GitHub Pages built from `main`, not Cloudflare Pages. Static rollback is `git revert` on `main`.
+> - Secrets: `wrangler secret put` creates AND immediately deploys a new Worker version (https://developers.cloudflare.com/workers/configuration/secrets/). Never pipe values with `echo ... |`. Use `wrangler versions upload`, `wrangler versions secret put`, `wrangler versions deploy`.
+> - Waitlist: PR #18 has a dedicated waitlist path that sends an INTERNAL notification to KRH (not a confirmation to the subscriber).
+>
+> Use `DEPLOY-ROLLBACK-CHECKLIST.md` and `PROD-ACCEPTANCE-TESTS.md` in this folder instead.
+
 # Contact Worker — Deployment Runbook
 
 This document covers the exact steps to deploy the Cloudflare Worker and connect it to the website.  
