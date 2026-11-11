@@ -20,7 +20,7 @@ jobs:
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli
 
-      - name: Run Lighthouse against live site
+      - name: Run Lighthouse against live site (mobile)
         run: |
           lhci collect \
             --url="https://kestrelridgehealth.com/" \
@@ -28,51 +28,71 @@ jobs:
             --url="https://kestrelridgehealth.com/pilot/" \
             --url="https://kestrelridgehealth.com/evidence/" \
             --numberOfRuns=1 \
+            --settings.formFactor=mobile \
+            --settings.screenEmulation.mobile \
+            --settings.screenEmulation.width=412 \
+            --settings.screenEmulation.height=823 \
+            --settings.screenEmulation.deviceScaleFactor=2.625 \
+            --settings.throttlingMethod=simulate \
             --settings.onlyCategories="performance,accessibility,best-practices,seo" 2>&1 | tail -30
           echo "--- .lighthouseci contents ---"
           ls -la .lighthouseci/ 2>/dev/null || echo "no .lighthouseci dir"
 
-      - name: Parse and report scores
+      - name: Parse, report, and enforce score gates
         run: |
           python3 << 'PY'
-          import json, glob, os
+          import json, glob, os, sys
 
           report_files = glob.glob('.lighthouseci/lhr-*.json')
 
           if not report_files:
               print("No report files found in .lighthouseci/ — lhci collect may have failed")
-              exit(1)
+              sys.exit(1)
 
-          summary_lines = ['## Lighthouse Results\n', '| Page | Perf | Access | Best Prac | SEO |', '|------|------|--------|-----------|-----|']
+          # Required gates (mobile). A page below ANY threshold fails the job -
+          # this workflow previously only printed a warning emoji and always
+          # exited 0, so low scores never actually blocked anything.
+          GATES = {'performance': 90, 'accessibility': 95, 'best-practices': 95, 'seo': 95}
+
+          summary_lines = ['## Lighthouse Results (mobile)\n', '| Page | Perf | Access | Best Prac | SEO |', '|------|------|--------|-----------|-----|']
           all_ok = True
+          failures = []
 
           for rf in sorted(report_files):
               with open(rf) as f:
                   r = json.load(f)
               url = r.get('finalUrl','?')
               cats = r.get('categories', {})
-              perf   = int(cats.get('performance',{}).get('score',0)*100)
-              acc    = int(cats.get('accessibility',{}).get('score',0)*100)
-              bp     = int(cats.get('best-practices',{}).get('score',0)*100)
-              seo    = int(cats.get('seo',{}).get('score',0)*100)
+              scores = {
+                  'performance': int(cats.get('performance',{}).get('score',0)*100),
+                  'accessibility': int(cats.get('accessibility',{}).get('score',0)*100),
+                  'best-practices': int(cats.get('best-practices',{}).get('score',0)*100),
+                  'seo': int(cats.get('seo',{}).get('score',0)*100),
+              }
               slug = url.replace('https://kestrelridgehealth.com','') or '/'
-              flag = '' if (perf >= 80 and acc >= 90 and seo >= 90) else ' ⚠️'
-              summary_lines.append(f'| {slug}{flag} | {perf} | {acc} | {bp} | {seo} |')
-              if perf < 60 or seo < 80:
+              page_failed = [cat for cat, gate in GATES.items() if scores[cat] < gate]
+              flag = '' if not page_failed else ' ❌'
+              summary_lines.append(f"| {slug}{flag} | {scores['performance']} | {scores['accessibility']} | {scores['best-practices']} | {scores['seo']} |")
+              if page_failed:
                   all_ok = False
+                  failures.append(f"{slug}: " + ", ".join(f"{c}={scores[c]} (needs >= {GATES[c]})" for c in page_failed))
 
           summary_lines.append('')
-          summary_lines.append('> Targets: Performance ≥80, Accessibility ≥90, SEO ≥90')
+          summary_lines.append(f"> Required gates (mobile): Performance >= {GATES['performance']}, Accessibility >= {GATES['accessibility']}, Best Practices >= {GATES['best-practices']}, SEO >= {GATES['seo']}")
 
           summary = '\n'.join(summary_lines)
           print(summary)
 
-          # Write to GitHub step summary
           with open(os.environ.get('GITHUB_STEP_SUMMARY', '/dev/null'), 'a') as f:
               f.write(summary + '\n')
 
           if not all_ok:
-              print('\n⚠️  One or more pages below threshold — see details above')
+              print('\n❌ FAILING BUILD — one or more pages below required threshold:')
+              for line in failures:
+                  print('  - ' + line)
+              sys.exit(1)
+
+          print('\n✅ All pages meet required thresholds.')
           PY
 
       - name: Upload Lighthouse reports
