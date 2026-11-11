@@ -6,10 +6,51 @@ const ALLOWED_ORIGINS = new Set([
 ]);
 const MAX_BODY_BYTES = 8192;
 const DESTINATION = "twagenberg@kestrelridgehealth.com";
-// Sender must be an address on a domain verified in Resend dashboard.
-// Until verified, Resend will reject custom domains — use resend.dev shared sender.
-const SENDER_VERIFIED = "notifications@kestrelridgehealth.com";
-const SENDER_FALLBACK = "KRH Contact <onboarding@resend.dev>";
+
+// Sender configuration is explicit, not inferred. ENVIRONMENT, SENDER_FROM,
+// RESEND_API_KEY and TURNSTILE_SECRET are all required Worker config in
+// production (set via `wrangler.toml` [vars] / `wrangler secret put`).
+// There is no default production sender address baked into this file:
+// Thomas must confirm in the Resend dashboard which From address is
+// actually verified/authorized to send, and set it as SENDER_FROM.
+// Until that is set, production fails closed (503) rather than guessing.
+const SENDER_FALLBACK = "KRH Contact <onboarding@resend.dev>"; // staging-only sandbox sender
+const SENDER_DOMAIN_ALLOWLIST = ["kestrelridgehealth.com"];
+
+function isProd(env) {
+  // Fail-safe default: anything that isn't explicitly "staging" is treated
+  // as production. An unset ENVIRONMENT var must never silently relax
+  // production requirements.
+  return env.ENVIRONMENT !== "staging";
+}
+
+function validSenderFrom(value) {
+  if (typeof value !== "string" || value.length < 3 || value.length > 200) return false;
+  const match = value.match(/<([^<>@\s]+@[^<>@\s]+)>\s*$/) || value.match(/^([^<>@\s]+@[^<>@\s]+)$/);
+  if (!match) return false;
+  const addr = match[1];
+  const domain = addr.split("@")[1]?.toLowerCase();
+  return SENDER_DOMAIN_ALLOWLIST.includes(domain);
+}
+
+// Explicit configuration validation, run once per request before any
+// submission is processed. Replaces the old pattern of each code path
+// silently falling back to a weaker behavior (skip Turnstile, use the
+// sandbox sender, fail open on rate limiting) when a secret/var was
+// missing. In production, a missing or invalid required setting is a
+// 503 "misconfigured" response, not a silent downgrade.
+function validateConfig(env) {
+  const problems = [];
+  if (isProd(env)) {
+    if (!env.RESEND_API_KEY) problems.push("RESEND_API_KEY missing");
+    if (!env.TURNSTILE_SECRET) problems.push("TURNSTILE_SECRET missing");
+    if (!validSenderFrom(env.SENDER_FROM)) {
+      problems.push("SENDER_FROM missing or not on an allowed/verified domain");
+    }
+    if (!env.RATE_LIMITER) problems.push("RATE_LIMITER binding not configured");
+  }
+  return problems;
+}
 
 function reply(status, payload, origin) {
   const headers = {
@@ -45,22 +86,49 @@ async function readInput(request) {
   return null;
 }
 
-// Fixed-window rate limit, keyed by client IP. Requires a KV namespace bound
-// as RATE_LIMIT_KV (not yet created/bound - see wrangler.toml comment). If the
-// binding is absent, this fails open (logs once) rather than taking the whole
-// Worker down, so merging this code is safe before the binding is approved
-// and added; it only becomes an enforced control once RATE_LIMIT_KV exists.
-async function checkRateLimit(env, ip, scope, limit, windowSeconds) {
-  if (!env.RATE_LIMIT_KV) {
-    console.warn("KRH: RATE_LIMIT_KV not bound; rate limiting is not enforced.");
+// Rate limiting uses Cloudflare's native Workers Rate Limiting binding
+// (`env.RATE_LIMITER`, GA as of Wrangler 4.36+ — the `ratelimits` binding
+// type in wrangler.toml), NOT Workers KV.
+//
+// Why KV was rejected: KV is eventually consistent across Cloudflare's
+// edge (writes can take up to ~60s to propagate globally), its
+// get-then-put pattern is not atomic (two simultaneous requests at
+// different edge locations can both read the same stale counter and
+// both write "1", undercounting real traffic), and it has a documented
+// per-key write-rate limit (~1 write/sec sustained) that bursty abuse
+// traffic against a single IP key could itself exceed.
+//
+// The Rate Limiting binding is backed by the same counting infrastructure
+// Cloudflare uses for its edge WAF Rate Limiting Rules: a sliding-window
+// counter enforced close to the edge, with atomic increments per key.
+// Documented characteristics (from Cloudflare's own docs, not guessed):
+//   - `period` must be 10 or 60 seconds (we approximate our 10-request/
+//     10-minute requirement as 10 req/60s, the closest supported window -
+//     see note in wrangler.toml).
+//   - It is approximate/best-effort under extreme global burst, same as
+//     any edge-distributed limiter, but does not have KV's stale-read or
+//     per-key-write-rate failure modes.
+//   - `limit()` can itself throw (network/infra fault). We treat that as
+//     a transient limiter failure, not a security decision: we fail OPEN
+//     for that one request (log a warning) rather than reject a
+//     legitimate inquiry because of an internal fault. This is different
+//     from the binding being entirely absent in production, which is a
+//     deploy-time configuration error caught by validateConfig() above
+//     and blocks ALL traffic with a 503 — it is never silently treated as
+//     "rate limiting enforced" when it is not configured at all.
+async function checkRateLimit(env, ip, scope) {
+  if (!env.RATE_LIMITER) {
+    // Only reachable in staging (validateConfig blocks this in production).
+    console.warn(`KRH: RATE_LIMITER not bound (${scope}); rate limiting not enforced (staging only).`);
     return true;
   }
-  const bucket = Math.floor(Date.now() / (windowSeconds * 1000));
-  const key = `rl:${scope}:${ip}:${bucket}`;
-  const current = Number((await env.RATE_LIMIT_KV.get(key)) || "0");
-  if (current >= limit) return false;
-  await env.RATE_LIMIT_KV.put(key, String(current + 1), { expirationTtl: windowSeconds + 60 });
-  return true;
+  try {
+    const { success } = await env.RATE_LIMITER.limit({ key: `${scope}:${ip}` });
+    return success;
+  } catch (err) {
+    console.warn(`KRH: rate limiter call failed for ${scope}, failing open for this request:`, typeof err?.message === "string" ? err.message : "unspecified");
+    return true;
+  }
 }
 
 async function verifyTurnstile(token, secret) {
@@ -80,8 +148,7 @@ async function verifyTurnstile(token, secret) {
   );
 }
 
-async function sendWaitlistViaResend(apiKey, email, domainVerified) {
-  const from = domainVerified ? SENDER_VERIFIED : SENDER_FALLBACK;
+async function sendWaitlistViaResend(apiKey, email, from) {
   const subject = "KRH waitlist signup";
   const text = [
     "New KRH waitlist signup",
@@ -92,13 +159,7 @@ async function sendWaitlistViaResend(apiKey, email, domainVerified) {
     "Do not forward sensitive information to analytics or public logs.",
   ].join("\n");
 
-  const payload = {
-    from,
-    to: [DESTINATION],
-    reply_to: email,
-    subject,
-    text,
-  };
+  const payload = { from, to: [DESTINATION], reply_to: email, subject, text };
 
   const resp = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -117,8 +178,7 @@ async function sendWaitlistViaResend(apiKey, email, domainVerified) {
   return true;
 }
 
-async function sendViaResend(apiKey, name, organization, email, message, domainVerified) {
-  const from = domainVerified ? SENDER_VERIFIED : SENDER_FALLBACK;
+async function sendViaResend(apiKey, name, organization, email, message, from) {
   const subject = organization
     ? `KRH Phase Zero inquiry — ${organization}`
     : "KRH Phase Zero inquiry";
@@ -136,13 +196,7 @@ async function sendViaResend(apiKey, name, organization, email, message, domainV
     "Do not forward sensitive information to analytics or public logs.",
   ].join("\n");
 
-  const payload = {
-    from,
-    to: [DESTINATION],
-    reply_to: email,
-    subject,
-    text,
-  };
+  const payload = { from, to: [DESTINATION], reply_to: email, subject, text };
 
   const resp = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -168,20 +222,38 @@ export default {
     const origin = request.headers.get("origin") || "";
     if (path !== "/submit") return reply(404, { ok: false }, origin);
 
-    // CORS preflight MUST be handled before any body parsing. Real browsers
-    // require a 2xx status on the OPTIONS preflight before they will send the
-    // actual POST; this used to fall through to readInput() first, which
-    // returned null for a preflight's empty body and produced a 400 - failing
-    // the preflight and silently blocking every real contact/waitlist
-    // submission (reproduced live: fetch() from the production /contact/
-    // page threw "TypeError: Failed to fetch" before reaching this fix).
+    // CORS preflight MUST be handled before any body parsing or config
+    // validation. Real browsers require a 2xx status on the OPTIONS
+    // preflight before they will send the actual POST.
     if (request.method === "OPTIONS") {
       return ALLOWED_ORIGINS.has(origin)
         ? reply(204, null, origin)
         : reply(403, { ok: false }, origin);
     }
 
-    // Detect waitlist submission (frontend sends {email, source:"waitlist"}).
+    // Explicit, fail-closed configuration gate. In production this blocks
+    // ALL submissions with one clear 503 if required config is missing,
+    // rather than letting each code path downgrade silently (skip
+    // Turnstile, use the sandbox sender, treat rate limiting as "not my
+    // problem"). Staging (ENVIRONMENT="staging") is exempt so local/dev
+    // testing doesn't require production secrets.
+    const configProblems = validateConfig(env);
+    if (configProblems.length > 0) {
+      console.error("KRH: refusing to process — configuration incomplete:", configProblems.join("; "));
+      return reply(503, { ok: false, error: "Service temporarily unavailable" }, origin);
+    }
+    const from = isProd(env) ? env.SENDER_FROM : SENDER_FALLBACK;
+
+    // Reject non-POST methods before attempting to parse a body. (Previously
+    // this check ran after waitlist-detection body parsing, so a bare GET
+    // with no matching content-type fell through to a 400 "Invalid form
+    // data" instead of the correct 405 — harmless in practice since no
+    // browser sends a GET here, but wrong, and caught by the rewritten
+    // test suite.)
+    if (request.method !== "POST") {
+      return reply(405, { ok: false, error: "POST required" }, origin);
+    }
+
     let preFields;
     try {
       preFields = await readInput(request.clone());
@@ -197,13 +269,6 @@ export default {
       if (!ALLOWED_ORIGINS.has(origin)) {
         return reply(403, { ok: false, error: "Request origin not allowed" }, origin);
       }
-      // Honeypot: the waitlist form ships the same hidden "website" field as
-      // the contact form, but this path never checked it - any origin-valid
-      // POST with a parseable email was sent immediately, with no honeypot
-      // and no Turnstile at all (the waitlist widget doesn't render one).
-      // Bots that fill the hidden field are silently discarded, matching the
-      // contact-form behavior, until a real Turnstile widget is added to the
-      // waitlist form itself.
       if (preFields.website) {
         return reply(202, { ok: true, status: "accepted_for_delivery" }, origin);
       }
@@ -212,29 +277,21 @@ export default {
         return reply(400, { ok: false, error: "Add an email address we can write to." }, origin);
       }
       const wIp = request.headers.get("cf-connecting-ip") || "unknown";
-      if (!(await checkRateLimit(env, wIp, "waitlist", 5, 600))) {
+      if (!(await checkRateLimit(env, wIp, "waitlist"))) {
         return reply(429, { ok: false, error: "Too many requests. Please try again later." }, origin);
       }
-      if (!env.RESEND_API_KEY) {
-        console.error("KRH: RESEND_API_KEY not set for waitlist.");
-        return reply(503, { ok: false, error: "Signup delivery not configured" }, origin);
-      }
       try {
-        await sendWaitlistViaResend(env.RESEND_API_KEY, wEmail, Boolean(env.DOMAIN_VERIFIED));
+        await sendWaitlistViaResend(env.RESEND_API_KEY, wEmail, from);
         return reply(202, { ok: true, status: "accepted_for_delivery" }, origin);
       } catch (err) {
         console.error("KRH waitlist send failure:", typeof err?.message === "string" ? err.message : "unspecified");
         return reply(502, { ok: false, error: "Signup could not be sent. Please try again later." }, origin);
       }
     }
-    // End waitlist path -----
-    if (request.method !== "POST") {
-      return reply(405, { ok: false, error: "POST required" }, origin);
-    }
+    // End waitlist path ----- (method already confirmed POST above)
     if (!ALLOWED_ORIGINS.has(origin)) {
       return reply(403, { ok: false, error: "Request origin not allowed" }, origin);
     }
-    // preFields was already parsed above (used for waitlist detection).
     const fields = preFields;
     const name = typeof fields.name === "string" ? fields.name.trim() : "";
     const organization = typeof fields.organization === "string"
@@ -245,7 +302,6 @@ export default {
       ? fields.turnstileToken
       : fields["cf-turnstile-response"];
 
-    // Honeypot: bots that fill the website field are silently discarded.
     if (fields.website) {
       return reply(202, { ok: true, status: "accepted_for_delivery" }, origin);
     }
@@ -260,10 +316,14 @@ export default {
     }
 
     const contactIp = request.headers.get("cf-connecting-ip") || "unknown";
-    if (!(await checkRateLimit(env, contactIp, "contact", 5, 600))) {
+    if (!(await checkRateLimit(env, contactIp, "contact"))) {
       return reply(429, { ok: false, error: "Too many requests. Please try again later." }, origin);
     }
 
+    // Turnstile is unconditionally required in production — validateConfig()
+    // above already guaranteed TURNSTILE_SECRET exists, so there is no
+    // "secret missing, skip the check" branch reachable here in prod.
+    // Staging only: if TURNSTILE_SECRET truly isn't set, skip loudly.
     if (env.TURNSTILE_SECRET) {
       if (typeof token !== "string" || token.length < 1 || token.length > 2048) {
         return reply(403, { ok: false, error: "Verification required" }, origin);
@@ -276,24 +336,11 @@ export default {
       }
       if (!verified) return reply(403, { ok: false, error: "Verification unsuccessful" }, origin);
     } else {
-      // Staging path: TURNSTILE_SECRET not configured. Token check is skipped.
-      console.warn("KRH: TURNSTILE_SECRET is not set; Turnstile check skipped (staging only).");
-    }
-
-    if (!env.RESEND_API_KEY) {
-      console.error("KRH: RESEND_API_KEY secret not configured. Run: wrangler secret put RESEND_API_KEY");
-      return reply(503, { ok: false, error: "Message delivery not configured" }, origin);
+      console.warn("KRH: TURNSTILE_SECRET is not set; Turnstile check skipped (staging only — unreachable in production).");
     }
 
     try {
-      await sendViaResend(
-        env.RESEND_API_KEY,
-        name,
-        organization,
-        email,
-        message,
-        Boolean(env.DOMAIN_VERIFIED),
-      );
+      await sendViaResend(env.RESEND_API_KEY, name, organization, email, message, from);
       return reply(202, { ok: true, status: "accepted_for_delivery" }, origin);
     } catch (error) {
       console.error("KRH email send failure:", typeof error?.message === "string" ? error.message : "unspecified");

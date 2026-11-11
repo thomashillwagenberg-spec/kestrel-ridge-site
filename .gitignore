@@ -5,3 +5,4 @@ __pycache__/
 # Local Cloudflare account cache and development state
 .wrangler/
 **/.wrangler/
+.dev.vars

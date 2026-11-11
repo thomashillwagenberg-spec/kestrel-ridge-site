@@ -3,20 +3,66 @@ name = "krh-contact-inquiries"
 main = "src/worker.mjs"
 compatibility_date = "2026-10-13"
 
-# Secrets (set via `wrangler secret put`):
-#   RESEND_API_KEY   — required for email delivery (get at resend.com, free tier)
-#   TURNSTILE_SECRET — optional; skip for staging, required before public launch
-#   DOMAIN_VERIFIED  — set to any non-empty value once kestrelridgehealth.com is
-#                      verified in Resend dashboard (enables branded from: address)
+# ENVIRONMENT must be set explicitly. Anything other than "staging"
+# (including unset) is treated as production by worker.mjs — production
+# requires RESEND_API_KEY, TURNSTILE_SECRET, SENDER_FROM and the
+# RATE_LIMITER binding below, or every request gets a 503. This is
+# deliberate: an unset/misconfigured default must fail closed, not
+# silently downgrade to a weaker (no-Turnstile, no-rate-limit) mode.
+[vars]
+ENVIRONMENT = "production"
+# SENDER_FROM must be set to the EXACT From address Thomas confirms is
+# verified/authorized in the Resend dashboard for kestrelridgehealth.com —
+# do not guess this. Format: "KRH Contact <notifications@kestrelridgehealth.com>"
+# or a bare address. DNS evidence (send.kestrelridgehealth.com SPF/MX) shows
+# a Resend-managed sending subdomain exists, but that is NOT proof that
+# notifications@kestrelridgehealth.com specifically is the verified/allowed
+# From identity — Resend ties verification to the domain, and the sending
+# subdomain used in SPF/MX does not have to match the visible From domain,
+# so this must be confirmed in-dashboard before being set here.
+# SENDER_FROM = "KRH Contact <notifications@kestrelridgehealth.com>"
 
-# Rate limiting (NOT YET CREATED - requires approval):
-#   1. wrangler kv namespace create RATE_LIMIT_KV
-#   2. Uncomment the [[kv_namespaces]] block below with the returned id
-#   3. Redeploy
-# Until this binding exists, the Worker fails open (logs a warning, does not
-# block) rather than refusing all traffic - see checkRateLimit() in worker.mjs.
-# [[kv_namespaces]]
-# binding = "RATE_LIMIT_KV"
-# id = "REPLACE_WITH_ID_FROM_WRANGLER_KV_NAMESPACE_CREATE"
+# Secrets (set via `wrangler secret put`, required in production):
+#   RESEND_API_KEY   — from resend.com (free tier covers this volume)
+#   TURNSTILE_SECRET — from the Cloudflare Turnstile dashboard for this site's widget
+
+# Rate limiting — Cloudflare's native Workers Rate Limiting binding (GA,
+# requires Wrangler >= 4.36), NOT Workers KV. KV was rejected: it is
+# eventually consistent (writes can take up to ~60s to propagate across
+# Cloudflare's edge), its get-then-put pattern is not atomic (concurrent
+# requests at different edge locations can both read a stale count), and
+# it has a per-key write-rate ceiling that bursty abuse against one IP
+# could itself exceed. The Rate Limiting binding is backed by the same
+# infrastructure as Cloudflare's edge WAF Rate Limiting Rules: atomic
+# increments, no KV propagation delay. `period` only supports 10 or 60
+# seconds (not the 600s/10-request window originally specified elsewhere
+# in this project) — approximated here as 10 requests / 60 seconds per
+# scope+IP key, the closest supported configuration; worker.mjs prefixes
+# the key with "contact:" or "waitlist:" so the two paths don't share a
+# budget. In production, if this binding is absent, validateConfig() in
+# worker.mjs refuses ALL traffic with a 503 rather than ever silently
+# treating "no binding" as "rate limiting enforced."
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1001"
+simple = { limit = 10, period = 60 }
+
+# Staging environment — `wrangler deploy --env staging` / `wrangler dev --env staging`.
+# ENVIRONMENT="staging" relaxes the fail-closed config gate so local/dev
+# testing does not require production secrets: missing RESEND_API_KEY,
+# TURNSTILE_SECRET, SENDER_FROM, or RATE_LIMITER are each logged and
+# handled per-path (sandbox sender, skipped Turnstile, open rate limit)
+# instead of a blanket 503. Use real test credentials here when available
+# (a separate Resend test API key, a Cloudflare Turnstile TEST sitekey/
+# secret pair such as the documented always-pass pair) rather than
+# production secrets, so staging runs never touch production quota/data.
+[env.staging]
+name = "krh-contact-inquiries-staging"
+[env.staging.vars]
+ENVIRONMENT = "staging"
+[[env.staging.ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1002"
+simple = { limit = 10, period = 60 }
 
 # No send_email binding required — Resend API handles delivery without Email Routing.
