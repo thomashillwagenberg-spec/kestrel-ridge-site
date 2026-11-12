@@ -10,7 +10,7 @@ Record for each step: time (UTC), result, evidence (screenshot or command output
 | A2 | Secret names present | `npx wrangler secret list` (names only) | `RESEND_API_KEY`, `TURNSTILE_SECRET`, `SENDER_FROM` (unless SENDER_FROM is a var) listed; no values printed |
 | A3 | Browser preflight, allowed origin | `curl -s -o /dev/null -w '%{http_code}\n' -X OPTIONS -H 'Origin: https://kestrelridgehealth.com' -H 'Access-Control-Request-Method: POST' https://krh-contact-inquiries.thomas-ec7.workers.dev/submit` and also check the Network tab on `/contact/` | 204 with `Access-Control-Allow-Origin: https://kestrelridgehealth.com` |
 | A4 | Preflight, foreign origin | same with `Origin: https://evil.example` | 403, no ACAO |
-| A5 | Frontend build | View source / grep the live JS chunk for `krh_contact` (if B1 was fixed on the frontend) | present; Pages build succeeded |
+| A5 | Frontend build | View source / grep the live `/contact/` JS chunk for `action:"krh_contact"` | present; Pages build succeeded |
 | A6 | Turnstile | Desktop browser, `/contact/`: widget renders and completes | token issued; no console errors besides known challenge-iframe noise |
 | A7 | Contact path, one submission | Fill the form with a clearly marked test ("ACCEPTANCE TEST, ignore"), submit once | Network: POST 202 `{"ok":true,"status":"accepted_for_delivery"}`; page shows the success message (not an error, not a mailto fallback) |
 | A8 | Waitlist path, one submission | Submit one waitlist signup with a test address Thomas controls | POST 202; page shows the waitlist success message |

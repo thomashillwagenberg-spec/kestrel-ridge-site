@@ -16,7 +16,7 @@ Re-check the syntax with `npx wrangler versions --help` on the day; Wrangler cha
 
 | Component | Hosted on | Change in this release | Rollback |
 |---|---|---|---|
-| Static site (HTML/JS, Turnstile render) | GitHub Pages, legacy build from `main` `/` | Only if B1 is fixed on the frontend | `git revert <merge-sha>` on `main`, push, wait for the Pages build, hard-refresh. No Cloudflare Pages is involved. |
+| Static site (HTML/JS, Turnstile render) | GitHub Pages, legacy build from `main` `/` | Yes: PR #18 ships the rebuilt `/contact/` chunk with `action:"krh_contact"` | `git revert <merge-sha>` on `main`, push, wait for the Pages build, hard-refresh. No Cloudflare Pages is involved. |
 | Edge proxy, DNS, WAF/security rules | Cloudflare zone `kestrelridgehealth.com` | None. Do not change. | n/a. If anything was touched by mistake, restore from the Cloudflare audit log. |
 | Contact Worker `krh-contact-inquiries` | Cloudflare Workers (`*.workers.dev`) | New code + secrets + rate-limit bindings | `npx wrangler rollback 9f1006ea-84e5-4f55-b46b-13cb85a47402 --message "rollback"` or `npx wrangler versions deploy 9f1006ea-84e5-4f55-b46b-13cb85a47402@100%`. Note: that version has no secrets and is already non-working (preflight returns 400), so rollback restores "broken but sends nothing", not a working form. |
 | Resend | Resend account, domain `kestrelridgehealth.com` | None (read-only confirmation) | Revoke/rotate the API key in the Resend dashboard if it leaked. |
@@ -65,7 +65,7 @@ The current live version is already non-functional (preflight 400, no secrets), 
 - Direct (recommended here, since the old version cannot serve anyone): `npx wrangler versions deploy FINAL_ID@100% --message "PR18 full"`.
 
 - [ ] `npx wrangler deployments list` shows FINAL_ID at the intended percentage.
-- [ ] If B1 is fixed on the frontend: merge the frontend change to `main` only after the Worker is live, wait for the GitHub Pages build to succeed, confirm the new chunk is served (grep the live JS for `krh_contact`).
+- [ ] Immediately after the Worker is live (contact gets 403 and falls back to mailto: until the new chunk is served): merge PR #18 to `main`, wait for the GitHub Pages build to succeed, confirm the new chunk is served (grep the live JS for `krh_contact`).
 
 ## 4. Verify
 
@@ -76,7 +76,7 @@ Run PROD-ACCEPTANCE-TESTS.md. One controlled submission per path. No bursts agai
 Trigger rollback if any of: preflight not 204, a submission returns 5xx, Resend shows a rejected/failed send, no Outlook receipt within 10 minutes, wrong user-facing message, unexpected error volume in `npx wrangler tail` (read-only log stream).
 
 1. Worker: `npx wrangler rollback 9f1006ea-84e5-4f55-b46b-13cb85a47402 --message "rollback PR18"` (or `versions deploy <id>@100%`). Secrets travel with versions; the old version has none.
-2. Static site (only if a frontend change shipped): `git revert <merge-sha>` on `main`, push, wait for GitHub Pages.
+2. Static site: `git revert -m 1 <merge-sha>` on `main`, push, wait for GitHub Pages.
 3. Secret wrong (e.g. SENDER_FROM): do NOT use `wrangler secret put` as a "quick fix" unless Thomas accepts that it deploys immediately. Preferred: `versions secret put` then `versions deploy <new>@100%`.
 4. Leaked key: rotate in Resend / Turnstile dashboards, then stage and deploy the new value as above.
 5. Confirm with `npx wrangler deployments list` and one OPTIONS preflight.
