@@ -4,7 +4,17 @@ url: https://kestrelridgehealth.com/screening-schedule-changes-technician-covera
 description: "A practical review for independent eye clinics changing a care pathway, prompted by the AAO’s November 4 journal update on screening timing."
 ---
 
-THE PRACTICAL TAKEAWAY
+# When screening schedules change, recheck technician coverage
+
+A practical review of the work, skills and coverage behind an approved care-pathway change.
+
+By Thomas Wagenberg · November 4, 2026 · 4 min read
+
+![Fictional eye-clinic diagnostic room with a retinal camera and two blank paper planners.](https://kestrelridgehealth.com/assets/screening-workflow-editorial.jpg)
+
+*AI-generated editorial illustration of a fictional clinic. Equipment is generic and no patient or customer is depicted.*
+
+The practical takeaway
 
 I'd map the affected visits, tasks, sites and half-days before changing technician coverage. Then I'd measure where work actually moves and check competencies, availability and supervision. A lower visit count alone doesn't establish usable staffing capacity.
 

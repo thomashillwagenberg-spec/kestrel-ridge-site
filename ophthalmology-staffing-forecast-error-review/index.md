@@ -4,7 +4,17 @@ url: https://kestrelridgehealth.com/ophthalmology-staffing-forecast-error-review
 description: "Check forecast error, session data and coverage decisions with a practical review process for independent ophthalmology practices."
 ---
 
-THE PRACTICAL TAKEAWAY
+# How to review an ophthalmology staffing forecast that misses
+
+A practical way to investigate a workload miss, compare the same sessions and decide whether to continue using a forecast.
+
+By Thomas Wagenberg · November 6, 2026 · 5 min read
+
+![Fictional clinic workroom with a blank clipboard, closed folder and calculator beside an exam-room doorway.](https://kestrelridgehealth.com/assets/forecast-error-review-3d3aad73.jpg)
+
+*AI-generated editorial illustration of a fictional clinic. No patient or customer is depicted.*
+
+The practical takeaway
 
 I'd preserve the original prediction, check how technician minutes were measured and compare errors with the existing planning method on the same sessions. Then document whether the issue concerns data, demand or coverage, and record a named decision to continue, pause or stop.
 

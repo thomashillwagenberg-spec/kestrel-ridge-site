@@ -4,7 +4,17 @@ url: https://kestrelridgehealth.com/ophthalmology-waitlist-technician-coverage/
 description: "An ophthalmology waitlist checklist for checking technician time, imaging and room coverage before booking a replacement visit."
 ---
 
-THE PRACTICAL TAKEAWAY
+# Before refilling an ophthalmology cancellation, check technician coverage
+
+Before you offer a canceled appointment to someone on the waitlist, check that the replacement visit fits the technician and equipment schedule.
+
+By Thomas Wagenberg · November 11, 2026 · 4 min read
+
+![A scheduling desk overlooking an empty eye exam room with an exam chair and slit lamp.](https://kestrelridgehealth.com/assets/waitlist-coverage-20261109.jpg)
+
+*AI-generated editorial illustration of a fictional eye clinic.*
+
+The practical takeaway
 
 I'd confirm the cancellation, match the replacement visit to your waitlist rules and check technician, room and equipment coverage at the time the work will happen. Ask the person responsible for the schedule to approve any change that affects another commitment.
 

@@ -4,17 +4,17 @@ url: https://kestrelridgehealth.com/ophthalmology-staffing-forecast-readiness/
 description: "A practical readiness checklist and blank worksheet for independent ophthalmology practices evaluating technician workload forecasting."
 ---
 
-Planning guide / Independent ophthalmology practices
-
 # Before you buy a staffing forecast, check your session data
 
-By Thomas Wagenberg · Kestrel Ridge Health · Published 2026-11-02 · Updated 2026-11-04 · 6 minute read
+A practical readiness checklist and blank worksheet for independent ophthalmology practices evaluating technician workload forecasting.
+
+By Thomas Wagenberg · November 2, 2026 · Updated November 4, 2026 · 6 min read
 
 ![Illustration of a blank planning worksheet and closed laptop beside an ophthalmology exam room.](https://kestrelridgehealth.com/assets/session-readiness-editorial.jpg)
 
 *AI-generated editorial illustration of a fictional clinic. No customer or patient is depicted.*
 
-The starting point
+The practical takeaway
 
 I'd start with a consistent definition of a clinic session, appointment counts by visit type and a clear measure of technician work. Then I'd compare the forecast with the method the practice already uses, on sessions the model hasn't seen. If it can't make a better case than that, I wouldn't move forward.
 

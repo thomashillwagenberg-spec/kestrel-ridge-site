@@ -4,7 +4,17 @@ url: https://kestrelridgehealth.com/adding-ophthalmologist-technician-coverage/
 description: "Compare launch options, shared testing resources and cross-site coverage before opening a new physician’s appointment template."
 ---
 
-THE PRACTICAL TAKEAWAY
+# Adding an ophthalmologist? Check technician coverage first
+
+A practical launch review for independent practices adding physician sessions, prompted by today’s ESCRS discussion of practice expansion.
+
+By Thomas Wagenberg · November 5, 2026 · 4 min read
+
+![Fictional independent eye clinic corridor with two adjacent diagnostic rooms and a blank planning board.](https://kestrelridgehealth.com/assets/physician-launch-coverage-8175121698.jpg)
+
+*AI-generated editorial illustration of a fictional clinic. Equipment is generic; no patient or customer is depicted.*
+
+The practical takeaway
 
 I'd compare the new session with existing demand before opening the template. Check shared technicians, testing resources, competencies and cross-site travel. Then choose a feasible launch option, record its dependencies and agree when to review the first sessions.
 
