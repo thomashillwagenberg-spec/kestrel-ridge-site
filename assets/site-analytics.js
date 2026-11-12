@@ -1,4 +1,6 @@
 (() => {
+  if (window.__krhStaticAnalyticsReady) return;
+  window.__krhStaticAnalyticsReady = true;
   const ID = 'G-7X0ZX70KQK';
   const KEY = 'krh-analytics-choice-v1';
   const DAYS = 180 * 24 * 60 * 60;
@@ -8,6 +10,9 @@
   let panel;
   const sheet = document.createElement('link');
   sheet.rel = 'stylesheet'; sheet.href = '/assets/site-analytics.css'; document.head.appendChild(sheet);
+  function directoryPath(path) {
+    return path.replace(/\/index\.html$/, '/').replace(/\/?$/, '/');
+  }
   function readChoice() {
     try {
       const value = JSON.parse(localStorage.getItem(KEY));
@@ -37,7 +42,7 @@
     let referrer = '';
     try { if (document.referrer) referrer = new URL(document.referrer).origin; } catch {}
     window.gtag('config', ID, {
-      send_page_view: true, page_location: location.origin + location.pathname, page_referrer: referrer,
+      send_page_view: true, page_location: location.origin + directoryPath(location.pathname), page_referrer: referrer,
       allow_google_signals: false, allow_ad_personalization_signals: false,
       cookie_expires: DAYS, cookie_update: false,
     });
@@ -83,8 +88,10 @@
     if (!link) return;
     let target;
     try { target = new URL(link.href, location.origin); } catch { return; }
-    if (target.origin === location.origin && target.pathname === '/contact/') {
-      window.gtag('event', 'consultation_link_click', { source_page: location.pathname, link_path: '/contact/' });
+    if (target.origin === location.origin && directoryPath(target.pathname) === '/contact/') {
+      window.gtag('event', 'consultation_link_click', {
+        source_page: directoryPath(location.pathname), link_path: '/contact/',
+      });
     }
   });
 })();

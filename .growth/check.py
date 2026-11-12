@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check indexable pages, reviewed content, local links and optional live deployment."""
 from html.parser import HTMLParser
+from functools import lru_cache
 from pathlib import Path
 from urllib.parse import urlparse, unquote
 from urllib.request import Request, urlopen
@@ -14,7 +15,7 @@ from build import ROOT, BASE, NS, check_article
 
 class Page(HTMLParser):
     def __init__(self):
-        super().__init__(); self.h1=0; self.canon=[]; self.links=[]; self.description=[]; self.robots=[]; self.images=[]; self.jsonld=[]; self.capture=False
+        super().__init__(); self.h1=0; self.canon=[]; self.links=[]; self.description=[]; self.robots=[]; self.images=[]; self.scripts=[]; self.jsonld=[]; self.capture=False
     def handle_starttag(self,t,a):
         a=dict(a)
         if t=='h1': self.h1+=1
@@ -25,6 +26,7 @@ class Page(HTMLParser):
             v=a.get('href',a.get('src',''))
             if v.startswith('/'): self.links.append(v)
         if t=='img': self.images.append(a)
+        if t=='script' and a.get('src'): self.scripts.append(a['src'])
         if t=='script' and a.get('type')=='application/ld+json': self.capture=True
     def handle_endtag(self,t):
         if t=='script': self.capture=False
@@ -44,6 +46,36 @@ def deployment_bytes(data, path):
     data=re.sub(rb'<script\b[^>]*src="https://static\.cloudflareinsights\.com/beacon\.min\.js/[^"<>]+"[^>]*data-cf-beacon=\'[^\']*\'[^>]*></script>',b'',data)
     return re.sub(rb'>\s+<',b'><',data).strip()
 
+@lru_cache(maxsize=None)
+def is_bundled_analytics(path):
+    if not path.is_file():
+        return False
+    text = path.read_text()
+    return all(marker in text for marker in (
+        'G-7X0ZX70KQK', 'krh-analytics-choice-v1', 'googletagmanager.com/gtag/js',
+    ))
+
+
+def analytics_errors(scripts, url, root=ROOT):
+    """Every sitemap page must load exactly one of the existing consent implementations."""
+    loaders = 0
+    errors = []
+    for script in scripts:
+        src = urlparse(script)
+        if src.hostname == 'www.googletagmanager.com' and src.path in ('/gtag/js', '/gtm.js'):
+            errors.append(f'{url}: Google tag bypasses the site consent loader')
+        if src.netloc:
+            continue
+        if src.path == '/assets/site-analytics.js':
+            loaders += 1
+        elif src.path.startswith('/_next/static/chunks/') and src.path.endswith('.js'):
+            path = root / src.path.lstrip('/')
+            loaders += is_bundled_analytics(path)
+    if loaders != 1:
+        errors.append(f'{url}: expected one consent analytics implementation, got {loaders}')
+    return errors
+
+
 def inspect(text,url):
     p=Page();p.feed(text); errors=[]
     if p.h1!=1: errors.append(f'{url}: expected one h1, got {p.h1}')
@@ -51,6 +83,7 @@ def inspect(text,url):
     if len(p.description)!=1 or not p.description[0]: errors.append(f'{url}: missing description')
     if any('noindex' in r for r in p.robots): errors.append(f'{url}: noindex')
     if re.search(r'\$\s*7[,.]?500|\bUSD\s*7[,.]?500|\b7500\s*dollars',text,re.I): errors.append(f'{url}: retired price')
+    errors.extend(analytics_errors(p.scripts, url))
     for link in p.links:
         if not local_path(link).exists(): errors.append(f'{url}: missing local target {link}')
     return errors
