@@ -1,7 +1,7 @@
 ---
-title: "Ophthalmic Staffing Software | Kestrel Ridge Health"
+title: "Ophthalmology Staffing Software for Eye Clinics | Kestrel Ridge Health"
 url: https://kestrelridgehealth.com/
-description: "Phase Zero is a diagnostic that scores a session-level staffing forecast against your current ratio, using your own history. Synthetic validation data only."
+description: "Kestrel Ridge Health is ophthalmology staffing software that forecasts technician workload for each clinic session and drafts a staffing plan for multi-site eye clinics. Synthetic validation only; Phase Zero tests it on your own history."
 ---
 
 ![An ophthalmology exam room with a slit lamp and phoropter](assets/p1.jpg)
@@ -14,12 +14,12 @@ description: "Phase Zero is a diagnostic that scores a session-level staffing fo
 
 1 recognition
 
-Technician staffing software for eye clinics
+Ophthalmology staffing software for multi-site eye clinics
 
 # Same patient count.   
 Different technician workload.
 
-Plan technician staffing session by session. Forecast the minutes each session will need, then staff it under eight rules the system does not relax, with a person approving every plan.
+Kestrel Ridge Health is ophthalmology staffing software. It forecasts the technician minutes each clinic session will need, then drafts a staffing plan under eight rules the system does not relax, with a person approving every plan.
 
 **Phase Zero** is a diagnostic scoped to your clinic. If the forecast does not beat both the ratio you use today and a historical average, the engagement stops there.
 

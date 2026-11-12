@@ -63,8 +63,8 @@
   human staffing decisions.
 
 <!-- AUTOGEN:pages BEGIN (scripts/gen_markdown.py; do not edit by hand) -->
-## All pages (30, with Markdown copies)
-- [Ophthalmic Staffing Software](https://kestrelridgehealth.com/) ([markdown](https://kestrelridgehealth.com/index.md)): Phase Zero is a diagnostic that scores a session-level staffing forecast against your current ratio, using your own history. Synthetic validation data only.
+## All pages (31, with Markdown copies)
+- [Ophthalmology Staffing Software for Eye Clinics](https://kestrelridgehealth.com/) ([markdown](https://kestrelridgehealth.com/index.md)): Kestrel Ridge Health is ophthalmology staffing software that forecasts technician workload for each clinic session and drafts a staffing plan for multi-site eye clinics. Synthetic validation only; Phase Zero tests it on your own history.
 - [Accessibility Statement](https://kestrelridgehealth.com/accessibility/) ([markdown](https://kestrelridgehealth.com/accessibility/index.md)): What we target, what we checked and when, the limitations we know about, and how to tell us about a barrier on this site.
 - [Ask About Phase Zero](https://kestrelridgehealth.com/contact/) ([markdown](https://kestrelridgehealth.com/contact/index.md)): Ask about Phase Zero, a diagnostic that scores a staffing forecast against your current method and a historical average. An export, not a new workflow. Data handling agreed with your privacy office before anything moves.
 - [Staffing Forecast Accuracy](https://kestrelridgehealth.com/evidence/) ([markdown](https://kestrelridgehealth.com/evidence/index.md)): Mean absolute error against the fixed technician-to-provider ratio and the historical mean, where the forecast is weakest, and the claims we will not make.
@@ -94,4 +94,5 @@
 - [How to spot a technician coverage gap during an eye clinic session](https://kestrelridgehealth.com/ophthalmology-technician-coverage-by-time-block/) ([markdown](https://kestrelridgehealth.com/ophthalmology-technician-coverage-by-time-block/index.md)): Use a time-block worksheet to find ophthalmic technician coverage gaps before publishing an eye clinic schedule.
 - [Ophthalmology schedule changes: a front desk and technician handoff checklist](https://kestrelridgehealth.com/ophthalmology-schedule-change-handoff/) ([markdown](https://kestrelridgehealth.com/ophthalmology-schedule-change-handoff/index.md)): Use a six-item handoff when an ophthalmology schedule changes, with a clear owner, a read-back and a decision deadline.
 - [Can EHR timestamps measure ophthalmic technician workload?](https://kestrelridgehealth.com/ehr-timestamps-ophthalmic-technician-workload/) ([markdown](https://kestrelridgehealth.com/ehr-timestamps-ophthalmic-technician-workload/index.md)): Compare EHR timestamps with observed technician work before using them to forecast staffing in an ophthalmology clinic.
+- [Ophthalmology Staffing Software: Options Compared](https://kestrelridgehealth.com/ophthalmology-staffing-software-compared/) ([markdown](https://kestrelridgehealth.com/ophthalmology-staffing-software-compared/index.md)): How eye clinics plan technician staffing today: fixed ratios, spreadsheets, EHR scheduling, general workforce tools and session-level forecasting. What each can and cannot tell you.
 <!-- AUTOGEN:pages END -->
