@@ -77,7 +77,7 @@
   font-size: 0.9375rem;
   line-height: 1.6;
 }
-.kr-stop-rule-callout strong { color: var(--color-primary, #1f3d3a); }
+.kr-stop-rule-callout strong { color: inherit; } /* was --color-primary: 1.29:1 on the navy pilot band */
 
 /* ---------- Hormozi value-equation CTA band ---------- */
 .kr-value-cta {

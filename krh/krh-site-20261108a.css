@@ -411,3 +411,6 @@ details[open]>summary .kr-faq-chevron::after{opacity:0}
 @keyframes krMastheadImg{from{transform:scale(1.06)}to{transform:scale(1)}}
 .kr-masthead-copy{animation:krMastheadIn 900ms cubic-bezier(.16,1,.3,1) 120ms both}
 .kr-masthead img{animation:krMastheadImg 1400ms cubic-bezier(.16,1,.3,1) both}
+
+/* a11y: muted copy inside navy bands (product #the-refusal-is-the-feature) was #4a5f7e on #0b2545 = 2.36:1 */
+.bg-\[\#0B2545\] .kr-m-eyebrow,.bg-\[\#0B2545\] .kr-m-sub{color:#B9CBE2}
