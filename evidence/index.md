@@ -159,4 +159,4 @@ Verified  Measured 2026-09-07 by running the backend suite with a five second so
 
 The useful conversation is about what these figures become when they are recomputed on your own sessions.
 
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[How the pilot is designed to stop](https://kestrelridgehealth.com/pilot/)
+[Start a Phase Zero fit conversation](https://kestrelridgehealth.com/contact/)[How the pilot is designed to stop](https://kestrelridgehealth.com/pilot/)

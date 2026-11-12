@@ -34,6 +34,38 @@ Step 3
 
 If the forecast does not beat both comparisons by the margin agreed in writing beforehand, with its range near 80 percent coverage, the engagement ends. That finding is yours either way. If it does, we agree in writing what happens next.
 
+## Phase Zero at a glance
+
+**The problem**
+
+A fixed technician-to-provider ratio staffs every session the same way, while workload changes with the appointment mix. Some sessions run short of technicians and others carry idle hours.
+
+**Who it is for**
+
+Administrators and operations leaders at multi-site ophthalmology practices who set technician staffing across locations.
+
+**What happens**
+
+You export an approved slice of historical session data. We fit a session-level forecast to it and score its error against the rule you use today and a historical average.
+
+**What you receive**
+
+The comparison on your own sessions, and a stop-or-continue finding measured against the margin agreed in writing before we see the data. The finding is yours either way.
+
+**What we need from you**
+
+Operational counts per session: appointment mix, complexity flags and realized technician minutes. No patient identifiers are requested. Your privacy office agrees how the export is prepared before anything moves.
+
+**What it cannot tell you yet**
+
+The model has been tested on synthetic data only. No clinic pilot or real-world outcome is claimed. Phase Zero is the first test on real operational history.
+
+**The next step**
+
+A short Phase Zero fit conversation by email. We reply within 2 business days and tell you plainly if it is not a fit.
+
+[Start a Phase Zero fit conversation](https://kestrelridgehealth.com/contact/)[Review the synthetic evidence](https://kestrelridgehealth.com/evidence/)
+
 Phases
 
 ## Three phases, each with an exit gate
@@ -126,7 +158,7 @@ Source  docs/pilot-evaluation-design.md, Stopping rules
 
 **What Phase Zero needs from you:** approved historical data you already have, no patient identifiers requested, nothing new to learn.
 
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[Read the methodology](https://kestrelridgehealth.com/methodology/)
+[Start a Phase Zero fit conversation](https://kestrelridgehealth.com/contact/)[Read the methodology](https://kestrelridgehealth.com/methodology/)
 
 Agreed before the pilot begins, not argued afterwards
 
@@ -169,9 +201,9 @@ Source  docs/pilot-evaluation-design.md, Sample size reasoning
 
 ## Start with Phase Zero
 
-The first conversation is about what history you can export and who owns the decision to stop.
+The first conversation is about what history you can export and who owns the decision to stop. Send a short note with your number of locations and the staffing rule you use today. We reply by email within 2 business days. Please do not include patient information.
 
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
+[Start a Phase Zero fit conversation](https://kestrelridgehealth.com/contact/)
 
 Technician Coverage Risk Check
 

@@ -168,9 +168,9 @@ Four things it is routinely mistaken for, and what it does instead.
 
 ## Try it against your own numbers
 
-There is a documented export format and a scoring service that tests the model on sessions you export. Rows are parsed in memory and dropped. Nothing is written, and nothing is kept.
+There is a documented export format and a scoring service that tests the model on sessions you export. Rows are parsed in memory and dropped. Nothing is written, and nothing is kept. For a multi-site practice, that test is what Phase Zero is: a scoped comparison on your own history with a stop rule agreed in advance.
 
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[What the forecast was measured against](https://kestrelridgehealth.com/evidence/)
+[Start a Phase Zero fit conversation](https://kestrelridgehealth.com/contact/)[What happens in Phase Zero](https://kestrelridgehealth.com/pilot/)[What the forecast was measured against](https://kestrelridgehealth.com/evidence/)
 
 Technician Coverage Risk Check
 

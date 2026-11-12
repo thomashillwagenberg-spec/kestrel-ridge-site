@@ -61,7 +61,7 @@
       'have, no PHI, nothing new to learn \u2014 yet.</p></div>' +
       '</div>' +
       '<div class="kr-value-cta-actions">' +
-      '<a class="btn-primary inline-flex min-h-11 items-center justify-center px-6 py-3 text-[0.9375rem] font-semibold" href="/contact/">Ask about Phase Zero</a>' +
+      '<a class="btn-primary inline-flex min-h-11 items-center justify-center px-6 py-3 text-[0.9375rem] font-semibold" href="/contact/">Start a Phase Zero fit conversation</a>' +
       '<a class="inline-flex min-h-11 items-center justify-center px-6 py-3 text-[0.9375rem] font-semibold underline underline-offset-4" href="/methodology/">Read the methodology</a>' +
       '</div>';
     anchor.parentNode.insertBefore(cta, anchor.nextSibling);
@@ -77,6 +77,6 @@
   // 3. Low-effort persistent mobile CTA (mirrors the one on /contact/).
   // ---------------------------------------------------------------
   var sticky = el('div', 'kr-mobile-sticky',
-    '<a href="/contact/">Ask about Phase Zero</a>');
+    '<a href="/contact/">Start a Phase Zero fit conversation</a>');
   document.body.appendChild(sticky);
 })();

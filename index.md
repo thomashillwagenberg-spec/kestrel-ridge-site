@@ -23,7 +23,7 @@ Plan technician staffing session by session. Forecast the minutes each session w
 
 **Phase Zero** is a diagnostic scoped to your clinic. If the forecast does not beat both the ratio you use today and a historical average, the engagement stops there.
 
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/) [See how it's measured](https://kestrelridgehealth.com/evidence/)
+[Start a Phase Zero fit conversation](https://kestrelridgehealth.com/contact/) [See how it's measured](https://kestrelridgehealth.com/evidence/)
 
 23.76 min Avg forecast error (synthetic)
 
@@ -116,7 +116,7 @@ Phase Zero
 
 The methodology is published, the comparisons show their work, and nothing moves until your privacy office signs off. The only ask right now is a conversation: no patient identifiers are requested, there is no platform to adopt, and the next step is a conversation about scope.
 
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)
+[Start a Phase Zero fit conversation](https://kestrelridgehealth.com/contact/)
 
 Check your technician coverage risk in about 3 minutes, using your own sessions and staffing. [Start the risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/)
 
@@ -156,7 +156,7 @@ Start with Phase Zero. We fit the forecast to your own history and score it agai
 
 Phase Zero is scoped to your clinic. It runs on operational counts you export: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and how the export is prepared, including whether it is protected health information in your hands, is agreed with your privacy office before anything moves.
 
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/) email_off[hello@kestrelridgehealth.com](mailto:hello@kestrelridgehealth.com)/email_off
+[Start a Phase Zero fit conversation](https://kestrelridgehealth.com/contact/) email_off[hello@kestrelridgehealth.com](mailto:hello@kestrelridgehealth.com)/email_off
 
 Figures shown come from the system's synthetic validation set. Not validated on real clinic data. Not HIPAA certified. No customers.
 

@@ -68,6 +68,12 @@ If you are using ratios today, three changes make them more useful without adopt
 
 That third step is the one that changes the conversation, because it is measured on your own operation rather than borrowed from a survey. It is also the input a forecast needs. If you want to see how session-level forecasting differs from ratio staffing in method, Kestrel Ridge Health documents its approach on  [how it works](https://kestrelridgehealth.com/how-it-works/)  and states its current validation status plainly on  [evidence](https://kestrelridgehealth.com/evidence/).
 
+## Want to see your own ratios by session?
+
+If you run several ophthalmology sites, the third step above is the work a Phase Zero fit conversation starts with. We ask how many locations you run, the staffing rule you use today and how much session history you can export. Then we tell you whether a scoped Phase Zero comparison is worth doing, or that it is not. Kestrel Ridge Health has been tested on synthetic data only, so the comparison on your own history is the first real test.
+
+[What happens in Phase Zero](https://kestrelridgehealth.com/pilot/)[How session-level staffing works](https://kestrelridgehealth.com/product/)
+
 ## Sources
 
 1. CRSToday,  [“What Is the Right Ratio?”](https://crstoday.com/articles/2016-oct/what-is-the-right-ratio), October 2016.

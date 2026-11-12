@@ -2,4 +2,4 @@
 :HL["/krh/krh-rc-cta.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":{"n":"slug","t":"d","k":"technician-shortage-session-variance","s":["technician-coverage-risk-check"]},"h":65600,"c":"$Q2"}]]
-0:{"b":"aBI_U1fZdNrWIffeI2l98","t":{"t":{"s":"","h":131088,"c":"$Q1"}}}
+0:{"b":"LMXmIH--l-9Z9opWsbtvq","t":{"t":{"s":"","h":131088,"c":"$Q1"}}}
