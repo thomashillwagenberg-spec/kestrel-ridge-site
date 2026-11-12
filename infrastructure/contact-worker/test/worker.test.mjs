@@ -69,6 +69,9 @@ function simulateResendSend(ok = true, body = { id: "synthetic" }) {
     return new Response(JSON.stringify(body), { status: ok ? 200 : 422 });
   });
 }
+// action:"krh_contact" is what the deployed widget now requests; the
+// turnstile-contract tests derive this from the committed frontend chunk and
+// fail if the frontend stops supplying it.
 const validChallenge = {
   success: true,
   hostname: "kestrelridgehealth.com",

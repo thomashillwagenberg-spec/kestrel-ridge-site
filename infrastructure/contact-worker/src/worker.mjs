@@ -148,6 +148,10 @@ async function checkRateLimit(env, ip, scope) {
   }
 }
 
+// Turnstile contract shared with the frontend. Tests read these two lines.
+const TURNSTILE_ACTION = "krh_contact";
+const TURNSTILE_HOSTNAMES = ["kestrelridgehealth.com", "www.kestrelridgehealth.com"];
+
 async function verifyTurnstile(token, secret) {
   const data = new FormData();
   data.set("secret", secret);
@@ -158,10 +162,15 @@ async function verifyTurnstile(token, secret) {
   );
   if (!response.ok) return false;
   const result = await response.json();
+  // All three must hold. A token rendered without an action, with any other
+  // action, for any other hostname, or rejected by Siteverify (invalid,
+  // expired, already redeemed) is refused. The frontend renders the widget
+  // with action TURNSTILE_ACTION (kestrel-ridge-source lib/site.ts).
   return Boolean(
-    result.success &&
-    ["kestrelridgehealth.com", "www.kestrelridgehealth.com"].includes(result.hostname) &&
-    result.action === "krh_contact",
+    result &&
+    result.success === true &&
+    TURNSTILE_HOSTNAMES.includes(result.hostname) &&
+    result.action === TURNSTILE_ACTION,
   );
 }
 

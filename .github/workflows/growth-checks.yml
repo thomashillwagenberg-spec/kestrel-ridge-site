@@ -25,6 +25,12 @@ jobs:
           node-version: '22'
       - name: Verify reader feedback service
         run: node --test tests/reader-feedback/*.test.mjs tests/analytics/*.test.mjs
+      - name: Contact Worker and deployed-frontend Turnstile contract tests
+        # Runs the real Worker suite against the committed frontend export.
+        # turnstile-contract.test.mjs reads the Turnstile render() options and
+        # POST body from _next/static/chunks, so a frontend/Worker mismatch
+        # (release blocker B1) fails this job instead of every real submission.
+        run: node --test infrastructure/contact-worker/test/*.test.mjs
       - name: Validate reviewed sources and publishing gates
         run: |
           python3 -m unittest discover -s .growth -p 'test_*.py'
