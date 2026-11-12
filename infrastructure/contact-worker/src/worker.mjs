@@ -293,23 +293,17 @@ export default {
     // Waitlist path --------------------------------------------------------
     // TEMPORARY, DOCUMENTED RESTRICTION (2026-11-11), not a claim of
     // equivalent protection: this path has NO Turnstile challenge. The
-    // waitlist signup form's markup and client-side JS are compiled into
-    // this site's Next.js build chunks under _next/static/chunks/, which
-    // are NOT present as editable source in this repo (only the built
-    // output is committed here) — there is no safe, reviewable way to add
-    // a real Turnstile widget to that form from this repo without
-    // hand-patching minified production JS, which this session will not
-    // do. Until the actual frontend source is available and a proper
-    // widget can be added and verified in a real browser, the compensating
-    // controls are: (1) the existing honeypot field (silently accepts and
-    // discards bot submissions that fill the hidden "website" field), (2)
-    // a SEPARATE, stricter rate limit on this path (WAITLIST_RATE_LIMITER,
-    // 3 req/60s vs. the contact form's 10 req/60s — see wrangler.toml),
-    // and (3) this path only ever sends a signup confirmation email, it
-    // never relays arbitrary attacker-controlled free-text content to
-    // twagenberg@kestrelridgehealth.com the way the contact form does, so
-    // the abuse impact of a bypass here is spam signups, not inbox abuse
-    // or phishing-via-relay. This is a real gap, not "equivalent security."
+    // frontend source (kestrel-ridge-source, components/InquiryForm.tsx)
+    // posts {email, source:"waitlist", website} with no token and falls back
+    // to mailto: on any non-2xx. Adding a widget to the waitlist form is a
+    // separate, reviewed frontend change. Compensating controls today:
+    // (1) honeypot "website" field (silent 202, nothing sent); (2) a
+    // separate, stricter WAITLIST_RATE_LIMITER (3 req/60s vs 10 for contact,
+    // see wrangler.toml); (3) the only email sent is an INTERNAL notification
+    // to DESTINATION ("KRH waitlist signup", reply_to = subscriber). The
+    // subscriber receives nothing, and no attacker free text is relayed, so
+    // a bypass yields spam signups in KRH's inbox, not relay or phishing.
+    // This is a real gap, not "equivalent security."
     if (preFields.source === "waitlist") {
       if (!ALLOWED_ORIGINS.has(origin)) {
         return reply(403, { ok: false, error: "Request origin not allowed" }, origin);
