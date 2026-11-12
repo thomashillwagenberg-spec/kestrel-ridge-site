@@ -1,6 +1,6 @@
 # KRH Contact System: Deploy and Rollback Checklist (corrected)
 
-Applies to: PR #18 (`release-candidate-test`, head `3b9e557`) and any later fix commit.
+Applies to: PR #18 (`release-candidate-test`, head `9658069`) and any later fix commit. Integration with PR #20 rehearsed on branch `release/w2-a1-integration` (b779718+): Worker source byte-identical, no merge conflicts outside generated output.
 Replaces the deploy/rollback sections of `Work Products/KRH-Release-Checklist.md` and `infrastructure/contact-worker/DEPLOYMENT.md`, which are wrong (see RELEASE-VERIFICATION.md section 7).
 Status: DO NOT START until every blocker in RELEASE-VERIFICATION.md section 9 is cleared and Thomas authorizes the deploy in writing.
 
@@ -37,16 +37,16 @@ Re-check the syntax with `npx wrangler versions --help` on the day; Wrangler cha
 Run from `infrastructure/contact-worker` on the reviewed commit. Never use `wrangler secret put` or `wrangler deploy` for this release: both deploy immediately.
 
 ```
-npx wrangler versions upload --message "PR18 <short-sha>"
+npx wrangler versions upload --env="" --message "PR18 <short-sha>"
 ```
 Record the printed Version ID as NEW_ID. This version is not serving traffic.
 
 Add secrets to a new staged version (each command creates another version, still not deployed; Thomas types each value at the hidden prompt himself, never in chat, never via `echo ... |`):
 
 ```
-npx wrangler versions secret put RESEND_API_KEY --message "PR18 secrets 1/3"
-npx wrangler versions secret put TURNSTILE_SECRET --message "PR18 secrets 2/3"
-npx wrangler versions secret put SENDER_FROM --message "PR18 secrets 3/3"
+npx wrangler versions secret put RESEND_API_KEY --env="" --message "PR18 secrets 1/3"
+npx wrangler versions secret put TURNSTILE_SECRET --env="" --message "PR18 secrets 2/3"
+npx wrangler versions secret put SENDER_FROM --env="" --message "PR18 secrets 3/3"
 ```
 (Alternative for SENDER_FROM: set it as a plain `[vars]` entry in `wrangler.toml` before `versions upload`, since it is not secret. Choose one, not both.)
 
@@ -56,6 +56,10 @@ Then:
 - [ ] `npx wrangler versions deploy FINAL_ID@100% --dry-run` if supported by the installed Wrangler, to review the plan.
 
 Caveat: `versions secret put` builds on the latest uploaded version. Do not upload anything else between these steps.
+
+`--env=""` is required: wrangler.toml defines an `[env.staging]` block, and Wrangler 4.161 warns that without an explicit `--env` the target is ambiguous. `--env=""` selects the top-level (production) Worker `krh-contact-inquiries`; `--env staging` would create `krh-contact-inquiries-staging` instead.
+
+Pre-verified 2026-11-12 (no upload): `npx wrangler@4.161.0 versions upload --dry-run` on this commit bundles 11.38 KiB and lists exactly `RATE_LIMITER (10/60s)`, `WAITLIST_RATE_LIMITER (3/60s)`, `ENVIRONMENT="production"`. FINAL_ID must show the same three plus the three secret names.
 
 ## 3. Deploy
 

@@ -21,6 +21,10 @@ Record for each step: time (UTC), result, evidence (screenshot or command output
 | A13 | Logs | `npx wrangler tail` during A7/A8 (read-only) | no `refusing to process`, no `Resend error` lines |
 | A14 | Rollback readiness | Confirm operator, command `npx wrangler rollback 9f1006ea-84e5-4f55-b46b-13cb85a47402` ready, and `git revert` plan for any frontend merge | written down before A7 |
 
+| A15 | CRM record (dry run) | In `krh-outreach-dev` branch `feat/website-inquiry-crm-ingest`: `KRH_INQUIRY_FROM=<exact SENDER_FROM address> python3 ingest_inquiry_mail.py --db <copy of krh_crm.db> --outlook` | A7 shows as `would-record` (inbound-lead), A8 as `waitlist-signup`; nothing `reject-*` |
+| A16 | CRM record (live, separate approval) | same with `--db <live krh_crm.db> --live-crm --apply` | exactly one `inbound-lead` and one `waitlist-signup` action, `source=website-inquiry-ingest`; re-run reports `skip-duplicate` |
+| A17 | Sales follow-through | Reply to the A7 test from Outlook (Reply-To = submitter) | reply lands at the submitter address; the CRM contact for that email is the one followed through qualification |
+
 Not tested in production by design: rate limiting, oversized bodies, honeypot, malformed input. Those are covered by the local harness (`burst-test-results.txt`).
 
-Sign-off: all of A1 to A14 pass, then Thomas marks the release accepted. Any failure: follow DEPLOY-ROLLBACK-CHECKLIST.md section 5.
+Sign-off: all of A1 to A17 pass, then Thomas marks the release accepted. Any failure: follow DEPLOY-ROLLBACK-CHECKLIST.md section 5.

@@ -22,7 +22,9 @@ ENVIRONMENT = "production"
 # so this must be confirmed in-dashboard before being set here.
 # SENDER_FROM = "KRH Contact <notifications@kestrelridgehealth.com>"
 
-# Secrets (set via `wrangler secret put`, required in production):
+# Secrets (required in production). Stage them with `wrangler versions secret put <NAME> --env=""`
+# (see DEPLOY-ROLLBACK-CHECKLIST.md section 2). Do NOT use `wrangler secret put`: it deploys a new
+# version immediately.
 #   RESEND_API_KEY   — from resend.com (free tier covers this volume)
 #   TURNSTILE_SECRET — from the Cloudflare Turnstile dashboard for this site's widget
 
