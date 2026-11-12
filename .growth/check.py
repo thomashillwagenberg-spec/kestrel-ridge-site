@@ -59,6 +59,8 @@ def main():
     ap=argparse.ArgumentParser();ap.add_argument('--live',action='store_true');ap.add_argument('--report');args=ap.parse_args()
     articles=[json.loads(p.read_text()) for p in (ROOT/'.growth/articles').glob('*.json')]
     for a in articles: check_article(a)
+    from editorial_gate import enforce as editorial_enforce
+    for a in articles: editorial_enforce(a,[o for o in articles if o is not a])
     urls=[e.text for e in ET.parse(ROOT/'sitemap.xml').findall(f'.//{{{NS}}}loc')]
     errors=[]
     if len(urls)!=len(set(urls)): errors.append('Duplicate sitemap URLs')

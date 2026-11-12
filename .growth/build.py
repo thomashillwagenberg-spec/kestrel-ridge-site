@@ -6,6 +6,7 @@ import datetime as dt
 import json
 import re
 import xml.etree.ElementTree as ET
+from editorial_gate import enforce as editorial_enforce
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://kestrelridgehealth.com'
@@ -64,6 +65,7 @@ def build():
     assert len({a['slug'] for a in articles}) == len(articles), 'Duplicate article slug'
     for a in articles:
         check_article(a)
+        editorial_enforce(a, [o for o in articles if o is not a])
     header = (ROOT/'.growth/templates/header.html').read_text().replace(' aria-current="page"', '')
     footer = (ROOT/'.growth/templates/footer.html').read_text()
     feedback = (ROOT/'.growth/templates/feedback.html').read_text()
