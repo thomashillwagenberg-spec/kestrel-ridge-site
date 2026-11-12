@@ -10,13 +10,19 @@ KRH-GROWTH-START
 
 [RSS feed](https://kestrelridgehealth.com/feed.xml)
 
+Scheduling and coverageNov 12, 2026
+
+### [How to schedule two ophthalmology sessions that share imaging](https://kestrelridgehealth.com/ophthalmology-shared-imaging-schedule/)
+
+A five-step scheduling check for independent eye clinics sharing an imaging station, with a worked timeline for device and technician coverage.
+
+## More practice guides
+
 Scheduling and coverageNov 11, 2026
 
 ### [Before refilling an ophthalmology cancellation, check technician coverage](https://kestrelridgehealth.com/ophthalmology-waitlist-technician-coverage/)
 
 An ophthalmology waitlist checklist for checking technician time, imaging and room coverage before booking a replacement visit.
-
-## More practice guides
 
 Training and coverageNov 7, 2026
 
