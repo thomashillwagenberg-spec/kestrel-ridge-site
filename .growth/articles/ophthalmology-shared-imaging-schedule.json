@@ -1,0 +1,65 @@
+{
+  "slug": "ophthalmology-shared-imaging-schedule",
+  "title": "How to schedule two ophthalmology sessions that share imaging",
+  "description": "A five-step scheduling check for independent eye clinics sharing an imaging station, with a worked timeline for device and technician coverage.",
+  "published": "2026-11-12",
+  "modified": "2026-11-12",
+  "reviewed": "2026-11-12",
+  "author": "Thomas Wagenberg",
+  "presentation": "editorial",
+  "category": "Scheduling and coverage",
+  "deck": "Put both sessions on one timeline so you can check the imaging station and qualified technician before opening the schedules.",
+  "answer": "I'd put both sessions on one timeline and mark when each block of imaging work is expected. Check the device and the qualified operator separately. If either is already committed, bring the conflict to the clinic lead before releasing the templates.",
+  "sections": [
+    [
+      "collision",
+      "Find the overlap"
+    ],
+    [
+      "map",
+      "Build the timeline"
+    ],
+    [
+      "example",
+      "Work through an example"
+    ],
+    [
+      "review",
+      "Review the first sessions"
+    ]
+  ],
+  "resource": {
+    "url": "/forecasting-technician-workload-by-session/",
+    "label": "Read the session workload guide"
+  },
+  "editorial_note": "November 12 same-day primary search surfaced event dates, job listings and a clinical publication without an applicable scheduling consequence. No suitable same-day development verified. Practical guide based on a single-clinic case and an original synthetic example.",
+  "body": "<h2 id=\"collision\">Where two schedules meet</h2>\n<p>Two providers can each have a reasonable morning schedule and still send work to the same imaging room at the same time. I'd look for that overlap before the templates open. Put both sessions on one timeline and mark when each block of imaging work is likely to arrive. Then check the device and the qualified technician separately.</p>\n<p>A <a href=\"https://d-scholarship.pitt.edu/downloads/15c67607-f0de-4b65-8b78-67576e5cd93c?locale=en\">2020 outpatient ophthalmology case study by Lydia Nada Tiguert</a> describes one clinic where subspecialty sessions ran concurrently. Each schedule was kept separately, and patients sometimes waited while another clinic used the same imaging equipment. I'd use that case to frame the question for my own clinic. The amount and timing of work have to come from local observations.</p>\n<h2 id=\"map\">Build one timeline before releasing either template</h2>\n<ol>\n<li><strong>Pick one shared station.</strong> List the sessions that use it. Ask the clinical lead which visit types can require that station and which tasks must be done in a particular order.</li>\n<li><strong>Mark when work arrives.</strong> Use a few comparable past sessions to estimate when each block typically reaches imaging. Use a wider window when the history is thin or timing varies. Keep a note beside assumptions that still need checking.</li>\n<li><strong>Block the device and the operator separately.</strong> Add existing bookings and downtime to the device row. On the technician row, put assigned work, breaks and the windows when someone qualified to run the station is available.</li>\n<li><strong>Compare the conflicts.</strong> Circle a block if the device or the qualified operator is committed elsewhere when that work arrives. Confirm that any proposed move also fits room capacity and the downstream visit schedule.</li>\n<li><strong>Give the release a named owner.</strong> Agree on who signs off and what the scheduler should do if the expected imaging window changes after booking. Bring unresolved clinical timing or visit priority questions to the clinical lead.</li>\n</ol>\n<h2 id=\"example\">Work through a 9:30 overlap</h2>\n<p>Here is a synthetic example for one station. The time windows illustrate the check. They are not suggested exam durations or clinic results.</p>\n<div class=\"growth-table\" role=\"region\" aria-label=\"Shared imaging timeline\" tabindex=\"0\"><table><caption>Two morning sessions using the same imaging station</caption><thead><tr><th scope=\"col\">Window</th><th scope=\"col\">Station</th><th scope=\"col\">Qualified technician</th><th scope=\"col\">Decision</th></tr></thead><tbody>\n<tr><td>9:20 to 9:40</td><td>Reserved for Session A</td><td>Assigned to Session A imaging</td><td>Keep the existing reservation.</td></tr>\n<tr><td>9:30 to 9:45</td><td>Session B needs the station while A still has it</td><td>The same operator is committed until 9:40</td><td>Review the overlap before release.</td></tr>\n<tr><td>9:50 to 10:05</td><td>Free for a possible Session B move</td><td>Already assigned to a different task</td><td>Keep looking until both rows work.</td></tr>\n</tbody></table></div>\n<p>I'd ask whether the clinical lead can move the work to a different time under the approved visit sequence. I would also check whether another qualified operator is available and what they would have to leave to cover it. If neither option works, the scheduler can hold the affected part of the template for review.</p>\n<h2 id=\"review\">Check the assumptions after the first few sessions</h2>\n<p>I'd ask the technician lead to record when blocks actually reached imaging and what caused each conflict. Keep a short set of reasons such as device in use, operator unavailable, room unavailable or earlier work running late. Compare similar mornings. Repeated late arrivals may mean the expected window needs work. Repeated operator conflicts give the scheduler a specific assignment to review.</p>\n<p>For a single appointment change after a template is already open, use the <a href=\"/ophthalmology-waitlist-technician-coverage/\">waitlist coverage checklist</a>. For the broader staffing question, see <a href=\"/forecasting-technician-workload-by-session/\">how KRH estimates technician workload by session</a>. <a href=\"/pilot/\">Phase Zero</a> is scoped to the clinic and compares a forecast against local baselines. The <a href=\"/evidence/\">published KRH validation</a> uses synthetic data.</p>\n",
+  "sources": [
+    {
+      "title": "Lydia Nada Tiguert, University of Pittsburgh",
+      "url": "https://d-scholarship.pitt.edu/downloads/15c67607-f0de-4b65-8b78-67576e5cd93c?locale=en",
+      "checked": "2026-11-12",
+      "supports": "2020 master\u2019s essay, submitted April 15, 2020. Section 3.1 describes overlap across independently scheduled subspecialty sessions and waits for shared imaging resources in the clinic studied."
+    },
+    {
+      "title": "KRH Pilot Design",
+      "url": "https://kestrelridgehealth.com/pilot/",
+      "checked": "2026-11-12",
+      "supports": "Current clinic-scoped Phase Zero evaluation and local baseline comparisons."
+    },
+    {
+      "title": "KRH Evidence",
+      "url": "https://kestrelridgehealth.com/evidence/",
+      "checked": "2026-11-12",
+      "supports": "Published validation uses synthetic data."
+    }
+  ],
+  "image": {
+    "path": "/assets/shared-imaging-20261112.jpg",
+    "width": 1440,
+    "height": 960,
+    "alt": "A single eye imaging station with a patient stool and a monitor in an empty room.",
+    "caption": "AI-generated editorial illustration of a fictional eye clinic. The scan shown is synthetic.",
+    "provenance": "Original image generated for Kestrel Ridge Health on November 12, 2026."
+  }
+}
