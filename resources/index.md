@@ -64,6 +64,14 @@ No articles in this category.
 
 Reference
 
+## [Ophthalmology Staffing Software: The Options Compared](https://kestrelridgehealth.com/ophthalmology-staffing-software-compared/)
+
+Fixed ratios, provider-average spreadsheets, EHR scheduling, general workforce tools and session-level forecasting, side by side: what each plans from, what each cannot see, and when Kestrel Ridge Health is the wrong choice.
+
+[Read the article](https://kestrelridgehealth.com/ophthalmology-staffing-software-compared/)
+
+Reference
+
 ## [Ophthalmic Technician Staffing Ratios Explained](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/)
 
 The published staffing benchmarks for ophthalmology give you two usable numbers: roughly 4 to 8 FTE staff per FTE provider, and roughly 3 to 3.5 patients worked up per technician per hour. This article states where each benchmark came from, how old it is, and exactly which decisions it can and cannot settle.
