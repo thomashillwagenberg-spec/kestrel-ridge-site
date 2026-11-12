@@ -14,7 +14,7 @@ This site does not run Cloudflare Web Analytics. We do not add advertising pixel
 
 ## Optional Google Analytics
 
-Google Analytics is optional. Its script loads only after you choose Allow analytics. It records page views and clicks on links to our contact page. A link click is an expression of interest, not a submitted inquiry. We do not send form contents, names, email addresses, patient information, URL queries or URL fragments through this integration. The referring website’s origin may be sent to help identify traffic sources.
+Google Analytics is optional. Its script loads only after you choose Allow analytics. It records page views, clicks on links to our contact page, and whether the contact or waitlist form was started, sent, or not sent. A link click is an expression of interest, not a submitted inquiry. We do not send form contents, names, email addresses, phone numbers, patient information or URL fragments through this integration. From the URL query we send only standard campaign tags (utm_source, utm_medium, utm_campaign, utm_content, utm_term), and only when they contain no email address or phone number. The referring website’s origin may be sent to help identify traffic sources.
 
 Google receives technical information when your browser connects to its service and uses Analytics cookies to distinguish visits. Our tag disables Google signals and advertising personalization and sets Analytics cookie expiry to 180 days without extending it on each visit. We remember your allow or decline choice in browser local storage for 180 days. If browser storage is unavailable, your choice applies to the current page.
 
