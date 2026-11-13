@@ -1,4 +1,6 @@
 (() => {
+  if (window.__krhStaticAnalyticsReady) return;
+  window.__krhStaticAnalyticsReady = true;
   const ID = 'G-7X0ZX70KQK';
   const KEY = 'krh-analytics-choice-v1';
   const DAYS = 180 * 24 * 60 * 60;
@@ -8,6 +10,23 @@
   let panel;
   const sheet = document.createElement('link');
   sheet.rel = 'stylesheet'; sheet.href = '/assets/site-analytics.css'; document.head.appendChild(sheet);
+  function directoryPath(path) {
+    return path.replace(/\/index\.html$/, '/').replace(/\/?$/, '/');
+  }
+  // Same rules as the Next routes (kestrel-ridge-source lib/analytics.ts): keep only utm_* campaign
+  // tags, drop any value with an email address, phone number or >100 chars.
+  const CAMPAIGN = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  function safeValue(v) {
+    const s = typeof v === 'string' ? v.trim() : '';
+    return s && s.length <= 100 && !/@|\+?\d[\d\s().-]{6,}\d/.test(s) ? s : null;
+  }
+  function attributionLocation() {
+    const keep = new URLSearchParams(); const src = new URLSearchParams(location.search);
+    for (const k of CAMPAIGN) { const v = safeValue(src.get(k)); if (v) keep.set(k, v); }
+    const q = keep.toString();
+    return location.origin + directoryPath(location.pathname) + (q ? '?' + q : '');
+  }
+  const automated = !!navigator.webdriver; // QA/automation browsers never produce analytics events
   function readChoice() {
     try {
       const value = JSON.parse(localStorage.getItem(KEY));
@@ -37,7 +56,7 @@
     let referrer = '';
     try { if (document.referrer) referrer = new URL(document.referrer).origin; } catch {}
     window.gtag('config', ID, {
-      send_page_view: true, page_location: location.origin + location.pathname, page_referrer: referrer,
+      send_page_view: true, page_location: attributionLocation(), page_referrer: referrer,
       allow_google_signals: false, allow_ad_personalization_signals: false,
       cookie_expires: DAYS, cookie_update: false,
     });
@@ -63,7 +82,7 @@
   document.body.appendChild(settings);
   panel = document.createElement('section');
   panel.className = 'krh-analytics-panel'; panel.setAttribute('aria-label', 'Optional Google Analytics');
-  panel.innerHTML = '<div><h2>May we measure your visit?</h2><p>With your permission, Google Analytics records page views and consultation-link clicks to help us improve KRH. No form contents are sent. Your choice is remembered for 180 days. <a href="/privacy/#google-analytics">Privacy details</a>.</p></div><div class="krh-analytics-actions"><button type="button" data-choice="yes">Allow analytics</button><button type="button" data-choice="no">No thanks</button></div>';
+  panel.innerHTML = '<div><h2>May we measure your visit?</h2><p>With your permission, Google Analytics records page views, consultation-link clicks and whether a form was started or sent, to help us improve KRH. No form contents are sent. Your choice is remembered for 180 days. <a href="/privacy/#google-analytics">Privacy details</a>.</p></div><div class="krh-analytics-actions"><button type="button" data-choice="yes">Allow analytics</button><button type="button" data-choice="no">No thanks</button></div>';
   panel.addEventListener('click', event => { const value = event.target?.dataset?.choice; if (['yes', 'no'].includes(value)) save(value); });
   document.body.appendChild(panel);
   const initial = readChoice();
@@ -78,13 +97,17 @@
     settings.textContent = choice === 'yes' ? 'Analytics settings (allowed)' : 'Analytics settings (off)';
   });
   document.addEventListener('click', event => {
-    if (!consent || !production || !window.gtag) return;
+    if (!consent || !production || automated || !window.gtag) return;
     const link = event.target.closest?.('a[href]');
     if (!link) return;
     let target;
     try { target = new URL(link.href, location.origin); } catch { return; }
-    if (target.origin === location.origin && target.pathname === '/contact/') {
-      window.gtag('event', 'consultation_link_click', { source_page: location.pathname, link_path: '/contact/' });
+    if (target.origin === location.origin && directoryPath(target.pathname) === '/contact/') {
+      // /contact/ is a Next route; its ConsentBanner sends this once on arrival. A click-time
+      // event is queued by gtag and lost when the page navigates (seen in QA).
+      try {
+        sessionStorage.setItem('krh-cta-pending-v1', JSON.stringify({ source_page: directoryPath(location.pathname), t: Date.now() }));
+      } catch {}
     }
   });
 })();
