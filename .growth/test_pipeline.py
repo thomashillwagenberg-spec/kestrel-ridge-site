@@ -42,4 +42,48 @@ class PublishingGateTests(unittest.TestCase):
     def test_unexpected_scripts_are_not_ignored(self):
         self.assertNotEqual(deployment_bytes(b'<p>text</p><script src="https://other.example/a.js"></script>','x.html'),b'<p>text</p>')
 
+class BriefGateTests(unittest.TestCase):
+    def gated(self):
+        from check import BRIEF_RULE_EFFECTIVE
+        a=json.loads((ROOT/'.growth/articles/ophthalmology-staffing-forecast-readiness.json').read_text())
+        a['published']=a['modified']=a['reviewed']=BRIEF_RULE_EFFECTIVE
+        a['slug']='example-gated-article'
+        a['body']+=('<p><a href="/product/">Product</a> <a href="/pilot/">Phase Zero</a> '
+                    '<a href="/evidence/">Evidence</a> <a href="/ophthalmic-technician-staffing-ratios/">Ratios</a></p>')
+        a['sources']=[dict(s,checked=BRIEF_RULE_EFFECTIVE) for s in (a['sources']*2)[:2]]
+        a['brief']={'id':'2026-W47-new-example-gated-article','kind':'new','evidence_type':'p2_opportunity',
+                    'buyer_question':'How many technicians per session?','nearest_page':'/ophthalmic-technician-staffing-ratios/',
+                    'distinct_because':'Answers a different decision.'}
+        return a
+    slugs={'ophthalmic-technician-staffing-ratios','example-gated-article'}
+    def test_grandfathered_articles_pass(self):
+        from check import check_brief_gate
+        for p in (ROOT/'.growth/articles').glob('*.json'):
+            a=json.loads(p.read_text())
+            if a['modified']<'2026-11-16': check_brief_gate(a,self.slugs)
+    def test_complete_brief_passes(self):
+        from check import check_brief_gate
+        check_brief_gate(self.gated(),self.slugs)
+    def test_missing_brief_is_blocked(self):
+        from check import check_brief_gate
+        a=self.gated();del a['brief']
+        with self.assertRaisesRegex(AssertionError,'missing brief'): check_brief_gate(a,self.slugs)
+    def test_bad_evidence_type_is_blocked(self):
+        from check import check_brief_gate
+        a=self.gated();a['brief']['evidence_type']='hunch'
+        with self.assertRaisesRegex(AssertionError,'evidence_type'): check_brief_gate(a,self.slugs)
+    def test_missing_required_link_is_blocked(self):
+        from check import check_brief_gate
+        a=self.gated();a['body']=a['body'].replace('href="/evidence/"','href="/faq/"')
+        with self.assertRaisesRegex(AssertionError,'required internal links'): check_brief_gate(a,self.slugs)
+    def test_missing_related_article_link_is_blocked(self):
+        from check import check_brief_gate
+        a=self.gated();a['body']=a['body'].replace('/ophthalmic-technician-staffing-ratios/','/faq/')
+        with self.assertRaisesRegex(AssertionError,'related article'): check_brief_gate(a,self.slugs)
+    def test_two_new_articles_in_one_week_are_blocked(self):
+        from check import check_weekly_cap
+        a=self.gated();b=copy.deepcopy(a);b['slug']='second';b['published']='2026-11-18'
+        with self.assertRaisesRegex(AssertionError,'More than one new article'): check_weekly_cap([a,b])
+        b['published']='2026-11-23'; check_weekly_cap([a,b])
+
 if __name__=='__main__': unittest.main()
