@@ -1,8 +1,30 @@
 ---
-title: "Pilot Design & Stopping Rules | Kestrel Ridge Health"
+title: "Phase Zero Staffing Pilot & Stopping Rules | Kestrel Ridge"
 url: https://kestrelridgehealth.com/pilot/
-description: "Phase Zero runs on an operational export with a pre-registered measure, six stopping rules, and an expansion decision agreed upfront. Scoped to your clinic."
+description: "Phase Zero tests the staffing forecast on your own exported history: what you send, what you get back, how it is scoped, and the stopping rules agreed first."
 ---
+
+Phase Zero
+
+## Phase Zero at a glance
+
+Phase Zero is the first step of the staffing pilot. It tests the forecast on your own clinic history before anything about your staffing changes.
+
+What you send
+
+An export of past schedule and visit history as operational counts: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems, and nothing is uploaded through this website. No connection to your EHR, practice management system or scheduler is needed.
+
+What you get back
+
+A comparison of forecast error on your own sessions against the ratio you use today and a simple historical average, for each site you include, and a plain answer on whether the gate to shadow mode passed or the engagement should stop there.
+
+Timeline
+
+Agreed in writing before anything starts, and sized to how many sites and how much history you bring. If Phase Zero passes, shadow mode runs for 4 weeks while your current staffing process stays in force.
+
+Next step
+
+A short conversation about what history you can export and who owns the decision to stop. [Ask about Phase Zero](https://kestrelridgehealth.com/contact/).
 
 The path to a decision
 

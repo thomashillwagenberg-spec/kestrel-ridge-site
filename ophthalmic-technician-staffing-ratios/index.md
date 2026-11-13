@@ -66,7 +66,7 @@ If you are using ratios today, three changes make them more useful without adopt
 2. **Separate technicians from total staff.**  The 4-to-8 band is all staff. Build your own technician-only ratio from your own payroll data before comparing yourself to anything external.
 3. **Look at the spread, not just the mean.**  Pull twelve months of realized technician hours by session from your practice management system and plot the distribution. If the spread is wide, your ratio is averaging over a problem, and you now know how large that problem is in hours.
 
-That third step is the one that changes the conversation, because it is measured on your own operation rather than borrowed from a survey. It is also the input a forecast needs. If you want to see how session-level forecasting differs from ratio staffing in method, Kestrel Ridge Health documents its approach on  [how it works](https://kestrelridgehealth.com/how-it-works/)  and states its current validation status plainly on  [evidence](https://kestrelridgehealth.com/evidence/).
+That third step is the one that changes the conversation, because it is measured on your own operation rather than borrowed from a survey. It is also the input a forecast needs. If you want to see how session-level forecasting differs from ratio staffing in method, Kestrel Ridge Health documents its approach on  [how it works](https://kestrelridgehealth.com/how-it-works/)  and states its current validation status plainly on  [evidence](https://kestrelridgehealth.com/evidence/), where every figure comes from synthetic test data. To find out whether a session-level forecast beats your own ratio on your own history, [Phase Zero](https://kestrelridgehealth.com/pilot/) runs that comparison before anything changes. For the day a technician calls out, see [call-off coverage options for eye clinics](https://kestrelridgehealth.com/call-off-coverage-eye-clinics/).
 
 ## Sources
 
@@ -82,6 +82,8 @@ That third step is the one that changes the conversation, because it is measured
 - [How the forecast and the eight hard rules work](https://kestrelridgehealth.com/how-it-works/) The method behind the session-level forecast and the constraints the assignment step will not relax.
 - [Forecast accuracy against the fixed ratio](https://kestrelridgehealth.com/evidence/) Mean absolute error on the synthetic validation set, where the forecast is weakest, and the claims not made.
 - [Frequently asked questions](https://kestrelridgehealth.com/faq/) What Phase Zero covers and requires, the data posture, and the limitations stated plainly.
+- [Phase Zero: test the forecast on your own history](https://kestrelridgehealth.com/pilot/) What you send, what you get back, and the stopping rules agreed before anything starts.
+- [Call-off coverage for eye clinics](https://kestrelridgehealth.com/call-off-coverage-eye-clinics/) The four realistic options when a technician calls out, and what each one costs.
 
 Technician Coverage Risk Check
 
