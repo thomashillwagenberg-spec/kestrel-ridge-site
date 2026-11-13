@@ -30,7 +30,7 @@ Prepared by Kestrel Ridge Health. We make one of the options on this page, so we
 
 ## Fixed technician-to-provider ratio
 
-A ratio such as two technicians per ophthalmologist is the most common method. It is simple and it settles budget questions. It cannot tell a ten-patient post-op session from a ten-patient new-glaucoma session with visual fields and OCT, so it staffs both the same way. [Ophthalmic Technician Staffing Ratios Explained](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/) covers what the published benchmarks can and cannot settle.
+A ratio such as two technicians per ophthalmologist is a common method. It is simple and it settles budget questions. It cannot tell a ten-patient post-op session from a ten-patient new-glaucoma session with visual fields and OCT, so it staffs both the same way. [Ophthalmic Technician Staffing Ratios Explained](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/) covers what the published benchmarks can and cannot settle.
 
 ## Spreadsheet with provider averages
 
@@ -38,7 +38,7 @@ Multiply the patients on a session by that provider’s average technician minut
 
 ## EHR or practice management scheduling
 
-Your EHR or practice management system holds the appointment book, and often room and provider templates. It is the source of the data any staffing forecast needs. It is built to schedule patients, and in most products technician coverage is entered by hand rather than forecast. Ask your vendor whether it records when a technician starts and finishes a workup. That timestamp decides whether any forecasting approach can work for you.
+Your EHR or practice management system holds the appointment book, and often room and provider templates. It is the source of the data any staffing forecast needs. It is built to schedule patients, and in many products technician coverage is entered by hand rather than forecast. Ask your vendor whether it records when a technician starts and finishes a workup. That timestamp decides whether any forecasting approach can work for you.
 
 ## General healthcare workforce management
 
@@ -54,7 +54,7 @@ What the evidence shows so far:
 - On that synthetic holdout the forecast’s average error is 23.76 technician minutes per session. A fixed ratio scores 208.61, a provider-average spreadsheet 33.42 and a plain regression 24.01.
 - The gap over a plain regression is about a quarter of a minute. The useful comparison is against the method you use today, on your own history.
 
-The first engagement, Phase Zero, runs that comparison on a clinic’s own exported sessions. If the forecast does not beat both the clinic’s current method and a historical average, the engagement stops and the clinic keeps the analysis. Full figures are on the [Evidence page](https://kestrelridgehealth.com/evidence/), and the [Product page](https://kestrelridgehealth.com/product/) describes the daily workflow.
+The first engagement, Phase Zero, runs that comparison on a clinic’s own exported sessions. If the forecast does not beat both the clinic’s current method and a historical average by a margin agreed in writing beforehand, the engagement stops and the clinic keeps the analysis. Full figures are on the [Evidence page](https://kestrelridgehealth.com/evidence/), and the [Product page](https://kestrelridgehealth.com/product/) describes the daily workflow.
 
 ## When Kestrel Ridge Health is not the right choice
 
