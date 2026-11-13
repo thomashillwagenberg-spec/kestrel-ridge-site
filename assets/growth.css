@@ -386,3 +386,28 @@
 .krh-resources-page {
   padding-bottom: 0;
 }
+
+/* Comparison table: our own row is tinted; on phones each row becomes a card. */
+.compare-table tbody th { background: white; font-weight: 600; }
+.compare-table tr.is-own :is(th, td) { background: #eef4ff; }
+.compare-table tr.is-own th { box-shadow: inset 3px 0 0 var(--primary, #1a5bdb); }
+@media (max-width: 680px) {
+  .compare-table { overflow-x: visible; }
+  .compare-table table { min-width: 0; }
+  .compare-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .compare-table :is(tbody, tr, th, td) { display: block; }
+  .compare-table tr { border: 1px solid #ccd7d0; border-radius: 4px; margin-bottom: 14px; overflow: hidden; }
+  .compare-table tbody :is(th, td) { border: 0; padding: 10px 14px; }
+  .compare-table tbody th { font-size: 16px; padding-top: 14px; border-bottom: 1px solid #ccd7d0; }
+  .compare-table td::before { content: attr(data-label); display: block; font-size: 12px; font-weight: 600; color: var(--ink-muted, #4a5f7e); margin-bottom: 2px; }
+}
+/* FAQ accordion. Native details, so answers stay in the HTML with no script. */
+.story-faq { border-top: 1px solid var(--rule, #dce4f2); margin: 8px 0 28px; }
+.story-faq details { border-bottom: 1px solid var(--rule, #dce4f2); }
+.story-faq summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; min-height: 44px; }
+.story-faq summary::-webkit-details-marker { display: none; }
+.story-faq summary::after { content: "+"; font-size: 22px; line-height: 1; color: var(--ink-muted, #4a5f7e); flex: none; }
+.story-faq details[open] summary::after { content: "\2212"; }
+.story-faq summary h3 { font-family: inherit; font-size: 17px; font-weight: 600; line-height: 1.4; margin: 0; }
+.story-faq summary:focus-visible { outline: 2px solid var(--primary, #1a5bdb); outline-offset: 2px; }
+.story-faq details p { margin: 0 0 18px; }
