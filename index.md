@@ -19,7 +19,7 @@ Ophthalmology staffing software for multi-site eye clinics
 # Same patient count.   
 Different technician workload.
 
-Kestrel Ridge Health is ophthalmology staffing software. It forecasts the technician minutes each clinic session will need, then drafts a staffing plan under eight rules the system does not relax, with a person approving every plan.
+Kestrel Ridge Health is ophthalmology staffing software. It forecasts the technician minutes each clinic session will need, then drafts a staffing plan under eight hard rules for a person to approve.
 
 **Phase Zero** is a diagnostic scoped to your clinic. If the forecast does not beat both the ratio you use today and a historical average, the engagement stops there.
 
