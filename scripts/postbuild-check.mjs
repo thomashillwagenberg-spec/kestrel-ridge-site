@@ -34,6 +34,13 @@ const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].trim())
 if (urls.length === 0) { console.error('No URLs in sitemap.xml'); process.exit(2); }
 
 const IGNORE = [/cloudflareinsights\.com/i, /beacon\.min\.js/i, /googletagmanager/i];
+// When testing a local/staging build (--base set, i.e. not the real production
+// origin), Cloudflare Turnstile's challenge iframe legitimately 400s because the
+// widget's sitekey is registered only to the production domain. That is Cloudflare's
+// own domain-validation response, not an application defect, and the contact form
+// already degrades gracefully (see data-krh-ts-status / error-callback in the form
+// component). Only ignore it off production so a real production regression still fails.
+if (BASE) IGNORE.push(/challenges\.cloudflare\.com/i);
 const browser = await chromium.launch(process.env.PW_EXE ? { executablePath: process.env.PW_EXE } : {});
 const results = [];
 for (const url of urls) {
@@ -44,7 +51,13 @@ for (const url of urls) {
   page.on('pageerror', e => errs.push('pageerror: ' + String(e.message || e).slice(0, 300)));
   let status = 0;
   try {
-    const resp = await page.goto(target, { waitUntil: 'networkidle', timeout: 45000 });
+    // 'networkidle' is not viable here: /contact/'s Turnstile widget schedules an
+    // automatic retry loop (reset + poll) whenever its challenge fails to resolve
+    // (e.g. a sitekey/domain mismatch on a non-production --base, or any real
+    // widget failure), which keeps a connection open indefinitely and was timing
+    // out this check at 45s. 'load' + the explicit settle wait below is enough to
+    // let hydration run without depending on third-party polling going quiet.
+    const resp = await page.goto(target, { waitUntil: 'load', timeout: 45000 });
     status = resp ? resp.status() : 0;
     await page.waitForTimeout(1500); // let hydration finish / crash
   } catch (e) { errs.push('navigation: ' + e.message.slice(0, 200)); }
