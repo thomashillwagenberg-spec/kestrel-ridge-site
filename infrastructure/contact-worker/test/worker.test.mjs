@@ -11,154 +11,159 @@ const standard = {
   message: "I'd like to learn about Phase Zero staffing.",
   turnstileToken: "synthetic-test-token",
 };
-function createRequest(method = "POST", fields = standard, options = {}) {
-  const headers = {
-    origin: options.origin === undefined ? ORIGIN : options.origin,
-    "content-type": options.contentType || "application/json",
-  };
-  const body = method === "POST"
-    ? (options.contentType === "application/x-www-form-urlencoded"
-      ? new URLSearchParams(fields).toString()
-      : JSON.stringify(fields))
-    : undefined;
-  return new Request(options.url || URL, { method, headers, body });
-}
-function emailEnv(send) {
-  return {
-    TURNSTILE_SECRET: "synthetic-unit-test-secret",
-    EMAIL: { send },
-  };
-}
-function simulateSiteverify(result) {
-  const oldFetch = globalThis.fetch;
-  globalThis.fetch = async () => new Response(JSON.stringify(result));
-  return () => { globalThis.fetch = oldFetch; };
-}
+const env = {
+  TURNSTILE_SECRET: "synthetic-unit-test-secret",
+  RESEND_API_KEY: "synthetic-resend-key",
+};
 const validChallenge = {
   success: true,
   hostname: "kestrelridgehealth.com",
   action: "krh_contact",
 };
 
-test("rejects GET, preventing a URL-based intake", async () => {
+function createRequest(method = "POST", fields = standard, options = {}) {
+  const headers = { origin: options.origin ?? ORIGIN };
+  let body;
+  if (method === "OPTIONS") {
+    headers["access-control-request-method"] = "POST";
+    headers["access-control-request-headers"] = "content-type";
+  } else if (method === "POST") {
+    const contentType = options.contentType ?? "application/json";
+    headers["content-type"] = contentType;
+    body = contentType === "application/x-www-form-urlencoded"
+      ? new URLSearchParams(fields).toString()
+      : JSON.stringify(fields);
+  }
+  return new Request(URL, { method, headers, body });
+}
+
+function mockTransport(t, { challenge = validChallenge, deliveryStatus = 200 } = {}) {
+  const calls = { verification: 0, emails: [] };
+  t.mock.method(globalThis, "fetch", async (url, options) => {
+    if (url === "https://challenges.cloudflare.com/turnstile/v0/siteverify") {
+      calls.verification++;
+      return Response.json(challenge);
+    }
+    assert.equal(url, "https://api.resend.com/emails");
+    assert.equal(options.method, "POST");
+    assert.equal(options.headers.Authorization, "Bearer synthetic-resend-key");
+    calls.emails.push(JSON.parse(options.body));
+    return Response.json({}, { status: deliveryStatus });
+  });
+  return calls;
+}
+
+test("rejects GET before parsing a body", async () => {
   const response = await worker.fetch(createRequest("GET"), {});
   assert.equal(response.status, 405);
 });
 
-test("preflight has no response body and is origin-restricted", async () => {
+test("an empty browser preflight permits JSON POST from KRH without external calls", async (t) => {
+  const calls = mockTransport(t);
   const response = await worker.fetch(createRequest("OPTIONS"), {});
   assert.equal(response.status, 204);
   assert.equal(await response.text(), "");
+  assert.equal(response.headers.get("access-control-allow-origin"), ORIGIN);
+  assert.equal(response.headers.get("access-control-allow-methods"), "POST, OPTIONS");
+  assert.equal(response.headers.get("access-control-allow-headers"), "Content-Type");
+
   const rejected = await worker.fetch(createRequest("OPTIONS", standard, { origin: "https://evil.example" }), {});
   assert.equal(rejected.status, 403);
+  assert.equal(rejected.headers.has("access-control-allow-origin"), false);
+  assert.deepEqual(calls, { verification: 0, emails: [] });
 });
 
-test("rejects an unauthorized origin before validating data", async () => {
-  const response = await worker.fetch(createRequest("POST", standard, { origin: "https://evil.example" }), {});
-  assert.equal(response.status, 403);
-});
-
-test("rejects invalid input without sending", async () => {
-  let count = 0;
-  const fields = { ...standard, email: "not-an-email" };
-  const response = await worker.fetch(createRequest("POST", fields), emailEnv(async () => { count++; }));
-  assert.equal(response.status, 400);
-  assert.equal(count, 0);
-});
-
-test("rejects missing Turnstile token", async () => {
-  const fields = { ...standard, turnstileToken: "" };
-  const response = await worker.fetch(createRequest("POST", fields), emailEnv(async () => {}));
-  assert.equal(response.status, 403);
-});
-
-test("rejects invalid or mismatched Turnstile challenges", async () => {
-  const restore = simulateSiteverify({
-    success: true, hostname: "evil.example", action: "krh_contact",
+test("rejects unauthorized origins before parsing malformed input", async () => {
+  const request = new Request(URL, {
+    method: "POST",
+    headers: { origin: "https://evil.example", "content-type": "application/json" },
+    body: "invalid JSON",
   });
-  try {
-    const response = await worker.fetch(createRequest(), emailEnv(async () => {}));
-    assert.equal(response.status, 403);
-  } finally { restore(); }
+  const response = await worker.fetch(request, {});
+  assert.equal(response.status, 403);
 });
 
-test("sends only to the fixed Outlook mailbox and does not claim mailbox delivery", async () => {
-  const restore = simulateSiteverify(validChallenge);
-  let email;
-  try {
-    const response = await worker.fetch(createRequest(), emailEnv(async (message) => {
-      email = message;
-      return { messageId: "synthetic-id" };
-    }));
-    assert.equal(response.status, 202);
-    const body = await response.json();
-    assert.deepEqual(body, { ok: true, status: "accepted_for_delivery" });
-    assert.equal(email.to, "twagenberg@kestrelridgehealth.com");
-    assert.equal(email.replyTo, "test@example.com");
-    assert.match(email.text, /Sample Practice/);
-  } finally { restore(); }
-});
-
-test("supports form-encoded POST but never a GET fallback", async () => {
-  const restore = simulateSiteverify(validChallenge);
-  let count = 0;
-  try {
-    const fields = {
-      ...standard,
-      "cf-turnstile-response": standard.turnstileToken,
-      turnstileToken: undefined,
-    };
-    delete fields.turnstileToken;
-    const response = await worker.fetch(
-      createRequest("POST", fields, { contentType: "application/x-www-form-urlencoded" }),
-      emailEnv(async () => { count++; }),
-    );
-    assert.equal(response.status, 202);
-    assert.equal(count, 1);
-  } finally { restore(); }
-});
-
-test("reports send failure instead of falsely acknowledging delivery", async () => {
-  const restore = simulateSiteverify(validChallenge);
-  const originalConsole = console.error;
-  console.error = () => {};
-  try {
-    const response = await worker.fetch(createRequest(), emailEnv(async () => {
-      throw Object.assign(new Error("synthetic failure"), { code: "E_DELIVERY_FAILED" });
-    }));
-    assert.equal(response.status, 502);
-    assert.equal((await response.json()).ok, false);
-  } finally {
-    restore();
-    console.error = originalConsole;
-  }
-});
-
-// --- Staging path: no TURNSTILE_SECRET configured ---
-// These tests cover the pre-widget staging mode. They must never be used to
-// validate production readiness.
-
-test("staging: accepts submission without TURNSTILE_SECRET (no token required)", async () => {
-  const warnLog = [];
-  const originalWarn = console.warn;
-  console.warn = (...args) => { warnLog.push(args.join(" ")); };
-  let sent = 0;
-  const env = { EMAIL: { send: async () => { sent++; } } };  // no TURNSTILE_SECRET
-  try {
-    // Fields without a turnstileToken — same as the current live frontend sends.
-    const fields = { name: "Stage Person", organization: "Sample Practice", email: "stage@example.com", message: "Staging test inquiry without a widget." };
-    const response = await worker.fetch(createRequest("POST", fields), env);
-    assert.equal(response.status, 202, "staging submission should be accepted");
-    assert.equal(sent, 1);
-    assert.ok(warnLog.some(m => m.includes("TURNSTILE_SECRET")), "should log a warning about missing secret");
-  } finally {
-    console.warn = originalWarn;
-  }
-});
-
-test("staging: still rejects invalid email when TURNSTILE_SECRET is absent", async () => {
-  const env = { EMAIL: { send: async () => {} } };
-  const fields = { name: "Bad Email", organization: "Clinic", email: "not-valid", message: "Testing field validation in staging mode." };
+test("rejects invalid input without sending", async (t) => {
+  const calls = mockTransport(t);
+  const fields = { ...standard, email: "not-an-email" };
   const response = await worker.fetch(createRequest("POST", fields), env);
   assert.equal(response.status, 400);
+  assert.deepEqual(calls, { verification: 0, emails: [] });
+});
+
+test("rejects missing Turnstile token", async (t) => {
+  const calls = mockTransport(t);
+  const fields = { ...standard, turnstileToken: "" };
+  const response = await worker.fetch(createRequest("POST", fields), env);
+  assert.equal(response.status, 403);
+  assert.deepEqual(calls, { verification: 0, emails: [] });
+});
+
+test("rejects invalid or mismatched Turnstile challenges", async (t) => {
+  const calls = mockTransport(t, {
+    challenge: { success: true, hostname: "evil.example", action: "krh_contact" },
+  });
+  const response = await worker.fetch(createRequest(), env);
+  assert.equal(response.status, 403);
+  assert.deepEqual(calls, { verification: 1, emails: [] });
+});
+
+test("sends only to the fixed Outlook mailbox and acknowledges provider acceptance", async (t) => {
+  const calls = mockTransport(t);
+  const response = await worker.fetch(createRequest(), env);
+  assert.equal(response.status, 202);
+  assert.deepEqual(await response.json(), { ok: true, status: "accepted_for_delivery" });
+  assert.equal(calls.verification, 1);
+  assert.equal(calls.emails.length, 1);
+  assert.deepEqual(calls.emails[0].to, ["twagenberg@kestrelridgehealth.com"]);
+  assert.equal(calls.emails[0].reply_to, "test@example.com");
+  assert.match(calls.emails[0].text, /Sample Practice/);
+});
+
+test("supports a form-encoded POST with the standard Turnstile field", async (t) => {
+  const calls = mockTransport(t);
+  const { turnstileToken, ...contact } = standard;
+  const fields = { ...contact, "cf-turnstile-response": turnstileToken };
+  const response = await worker.fetch(
+    createRequest("POST", fields, { contentType: "application/x-www-form-urlencoded" }),
+    env,
+  );
+  assert.equal(response.status, 202);
+  assert.equal(calls.verification, 1);
+  assert.equal(calls.emails.length, 1);
+});
+
+test("honeypot silently acknowledges the request without provider delivery", async (t) => {
+  const calls = mockTransport(t);
+  const response = await worker.fetch(createRequest("POST", { ...standard, website: "bot" }), env);
+  assert.equal(response.status, 202);
+  assert.deepEqual(await response.json(), { ok: true, status: "accepted_for_delivery" });
+  assert.deepEqual(calls, { verification: 0, emails: [] });
+});
+
+test("reports provider send failure without acknowledging acceptance", async (t) => {
+  const calls = mockTransport(t, { deliveryStatus: 503 });
+  t.mock.method(console, "error", () => {});
+  const response = await worker.fetch(createRequest(), env);
+  assert.equal(response.status, 502);
+  assert.equal((await response.json()).ok, false);
+  assert.equal(calls.emails.length, 1);
+});
+
+test("staging without TURNSTILE_SECRET can accept valid input", async (t) => {
+  const calls = mockTransport(t);
+  const warning = t.mock.method(console, "warn", () => {});
+  const { turnstileToken, ...fields } = standard;
+  const response = await worker.fetch(createRequest("POST", fields), { RESEND_API_KEY: env.RESEND_API_KEY });
+  assert.equal(response.status, 202);
+  assert.equal(calls.verification, 0);
+  assert.equal(calls.emails.length, 1);
+  assert.match(warning.mock.calls[0].arguments[0], /TURNSTILE_SECRET/);
+});
+
+test("staging still rejects invalid email when TURNSTILE_SECRET is absent", async (t) => {
+  const calls = mockTransport(t);
+  const response = await worker.fetch(createRequest("POST", { ...standard, email: "not-valid" }), {});
+  assert.equal(response.status, 400);
+  assert.deepEqual(calls, { verification: 0, emails: [] });
 });

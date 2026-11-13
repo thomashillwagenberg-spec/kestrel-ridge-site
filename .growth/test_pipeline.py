@@ -2,7 +2,7 @@ import copy
 import json
 import unittest
 from build import ROOT, check_article
-from check import deployment_bytes
+from check import analytics_errors, deployment_bytes
 
 class PublishingGateTests(unittest.TestCase):
     def setUp(self):
@@ -41,5 +41,15 @@ class PublishingGateTests(unittest.TestCase):
         self.assertEqual(deployment_bytes(b'<p><!--email_off-->contact<!--/email_off--></p>','x.html'),b'<p>contact</p>')
     def test_unexpected_scripts_are_not_ignored(self):
         self.assertNotEqual(deployment_bytes(b'<p>text</p><script src="https://other.example/a.js"></script>','x.html'),b'<p>text</p>')
+
+    def test_analytics_gate_requires_one_consent_implementation(self):
+        url = 'https://kestrelridgehealth.com/example/'
+        tracker = '/assets/site-analytics.js'
+        self.assertEqual(analytics_errors([tracker], url), [])
+        self.assertIn('got 0', analytics_errors([], url)[0])
+        self.assertIn('got 2', analytics_errors([tracker, tracker], url)[0])
+        self.assertIn('bypasses', analytics_errors([
+            tracker, 'https://www.googletagmanager.com/gtag/js?id=G-7X0ZX70KQK',
+        ], url)[0])
 
 if __name__=='__main__': unittest.main()

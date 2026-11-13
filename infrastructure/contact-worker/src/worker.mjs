@@ -150,23 +150,33 @@ export default {
     const origin = request.headers.get("origin") || "";
     if (path !== "/submit") return reply(404, { ok: false }, origin);
 
-    // Detect waitlist submission (frontend sends {email, source:"waitlist"}).
-    let preFields;
+    // A cross-origin JSON POST requires an empty OPTIONS preflight.
+    // Check the method and origin before reading any request body.
+    if (request.method === "OPTIONS") {
+      return ALLOWED_ORIGINS.has(origin)
+        ? reply(204, null, origin)
+        : reply(403, { ok: false }, origin);
+    }
+    if (request.method !== "POST") {
+      return reply(405, { ok: false, error: "POST required" }, origin);
+    }
+    if (!ALLOWED_ORIGINS.has(origin)) {
+      return reply(403, { ok: false, error: "Request origin not allowed" }, origin);
+    }
+
+    let fields;
     try {
-      preFields = await readInput(request.clone());
+      fields = await readInput(request);
     } catch {
       return reply(400, { ok: false, error: "Invalid form data" }, origin);
     }
-    if (!preFields || typeof preFields !== "object" || Array.isArray(preFields)) {
+    if (!fields || typeof fields !== "object" || Array.isArray(fields)) {
       return reply(400, { ok: false, error: "Invalid form data" }, origin);
     }
 
-    // Waitlist path --------------------------------------------------------
-    if (preFields.source === "waitlist") {
-      if (!ALLOWED_ORIGINS.has(origin)) {
-        return reply(403, { ok: false, error: "Request origin not allowed" }, origin);
-      }
-      const wEmail = typeof preFields.email === "string" ? preFields.email.trim() : "";
+    // Waitlist submissions send {email, source:"waitlist"}.
+    if (fields.source === "waitlist") {
+      const wEmail = typeof fields.email === "string" ? fields.email.trim() : "";
       if (!validEmail(wEmail)) {
         return reply(400, { ok: false, error: "Add an email address we can write to." }, origin);
       }
@@ -182,20 +192,6 @@ export default {
         return reply(502, { ok: false, error: "Signup could not be sent. Please try again later." }, origin);
       }
     }
-    // End waitlist path -----
-    if (request.method === "OPTIONS") {
-      return ALLOWED_ORIGINS.has(origin)
-        ? reply(204, null, origin)
-        : reply(403, { ok: false }, origin);
-    }
-    if (request.method !== "POST") {
-      return reply(405, { ok: false, error: "POST required" }, origin);
-    }
-    if (!ALLOWED_ORIGINS.has(origin)) {
-      return reply(403, { ok: false, error: "Request origin not allowed" }, origin);
-    }
-    // preFields was already parsed above (used for waitlist detection).
-    const fields = preFields;
     const name = typeof fields.name === "string" ? fields.name.trim() : "";
     const organization = typeof fields.organization === "string"
       ? fields.organization.trim() : (typeof fields.org === "string" ? fields.org.trim() : "");

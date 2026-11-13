@@ -40,6 +40,16 @@ for (const url of urls) {
   const target = BASE ? url.replace(SITE, BASE.replace(/\/$/, '')) : url;
   const page = await browser.newPage();
   const errs = [];
+  if (BASE && new URL(target).hostname === '127.0.0.1' && new URL(url).pathname === '/contact/') {
+    // The production widget is restricted to KRH's domain. Keep the local
+    // render check independent of Cloudflare; live Turnstile needs separate QA.
+    await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js*', route =>
+      route.fulfill({
+        contentType: 'application/javascript',
+        body: 'window.turnstile = {render() {return "local-render-check";}, reset() {}, remove() {}};',
+      }),
+    );
+  }
   page.on('console', m => { if (m.type() === 'error' && !IGNORE.some(r => r.test(m.text() + (m.location()?.url || '')))) errs.push('console: ' + m.text().slice(0, 300)); });
   page.on('pageerror', e => errs.push('pageerror: ' + String(e.message || e).slice(0, 300)));
   let status = 0;
