@@ -11,6 +11,47 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 from build import ROOT, BASE, NS, check_article
+import datetime as dt
+
+# Weekly brief-gated publishing rule (see README.md and BRIEF-TEMPLATE.md).
+# Articles created or substantively revised on or after this date must carry a
+# brief reference and the required internal links. Earlier revisions are grandfathered.
+BRIEF_RULE_EFFECTIVE='2026-11-16'
+REQUIRED_LINKS=('/product/','/pilot/','/evidence/')
+EVIDENCE_TYPES={'search_console_query','sales_conversation','ai_answer_gap','p2_opportunity'}
+BRIEF_KINDS={'new','refresh'}
+
+def internal_links(a):
+    text=a.get('answer','')+a.get('body','')
+    return {h.split('#')[0] for h in re.findall(r'href="(/[^"]*)"',text)}
+
+def check_brief_gate(a, slugs):
+    """Raise AssertionError when a gated article lacks its brief or required links."""
+    if a['modified']<BRIEF_RULE_EFFECTIVE: return
+    b=a.get('brief')
+    assert isinstance(b,dict), f"{a['slug']}: missing brief reference (see .growth/BRIEF-TEMPLATE.md)"
+    assert re.fullmatch(r'\d{4}-W\d{2}-(new|refresh)-[a-z0-9-]+',b.get('id','')), f"{a['slug']}: brief id must look like 2026-W47-new-slug"
+    assert b.get('kind') in BRIEF_KINDS, f"{a['slug']}: brief kind must be new or refresh"
+    assert b.get('kind') in b['id'], f"{a['slug']}: brief id and kind disagree"
+    assert b.get('evidence_type') in EVIDENCE_TYPES, f"{a['slug']}: brief evidence_type must be one of {sorted(EVIDENCE_TYPES)}"
+    assert b.get('buyer_question','').strip(), f"{a['slug']}: brief buyer_question missing"
+    assert b.get('nearest_page','').startswith('/') and b.get('distinct_because','').strip(), f"{a['slug']}: brief must name nearest existing page and why this differs"
+    if b['kind']=='new': assert b['nearest_page']!=f"/{a['slug']}/", f"{a['slug']}: nearest page cannot be itself"
+    links=internal_links(a)
+    missing=[l for l in REQUIRED_LINKS if l not in links]
+    assert not missing, f"{a['slug']}: missing required internal links {missing}"
+    related={l for l in links if l.strip('/') in slugs and l.strip('/')!=a['slug']}
+    assert related, f"{a['slug']}: link at least one related article"
+    assert len(a.get('sources',[]))>=2, f"{a['slug']}: brief-gated articles need at least two cited sources"
+
+def check_weekly_cap(articles):
+    """At most one new article per ISO week from the effective date onward."""
+    weeks={}
+    for a in articles:
+        if a['published']>=BRIEF_RULE_EFFECTIVE:
+            weeks.setdefault(dt.date.fromisoformat(a['published']).isocalendar()[:2],[]).append(a['slug'])
+    over={f'{y}-W{w:02d}':s for (y,w),s in weeks.items() if len(s)>1}
+    assert not over, f'More than one new article in a week: {over}'
 
 class Page(HTMLParser):
     def __init__(self):
@@ -59,8 +100,14 @@ def main():
     ap=argparse.ArgumentParser();ap.add_argument('--live',action='store_true');ap.add_argument('--report');args=ap.parse_args()
     articles=[json.loads(p.read_text()) for p in (ROOT/'.growth/articles').glob('*.json')]
     for a in articles: check_article(a)
-    urls=[e.text for e in ET.parse(ROOT/'sitemap.xml').findall(f'.//{{{NS}}}loc')]
+    slugs={a['slug'] for a in articles}|{p.parent.name for p in ROOT.glob('*/index.html')}
     errors=[]
+    for a in articles:
+        try: check_brief_gate(a,slugs)
+        except AssertionError as e: errors.append(str(e))
+    try: check_weekly_cap(articles)
+    except AssertionError as e: errors.append(str(e))
+    urls=[e.text for e in ET.parse(ROOT/'sitemap.xml').findall(f'.//{{{NS}}}loc')]
     if len(urls)!=len(set(urls)): errors.append('Duplicate sitemap URLs')
     for url in urls:
         p=local_path(url)
