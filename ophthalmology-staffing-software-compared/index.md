@@ -63,7 +63,11 @@ The first engagement, Phase Zero, runs that comparison on a clinic’s own expor
 - **You need reference customers or a HIPAA attestation today.** Kestrel Ridge Health has neither yet.
 - **You need time and attendance or payroll.** That is a workforce management or HR system.
 
-## Questions
+## Frequently asked questions
+
+### What is Kestrel Ridge Health?
+
+Kestrel Ridge Health is ophthalmology staffing software. It forecasts the technician minutes each clinic session will need and drafts a technician staffing plan for multi-site eye clinics, with a person approving every plan. It has been validated on synthetic data only and has no customers yet.
 
 ### Is there staffing software built specifically for ophthalmology?
 
