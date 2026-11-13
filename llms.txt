@@ -64,7 +64,7 @@
   human staffing decisions.
 
 <!-- AUTOGEN:pages BEGIN (scripts/gen_markdown.py; do not edit by hand) -->
-## All pages (28, with Markdown copies)
+## All pages (29, with Markdown copies)
 - [Ophthalmology Staffing Software for Eye Clinics](https://kestrelridgehealth.com/) ([markdown](https://kestrelridgehealth.com/index.md)): Kestrel Ridge Health is ophthalmology staffing software that forecasts technician workload for each clinic session and drafts a staffing plan for multi-site eye clinics. Synthetic validation only; Phase Zero tests it on your own history.
 - [Accessibility Statement](https://kestrelridgehealth.com/accessibility/) ([markdown](https://kestrelridgehealth.com/accessibility/index.md)): What we target, what we checked and when, the limitations we know about, and how to tell us about a barrier on this site.
 - [Ask About Phase Zero](https://kestrelridgehealth.com/contact/) ([markdown](https://kestrelridgehealth.com/contact/index.md)): Ask about Phase Zero, a diagnostic that scores a staffing forecast against your current method and a historical average. An export, not a new workflow. Data handling agreed with your privacy office before anything moves.
