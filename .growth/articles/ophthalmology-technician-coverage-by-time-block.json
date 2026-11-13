@@ -1,0 +1,41 @@
+{
+  "slug": "ophthalmology-technician-coverage-by-time-block",
+  "title": "How to spot a technician coverage gap during an eye clinic session",
+  "description": "Use a time-block worksheet to find ophthalmic technician coverage gaps before publishing an eye clinic schedule.",
+  "published": "2026-11-13",
+  "modified": "2026-11-13",
+  "reviewed": "2026-11-13",
+  "category": "Planning guide",
+  "author": "Thomas Wagenberg",
+  "answer": "Split the session into short blocks and compare the work due in each block with the qualified technician minutes available. Start with the busiest interval. A morning can have enough minutes overall and still be short when workups and testing land together.",
+  "editorial_note": "Original time-block decision guide. All worksheet figures are fictional. Separate from equipment sharing and split-site assignments.",
+  "image": {
+    "path": "/assets/technician-coverage-peaks-20261113.jpg",
+    "width": 1440,
+    "height": 960,
+    "alt": "A wall clock and two empty exam rooms in an ophthalmology clinic.",
+    "caption": "AI-generated editorial illustration of a fictional clinic.",
+    "provenance": "Original editorial image generated for KRH on November 13, 2026."
+  },
+  "sources": [
+    {
+      "title": "Discrete-event simulation in a glaucoma clinic",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10862387/",
+      "checked": "2026-11-13",
+      "supports": "In the clinic studied, the researchers examined technician demand by time and modeled bottlenecks. The study does not establish a staffing standard or validate this worksheet."
+    },
+    {
+      "title": "KRH: How technician forecasting and assignments work",
+      "url": "https://kestrelridgehealth.com/how-it-works/",
+      "checked": "2026-11-13",
+      "supports": "KRH distinguishes session workload estimates, assignment constraints and human review."
+    },
+    {
+      "title": "KRH: Evidence and limitations",
+      "url": "https://kestrelridgehealth.com/evidence/",
+      "checked": "2026-11-13",
+      "supports": "Published KRH validation uses synthetic data."
+    }
+  ],
+  "body": "<h2 id=\"time-block\">Start with the work due in each block</h2>\n<p>I'd take one provider's morning session and mark the half hours where work needs to happen. Count the active minutes for workups, testing and any other duties already assigned. If a task can move, write down its earliest and latest workable times. If it spans two blocks, split the minutes across those blocks.</p>\n<p>Then write down the technicians who are present and eligible for each task. Deduct breaks, training and commitments elsewhere. Give each technician one timeline. A person who can do both imaging and workups still has only 30 minutes in a half hour.</p>\n<h2 id=\"worksheet\">Check the busiest half hour</h2>\n<p>Here's a fictional 90-minute slice of a morning. Two technicians are scheduled throughout. One is eligible for the tests. The 40 workup minutes at 10:00 could come from four 10-minute workups. The 30 testing minutes could come from two 15-minute tests. The times are example inputs.</p>\n<div class=\"growth-table\" role=\"region\" aria-label=\"Example technician coverage by time block\" tabindex=\"0\"><table><caption>Fictional coverage worksheet, all figures in technician minutes</caption><thead><tr><th scope=\"col\">Block</th><th scope=\"col\">Workups</th><th scope=\"col\">Tests</th><th scope=\"col\">Available</th><th scope=\"col\">Capacity after work</th></tr></thead><tbody><tr><th scope=\"row\">9:30 AM</th><td>25</td><td>15</td><td>60</td><td>20 remaining</td></tr><tr><th scope=\"row\">10:00 AM</th><td>40</td><td>30</td><td>60</td><td>10 short</td></tr><tr><th scope=\"row\">10:30 AM</th><td>25</td><td>15</td><td>60</td><td>20 remaining</td></tr><tr><th scope=\"row\">Total</th><td>90</td><td>60</td><td>180</td><td>30 remaining</td></tr></tbody></table></div>\n<p>The slice has 30 minutes left overall. At 10:00, both tests use the full half hour of the eligible technician. That leaves 30 minutes for 40 minutes of workups. I'd move a 10-minute workup to 10:30 only if the visit can move with it and the receiving block still works. The 10:00 block would then have no margin. I'd check what happens if one test runs five minutes long.</p>\n<h2 id=\"decision\">Decide what to change before publishing</h2>\n<ol><li>Try moving flexible work within its allowed window. Recheck both blocks, including downstream room and provider availability.</li><li>If the work can't move, check whether an eligible technician is free to help. Review the assignment they would leave before moving them.</li><li>If neither change works, flag the block for the site lead. Adjust the template or coverage before approving it.</li></ol>\n<p>A glaucoma-clinic simulation study examined how demands on technicians varied in the clinic it studied. I use that as a reason to look at timing locally. The table here is a planning method with synthetic inputs. It doesn't predict waiting time or establish a safe staffing level.</p>\n<p>Our <a href=\"/forecasting-technician-workload-by-session/\">workload forecasting guide</a> explains how to estimate the work for a whole session. If the same device is the constraint, use the <a href=\"/ophthalmology-shared-imaging-schedule/\">shared imaging guide</a> to check its availability separately.</p>"
+}

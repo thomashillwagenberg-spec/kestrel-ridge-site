@@ -63,7 +63,7 @@
   human staffing decisions.
 
 <!-- AUTOGEN:pages BEGIN (scripts/gen_markdown.py; do not edit by hand) -->
-## All pages (27, with Markdown copies)
+## All pages (28, with Markdown copies)
 - [Ophthalmic Staffing Software](https://kestrelridgehealth.com/) ([markdown](https://kestrelridgehealth.com/index.md)): Phase Zero is a diagnostic that scores a session-level staffing forecast against your current ratio, using your own history. Synthetic validation data only.
 - [Accessibility Statement](https://kestrelridgehealth.com/accessibility/) ([markdown](https://kestrelridgehealth.com/accessibility/index.md)): What we target, what we checked and when, the limitations we know about, and how to tell us about a barrier on this site.
 - [Ask About Phase Zero](https://kestrelridgehealth.com/contact/) ([markdown](https://kestrelridgehealth.com/contact/index.md)): Ask about Phase Zero, a diagnostic that scores a staffing forecast against your current method and a historical average. An export, not a new workflow. Data handling agreed with your privacy office before anything moves.
@@ -91,4 +91,5 @@
 - [Ten Patients Is Not a Staffing Plan](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/) ([markdown](https://kestrelridgehealth.com/news/kestrel-ridge-health-phase-zero/index.md)): Kestrel Ridge Health LLC announces Phase Zero, a diagnostic that tests a staffing forecast on a practice's own history.
 - [Before refilling an ophthalmology cancellation, check technician coverage](https://kestrelridgehealth.com/ophthalmology-waitlist-technician-coverage/) ([markdown](https://kestrelridgehealth.com/ophthalmology-waitlist-technician-coverage/index.md)): An ophthalmology waitlist checklist for checking technician time, imaging and room coverage before booking a replacement visit.
 - [How to schedule two ophthalmology sessions that share imaging](https://kestrelridgehealth.com/ophthalmology-shared-imaging-schedule/) ([markdown](https://kestrelridgehealth.com/ophthalmology-shared-imaging-schedule/index.md)): A five-step scheduling check for independent eye clinics sharing an imaging station, with a worked timeline for device and technician coverage.
+- [How to spot a technician coverage gap during an eye clinic session](https://kestrelridgehealth.com/ophthalmology-technician-coverage-by-time-block/) ([markdown](https://kestrelridgehealth.com/ophthalmology-technician-coverage-by-time-block/index.md)): Use a time-block worksheet to find ophthalmic technician coverage gaps before publishing an eye clinic schedule.
 <!-- AUTOGEN:pages END -->

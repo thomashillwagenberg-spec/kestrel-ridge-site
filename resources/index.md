@@ -10,13 +10,19 @@ KRH-GROWTH-START
 
 [RSS feed](https://kestrelridgehealth.com/feed.xml)
 
+Planning guideNov 13, 2026
+
+### [How to spot a technician coverage gap during an eye clinic session](https://kestrelridgehealth.com/ophthalmology-technician-coverage-by-time-block/)
+
+Use a time-block worksheet to find ophthalmic technician coverage gaps before publishing an eye clinic schedule.
+
+## More practice guides
+
 Scheduling and coverageNov 12, 2026
 
 ### [How to schedule two ophthalmology sessions that share imaging](https://kestrelridgehealth.com/ophthalmology-shared-imaging-schedule/)
 
 A five-step scheduling check for independent eye clinics sharing an imaging station, with a worked timeline for device and technician coverage.
-
-## More practice guides
 
 Scheduling and coverageNov 11, 2026
 
