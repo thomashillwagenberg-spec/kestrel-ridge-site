@@ -1,7 +1,7 @@
 ---
-title: "Technician Staffing Software for Eye Clinics | Kestrel Ridge"
+title: "Ophthalmology Staffing Forecast Software | Kestrel Ridge"
 url: https://kestrelridgehealth.com/product/
-description: "What a scheduler does with it: build a staffing plan, get refused an override that breaks a rule, stress-test a call-off, hand the lineage to an auditor."
+description: "Ophthalmology technician staffing forecast software for single and multi-site eye clinics. Runs alongside your EHR and scheduler, from exported history."
 ---
 
 Session-level planning
@@ -60,7 +60,7 @@ Layer 2 · Rule validator
 
 Checks every assignment against eight hard rules
 
-Competency, availability, site eligibility and five more. A proposed change that breaks one is refused, logged and named by rule — nothing is saved.
+Competency, availability, site eligibility and five more. A proposed change that breaks one is refused, logged and named by rule. Nothing is saved.
 
 ↓
 
@@ -119,7 +119,7 @@ See the refusal happen
 
 ## Try an assignment that breaks a rule
 
-Illustrative synthetic example — not a live solver. No real clinic, session or technician data is used.
+Illustrative synthetic example, not a live solver. No real clinic, session or technician data is used.
 
 Assign Dana R. to the 7:30 AM Westside session
 
@@ -162,7 +162,7 @@ Boundaries
 Four things it is routinely mistaken for, and what it does instead.
 
 - Not an EHR It holds no chart, no diagnosis and no note. It reads counts about a clinic session and forecasts the technician minutes that session will consume.
-- Not appointment scheduling It does not book, move or cancel a patient. It takes the schedule you already built as given and staffs the technician side of it.
+- Not appointment scheduling It does not book, move or cancel a patient. It takes the schedule you already built as given and staffs the technician side of it. It runs alongside the scheduler you use now, from history you export, rather than replacing it.
 - Not a staffing agency It supplies nobody and hires nobody. It assigns the technicians already on your roster, under your own rules, for a person to approve.
 - Not credentialing software It does not verify, issue or track a credential. It reads the competencies and site approvals you maintain elsewhere and refuses any assignment that would violate them.
 

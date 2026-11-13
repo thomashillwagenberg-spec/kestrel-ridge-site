@@ -4,6 +4,8 @@ url: https://kestrelridgehealth.com/call-off-coverage-eye-clinics/
 description: "When an ophthalmic technician calls out, eye clinics face a narrow decision window. Options, tradeoffs, and how forecasting changes the math."
 ---
 
+**Short answer:** when a technician calls out, most eye clinics have four options: absorb the work with the staff who are present, trim the schedule, bring in a locum or agency technician, or move someone from another site. Which one works depends on how many technician minutes the session needs and how much slack is left, so the decision is easier if it is made before the call comes in. You can [run the technician coverage risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/), or see a [call-off stress test on the product page](https://kestrelridgehealth.com/product/#demo-title).
+
 ## The call-off problem in ophthalmology
 
 A call-off in ophthalmology is not a generic staffing problem. It is a credentialing problem with a short fuse. Ophthalmic technicians hold certifications that require supervised clinical experience. A general clinical substitute cannot step in. When a credentialed technician calls out, the replacement must also be credentialed, and the pool of available credentialed staff on any given morning is small.
@@ -62,7 +64,7 @@ The best time to build a call-off coverage protocol is not the morning of a call
 
 That review is difficult to do without session-level data. The Kestrel Ridge Health Phase Zero diagnostic produces exactly that data: a session-by-session workload forecast that identifies which sessions are structurally fragile and why.
 
-[Contact us](https://kestrelridgehealth.com/contact/) to start a conversation about Phase Zero and what it would show for your group.
+[Phase Zero](https://kestrelridgehealth.com/pilot/) tests the forecast on your own exported history before anything about your staffing changes. For why a fixed ratio misses session-level need, see [what published staffing ratios can and cannot decide](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/). [Contact us](https://kestrelridgehealth.com/contact/) to start a conversation about Phase Zero and what it would show for your group.
 
 ## Technician coverage risk check
 

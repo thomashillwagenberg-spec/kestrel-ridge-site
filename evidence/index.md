@@ -160,3 +160,5 @@ Verified  Measured 2026-09-07 by running the backend suite with a five second so
 The useful conversation is about what these figures become when they are recomputed on your own sessions.
 
 [Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[How the pilot is designed to stop](https://kestrelridgehealth.com/pilot/)
+
+Related reading: [what the software does](https://kestrelridgehealth.com/product/), [what published staffing ratios can and cannot decide](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/), and [call-off coverage options for eye clinics](https://kestrelridgehealth.com/call-off-coverage-eye-clinics/).
