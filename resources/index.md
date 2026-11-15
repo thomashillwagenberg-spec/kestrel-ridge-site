@@ -10,13 +10,19 @@ KRH-GROWTH-START
 
 [RSS feed](https://kestrelridgehealth.com/feed.xml)
 
+Scheduling guideNov 15, 2026
+
+### [Ophthalmology schedule changes: a front desk and technician handoff checklist](https://kestrelridgehealth.com/ophthalmology-schedule-change-handoff/)
+
+Use a six-item handoff when an ophthalmology schedule changes, with a clear owner, a read-back and a decision deadline.
+
+## More practice guides
+
 Planning guideNov 13, 2026
 
 ### [How to spot a technician coverage gap during an eye clinic session](https://kestrelridgehealth.com/ophthalmology-technician-coverage-by-time-block/)
 
 Use a time-block worksheet to find ophthalmic technician coverage gaps before publishing an eye clinic schedule.
-
-## More practice guides
 
 Scheduling and coverageNov 12, 2026
 
