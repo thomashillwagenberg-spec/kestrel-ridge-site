@@ -15,7 +15,7 @@ const DESTINATION = "twagenberg@kestrelridgehealth.com";
 // actually verified/authorized to send, and set it as SENDER_FROM.
 // Until that is set, production fails closed (503) rather than guessing.
 const SENDER_FALLBACK = "KRH Contact <onboarding@resend.dev>"; // staging-only sandbox sender
-const SENDER_DOMAIN_ALLOWLIST = ["mail.kestrelridgehealth.com"]; // Resend team "kestrelridgehealth" (us-east-1). Root domain belongs to a different Resend team: never send from it.
+const SENDER_DOMAIN_ALLOWLIST = ["kestrelridgehealth.com"]; // Root domain, verified in the Resend team whose sending-only key was confirmed 2026-11-17 (probe id 01a1ebd4). Subdomains are refused.
 
 function isProd(env) {
   // Fail-safe default: anything that isn't explicitly "staging" is treated

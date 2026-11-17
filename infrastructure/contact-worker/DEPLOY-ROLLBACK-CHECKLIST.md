@@ -19,7 +19,7 @@ Re-check the syntax with `npx wrangler versions --help` on the day; Wrangler cha
 | Static site (HTML/JS, Turnstile render) | GitHub Pages, legacy build from `main` `/` | Yes: PR #18 ships the rebuilt `/contact/` chunk with `action:"krh_contact"` | `git revert <merge-sha>` on `main`, push, wait for the Pages build, hard-refresh. No Cloudflare Pages is involved. |
 | Edge proxy, DNS, WAF/security rules | Cloudflare zone `kestrelridgehealth.com` | None. Do not change. | n/a. If anything was touched by mistake, restore from the Cloudflare audit log. |
 | Contact Worker `krh-contact-inquiries` | Cloudflare Workers (`*.workers.dev`) | New code + secrets + rate-limit bindings | `npx wrangler rollback 9f1006ea-84e5-4f55-b46b-13cb85a47402 --message "rollback"` or `npx wrangler versions deploy 9f1006ea-84e5-4f55-b46b-13cb85a47402@100%`. Note: that version has no secrets and is already non-working (preflight returns 400), so rollback restores "broken but sends nothing", not a working form. |
-| Resend | Resend team "kestrelridgehealth", domain `mail.kestrelridgehealth.com` | None (read-only confirmation) | Revoke/rotate the API key in the Resend dashboard if it leaked. |
+| Resend | Resend team that owns verified root `kestrelridgehealth.com` (NOT team "kestrelridgehealth") | None (read-only confirmation) | Revoke/rotate the API key in the Resend dashboard if it leaked. |
 | Destination mailbox | Microsoft 365, `twagenberg@kestrelridgehealth.com` | None | n/a. If mail lands in Junk, add a transport rule or safe-sender entry; do not change MX/SPF. |
 
 ## 1. Pre-flight (no production change)
@@ -27,7 +27,7 @@ Re-check the syntax with `npx wrangler versions --help` on the day; Wrangler cha
 - [ ] All RELEASE-VERIFICATION.md blockers B1 to B7 closed, with evidence links.
 - [ ] Worker tests run in CI and pass (B5): CI log shows `node --test infrastructure/contact-worker/test/worker.test.mjs` with 0 failures.
 - [ ] Local burst harness re-run on the final commit; results attached.
-- [ ] Resend dashboard (Thomas): domain `mail.kestrelridgehealth.com` shows Verified. Write down the exact From address to use, e.g. `KRH Website <notifications@mail.kestrelridgehealth.com>`. It must be on `mail.kestrelridgehealth.com` because `worker.mjs:18` allows only that subdomain (the root domain is a different Resend team). DNS alone is not proof.
+- [ ] Resend dashboard (Thomas): domain `kestrelridgehealth.com` shows Verified in the owning team; From is `Kestrel Ridge Health <twagenberg@kestrelridgehealth.com>`, e.g. `KRH Website <notifications@mail.kestrelridgehealth.com>`. It must be on `mail.kestrelridgehealth.com` because `worker.mjs:18` allows only that subdomain (the root domain is a different Resend team). DNS alone is not proof.
 - [ ] Turnstile dashboard (Thomas): the widget for the sitekey embedded in the live JS lists `kestrelridgehealth.com` and `www.kestrelridgehealth.com`.
 - [ ] Record the rollback target: `npx wrangler deployments list` shows the active version (today `9f1006ea-84e5-4f55-b46b-13cb85a47402`, 100%).
 - [ ] Rollback operator available for 30 minutes after deploy.

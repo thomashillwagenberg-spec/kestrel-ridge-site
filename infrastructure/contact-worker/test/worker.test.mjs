@@ -43,7 +43,7 @@ function prodEnv(overrides = {}) {
     ENVIRONMENT: "production",
     RESEND_API_KEY: "synthetic-test-key",
     TURNSTILE_SECRET: "synthetic-unit-test-secret",
-    SENDER_FROM: "KRH Contact <notifications@mail.kestrelridgehealth.com>",
+    SENDER_FROM: "Kestrel Ridge Health <twagenberg@kestrelridgehealth.com>",
     RATE_LIMITER: fakeRateLimiter(),
     WAITLIST_RATE_LIMITER: fakeRateLimiter(),
     ...overrides,
@@ -329,18 +329,54 @@ test("waitlist: accepts and sends a valid, non-bot submission", async () => {
   } finally { restore(); }
 });
 
-test("W3: production refuses a root-domain SENDER_FROM (different Resend team)", async () => {
-  const { default: worker } = await import("../src/worker.mjs");
-  const env = { ENVIRONMENT: "production", RESEND_API_KEY: "re_test", TURNSTILE_SECRET: "t",
-    SENDER_FROM: "KRH Website <notifications@kestrelridgehealth.com>",
-    RATE_LIMITER: { limit: async () => ({ success: true }) }, WAITLIST_RATE_LIMITER: { limit: async () => ({ success: true }) } };
-  const origFetch = globalThis.fetch; let calls = 0; globalThis.fetch = async () => { calls++; return new Response("{}"); };
+for (const [label, sender] of [
+  ["the old mail. subdomain", "KRH Website <notifications@mail.kestrelridgehealth.com>"],
+  ["a non-KRH domain", "KRH <twagenberg@example.com>"],
+  ["a lookalike domain", "KRH <twagenberg@kestrelridgehealth.com.evil.co>"],
+]) {
+  test("W3: production refuses " + label + " as SENDER_FROM, with no outbound email", async () => {
+    let calls = 0;
+    const restore = simulateFetch(async () => { calls++; return new Response("{}"); });
+    try {
+      const res = await worker.fetch(createRequest(), prodEnv({ SENDER_FROM: sender }));
+      assert.equal(res.status, 503);
+      assert.equal(calls, 0);
+    } finally { restore(); }
+  });
+}
+
+function captureResend() {
+  const sent = [];
+  const restore = simulateFetch(async (url, init) => {
+    const href = typeof url === "string" ? url : url.url;
+    if (href.includes("siteverify")) return new Response(JSON.stringify(validChallenge));
+    sent.push(JSON.parse(init.body));
+    return new Response(JSON.stringify({ id: "synthetic" }));
+  });
+  return { sent, restore };
+}
+
+test("W3: contact email is From the business address, To the business inbox, Reply-To the visitor", async () => {
+  const { sent, restore } = captureResend();
   try {
-    const req = new Request("https://w.example/submit", { method: "POST",
-      headers: { Origin: "https://kestrelridgehealth.com", "Content-Type": "application/json", "cf-connecting-ip": "1.2.3.4" },
-      body: JSON.stringify({ name: "A", email: "a@b.co", message: "hello there world", turnstileToken: "x" }) });
-    const res = await worker.fetch(req, env);
-    assert.ok(res.status >= 500, "expected refusal, got " + res.status);
-    assert.equal(calls, 0, "no outbound call (no email) when sender is misconfigured");
-  } finally { globalThis.fetch = origFetch; }
+    const res = await worker.fetch(createRequest(), prodEnv());
+    assert.equal(res.status, 202);
+    assert.equal(sent.length, 1);
+    assert.equal(sent[0].from, "Kestrel Ridge Health <twagenberg@kestrelridgehealth.com>");
+    assert.deepEqual(sent[0].to, ["twagenberg@kestrelridgehealth.com"]);
+    assert.equal(sent[0].reply_to, standard.email);
+    assert.notEqual(sent[0].reply_to, sent[0].to[0]);
+  } finally { restore(); }
+});
+
+test("W3: waitlist email uses the same From/To, Reply-To the subscriber", async () => {
+  const { sent, restore } = captureResend();
+  try {
+    const res = await worker.fetch(createRequest("POST", { source: "waitlist", email: "visitor@clinic.example" }), prodEnv());
+    assert.equal(res.status, 202);
+    assert.equal(sent.length, 1);
+    assert.equal(sent[0].from, "Kestrel Ridge Health <twagenberg@kestrelridgehealth.com>");
+    assert.deepEqual(sent[0].to, ["twagenberg@kestrelridgehealth.com"]);
+    assert.equal(sent[0].reply_to, "visitor@clinic.example");
+  } finally { restore(); }
 });

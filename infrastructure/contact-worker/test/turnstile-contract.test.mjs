@@ -71,7 +71,7 @@ function prodEnv(overrides = {}) {
     ENVIRONMENT: "production",
     RESEND_API_KEY: "synthetic-test-key",
     TURNSTILE_SECRET: "synthetic-unit-test-secret",
-    SENDER_FROM: "KRH Contact <notifications@mail.kestrelridgehealth.com>",
+    SENDER_FROM: "Kestrel Ridge Health <twagenberg@kestrelridgehealth.com>",
     RATE_LIMITER: { limit: async () => ({ success: true }) },
     WAITLIST_RATE_LIMITER: { limit: async () => ({ success: true }) },
     ...overrides,
