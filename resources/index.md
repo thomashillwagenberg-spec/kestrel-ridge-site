@@ -10,13 +10,19 @@ KRH-GROWTH-START
 
 [RSS feed](https://kestrelridgehealth.com/feed.xml)
 
+Data readinessNov 17, 2026
+
+### [Can EHR timestamps measure ophthalmic technician workload?](https://kestrelridgehealth.com/ehr-timestamps-ophthalmic-technician-workload/)
+
+Compare EHR timestamps with observed technician work before using them to forecast staffing in an ophthalmology clinic.
+
+## More practice guides
+
 Scheduling guideNov 15, 2026
 
 ### [Ophthalmology schedule changes: a front desk and technician handoff checklist](https://kestrelridgehealth.com/ophthalmology-schedule-change-handoff/)
 
 Use a six-item handoff when an ophthalmology schedule changes, with a clear owner, a read-back and a decision deadline.
-
-## More practice guides
 
 Planning guideNov 13, 2026
 
