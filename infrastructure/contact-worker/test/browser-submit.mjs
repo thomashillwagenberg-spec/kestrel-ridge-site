@@ -125,7 +125,7 @@ try {
 function env() {
   return {
     ENVIRONMENT: "production", RESEND_API_KEY: "synthetic", TURNSTILE_SECRET: "synthetic",
-    SENDER_FROM: "KRH Contact <notifications@kestrelridgehealth.com>",
+    SENDER_FROM: "KRH Contact <notifications@mail.kestrelridgehealth.com>",
     RATE_LIMITER: { limit: async () => ({ success: true }) },
     WAITLIST_RATE_LIMITER: { limit: async () => ({ success: true }) },
   };

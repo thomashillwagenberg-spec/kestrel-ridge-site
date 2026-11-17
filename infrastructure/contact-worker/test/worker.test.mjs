@@ -43,7 +43,7 @@ function prodEnv(overrides = {}) {
     ENVIRONMENT: "production",
     RESEND_API_KEY: "synthetic-test-key",
     TURNSTILE_SECRET: "synthetic-unit-test-secret",
-    SENDER_FROM: "KRH Contact <notifications@kestrelridgehealth.com>",
+    SENDER_FROM: "KRH Contact <notifications@mail.kestrelridgehealth.com>",
     RATE_LIMITER: fakeRateLimiter(),
     WAITLIST_RATE_LIMITER: fakeRateLimiter(),
     ...overrides,
@@ -327,4 +327,20 @@ test("waitlist: accepts and sends a valid, non-bot submission", async () => {
     const response = await worker.fetch(createRequest("POST", fields), prodEnv());
     assert.equal(response.status, 202);
   } finally { restore(); }
+});
+
+test("W3: production refuses a root-domain SENDER_FROM (different Resend team)", async () => {
+  const { default: worker } = await import("../src/worker.mjs");
+  const env = { ENVIRONMENT: "production", RESEND_API_KEY: "re_test", TURNSTILE_SECRET: "t",
+    SENDER_FROM: "KRH Website <notifications@kestrelridgehealth.com>",
+    RATE_LIMITER: { limit: async () => ({ success: true }) }, WAITLIST_RATE_LIMITER: { limit: async () => ({ success: true }) } };
+  const origFetch = globalThis.fetch; let calls = 0; globalThis.fetch = async () => { calls++; return new Response("{}"); };
+  try {
+    const req = new Request("https://w.example/submit", { method: "POST",
+      headers: { Origin: "https://kestrelridgehealth.com", "Content-Type": "application/json", "cf-connecting-ip": "1.2.3.4" },
+      body: JSON.stringify({ name: "A", email: "a@b.co", message: "hello there world", turnstileToken: "x" }) });
+    const res = await worker.fetch(req, env);
+    assert.ok(res.status >= 500, "expected refusal, got " + res.status);
+    assert.equal(calls, 0, "no outbound call (no email) when sender is misconfigured");
+  } finally { globalThis.fetch = origFetch; }
 });
