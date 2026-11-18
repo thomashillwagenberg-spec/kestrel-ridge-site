@@ -23,19 +23,19 @@ Kestrel Ridge Health is ophthalmology staffing software. It forecasts the techni
 
 **Phase Zero** is a diagnostic scoped to your clinic. If the forecast does not beat both the ratio you use today and a historical average, the engagement stops there.
 
-[Ask about Phase Zero](https://kestrelridgehealth.com/contact/) [See how it's measured](https://kestrelridgehealth.com/evidence/)
+[Ask about Phase Zero](https://kestrelridgehealth.com/contact/) What Phase Zero involves
 
-23.76 min Avg forecast error (synthetic)
+For operations leaders Administrators, COOs, directors of operations
 
-Privacy office Agrees data handling first
+Your history decides Stops if it does not beat your method
 
-Scoped per clinic Agreed in writing first
+Synthetic data only No real-clinic results yet
 
 2 the blindness
 
 ## A fixed ratio counts heads.
 
-It cannot see appointment mix, testing load, complexity or how a particular provider works. Every session becomes the same session.
+It cannot see appointment mix, testing load, complexity or how a particular provider works. Every session becomes the same session, so a heavy testing clinic and a light follow-up clinic get the same technician count.
 
 On the system's synthetic validation holdout, not validated on real clinic data, the forecast's average error is 23.76 minutes. A plain regression scores 24.01 and a provider-average spreadsheet 33.42 on the same sessions; the fixed ratio scores 208.61, a naive floor rather than the comparison that matters.
 

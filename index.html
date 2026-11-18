@@ -816,20 +816,20 @@
       <p class="kr-note kr-offer"><strong class="kr-pz">Phase Zero</strong> is a diagnostic scoped to your clinic. If the forecast does not beat both the ratio you use today and a historical average, the engagement stops there.</p>
       <div class="kr-actions kr-hero-actions">
         <a class="cta" href="/contact/">Ask about Phase Zero</a>
-        <a class="kr-second kr-m-hero-link" href="/evidence/">See how it's measured</a>
+        <a class="kr-second kr-m-hero-link" href="#phase-zero">What Phase Zero involves</a>
       </div>
-      <div class="kr-proof-strip" aria-label="Synthetic validation results">
+      <div class="kr-proof-strip" aria-label="Who it is for and what it has been tested on">
         <div class="kr-proof-strip__item">
-          <span class="kr-proof-strip__val">23.76 min</span>
-          <span class="kr-proof-strip__label">Avg forecast error (synthetic)</span>
+          <span class="kr-proof-strip__val">For operations leaders</span>
+          <span class="kr-proof-strip__label">Administrators, COOs, directors of operations</span>
         </div>
         <div class="kr-proof-strip__item">
-          <span class="kr-proof-strip__val">Privacy office</span>
-          <span class="kr-proof-strip__label">Agrees data handling first</span>
+          <span class="kr-proof-strip__val">Your history decides</span>
+          <span class="kr-proof-strip__label">Stops if it does not beat your method</span>
         </div>
         <div class="kr-proof-strip__item">
-          <span class="kr-proof-strip__val">Scoped per clinic</span>
-          <span class="kr-proof-strip__label">Agreed in writing first</span>
+          <span class="kr-proof-strip__val">Synthetic data only</span>
+          <span class="kr-proof-strip__label">No real-clinic results yet</span>
         </div>
       </div>
     </div>
@@ -837,7 +837,7 @@
     <!-- 2 the blindness -->
     <div class="sc-copy sc-copy--lead" data-sc-copy data-sc-window="0.16 0.28">
       <h2 class="kr-h2">A fixed ratio counts heads.</h2>
-      <p class="kr-lede">It cannot see appointment mix, testing load, complexity or how a particular provider works. Every session becomes the same session.</p>
+      <p class="kr-lede">It cannot see appointment mix, testing load, complexity or how a particular provider works. Every session becomes the same session, so a heavy testing clinic and a light follow-up clinic get the same technician count.</p>
       <p class="kr-lede">On the system's synthetic validation holdout, not validated on real clinic data, the forecast's average error is 23.76 minutes. A plain regression scores 24.01 and a provider-average spreadsheet 33.42 on the same sessions; the fixed ratio scores 208.61, a naive floor rather than the comparison that matters.</p>
     </div>
 
@@ -1018,8 +1018,43 @@
   <div data-sc-spacer aria-hidden="true"></div>
 </main>
 
+<section class="kr-pz-plain" id="phase-zero" aria-labelledby="pz-plain-h">
+  <div class="kr-pz-plain__in">
+    <p class="kr-pz-plain__eyebrow">Phase Zero, in plain terms</p>
+    <h2 id="pz-plain-h">A test on your own clinic history that can end the engagement</h2>
+    <p class="kr-pz-plain__lede">Phase Zero answers one question for a practice administrator, COO or director of operations: would a session-level workload forecast have staffed your technicians better than the ratio you use today?</p>
+    <dl class="kr-pz-plain__grid">
+      <div><dt>The decision it supports</dt><dd>How many technicians each clinic session needs, and who can cover when someone calls off without breaking competency or site rules. A named person still approves every plan.</dd></div>
+      <div><dt>What you provide</dt><dd>An export of operational counts from your own history: per-session appointment mix, complexity flags and realized technician minutes. Patient identifiers stay in your systems.</dd></div>
+      <div><dt>What has to be approved first</dt><dd>Your privacy office agrees how the export is prepared, including whether it is protected health information in your hands, before anything moves. Scope is agreed in writing before any work starts.</dd></div>
+      <div><dt>What you receive</dt><dd>The forecast's error on your own sessions, compared with your current ratio or spreadsheet and with a simple historical average, and a stop-or-continue decision against a margin agreed in writing beforehand.</dd></div>
+      <div><dt>If it does not win</dt><dd>The engagement stops there. Your current ratio being adequate is a legitimate finding, and it is yours to keep either way.</dd></div>
+      <div><dt>What it cannot do yet</dt><dd>It has been tested on synthetic data only, has no customers, is not HIPAA certified and does not approve staffing plans on its own.</dd></div>
+    </dl>
+    <div class="kr-pz-plain__actions">
+      <a class="cta" href="/contact/">Ask about Phase Zero</a>
+      <a href="/pilot/">Full pilot design and stopping rules</a>
+      <a href="/evidence/">How the forecast was measured</a>
+      <a href="/faq/">Buyer questions answered</a>
+    </div>
+  </div>
+</section>
+
 <footer class="kr-site-footer" role="contentinfo">
 <style>
+.kr-pz-plain{background:#071a33;color:#dbe7f7;padding:4rem 1.25rem;position:relative;z-index:2;font:17px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;scroll-margin-top:5rem}
+.kr-pz-plain__in{max-width:72rem;margin:0 auto}
+.kr-pz-plain__eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#87BCF7;margin:0 0 .5rem}
+.kr-pz-plain h2{font-size:clamp(1.6rem,3.2vw,2.4rem);line-height:1.2;color:#fff;margin:0 0 1rem;max-width:30ch}
+.kr-pz-plain__lede{max-width:62ch;margin:0 0 2rem}
+.kr-pz-plain__grid{display:grid;gap:1.25rem;grid-template-columns:1fr;margin:0}
+@media(min-width:761px){.kr-pz-plain__grid{grid-template-columns:repeat(3,1fr)}}
+.kr-pz-plain__grid>div{border:1px solid rgba(200,216,238,.22);border-radius:8px;padding:1.1rem 1.2rem}
+.kr-pz-plain dt{font-weight:700;color:#fff;margin:0 0 .35rem}
+.kr-pz-plain dd{margin:0;font-size:.95rem}
+.kr-pz-plain__actions{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;align-items:center;margin-top:2rem}
+.kr-pz-plain__actions a:not(.cta){color:#fff;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px}
+.kr-pz-plain__actions a:focus-visible{outline:2px solid #87BCF7;outline-offset:3px}
 .kr-site-footer{background:#04101F;color:#C8D8EE;border-top:1px solid rgba(200,216,238,.18);padding:3rem 1.25rem 2rem;font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;position:relative;z-index:2}
 .kr-site-footer .f-in{max-width:72rem;margin:0 auto}
 .kr-site-footer .f-grid{display:grid;gap:2rem;grid-template-columns:1fr}
