@@ -8,7 +8,7 @@ description: "Use a six-item handoff when an ophthalmology schedule changes, wit
 
 Use a six-item handoff when an ophthalmology schedule changes, with a clear owner, a read-back and a decision deadline.
 
-By Thomas Wagenberg · November 15, 2026 · 3 min read
+By Thomas Wagenberg · November 15, 2026 · Updated November 18, 2026 · 4 min read
 
 ![Two clinic staff review a paper schedule at a reception counter.](https://kestrelridgehealth.com/assets/ophthalmology-schedule-handoff-20261115.webp)
 
@@ -16,7 +16,7 @@ By Thomas Wagenberg · November 15, 2026 · 3 min read
 
 The practical takeaway
 
-When an eye clinic schedule changes, tell the front desk and technician lead what moved, what work it affects, who will check coverage and when they'll confirm. Ask the receiving person to repeat the change and any open issue. Keep the previous plan active until the owner confirms or escalates.
+When an eye clinic schedule changes, tell the front desk and technician lead what moved, what work it affects, who will check coverage and when they'll confirm. Ask the receiving person to repeat the change and any open issue. Keep the previous plan active until the owner confirms or escalates. If two sites are open at the same time, count qualified technician minutes at each site before confirming the change.
 
 ## What belongs in a schedule change handoff?
 
@@ -41,6 +41,16 @@ At 8:10, front desk asks to move a visit with planned imaging from 10:40 to 9:20
 
 The read-back might be, “I’m checking the 9:20 block by 8:25. Keep 10:40 until I confirm.” Those times are synthetic. The useful part is that both teams can tell which slot is active and who makes the next call.
 
+## How do I split technicians between two offices on the same morning?
+
+I'd start with the half hour when both offices need the most help. List the work due, the people who can do it and where each person will be. Give each technician one location for that block unless the schedule leaves enough time for travel and setup.
+
+Here's a fictional example. North needs 25 minutes of imaging and 20 minutes of workups from 9:00 to 9:30. South needs 40 minutes of workups. Three technicians have 30 minutes each. The total is 85 minutes of work and 90 minutes of capacity. With both sites open and no time to travel during that block, each site needs more than one person. Three techs can't cover that version of the schedule.
+
+Suppose North can move one 15-minute workup and its visit to 9:30. That leaves North 25 minutes of imaging and five minutes of workups at 9:00. If one person can do both, the other two technicians can cover South's 40 minutes together. I'd check the new North block for the moved workup and make sure the room and appointment can move before confirming.
+
+The handoff should say who stays at North, who starts at South, which workup moves and who checks the receiving block. If the workup has to stay, keep the gap open for the schedule owner to resolve. The times and tasks are synthetic. Use your own estimates and local rules for which tasks can move.
+
 ## When should I use a quick huddle?
 
 If the change affects two people who can resolve it in the schedule, a short written handoff may be enough. If it crosses sites, consumes a shared station or leaves ownership unclear, I'd bring the people making those decisions together. Update the record once they agree. Keep patient details in the approved scheduling system and share only the operational details your team needs.
@@ -49,8 +59,8 @@ Use the [technician coverage worksheet](https://kestrelridgehealth.com/ophthalmo
 
 ## Sources and scope
 
-- [AHRQ TeamSTEPPS curriculum: Monitoring and modifying the plan](https://www.ahrq.gov/teamstepps-program/curriculum/team/teach/two-day.html) The curriculum describes a huddle as a way to communicate changes and discuss contingencies. It does not validate the scheduling checklist above. Checked 2026-11-15.
-- [American Society of Ophthalmic Administrators: Position descriptions](https://www.asoa.org/-/media/asoa/comp-survey/position-descriptions-cs.pdf) The example Lead Technician role includes clinic flow management and coordination of work assignments. Actual responsibilities vary by practice. Checked 2026-11-15.
+- [AHRQ TeamSTEPPS curriculum: Monitoring and modifying the plan](https://www.ahrq.gov/teamstepps-program/curriculum/team/teach/two-day.html) The curriculum describes a huddle as a way to communicate changes and discuss contingencies. It does not validate the scheduling checklist above. Checked 2026-11-18.
+- [American Society of Ophthalmic Administrators: Position descriptions](https://www.asoa.org/-/media/asoa/comp-survey/position-descriptions-cs.pdf) The example Lead Technician role includes clinic flow management and coordination of work assignments. Actual responsibilities vary by practice. Checked 2026-11-18.
 
 HELP US IMPROVE
 
