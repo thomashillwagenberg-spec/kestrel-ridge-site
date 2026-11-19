@@ -8,7 +8,7 @@ description: "A practical readiness checklist and blank worksheet for independen
 
 A practical readiness checklist and blank worksheet for independent ophthalmology practices evaluating technician workload forecasting.
 
-By Thomas Wagenberg · November 2, 2026 · Updated November 4, 2026 · 6 min read
+By Thomas Wagenberg · November 2, 2026 · Updated November 19, 2026 · 7 min read
 
 ![Illustration of a blank planning worksheet and closed laptop beside an ophthalmology exam room.](https://kestrelridgehealth.com/assets/session-readiness-editorial.jpg)
 
@@ -40,9 +40,7 @@ An appointment's elapsed time isn't automatically technician time. Neither is a 
 
 ## Use the worksheet to find the missing pieces
 
-[Download the blank planning worksheet](https://kestrelridgehealth.com/downloads/session-readiness-worksheet.csv)
-
-I made this as a discussion worksheet, not KRH's import specification. Keep completed versions within your practice. This page doesn't upload or send the worksheet anywhere.
+Use the questions below as a worksheet in your practice's approved planning tool. Record what you have, what's missing and who will check it. Keep completed versions within your practice.
 
 | Planning question | What to record locally | What a missing answer means |
 |---|---|---|
@@ -66,9 +64,34 @@ I'd save what each method predicted when the scheduler had to make the plan. If 
 
 For a provider-average comparison, I'd use earlier sessions to calculate the provider's observed technician minutes per visit. I'd multiply that rate by the visits booked when the plan was made. If there's no usable history for a new provider, agree on a fallback ahead of time and flag those sessions separately.
 
-[Download the blank forecast comparison sheet](https://kestrelridgehealth.com/downloads/session-forecast-comparison.csv). Keep one row per session, even if your separate planning worksheet has several rows for different visit types. Enter the spreadsheet prediction in column D, the model prediction in E and the observed technician minutes in F. If any of those three numbers is missing, leave both error cells blank and record the reason.
+Keep one row per session. Copy these fields into your approved planning tool, using internal reference codes your team can reconcile locally.
 
-In a spreadsheet, I use `=IF(COUNT(D2:F2)=3,ABS(D2-F2),"")` for column G and `=IF(COUNT(D2:F2)=3,ABS(E2-F2),"")` for H. Copy the formulas down for the sessions you held back. The average of each error column is how many technician minutes that method missed by per scored session, in either direction. Zero observed minutes and missing observations mean different things. Only enter zero if someone actually measured it.
+| Field | Your entry |
+|---|---|
+| Session and site reference | _____ |
+| Date and time the staffing plan was made | _____ |
+| Spreadsheet prediction in technician minutes | _____ |
+| Model prediction in technician minutes | _____ |
+| Observed technician minutes and measurement method | _____ |
+| Absolute error for each method | _____ |
+| Missing data or fallback used | _____ |
+
+For each method, subtract its prediction from the observed minutes and take the absolute value. Add those absolute errors and divide by the number of scored sessions to get mean absolute error, or MAE. The result is the average miss in technician minutes. Score both methods on the same rows. If a prediction or observation is missing, leave both error cells blank and record why. Enter zero observed minutes only when someone measured zero.
+
+### What does a fair comparison look like?
+
+Here's a synthetic example with four fictional sessions. Each prediction uses information available when the plan was made. The observed minutes come afterward. Four rows illustrate the arithmetic. They don't establish how much history your practice needs or how a real model will perform.
+
+| Session | Spreadsheet | Model | Observed | Spreadsheet absolute error | Model absolute error |
+|---|---|---|---|---|---|
+| North 1 | 140 | 190 | 200 | 60 | 10 |
+| North 2 | 160 | 210 | 220 | 60 | 10 |
+| South 1 | 100 | 80 | 100 | 0 | 20 |
+| South 2 | 110 | 100 | 120 | 10 | 20 |
+
+The spreadsheet's absolute errors add to 130 minutes, so its MAE is 32.5 minutes across four sessions. The model's errors add to 60, giving an MAE of 15 minutes. At North, the spreadsheet averages 60 minutes of error and the model averages 10. At South, the spreadsheet averages five and the model averages 20. I'd flag South before making a decision about both sites.
+
+I'd also keep the direction of the miss. All four model predictions in this example are below the observed work. Decide with the scheduling lead what a shortfall means for the work due, then use the [time-block coverage worksheet](https://kestrelridgehealth.com/ophthalmology-technician-coverage-by-time-block/) to check where qualified minutes are needed. The comparison tells us how a forecast missed. The coverage check shows what the team can staff.
 
 I'd compare those averages for each site as well as across the practice, and report how many sessions contributed to each comparison. A busy office can drive the group average while another site gets worse. I'd also look back at the sessions where the model predicted too few minutes. That's a different scheduling problem from predicting too many, even if the absolute errors match.
 
@@ -98,10 +121,10 @@ I want a practice to know whether the forecast helps before it changes how peopl
 
 ## Sources and scope
 
-- [KRH: Phase Zero scope and evaluation gates](https://kestrelridgehealth.com/pilot/) Clinic-specific scope, local evaluation, continuation gates and export review. Checked 2026-11-04.
-- [KRH: forecasting and assignment process](https://kestrelridgehealth.com/how-it-works/) Workload forecasting is separate from constrained assignment and human approval. Checked 2026-11-04.
-- [Hyndman and Athanasopoulos: evaluating point forecast accuracy](https://otexts.com/fpp3/accuracy.html) Testing on observations excluded from training and interpreting mean absolute error in the units measured. Checked 2026-11-04.
-- [KRH: forecast comparisons and evidence limits](https://kestrelridgehealth.com/evidence/) The published synthetic evaluation includes a provider-average spreadsheet comparison. Checked 2026-11-04.
+- [KRH: Phase Zero scope and evaluation gates](https://kestrelridgehealth.com/pilot/) Clinic-specific scope, local evaluation, continuation gates and export review. Checked 2026-11-19.
+- [KRH: forecasting and assignment process](https://kestrelridgehealth.com/how-it-works/) Workload forecasting is separate from constrained assignment and human approval. Checked 2026-11-19.
+- [Hyndman and Athanasopoulos: evaluating point forecast accuracy](https://otexts.com/fpp3/accuracy.html) Authoritative forecasting text defines held-out evaluation and mean absolute error in the units of the measured series. The four-session example here is original fictional arithmetic. Checked 2026-11-19.
+- [KRH: forecast comparisons and evidence limits](https://kestrelridgehealth.com/evidence/) The published synthetic evaluation includes a provider-average spreadsheet comparison. Checked 2026-11-19.
 
 HELP US IMPROVE
 
