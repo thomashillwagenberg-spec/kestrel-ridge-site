@@ -1,0 +1,26 @@
+{
+  "purpose": "Legacy list for the weekly brief rule. These article revisions were published by the earlier daily publishing job after the BRIEF_RULE_EFFECTIVE date written into the draft rule but before the rule was merged and in force. No brief was written for them and none has been created afterwards: they are exempt, not briefed. Each exemption covers only the revision whose modified date is listed. Any later substantive revision (a newer modified date) is gated like any other article and needs a real brief. Do not add entries for work published after the rule is merged.",
+  "added": "2026-11-18",
+  "exemptions": [
+    {
+      "slug": "ophthalmology-technician-coverage-by-time-block",
+      "modified": "2026-11-17",
+      "reason": "Published 2026-11-13 and revised 2026-11-17 by the daily job before the weekly brief rule was merged. No brief exists."
+    },
+    {
+      "slug": "ehr-timestamps-ophthalmic-technician-workload",
+      "modified": "2026-11-17",
+      "reason": "Published 2026-11-17 by the daily job before the weekly brief rule was merged. No brief exists."
+    },
+    {
+      "slug": "ophthalmology-schedule-change-handoff",
+      "modified": "2026-11-18",
+      "reason": "Published 2026-11-15 and revised 2026-11-18 (commit f749c58) by the daily job before the weekly brief rule was merged. No brief exists."
+    },
+    {
+      "slug": "ophthalmology-staffing-forecast-readiness",
+      "modified": "2026-11-19",
+      "reason": "Published 2026-11-02 and revised 2026-11-19 (commit 6d785bd on main) before the weekly brief rule was merged. No brief exists."
+    }
+  ]
+}
