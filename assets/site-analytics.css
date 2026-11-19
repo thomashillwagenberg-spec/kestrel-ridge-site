@@ -11,3 +11,4 @@
 .krh-analytics-settings{position:fixed;right:12px;bottom:8px;z-index:1000;background:var(--card,#fff);color:var(--primary,#1a5bdb);border:1px solid var(--border,#dce4f2);border-radius:var(--radius,3px);padding:5px 10px;font:500 11px/1.5 var(--font-sans,"Public Sans",ui-sans-serif,system-ui,sans-serif);cursor:pointer}
 .krh-analytics-panel button:focus-visible,.krh-analytics-settings:focus-visible{outline:3px solid var(--primary,#1a5bdb);outline-offset:3px}
 @media(max-width:760px){.krh-analytics-panel{left:12px;right:12px;padding:20px;gap:18px;display:block}.krh-analytics-actions{margin-top:16px}.krh-analytics-panel h2{font-size:21px}.krh-analytics-panel p{font-size:13px}}
+@media(max-width:767px){body:has(.kr-mobile-sticky) .krh-analytics-settings{bottom:84px}}
