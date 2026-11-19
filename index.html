@@ -1218,7 +1218,7 @@ if (matchMedia('(min-width: 761px)').matches) {
 (function(){var sp=document.querySelector('[data-sc-spacer]');if(!sp)return;
 var L=[document.querySelector('[data-sc-world]'),document.querySelector('[data-sc-world-copy]'),document.querySelector('.mapwrap')||document.getElementById('map')].filter(Boolean);
 var t=0;function u(){t=0;var d=Math.min(0,sp.getBoundingClientRect().bottom-innerHeight);
-L.forEach(function(e){e.style.transform=d?'translate3d(0,'+d+'px,0)':'';e.style.pointerEvents=d<-2?'none':'';});}
+L.forEach(function(e){if(!sp.offsetHeight||getComputedStyle(e).position!=='fixed'){e.style.transform='';e.style.pointerEvents='';return;}e.style.transform=d?'translate3d(0,'+d+'px,0)':'';e.style.pointerEvents=d<-2?'none':'';});}
 function q(){if(!t)t=requestAnimationFrame(u);}addEventListener('scroll',q,{passive:true});addEventListener('resize',q);u();})();
 </script>
 <div class="kr-mobile-sticky">
