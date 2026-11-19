@@ -1,8 +1,29 @@
 ---
-title: "Technician Staffing Software for Eye Clinics | Kestrel Ridge"
+title: "Ophthalmology Staffing Forecast Software | Kestrel Ridge"
 url: https://kestrelridgehealth.com/product/
-description: "What a scheduler does with it: build a staffing plan, get refused an override that breaks a rule, stress-test a call-off, hand the lineage to an auditor."
+description: "Ophthalmology technician staffing forecast software for single and multi-site eye clinics. Runs alongside your EHR and scheduler, from exported history."
 ---
+
+For practice leaders
+
+## What it is, in plain terms
+
+Ophthalmology staffing software that forecasts technician workload by clinic session, so technician coverage can be planned from the schedule you actually have rather than a fixed headcount ratio.
+
+- The question it answers How many technician minutes each session will need, at each site, before the day starts, and whether the roster you have covers them.
+- Who it is for Practice administrators, COOs and directors of operations at single-site and multi-site ophthalmology practices who staff technicians by headcount ratio today.
+- Where it fits next to your other systems It does not replace your EHR, practice management system, appointment scheduler or staffing agency. Those book patients, record care and supply people. Kestrel Ridge Health works from the schedule and visit history you export, estimates the technician workload in it, and drafts coverage for a person to approve.
+- What has been shown so far Validation so far uses synthetic data only. No clinic results, savings or outcomes are claimed. That is why every engagement starts by testing the forecast on your own history.
+
+### Multi-site technician coverage
+
+For practices with more than one location, the forecast and the draft plan work per site and per session: technician minutes needed against the technicians approved and available at that site. Site eligibility is one of the eight hard rules, so a draft plan never assigns a technician to a site they are not approved for, and a session that cannot be covered inside the rules is listed with its shortfall rather than filled by bending one.
+
+### How an engagement starts
+
+Every engagement starts with Phase Zero: a test of the forecast on your own exported history against the ratio you use today. You receive a written comparison report. If the forecast does not beat your current method by the margin agreed in writing, the engagement stops there and you keep the report. Price is quoted after a scoping conversation, and duration is agreed in writing once your requirements and data are understood.
+
+[Ask about Phase Zero](https://kestrelridgehealth.com/contact/)[What Phase Zero covers](https://kestrelridgehealth.com/pilot/#phase-zero-at-a-glance)
 
 Session-level planning
 
@@ -60,7 +81,7 @@ Layer 2 · Rule validator
 
 Checks every assignment against eight hard rules
 
-Competency, availability, site eligibility and five more. A proposed change that breaks one is refused, logged and named by rule — nothing is saved.
+Competency, availability, site eligibility and five more. A proposed change that breaks one is refused, logged and named by rule. Nothing is saved.
 
 ↓
 
@@ -82,11 +103,11 @@ Five steps, and a person in the ones that matter.
 4. 04 ### Approve, separately By default a second person approves before the plan becomes final. A solo approval is allowed only with an acknowledgment and a reason, and it is recorded. More detail A second person accepts and publishes. Until they do, there is no plan of record. The creator cannot normally approve it. A solo-approval exception requires explicit acknowledgment and a recorded reason.
 5. 05 ### When the day changes Record a call-off and replan with as few changes as possible to the published plan. More detail Record a call-off or an add-on and replan. The solver is told to minimize churn against what was already published, so a small change to the facts is designed not to reshuffle the whole day.
 
-The moments worth seeing
+For technical reviewers
 
 ## Seven things it does that a schedule cannot
 
-Each of these is built and covered by automated tests.
+Each of these is built and covered by automated tests. The detail is here for anyone who wants to verify how the system behaves.
 
 1. 01Session Detail ### The system refuses an override and names the rule you broke Pick a technician the picker has marked blocked, give a reason, and submit. More detail The override is refused, nothing is stored, and the failing hard constraints come back by name, with the detail for each. Try a technician who is not blocked and the override is accepted, creating a new plan version whose parent is the one it replaced. An automated test confirms the refusal names the site eligibility rule.
 2. 02Session Detail ### Every assignment can be second-guessed Open the counterfactual for any assigned technician and the system names the next feasible alternative, then re-validates the swapped plan and reports the simulated metric differences on synthetic data rather than estimating them. More detail Runs on the same plan comparison and counterfactual checks.
@@ -119,7 +140,7 @@ See the refusal happen
 
 ## Try an assignment that breaks a rule
 
-Illustrative synthetic example — not a live solver. No real clinic, session or technician data is used.
+Illustrative synthetic example, not a live solver. No real clinic, session or technician data is used.
 
 Assign Dana R. to the 7:30 AM Westside session
 
@@ -162,7 +183,7 @@ Boundaries
 Four things it is routinely mistaken for, and what it does instead.
 
 - Not an EHR It holds no chart, no diagnosis and no note. It reads counts about a clinic session and forecasts the technician minutes that session will consume.
-- Not appointment scheduling It does not book, move or cancel a patient. It takes the schedule you already built as given and staffs the technician side of it.
+- Not appointment scheduling It does not book, move or cancel a patient. It takes the schedule you already built as given and staffs the technician side of it. It runs alongside the scheduler you use now, from history you export, rather than replacing it.
 - Not a staffing agency It supplies nobody and hires nobody. It assigns the technicians already on your roster, under your own rules, for a person to approve.
 - Not credentialing software It does not verify, issue or track a credential. It reads the competencies and site approvals you maintain elsewhere and refuses any assignment that would violate them.
 
