@@ -1,8 +1,10 @@
 ---
-title: "Call-Off Coverage for Eye Clinics | Kestrel Ridge Health"
+title: "Technician Call-Off Coverage for Eye Clinics | Kestrel Ridge Health"
 url: https://kestrelridgehealth.com/call-off-coverage-eye-clinics/
-description: "When an ophthalmic technician calls out, eye clinics face a narrow decision window. Options, tradeoffs, and how forecasting changes the math."
+description: "When an ophthalmic technician (not the physician on call) calls out: four coverage options, their tradeoffs, and how a session forecast helps you decide early."
 ---
+
+**Short answer:** when a technician calls out, most eye clinics have four options: absorb the work with the staff who are present, trim the schedule, bring in a locum or agency technician, or move someone from another site. Which one works depends on how many technician minutes the session needs and how much slack is left, so the decision is easier if it is made before the call comes in. You can [run the technician coverage risk check](https://kestrelridgehealth.com/technician-coverage-risk-check/), or see a [call-off stress test on the product page](https://kestrelridgehealth.com/product/#demo-title).
 
 ## The call-off problem in ophthalmology
 
@@ -60,9 +62,9 @@ For more on how session-level forecasting works, see [The Tech Shortage You Cann
 
 The best time to build a call-off coverage protocol is not the morning of a call-out. It is a scheduled review of the sessions most exposed to single-technician call-offs, the cross-credentialing gaps in your current staff, and the agency relationships that need to be established before they are needed.
 
-That review is difficult to do without session-level data. The Kestrel Ridge Health Phase Zero diagnostic produces exactly that data: a session-by-session workload forecast that identifies which sessions are structurally fragile and why.
+That review is difficult to do without session-level data. The Kestrel Ridge Health Phase Zero diagnostic is designed to produce that data: a session-by-session workload forecast, tested against your current method on your own history, that shows which sessions look structurally fragile and why.
 
-[Contact us](https://kestrelridgehealth.com/contact/) to start a conversation about Phase Zero and what it would show for your group.
+[Phase Zero](https://kestrelridgehealth.com/pilot/) tests the forecast on your own exported history before anything about your staffing changes. For why a fixed ratio misses session-level need, see [what published staffing ratios can and cannot decide](https://kestrelridgehealth.com/ophthalmic-technician-staffing-ratios/). [Contact us](https://kestrelridgehealth.com/contact/) to start a conversation about Phase Zero and what it would show for your group.
 
 ## Technician coverage risk check
 
