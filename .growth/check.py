@@ -25,9 +25,31 @@ def internal_links(a):
     text=a.get('answer','')+a.get('body','')
     return {h.split('#')[0] for h in re.findall(r'href="(/[^"]*)"',text)}
 
-def check_brief_gate(a, slugs):
+EXEMPTIONS_FILE=Path(__file__).resolve().parent/'brief-exemptions.json'
+
+def load_exemptions(path=None):
+    """Return {slug: modified} for legacy revisions published before the rule was in force.
+
+    These revisions have no brief. They are listed honestly in brief-exemptions.json
+    instead of receiving retrospective briefs. An exemption matches only the exact
+    modified date listed, so any later revision is gated normally."""
+    path=Path(path) if path else EXEMPTIONS_FILE
+    if not path.exists(): return {}
+    data=json.loads(path.read_text())
+    out={}
+    for e in data.get('exemptions',[]):
+        assert e.get('slug') and re.fullmatch(r'\d{4}-\d{2}-\d{2}',e.get('modified','')) and e.get('reason','').strip(), f'Invalid brief exemption entry: {e}'
+        assert e['slug'] not in out, f"Duplicate brief exemption for {e['slug']}"
+        out[e['slug']]=e['modified']
+    return out
+
+def is_exempt(a, exemptions):
+    return exemptions.get(a['slug'])==a['modified'] and 'brief' not in a
+
+def check_brief_gate(a, slugs, exemptions=None):
     """Raise AssertionError when a gated article lacks its brief or required links."""
     if a['modified']<BRIEF_RULE_EFFECTIVE: return
+    if exemptions and is_exempt(a, exemptions): return
     b=a.get('brief')
     assert isinstance(b,dict), f"{a['slug']}: missing brief reference (see .growth/BRIEF-TEMPLATE.md)"
     assert re.fullmatch(r'\d{4}-W\d{2}-(new|refresh)-[a-z0-9-]+',b.get('id','')), f"{a['slug']}: brief id must look like 2026-W47-new-slug"
@@ -44,14 +66,34 @@ def check_brief_gate(a, slugs):
     assert related, f"{a['slug']}: link at least one related article"
     assert len(a.get('sources',[]))>=2, f"{a['slug']}: brief-gated articles need at least two cited sources"
 
-def check_weekly_cap(articles):
-    """At most one new article per ISO week from the effective date onward."""
-    weeks={}
+def check_weekly_cap(articles, exemptions=None):
+    """From the effective date onward: at most one new article per ISO week (by
+    published date) and at most one briefed refresh per ISO week (by modified date).
+    Exempt legacy revisions predate the rule and are not counted."""
+    exemptions=exemptions or {}
+    new,ref={},{}
     for a in articles:
+        if is_exempt(a, exemptions): continue
+        kind=(a.get('brief') or {}).get('kind')
         if a['published']>=BRIEF_RULE_EFFECTIVE:
-            weeks.setdefault(dt.date.fromisoformat(a['published']).isocalendar()[:2],[]).append(a['slug'])
-    over={f'{y}-W{w:02d}':s for (y,w),s in weeks.items() if len(s)>1}
+            new.setdefault(dt.date.fromisoformat(a['published']).isocalendar()[:2],[]).append(a['slug'])
+        if kind=='refresh' and a['modified']>=BRIEF_RULE_EFFECTIVE:
+            ref.setdefault(dt.date.fromisoformat(a['modified']).isocalendar()[:2],[]).append(a['slug'])
+    over={f'{y}-W{w:02d}':s for (y,w),s in new.items() if len(s)>1}
     assert not over, f'More than one new article in a week: {over}'
+    over={f'{y}-W{w:02d}':s for (y,w),s in ref.items() if len(s)>1}
+    assert not over, f'More than one article improvement in a week: {over}'
+
+def check_exemptions_current(articles, exemptions):
+    """Flag stale exemption entries so the legacy list cannot silently cover new work."""
+    by_slug={a['slug']:a for a in articles}
+    errs=[]
+    for slug,mod in exemptions.items():
+        a=by_slug.get(slug)
+        if a is None: errs.append(f'brief-exemptions.json: unknown article {slug}')
+        elif mod>=BRIEF_RULE_EFFECTIVE and a['modified']!=mod and 'brief' not in a:
+            errs.append(f"brief-exemptions.json: {slug} was revised on {a['modified']} after its exempt revision {mod}; the new revision needs a real brief")
+    return errs
 
 class Page(HTMLParser):
     def __init__(self):
@@ -102,10 +144,13 @@ def main():
     for a in articles: check_article(a)
     slugs={a['slug'] for a in articles}|{p.parent.name for p in ROOT.glob('*/index.html')}
     errors=[]
+    try: exemptions=load_exemptions()
+    except (AssertionError,ValueError) as e: exemptions={}; errors.append(str(e))
+    errors+=check_exemptions_current(articles,exemptions)
     for a in articles:
-        try: check_brief_gate(a,slugs)
+        try: check_brief_gate(a,slugs,exemptions)
         except AssertionError as e: errors.append(str(e))
-    try: check_weekly_cap(articles)
+    try: check_weekly_cap(articles,exemptions)
     except AssertionError as e: errors.append(str(e))
     urls=[e.text for e in ET.parse(ROOT/'sitemap.xml').findall(f'.//{{{NS}}}loc')]
     if len(urls)!=len(set(urls)): errors.append('Duplicate sitemap URLs')
