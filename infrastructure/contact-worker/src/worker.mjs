@@ -1,5 +1,12 @@
 // KRH contact intake Worker — Resend API delivery (no Email Routing required).
 // No analytics, no raw inquiry logging, no PII in Worker logs.
+import {
+  buildCrmRow,
+  crmConfigured,
+  deriveInquiryIdentity,
+  recordInquiryInCrm,
+} from "./inquiry.mjs";
+
 const ALLOWED_ORIGINS = new Set([
   "https://kestrelridgehealth.com",
   "https://www.kestrelridgehealth.com",
@@ -204,13 +211,16 @@ async function sendWaitlistViaResend(apiKey, email, from) {
   return true;
 }
 
-async function sendViaResend(apiKey, name, organization, email, message, from) {
+async function sendViaResend(apiKey, name, organization, email, message, from, identity) {
+  // The inquiry ID is the cross-reference between this email, the CRM row
+  // and the reconcile runbook (crm/README.md).
   const subject = organization
-    ? `KRH Phase Zero inquiry — ${organization}`
-    : "KRH Phase Zero inquiry";
+    ? `KRH Phase Zero inquiry [${identity.inquiryId}] | ${organization}`
+    : `KRH Phase Zero inquiry [${identity.inquiryId}]`;
   const text = [
     "New KRH Phase Zero inquiry",
     "──────────────────────────",
+    "Inquiry ID:   " + identity.inquiryId,
     "Name:         " + name,
     "Organization: " + (organization || "(not provided)"),
     "Reply email:  " + email,
@@ -229,6 +239,9 @@ async function sendViaResend(apiKey, name, organization, email, message, from) {
     headers: {
       "Authorization": "Bearer " + apiKey,
       "Content-Type": "application/json",
+      // Resend dedupes sends that reuse this key for 24h, so a retried or
+      // double-clicked submission does not produce a second email.
+      "Idempotency-Key": "krh-inq/" + identity.idempotencyKey,
     },
     body: JSON.stringify(payload),
   });
@@ -243,7 +256,7 @@ async function sendViaResend(apiKey, name, organization, email, message, from) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const path = new URL(request.url).pathname;
     const origin = request.headers.get("origin") || "";
     if (path !== "/submit") return reply(404, { ok: false }, origin);
@@ -378,11 +391,35 @@ export default {
       console.warn("KRH: TURNSTILE_SECRET is not set; Turnstile check skipped (staging only — unreachable in production).");
     }
 
+    // Server-side inquiry identity. Same submission (retry / double click)
+    // => same inquiry ID, same Resend Idempotency-Key, same CRM dedup key.
+    const identity = await deriveInquiryIdentity({
+      email,
+      message,
+      submissionId: typeof fields.submissionId === "string" ? fields.submissionId : undefined,
+    });
+
+    // CRM recording is optional and fail-safe. It is skipped entirely
+    // (current email-only behavior) unless CRM_URL and CRM_SERVICE_KEY are
+    // both set, runs independently of the email, never throws, and never
+    // changes the HTTP response. It is recorded even if the email fails, so
+    // the inquiry is captured somewhere; the client retry dedupes on the key.
+    const crmTask = crmConfigured(env)
+      ? recordInquiryInCrm(env, buildCrmRow(identity, { name, organization, email }))
+      : null;
+    const settleCrm = async () => {
+      if (!crmTask) return;
+      if (ctx && typeof ctx.waitUntil === "function") ctx.waitUntil(crmTask);
+      else await crmTask;
+    };
+
     try {
-      await sendViaResend(env.RESEND_API_KEY, name, organization, email, message, from);
+      await sendViaResend(env.RESEND_API_KEY, name, organization, email, message, from, identity);
+      await settleCrm();
       return reply(202, { ok: true, status: "accepted_for_delivery" }, origin);
     } catch (error) {
-      console.error("KRH email send failure:", typeof error?.message === "string" ? error.message : "unspecified");
+      console.error("KRH email send failure:", typeof error?.message === "string" ? error.message : "unspecified", identity.inquiryId);
+      await settleCrm();
       return reply(502, { ok: false, error: "Message could not be sent. Please try again later." }, origin);
     }
   },
