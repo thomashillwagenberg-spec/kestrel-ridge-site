@@ -8,7 +8,7 @@ description: "Use a time-block worksheet to find ophthalmic technician coverage 
 
 Use a time-block worksheet to find ophthalmic technician coverage gaps before publishing an eye clinic schedule.
 
-By Thomas Wagenberg · November 13, 2026 · 3 min read
+By Thomas Wagenberg · November 13, 2026 · Updated November 17, 2026 · 4 min read
 
 ![A wall clock and two empty exam rooms in an ophthalmology clinic.](https://kestrelridgehealth.com/assets/technician-coverage-peaks-20261113.jpg)
 
@@ -37,6 +37,22 @@ Here's a fictional 90-minute slice of a morning. Two technicians are scheduled t
 
 The slice has 30 minutes left overall. At 10:00, both tests use the full half hour of the eligible technician. That leaves 30 minutes for 40 minutes of workups. I'd move a 10-minute workup to 10:30 only if the visit can move with it and the receiving block still works. The 10:00 block would then have no margin. I'd check what happens if one test runs five minutes long.
 
+## A worksheet you can copy for any session
+
+I'd start with the block that usually gets backed up. Copy these rows for that block and use local estimates. If there's a range, run the numbers once for the usual workload and again for a busier block. Keep the clinic's working copy with the people who own the schedule. The worksheet only needs task counts and minutes.
+
+| What to write down | Your planning notes |
+|---|---|
+| Site, date and block | Site: _____ Date: _____ Time: _____ |
+| Work due | For each task, record its count, minutes per task and the window it can be done in. Add the minutes due in this block: _____ |
+| Technician time | Record each person's free minutes in the block after subtracting breaks, travel and other work. Add those minutes once: _____ |
+| Where the work fits | Start with work that has the fewest eligible people or the tightest timing. Write each task on one eligible person's timeline. Check for overlapping tasks and flag minutes you couldn't place: _____ |
+| Change and recheck | What will move? _____ Who will review it? _____ Which blocks or sites need another check? _____ |
+
+Here's a second fictional example. Three people together have 60 free minutes in the block. There are 35 minutes of workups and 25 minutes of testing due. The only person eligible for the tests has 20 free minutes. I'd assign those 20 minutes to testing and use 35 of the other technicians' 40 minutes for workups. That leaves five minutes of workups capacity and five testing minutes I still can't place. I'd flag those five separately so the person fixing the schedule knows what kind of coverage to look for.
+
+If you're estimating minutes from a schedule export, check what each [EHR timestamp measures](https://kestrelridgehealth.com/ehr-timestamps-ophthalmic-technician-workload/) before putting it in the worksheet. When a change affects another team or site, use the [schedule-change handoff](https://kestrelridgehealth.com/ophthalmology-schedule-change-handoff/) to record who needs to confirm it.
+
 ## Decide what to change before publishing
 
 1. Try moving flexible work within its allowed window. Recheck both blocks, including downstream room and provider availability.
@@ -49,9 +65,9 @@ Our [workload forecasting guide](https://kestrelridgehealth.com/forecasting-tech
 
 ## Sources and scope
 
-- [Discrete-event simulation in a glaucoma clinic](https://pmc.ncbi.nlm.nih.gov/articles/PMC10862387/) In the clinic studied, the researchers examined technician demand by time and modeled bottlenecks. The study does not establish a staffing standard or validate this worksheet. Checked 2026-11-13.
-- [KRH: How technician forecasting and assignments work](https://kestrelridgehealth.com/how-it-works/) KRH distinguishes session workload estimates, assignment constraints and human review. Checked 2026-11-13.
-- [KRH: Evidence and limitations](https://kestrelridgehealth.com/evidence/) Published KRH validation uses synthetic data. Checked 2026-11-13.
+- [Discrete-event simulation in a glaucoma clinic (2019 conference proceedings)](https://pubmed.ncbi.nlm.nih.gov/38352022/) In the clinic studied, the researchers examined technician demand by time and modeled bottlenecks. The study does not establish a staffing standard or validate this worksheet. Checked 2026-11-17.
+- [KRH: How technician forecasting and assignments work](https://kestrelridgehealth.com/how-it-works/) KRH distinguishes session workload estimates, assignment constraints and human review. Checked 2026-11-17.
+- [KRH: Evidence and limitations](https://kestrelridgehealth.com/evidence/) Published KRH validation uses synthetic data. Checked 2026-11-17.
 
 HELP US IMPROVE
 
