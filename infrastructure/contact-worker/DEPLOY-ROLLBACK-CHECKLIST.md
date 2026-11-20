@@ -27,7 +27,7 @@ Re-check the syntax with `npx wrangler versions --help` on the day; Wrangler cha
 - [ ] All RELEASE-VERIFICATION.md blockers B1 to B7 closed, with evidence links.
 - [ ] Worker tests run in CI and pass (B5): CI log shows `node --test infrastructure/contact-worker/test/worker.test.mjs` with 0 failures.
 - [ ] Local burst harness re-run on the final commit; results attached.
-- [ ] Resend dashboard (Thomas): domain `kestrelridgehealth.com` shows Verified in the owning team; From is `Kestrel Ridge Health <twagenberg@kestrelridgehealth.com>`, e.g. `KRH Website <notifications@mail.kestrelridgehealth.com>`. It must be on `mail.kestrelridgehealth.com` because `worker.mjs:18` allows only that subdomain (the root domain is a different Resend team). DNS alone is not proof.
+- [ ] Resend dashboard (Thomas): domain `kestrelridgehealth.com` (root) shows Verified in the team that owns the sending-only key; SENDER_FROM is exactly `Kestrel Ridge Health <twagenberg@kestrelridgehealth.com>`. `src/worker.mjs` (SENDER_DOMAIN_ALLOWLIST) accepts only the root domain and refuses the old `mail.` subdomain (covered by test/worker.test.mjs). DNS alone is not proof.
 - [ ] Turnstile dashboard (Thomas): the widget for the sitekey embedded in the live JS lists `kestrelridgehealth.com` and `www.kestrelridgehealth.com`.
 - [ ] Record the rollback target: `npx wrangler deployments list` shows the active version (today `9f1006ea-84e5-4f55-b46b-13cb85a47402`, 100%).
 - [ ] Rollback operator available for 30 minutes after deploy.
