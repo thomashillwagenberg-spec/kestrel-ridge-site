@@ -15,7 +15,7 @@ const DESTINATION = "twagenberg@kestrelridgehealth.com";
 // actually verified/authorized to send, and set it as SENDER_FROM.
 // Until that is set, production fails closed (503) rather than guessing.
 const SENDER_FALLBACK = "KRH Contact <onboarding@resend.dev>"; // staging-only sandbox sender
-const SENDER_DOMAIN_ALLOWLIST = ["kestrelridgehealth.com"];
+const SENDER_DOMAIN_ALLOWLIST = ["kestrelridgehealth.com"]; // Root domain, verified in the Resend team whose sending-only key was confirmed 2026-11-17 (probe id 01a1ebd4). Subdomains are refused.
 
 function isProd(env) {
   // Fail-safe default: anything that isn't explicitly "staging" is treated
@@ -198,7 +198,7 @@ async function sendWaitlistViaResend(apiKey, email, from) {
 
   if (!resp.ok) {
     const errText = await resp.text().catch(() => "");
-    console.error("KRH Resend waitlist error HTTP", resp.status, errText.slice(0, 80));
+    console.error("KRH Resend waitlist error HTTP", resp.status); // status only: Resend error bodies can echo submitter fields
     throw new Error("resend_" + resp.status);
   }
   return true;
@@ -236,7 +236,7 @@ async function sendViaResend(apiKey, name, organization, email, message, from) {
   if (!resp.ok) {
     const errText = await resp.text().catch(() => "");
     // Log only HTTP status; never log the email body or PII.
-    console.error("KRH Resend error HTTP", resp.status, errText.slice(0, 80));
+    console.error("KRH Resend error HTTP", resp.status); // status only: Resend error bodies can echo submitter fields
     throw new Error("resend_" + resp.status);
   }
   return true;
